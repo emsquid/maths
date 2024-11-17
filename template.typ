@@ -2,6 +2,7 @@
 #import "@preview/rich-counters:0.2.1": *
 #import "@preview/outrageous:0.3.0"
 
+// Counter and blocks definitions
 #let mathcounter = rich-counter(
   identifier: "mathblocks",
   inherited_levels: 1
@@ -34,8 +35,10 @@
     authors.join(" -- ")
   }
 
-  // Header function
-  let display-header = context { 
+  // Page options
+  set page(
+    numbering: "1", 
+    header: context { 
       if header and counter(page).get().first() > 1 {
         align(center, if title != "" and authors != "" {
           [#title -- #authors] 
@@ -48,11 +51,6 @@
         v(-10pt)
       }
     }
-
-  // Page options
-  set page(
-    numbering: "1", 
-    header: display-header
   )
 
   // Text options
@@ -78,13 +76,17 @@
     )
   }  
 
-  show math.equation.where(block: true): it => [
-      #block(width: 100%, inset: 0em, [#align(center)[#it]])
-  ]
+  // Center maths block in list
+  show math.equation.where(block: true): it => {
+    block(width: 100%, inset: 0em, [#align(center)[#it]])
+  }
+
+  // Unbreakable math equation
   show math.equation.where(block: false): box
 
+  // Link colors
   show link: it => text(rgb(color), it)
-  
+
   // Maths
   show: great-theorems-init
 
