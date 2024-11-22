@@ -1,38 +1,51 @@
 #import "@preview/great-theorems:0.1.1": *
-#import "@preview/rich-counters:0.2.1": *
+#import "@preview/headcount:0.1.0": *
 #import "@preview/outrageous:0.3.0"
 
 // Counter and blocks definitions
-#let mathcounter = rich-counter(
-  identifier: "mathblocks",
-  inherited_levels: 1
+#let mathcounter = counter("maths")
+#let mathblock = mathblock.with(
+  breakable: false, 
+  counter: mathcounter, 
+  numbering: dependent-numbering("1.1", levels: 1)
 )
-#let mathblock = mathblock.with(breakable: false, counter: mathcounter)
 
 #let definition = mathblock(blocktitle: "Définition")
 #let notation = mathblock(blocktitle: "Notation")
-#let theorem = mathblock(blocktitle: "Théoreme")
+#let theorem = mathblock(blocktitle: "Théorème")
 #let lemma = mathblock(blocktitle: "Lemme")
 #let corollary = mathblock(blocktitle: "Corollaire")
 #let proposition = mathblock(blocktitle: "Proposition")
 #let example = mathblock(blocktitle: "Exemple")
 #let remark = mathblock(blocktitle: "Remarque")
-#let proof = mathblock(
-  blocktitle: "Démonstration",
-  prefix: [_Démonstration._],
-  suffix: [#h(1fr) $square$],
-  counter: none,
-)
+#let proof = proofblock(prefix: [_Démonstration_.])
 
-#let maths(title: none, authors: (), color: "#1C4C2D", header: false, date: false, body) = {
+// Maths shortcuts
+#let gen(..generators) = $angle.l #generators.pos().join(", ") angle.r$
+#let qt(numerator, denominator) = $#numerator slash #denominator$
+#let qtr(numerator, denominator) = $#denominator thin backslash thin #numerator$
+#let fun(f, E, F, x: none, fx: none) = context {
+  if x == none or fx == none {
+    $#f : #E -> #F$
+  } else {
+    $#f : #E -> #F, #x -> #fx$
+  } 
+} 
+#let act = rotate(180deg, $arrow.cw$)
+
+#let maths(title: none, authors: (), color: none, header: false, date: false, body) = {
   // Document metadata
   set document(title: title, author: authors)
 
   // String for authors
-  let authors = if type(authors) == "string" {
+  authors = if type(authors) == "string" {
     authors
   } else {
     authors.join(" -- ")
+  }
+
+  if color == none {
+    color = black
   }
 
   // Page options
@@ -61,7 +74,8 @@
   )
 
   // Heading options
-  set heading(numbering: "1.")
+  set heading(numbering: "1.1.")
+  show heading: reset-counter(mathcounter, levels: 1)
 
   // Paragraph options
   set par(justify: true)
@@ -73,6 +87,7 @@
       font: (auto, none),
       font-weight: ("bold", auto),
       body-transform: (level, body) => text(rgb(color), body),
+      fill:  (none, align(right, outrageous.repeat(gap: 5pt)[$dot$])), 
     )
   }  
 
