@@ -5,6 +5,7 @@
 = Groupes
 
 #definition[
+  test
   Soit $G$ un ensemble et $star: G times G --> G$ une loi de composition interne. On dit que le couple $(G, star)$ forme un _groupe_ s'il vérifie les propriétes suivantes
   + la loi $star$ est associative, $forall x, y, z in G, (x star y) star z = x star (y star z)$,
   + il existe un neutre $e_G in G$, $forall x in G, x star e_G = e_G star x = x$,
@@ -12,27 +13,31 @@
 ]
 
 #example[
-  Le couple $(ZZ, +)$ est un groupe, le neutre est $0$ et pour $n in ZZ$ un inverse est $-n$. 
+  Le couple $(ZZ, +)$ est un groupe, le neutre est $0$ et pour $n in ZZ$ un inverse est $-n$.
   Le couple $(RR, dot)$ n'est pas un groupe, $0$ n'admet pas d'inverses.
 ]
 
 #proposition[
   Soit $(G, star)$ un groupe. Alors
   + le neutre $e_G$ est unique,
-  + soit $x in G$, alors son inverse $x^(-1)$ est unique. 
+  + soit $x in G$, alors son inverse $x^(-1)$ est unique.
 ]
 
 #proof[
-  + Soit $e in G$ vérifiant $forall x in G, x star e = e star x = x$. Alors 
+  + Soit $e in G$ vérifiant $forall x in G, x star e = e star x = x$. Alors
     $ e = e star e_G = e_G. $
-  + Soit $y in G$ vérifiant $x star y = y star x = e_G$. Alors 
-    $ y = e_G star y = (x^(-1) star x) star y = x^(-1) star (x star y) = x^(-1) star e_G = x^(-1). $ 
+  + Soit $y in G$ vérifiant $x star y = y star x = e_G$. Alors
+    $
+      y = e_G star y = (x^(-1) star x) star y = x^(-1) star (
+        x star y
+      ) = x^(-1) star e_G = x^(-1).
+    $
 ]
 
 #definition[
   Soit $(G, star)$ un groupe. On dit qu'il est _commutatif_ ou _abélien_ s'il vérifie
   $ forall x, y in G, x star y = y star x. $
-] 
+]
 
 #example[
   Le groupe $(ZZ, +)$ est commutatif.
@@ -44,23 +49,60 @@
 
 #remark[
   Soit $(G, star)$ un groupe d'ordre fini. On note $G = {e_G, g_1, ..., g_n}$, alors on peut donner sa table de multiplication
-  #align(center, table(
-    columns: 7,
-    align: center,
-    inset: 6pt,
-    [$star$], [$e_G$], [$g_1$], [$dots.c$], [$g_j$], [$dots.c$], [$g_n$],
-    [$e_G$], [$e_G$], [$g_1$], [$dots.c$], [$g_j$], [$dots.c$], [$g_n$],
-    [$g_1$], [$g_1$], [$g_1 star g_1$], [$dots.c$], [$g_1 star g_j$], [$dots.c$], [$g_1 star g_n$],
-    [$dots.v$], [$dots.v$], [$dots.v$], [$dots.down$], [$dots.v$], [$dots.up$], [$dots.v$],
-    [$g_i$], [$g_i$], [$g_i star g_1$], [$dots.c$], [$g_i star g_j$], [$dots.c$], [$g_i star g_n$],
-    [$dots.v$], [$dots.v$], [$dots.v$], [$dots.up$], [$dots.v$], [$dots.down$], [$dots.v$],
-    [$g_n$], [$g_n$], [$g_n star g_1$], [$dots.c$], [$g_n star g_j$], [$dots.c$], [$g_n star g_n$]
-  ))
+  #align(
+    center,
+    table(
+      columns: 7,
+      align: center,
+      inset: 6pt,
+      [$star$], [$e_G$], [$g_1$], [$dots.c$], [$g_j$], [$dots.c$], [$g_n$],
+      [$e_G$], [$e_G$], [$g_1$], [$dots.c$], [$g_j$], [$dots.c$], [$g_n$],
+      [$g_1$],
+      [$g_1$],
+      [$g_1 star g_1$],
+      [$dots.c$],
+      [$g_1 star g_j$],
+      [$dots.c$],
+      [$g_1 star g_n$],
+
+      [$dots.v$],
+      [$dots.v$],
+      [$dots.v$],
+      [$dots.down$],
+      [$dots.v$],
+      [$dots.up$],
+      [$dots.v$],
+
+      [$g_i$],
+      [$g_i$],
+      [$g_i star g_1$],
+      [$dots.c$],
+      [$g_i star g_j$],
+      [$dots.c$],
+      [$g_i star g_n$],
+
+      [$dots.v$],
+      [$dots.v$],
+      [$dots.v$],
+      [$dots.up$],
+      [$dots.v$],
+      [$dots.down$],
+      [$dots.v$],
+
+      [$g_n$],
+      [$g_n$],
+      [$g_n star g_1$],
+      [$dots.c$],
+      [$g_n star g_j$],
+      [$dots.c$],
+      [$g_n star g_n$],
+    ),
+  )
 ]
 où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #notation[
-  Soit $(G, star)$ un groupe. Lorsqu'il ne peut pas y avoir de confusions, on notera 
+  Soit $(G, star)$ un groupe. Lorsqu'il ne peut pas y avoir de confusions, on notera
   - $e := e_G$ pour le neutre,
   - $forall x, y in G, x y := x star y$ pour la loi $star$,
   - $forall x in G, forall n in ZZ, "si" n > 0, x^n := attach(limits(underbrace(x star ... star x)), b: "n fois"), "si" n= 0, x^0 := e, "si" n < 0, x^n := x^(-1) star ... star x^(-1).$
@@ -76,7 +118,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
   Soit $(G, star)$ un groupe et $H$ un sous-ensemble de $G$. On dit que $H$ est un _sous-groupe_ de $G$, noté $H < G$, s'il vérifie les propriétés suivantes
   + le neutre appartient à $H$, $e in H$,
   + $H$ est stable par $star$, $forall x, y in H, x star y in H$,
-  + $H$ est stable par inverse, $forall x in H, x^(-1) in H$. 
+  + $H$ est stable par inverse, $forall x in H, x^(-1) in H$.
 ]
 
 #definition[
@@ -91,14 +133,14 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ] <prop-sg-condense>
 
 #proof[
-  #linebreak() 
+  #linebreak()
   $arrow.r.double$ : Supposons que $H$ est un sous-groupe de $G$. Alors
-    + le neutre appartient à $H$, 
-    + soit $x, y in H$, alors $y^(-1) in H$ et $x star y^(-1) in H$.
+  + le neutre appartient à $H$,
+  + soit $x, y in H$, alors $y^(-1) in H$ et $x star y^(-1) in H$.
   $arrow.l.double$ : Supposons que $H$ vérifie les deux propriétés. Alors
-    1. le neutre appartient à $H$,
-    3. soit $x in H$, alors $x^(-1) = e star x^(-1) in H$,
-    2. soit $x, y in H$, alors $y^(-1) in H$ et $x star y = x star (y^(-1))^(-1) in H$.
+  1. le neutre appartient à $H$,
+  3. soit $x in H$, alors $x^(-1) = e star x^(-1) in H$,
+  2. soit $x, y in H$, alors $y^(-1) in H$ et $x star y = x star (y^(-1))^(-1) in H$.
 ]
 
 #proposition[
@@ -127,9 +169,9 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ] <prop-sect-sg>
 
 
-#proof[ 
+#proof[
   + $e in H_1$ et $e in H_2$, donc $e in H_1 sect H_2$,
-  + soit $x, y in H_1 sect H_2$, alors $x, y in H_1$, puisque $H_1$ est un sous-groupe de $G$ on a $x star y^(-1) in H_1$, de la même manière on a $x star y^(-1) in H_2$, donc $x star y^(-1) in H_1 sect H_2$. 
+  + soit $x, y in H_1 sect H_2$, alors $x, y in H_1$, puisque $H_1$ est un sous-groupe de $G$ on a $x star y^(-1) in H_1$, de la même manière on a $x star y^(-1) in H_2$, donc $x star y^(-1) in H_1 sect H_2$.
   Donc d'après la @prop-sg-condense, $H_1 sect H_2$ est un sous-groupe de $G$.
 ]
 
@@ -158,7 +200,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #definition[
   Soit $(G, star)$ un groupe et $S$ un sous-ensemble de $G$. Si $G = gen(S)$, on dit que $G$ est _engendré_ par $S$ et on appelle $S$ un _système de générateurs_ pour $G$. \
-  - Si $S$ est fini, on dit que $G$ est _finiment engendré_. 
+  - Si $S$ est fini, on dit que $G$ est _finiment engendré_.
   - Si $S$ ne contient qu'un élément, on dit que $G$ est _monogène_, si de plus $G$ est fini, on dit que $G$ est _cyclique_.
 ]
 
@@ -178,12 +220,12 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #proof[
   + Soit $n in ZZ$, alors $gen(n) = {k dot n | k in ZZ} = n ZZ$.
-  + 
+  +
     - Si $H = {0}$, alors $H = 0 ZZ$.
     - Sinon, $H \\ {0}$ est non-vide, on prend $n$ le plus petit entier strictement positif de $H$. \
       Puisque $n in H$, on a $n ZZ subset H$. Réciproquement, soit $m in H$, par division euclidienne il existe $q, r in ZZ$ tels que $m = n q + r$ et $0 <= r < n$, puisque $r = m - n q in H$, on a nécessairement $r = 0$, d'où $m in n ZZ$, donc $H subset n ZZ$.
       Donc $H = n ZZ$.
-  + On sait que $b$ divise $a$ si et seulement il existe $q in ZZ$ tel que $a = b q$ si et seulement $a in gen(b)$ si et seulement si $gen(a) subset gen(b)$. 
+  + On sait que $b$ divise $a$ si et seulement il existe $q in ZZ$ tel que $a = b q$ si et seulement $a in gen(b)$ si et seulement si $gen(a) subset gen(b)$.
   + _TODO_ : Voir TD.
 ]
 
@@ -233,12 +275,14 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ]
 
 #proposition[
-  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $phi: G --> H$ un isomorphisme. Alors son inverse, noté $phi^(-1)$, est un isomorphisme.  
+  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $phi: G --> H$ un isomorphisme. Alors son inverse, noté $phi^(-1)$, est un isomorphisme.
 ]
 
 #proof[
   Soit $x, y in H$. Puisque $phi$ est un morphisme de groupes on a
-  $ phi(phi^(-1)(x dot y)) = x dot y = phi(phi^(-1)(x)) dot phi(phi^(-1)(y)) = phi(phi^(-1)(x) star phi^(-1)(y)) $
+  $
+    phi(phi^(-1)(x dot y)) = x dot y = phi(phi^(-1)(x)) dot phi(phi^(-1)(y)) = phi(phi^(-1)(x) star phi^(-1)(y))
+  $
   et par injectivité de $phi$, on obtient $phi^(-1)(x dot y) = phi^(-1)(x) star phi^(-1)(y)$, donc $phi^(-1)$ est un morphisme.
 ]
 
@@ -248,10 +292,12 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #proof[
   Soit $x, y in G$. Alors
-  $ (psi compose phi)(x star y) &= psi(phi(x star y)) \
+  $
+    (psi compose phi)(x star y) &= psi(phi(x star y)) \
     &= psi(phi(x) dot phi(y)) \
     &= psi(phi(x)) med square.tiny.filled med psi(phi(y)) \
-    &= (psi compose phi)(x) med square.tiny.filled med (psi compose phi)(y) $
+    &= (psi compose phi)(x) med square.tiny.filled med (psi compose phi)(y)
+  $
   donc $psi compose phi$ est un morphisme de groupes.
 ]
 
@@ -260,18 +306,22 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
   + $G$ et $H$ ont le même ordre,
   + $G$ est abélien si et seulement si $H$ est abélien,
   + $G$ est monogène si et seulement si $H$ est monogène,
-  + $forall phi: G --> H "isomorphisme", forall x in G, "ord"(x) = "ord"(phi(x))$. 
+  + $forall phi: G --> H$ isomorphisme, $forall x in G, "ord"(x) = "ord"(phi(x))$.
 ]
 
 #proof[
   Soit $phi: G --> H$ un isomorphisme.
   + $G$ et $H$ sont en bijection, donc $|G| = |H|$.
   + $arrow.r.double$ : Supposons que $G$ est abélien. Soit $x, y in H$, puisque $phi$ est un isomorphisme
-    $ phi^(-1)(x) star phi^(-1)(y) = phi^(-1)(y) star phi^(-1)(x) => x dot y = y dot x $
+    $
+      phi^(-1)(x) star phi^(-1)(y) = phi^(-1)(y) star phi^(-1)(
+        x
+      ) => x dot y = y dot x
+    $
     donc $H$ est abélien. \
     $arrow.l.double$ : On montre la réciproque de la même manière.
-  + $arrow.r.double$ : Supposons que $G$ est monogène. Alors il existe $x in G$ tel que $G = gen(x)$, ainsi 
-    $ H = phi(G) = phi(gen(x)) = gen(phi(x)) $ 
+  + $arrow.r.double$ : Supposons que $G$ est monogène. Alors il existe $x in G$ tel que $G = gen(x)$, ainsi
+    $ H = phi(G) = phi(gen(x)) = gen(phi(x)) $
     donc $H$ est monogène. \
     $arrow.r.double$ : On montre la réciproque de la même manière.
   + Soit $x in G$, alors $forall d in NN \\ {0}, x^d = e_G <=> phi(x)^d = e_H$, donc $"ord"(x) = "ord"(phi(x))$.
@@ -286,22 +336,26 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ]
 
 #proposition[
-  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $phi: G --> H$ un morphisme de groupes. Alors $im(phi)$ est un sous-groupe de $H$ et $ker(phi)$ est un sous-groupe de $G$. Plus généralement si $G'$ est un sous groupe de $G$ et $H'$ un sous-groupe de $H$, alors $phi(G')$ est un sous-groupe de $H$ et $phi^(-1)(H')$ est un sous-groupe de $G$. 
+  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $phi: G --> H$ un morphisme de groupes. Alors $im(phi)$ est un sous-groupe de $H$ et $ker(phi)$ est un sous-groupe de $G$. Plus généralement si $G'$ est un sous groupe de $G$ et $H'$ un sous-groupe de $H$, alors $phi(G')$ est un sous-groupe de $H$ et $phi^(-1)(H')$ est un sous-groupe de $G$.
 ]
 
 #proof[
   On considère $phi(G')$,
   + $e_H = phi(e_G)$, donc $e_H in phi(G')$,
   + soit $x, y in phi(G')$, il existe $u, v in G'$ tels que $x = phi(u)$ et $y = phi(v)$, alors
-    $ x dot y^(-1) = phi(u) dot phi(y)^(-1) = phi(u star v^(-1)) $ 
+    $ x dot y^(-1) = phi(u) dot phi(y)^(-1) = phi(u star v^(-1)) $
     puisque $G'$ est un sous-groupe de $G$, on a $u star v^(-1) in G'$, donc $x dot y^(-1) in phi(G')$.
   D'après la @prop-sg-condense, $phi(G')$ est un sous-groupe de $H$.
 
   On considère $phi^(-1)(H')$,
   + $e_G = phi(e_H)$, donc $e_G in phi^(-1)(H')$.
   + soit $x, y in phi^(-1)(H')$, alors $phi(x), phi(y) in H'$ et
-    $ x star y^(-1) in phi^(-1)(H') <=> phi(x star y^(-1)) in H' <=> phi(x) dot phi(y)^(-1) in H' $
-    puisque $H'$ est un sous-groupe de $H$, on a $phi(x) dot phi(y)^(-1) in H'$, donc $x star y^(-1) in phi^(-1)(H')$. 
+    $
+      x star y^(-1) in phi^(-1)(
+        H'
+      ) <=> phi(x star y^(-1)) in H' <=> phi(x) dot phi(y)^(-1) in H'
+    $
+    puisque $H'$ est un sous-groupe de $H$, on a $phi(x) dot phi(y)^(-1) in H'$, donc $x star y^(-1) in phi^(-1)(H')$.
   D'après la @prop-sg-condense, $phi^(-1)(H')$ est un sous-groupe de $G$.
 ]
 
@@ -324,7 +378,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 == Définitions
 
 #definition[
-  Soit $n in NN$. On appelle _groupe symétrique_, noté $S_n$, l'ensemble de toutes les bijections de ${1, ..., n}$ dans lui-même muni de la composition. 
+  Soit $n in NN$. On appelle _groupe symétrique_, noté $S_n$, l'ensemble de toutes les bijections de ${1, ..., n}$ dans lui-même muni de la composition.
   - On appelle _permutations_ les éléments de $S_n$.
   - Soit $sigma$ une permutation, on la note
     $ sigma := mat(1, ..., n; sigma(1), ..., sigma(n)). $
@@ -351,12 +405,14 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #definition[
   Soit $a_1, ..., a_k in {1, ..., n}$ deux à deux distincts. On appelle _$k$-cycle_, noté $(a_1, ..., a_k)$, la permutation définie par
-  $ forall i in {1, ..., n}, (a_1, ..., a_k)(i) := 
+  $
+    forall i in {1, ..., n}, (a_1, ..., a_k)(i) :=
     cases(
       a_(j+1) quad &"si" j in {1, ..., k - 1} "avec" i = a_j,
       a_1 quad &"si" i = a_k,
       i quad &"sinon"
-      ) $
+      )
+  $
   - On dit que $k$ est sa _longueur_.
   - On appelle _transposition_ un $2$-cycle.
 ]
@@ -367,11 +423,15 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #proof[
   Soit $i in {1, ..., n}$. Alors
-  - s'il existe $j in {1, ..., k - 1}$ tel que $i = a_j$, on a 
-    $ (a_k, ..., a_1)((a_1, ..., a_k)(a_j)) = (a_k, ..., a_1)(a_(j+1)) = a_j = i, $
+  - s'il existe $j in {1, ..., k - 1}$ tel que $i = a_j$, on a
+    $
+      (a_k, ..., a_1)((a_1, ..., a_k)(a_j)) = (a_k, ..., a_1)(
+        a_(j+1)
+      ) = a_j = i,
+    $
   - si $i = a_k$, on a
     $ (a_k, ..., a_1)((a_1, ..., a_k)(a_k)) = (a_k, ..., a_1)(a_1) = a_k = i, $
-  - sinon on a 
+  - sinon on a
     $ (a_k, ..., a_1)((a_1, ..., a_k)(i)) = (a_k, ..., a_1)(i) = i. $
   Donc $(a_k, ..., a_1)$ est l'inverse de $(a_1, ..., a_k)$.
 ]
@@ -392,16 +452,24 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #lemma[
   Soit $(a_1, ... , a_k) in S_n$ un $k$-cycle. Alors
-  $ forall sigma in S_n, sigma compose (a_1, ..., a_k) compose sigma^(-1) = (sigma(a_1), ..., sigma(a_k)) $
+  $
+    forall sigma in S_n, sigma compose (a_1, ..., a_k) compose sigma^(-1) = (
+      sigma(a_1), ..., sigma(a_k)
+    )
+  $
 ] <lem-cycle-conj>
 
 #proof[
   Soit $sigma in S_n$. Soit $i in {1, ..., n}$, alors
-  - s'il existe $j in {1, ..., k - 1}$ tel que $i = sigma(a_j)$, alors $sigma^(-1)(i) = a_j$ et on a 
-    $ sigma((a_1, ..., a_k)(sigma^(-1)(i))) = sigma((a_1, ..., a_k)(a_j)) = sigma(a_(j+1)), $
+  - s'il existe $j in {1, ..., k - 1}$ tel que $i = sigma(a_j)$, alors $sigma^(-1)(i) = a_j$ et on a
+    $
+      sigma((a_1, ..., a_k)(sigma^(-1)(i))) = sigma((a_1, ..., a_k)(a_j)) = sigma(a_(j+1)),
+    $
   - si $i = sigma(a_k)$, alors $sigma^(-1)(i) = a_k$ et on a
-    $ sigma((a_1, ..., a_k)(sigma^(-1)(i))) = sigma((a_1, ..., a_k)(a_k)) = sigma(a_(1)), $
-  - sinon on a 
+    $
+      sigma((a_1, ..., a_k)(sigma^(-1)(i))) = sigma((a_1, ..., a_k)(a_k)) = sigma(a_(1)),
+    $
+  - sinon on a
     $ sigma((a_1, ..., a_k)(sigma^(-1)(i))) = sigma(sigma^(-1)(i)) = i. $
   Donc $sigma compose (a_1, ..., a_k) compose sigma^(-1) = (sigma(a_1), ..., sigma(a_k))$.
 ]
@@ -436,12 +504,16 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #proof[
   #linebreak()
-  $arrow.r.double$ : Supposons que $sigma_1$ et $sigma_2$ sont conjuguées. D'après le @lem-cycle-conj, $sigma_1$ et $sigma_2$ ont le même type. \ 
+  $arrow.r.double$ : Supposons que $sigma_1$ et $sigma_2$ sont conjuguées. D'après le @lem-cycle-conj, $sigma_1$ et $sigma_2$ ont le même type. \
   $arrow.l.double$ : Supposons que $sigma_1$ et $sigma_2$ ont le même type $(k_1, ..., k_m)$. \
   D'après le @cor-cycle-conj, $sigma_1$ et $sigma_2$ sont conjuguées à
-  $ sigma_3 := (1, ..., k_1) compose (k_1 + 1, ..., k_1 + k_2) compose ... compose (k_1 + ... + k_(m - 1) + 1, ..., k_m) $
+  $
+    sigma_3 := (1, ..., k_1) compose (
+      k_1 + 1, ..., k_1 + k_2
+    ) compose ... compose (k_1 + ... + k_(m - 1) + 1, ..., k_m)
+  $
   donc il existe $tau_1, tau_2 in S_n$ telles que $sigma_1 = tau_1 compose sigma_3 compose tau_1^(-1)$ et $sigma_2 = tau_2 compose sigma_3 compose tau_2^(-1)$. \
-   Alors $sigma_1 = (tau_1 compose tau_2^(-1)) compose sigma_2 compose (tau_2 compose tau_1^(-1))$, donc $sigma_1$ et $sigma_2$ sont conjuguées.
+  Alors $sigma_1 = (tau_1 compose tau_2^(-1)) compose sigma_2 compose (tau_2 compose tau_1^(-1))$, donc $sigma_1$ et $sigma_2$ sont conjuguées.
 ]
 
 #corollary[
@@ -456,14 +528,20 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #definition[
   Soit $sigma in S_n$ une permutation. On appelle _signature_ de $sigma$ le nombre rationnel
-  $ "sign"(sigma) := product_(1 <= i < j <= n) (sigma(j) - sigma(i))/(j - i). $
+  $
+    "sign"(sigma) := product_(1 <= i < j <= n) (sigma(j) - sigma(i)) / (j - i).
+  $
 ]
 
 #example[
   On calcule la signature de la transposition $(1, 2)$
-  $ "sign"((1, 2)) &= (sigma(2) - sigma(1))/(2 - i) dot product_(2 < j <= n) (sigma(j) - sigma(1))/(j - 1) dot product_(2 < j <= n) (sigma(j) - sigma(2))/(j - 2) dot product_(3 <= i < j <= n) (sigma(j) - sigma(i))/(j - i) \
-    &= (2 - 1)/(1 - 2) dot product_(2 < j <= n) (j - 2)/(j - 1) (j - 1)/(j - 2) dot 1 \
-    &= -1 $
+  $
+    "sign"(
+      (1, 2)
+    ) &= (sigma(2) - sigma(1)) / (2 - i) dot product_(2 < j <= n) (sigma(j) - sigma(1)) / (j - 1) dot product_(2 < j <= n) (sigma(j) - sigma(2)) / (j - 2) dot product_(3 <= i < j <= n) (sigma(j) - sigma(i)) / (j - i) \
+    &= (2 - 1) / (1 - 2) dot product_(2 < j <= n) (j - 2) / (j - 1) (j - 1) / (j - 2) dot 1 \
+    &= -1
+  $
 ]
 
 #theorem[
@@ -472,16 +550,28 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #proof[
   Soit $sigma in S_n$. Alors on calcule
-  $ |"sign"(sigma)| = product_(1 <= i < j <= n) (|sigma(j) - sigma(i)|)/(|j - i|) $
+  $
+    |"sign"(
+      sigma
+    )| = product_(1 <= i < j <= n) (|sigma(j) - sigma(i)|) / (|j - i|)
+  $
   puisque $sigma$ est une bijection, on a ${{sigma(i), sigma(j)} | 1 <= i < j <= n} = {{i, j} | 1 <= i < j <= n}$, alors
-  $ |"sign"(sigma)| = product_(1 <= i < j <= n) (|j - i|)/(|j - i|) = 1 $
+  $ |"sign"(sigma)| = product_(1 <= i < j <= n) (|j - i|) / (|j - i|) = 1 $
   donc $"sign"(sigma) in {-1, 1}$. \
   Soit $tau in S_n$. Alors
-  $ "sign"(sigma compose tau) &= product_(1 <= i < j <= n) (sigma(tau(j)) - sigma(tau(i)))/(j - i) \ 
-    &=  product_(1 <= i < j <= n) (sigma(tau(j)) - sigma(tau(i)))/(tau(j) - tau(i)) dot product_(1 <= i < j <= n) (tau(j) - tau(i))/(j - i) $
+  $
+    "sign"(
+      sigma compose tau
+    ) &= product_(1 <= i < j <= n) (sigma(tau(j)) - sigma(tau(i))) / (j - i) \
+    &= product_(1 <= i < j <= n) (sigma(tau(j)) - sigma(tau(i))) / (tau(j) - tau(i)) dot product_(1 <= i < j <= n) (tau(j) - tau(i)) / (j - i)
+  $
   puisque $tau$ est une bijection, de la même manière on a
-  $ "sign"(sigma compose tau) &= product_(1 <= i < j <= n) (sigma(j) - sigma(i))/(j - i) dot product_(1 <= i < j <= n) (tau(j) - tau(i))/(j - i) \
-    &= "sign"(sigma) dot "sign"(tau) $
+  $
+    "sign"(
+      sigma compose tau
+    ) &= product_(1 <= i < j <= n) (sigma(j) - sigma(i)) / (j - i) dot product_(1 <= i < j <= n) (tau(j) - tau(i)) / (j - i) \
+    &= "sign"(sigma) dot "sign"(tau)
+  $
   donc $"sign"$ est un morphisme de groupes.
 ]
 
@@ -494,8 +584,12 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 #proof[
   Puisque $"sign"$ est un morphisme de groupes.
   - Comme $(a, b)$ est conjuguée à $(1, 2)$, $"sign"((a, b)) = "sign"((1, 2)) = -1$.
-  - Comme $(a_1, ..., a_k) = (a_1, a_2) compose ... compose (a_(k - 1), a_k)$, on a 
-    $ "sign"((a_1, ..., a_k)) = "sign"((a_1, a_2)) ... "sign"((a_(k - 1), a_k)) = (-1)^(k - 1). $
+  - Comme $(a_1, ..., a_k) = (a_1, a_2) compose ... compose (a_(k - 1), a_k)$, on a
+    $
+      "sign"((a_1, ..., a_k)) = "sign"((a_1, a_2)) ... "sign"(
+        (a_(k - 1), a_k)
+      ) = (-1)^(k - 1).
+    $
   - De la même manière, $sigma$ se décompose en cycles à supports disjoints, $"sign"(sigma) = product_(l = 1)^m (-1)^(k_l - 1)$.
 ]
 
@@ -535,15 +629,15 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
   Soit $R$ une relation sur un ensemble $E$. On dit que $R$ est une _relation d'équivalence_ si elle vérifie les propriétés suivantes
   + $R$ est réflexive, $forall x in E, x R x$,
   + $R$ est symétrique, $forall x, y in E, x R y => y R x$,
-  + $R$ est transitive, $forall x, y z in E, x R y "et" y R z => x R z$.  
+  + $R$ est transitive, $forall x, y z in E, x R y "et" y R z => x R z$.
   Dans ce cas, on notera $tilde$ pour $R$.
 ]
 
 #example[
   Soit $n in N \\ {0}$, on pose $R_n := {(a, b) in ZZ^2 | n|a - b}$.
-  + Soit $x in ZZ$, alors $n|0 = x - x$, donc $x R_n x$, 
+  + Soit $x in ZZ$, alors $n|0 = x - x$, donc $x R_n x$,
   + soit $x, y in ZZ$, si $x R_n y$, alors $n|x - y$, d'où $n|y - x$, donc $y R_n x$,
-  + soit $x, y, z in ZZ$, si $x R_n y$ et $y R_n z$, alors $n|x - y$ et $n|y - z$, d'où 
+  + soit $x, y, z in ZZ$, si $x R_n y$ et $y R_n z$, alors $n|x - y$ et $n|y - z$, d'où
     $n|(x - y) + (y - z) = x - z$, donc $x R_n z$.
   Donc $R_n$ est une relation d'équivalence, si $(a, b) in ZZ^2$ on notera $a equiv b mod n$ pour $a R_n b$.
 ]
@@ -552,7 +646,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
   Soit $tilde$ une relation d'équivalence sur un ensemble $E$.
   - Soit $x in E$. On appelle _classe d'équivalence_ de $x$, notée $overline(x)$, l'ensemble
     $overline(x) := {y in E | x tilde y}$.
-  - Soit $x in E$. On appelle _représentant_ de $x$ tout élément de $overline(x)$. 
+  - Soit $x in E$. On appelle _représentant_ de $x$ tout élément de $overline(x)$.
   - On appelle _espace quotient_ de E modulo $tilde$ l'ensemble
     $qt(E, tilde) := {overline(x) | x in E}$.
   - On appelle _projection canonique_ de $E$ sur $qt(E, tilde)$ l'application
@@ -561,7 +655,11 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #example[
   Soit $n in NN$, on considère de nouveau la relation d'équivalence $R_n$. Alors
-  $ forall x in ZZ, overline(x) = {y in ZZ | x equiv y mod n} = {x + n k | k in ZZ} $
+  $
+    forall x in ZZ, overline(x) = {y in ZZ | x equiv y mod n} = {
+      x + n k | k in ZZ
+    }
+  $
   on notera $qt(ZZ, n ZZ)$ pour $qt(ZZ, R_n)$.
 ]
 
@@ -580,7 +678,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
       enum.item(2)[$x in overline(y)$,],
       enum.item(3)[$x tilde y$.],
     )
-  + L'espace quotient de $E$ modulo $tilde$ forme une partition de $E$. 
+  + L'espace quotient de $E$ modulo $tilde$ forme une partition de $E$.
   + Soit $(E_i)_(i in I)$ une partition de $E$. Alors $R := {(x, y) in E | exists i in I, x, y in E_i}$ est une relation d'équivalence.
 ]
 
@@ -590,7 +688,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
     $(c) => (a)$ : Supposons que $x tilde y$. Soit $z in overline(x)$, alors $z tilde x$, et par transitivité $z tilde y$, donc $z in overline(y)$. Réciproquement si $z in overline(y)$, alors $z in overline(x)$, donc $overline(x) = overline(y)$.
   + Soit $x, y in E$. Si $overline(x) sect overline(y) != emptyset$, il existe $z in overline(x) sect overline(y)$ tel que $z tilde x$ et $z tilde y$, donc $x tilde y$ et $overline(x) = overline(y)$. \
     Soit $x in E$, alors $x in overline(x) subset union.sq.big_(x in E) overline(x)$, donc $E = union.sq.big_(x in E) overline(x)$.
-  + 
+  +
     + Soit $x in E$, alors il existe $i in I$ tel que $x in E_i$, donc $x R x$.
     + Soit $x, y in E$, alors si $x R y$, il existe $i in I$ tel que $x, y in E_i$, donc $y R x$.
     + Soit $x, y in E$, alors si $x R y$ et $y R z$, il existe $i, j in I$ tels que $x, y in E_i$ et $y, z in E_j$, mais puisque $(E_i)_(i in I)$, alors $y in E_i sect E_j$, puisqu'il s'agit d'une partition on a $i = j$, donc $x R z$.
@@ -599,17 +697,17 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #definition[
   Soit $E$ un ensemble et $tilde$ une relation d'équivalence sur $E$. On appelle _système de représentants_ pour $tilde$ un sous-ensemble $F$ de $E$ tel que
-  $ forall c in qt(E, tilde), exists! x in F, x in c $
+  $ forall alpha in qt(E, tilde), exists! x in F, x in alpha $
   c'est-à-dire $fun(pi_(|F), F, qt(E, tilde))$ est bijective.
 ]
 
 #definition[
   Soit $E$ et $F$ deux ensembles, et $fun(f, E, F)$ une fonction. On dit que $f$ est _bien définie_ si
-  $ forall x, y in E, x = y => f(x) = f(y) $ 
+  $ forall x, y in E, x = y => f(x) = f(y) $
 ]
 
 #proposition[
-  Soit $E$ et $F$ deux ensembles, et $tilde$ une relation d'équivalence. 
+  Soit $E$ et $F$ deux ensembles, et $tilde$ une relation d'équivalence.
   Soit $fun(f, E, F)$ une application, $fun(pi, E, qt(E, tilde))$ la projection canonique. Alors il existe $fun(overline(f), qt(E, tilde), F)$ bien définie telle que $overline(f) compose pi = f$ si et seulement si
   $ forall x, y in E, x tilde y => f(x) = f(y). $
 ]
@@ -617,8 +715,8 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 #proof[
   #linebreak()
   $arrow.r.double$ : Supposons que $overline(f)$ soit bien définie et que $overline(f) compose pi = f$. Soit $x, y in E$ tels que $x tilde y$, alors $pi(x) = pi(y)$, d'où $overline(f)(pi(x)) = overline(f)(pi(y))$, donc $f(x) = f(y)$.
-  
-  $arrow.l.double$ : Supposons que $forall x, y in E, x tilde y => f(x) = f(y)$. \ 
+
+  $arrow.l.double$ : Supposons que $forall x, y in E, x tilde y => f(x) = f(y)$. \
   Soit $alpha in qt(E, tilde)$, on pose $x_alpha in E$ un représentant de $alpha$, on définit $overline(f)(alpha) = f(x_alpha)$.
   Soit $beta in qt(E, tilde)$, si $beta = alpha$, alors $x_beta tilde x_alpha$, d'où $f(x_beta) = f(x_alpha)$, donc $overline(f)(beta) = overline(f)(alpha)$, c'est-à-dire $overline(f)$ est bien définie.
 ]
@@ -627,7 +725,9 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #definition[
   Soit $(G, star)$ un groupe et $H$ un sous-groupe de $G$. On appelle _relation modulo $H$ à gauche_, la relation $attach(tilde, br: H)$ sur $G$ définie par
-  $ forall x, y in G, x attach(tilde, br:H) y <=> y in x H <=> x^(-1) star y in H $
+  $
+    forall x, y in G, x attach(tilde, br:H) y <=> y in x H <=> x^(-1) star y in H
+  $
   où $x H = {x star y | y in H}$.
 ]
 
@@ -671,8 +771,8 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ] <thm-classes>
 
 #proof[
-  On pose $n := [G:H]$ et on considère ${x_1, ..., x_n}$ un système de représentants pour $attach(tilde, br: H)$. On sait que la famille $(x_i H)_(i in {1, ..., n})$ forme une partition de $G$, d'où 
-  $ |G| = sum_(i=1)^n |x_i H| = sum_(i=1)^n |H| = n|H| $ 
+  On pose $n := [G:H]$ et on considère ${x_1, ..., x_n}$ un système de représentants pour $attach(tilde, br: H)$. On sait que la famille $(x_i H)_(i in {1, ..., n})$ forme une partition de $G$, d'où
+  $ |G| = sum_(i=1)^n |x_i H| = sum_(i=1)^n |H| = n|H| $
   c'est-à-dire $|G| = [G:H]|H|$.
 ]
 
@@ -681,7 +781,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ] <thm-lagrange>
 
 #corollary[
-  + Soit $(G, star)$ un groupe fini d'ordre $n$ et $x in G$. Alors $x^n = e$.  
+  + Soit $(G, star)$ un groupe fini d'ordre $n$ et $x in G$. Alors $x^n = e$.
   + Soit $(G, star)$ un groupe fini, $H$ un sous-groupe de $G$ et $K$ un sous-groupe de $H$. Alors $K$ est un sous-groupe de $G$ et
     $ [G:K] = [G:H][H:K]. $
 ]
@@ -703,14 +803,16 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 #proof[
   #linebreak()
   $1. => 3.$ : Supposons que $H$ est distingué. \
-  On considère l'application $fun(dot, qt(G, H) times qt(G, H), qt(G, H), x:(x H, y H), fx: x y H)$, alors elle est bien définie et $(qt(G, H), dot)$ forme un groupe. 
+  On considère l'application $fun(dot, qt(G, H) times qt(G, H), qt(G, H), x:(x H, y H), fx: x y H)$, alors elle est bien définie et $(qt(G, H), dot)$ forme un groupe.
 
   $3. => 2.$ : Supposons que $qt(G, H)$ a une structure de groupe. \
-  Alors la projection canonique $fun(pi, G, qt(G, H))$ est un morphisme de groupes et $ker(pi) = H$. 
-  
+  Alors la projection canonique $fun(pi, G, qt(G, H))$ est un morphisme de groupes et $ker(pi) = H$.
+
   $2. => 1.$ : Supposons qu'il existe un tel morphisme $phi$. \
   Soit $h in H$ et $g in G$, alors
-  $ phi(g star h star g^(-1)) = phi(g) star phi(h) star phi(g)^(-1) = phi(x) star phi(x)^(-1) = e $
+  $
+    phi(g star h star g^(-1)) = phi(g) star phi(h) star phi(g)^(-1) = phi(x) star phi(x)^(-1) = e
+  $
   puisque $H = ker(phi)$, on a $g star h star g^(-1) in H$.
 ]
 
@@ -736,7 +838,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ] <thm-iso>
 
 #proof[
-  On pose $H := ker(phi)$, alors par le @thm-prop-univ-groupes, il existe $fun(overline(phi), qt(G, ker(phi)), im(phi))$ telle que $overline(phi) compose pi = phi$. 
+  On pose $H := ker(phi)$, alors par le @thm-prop-univ-groupes, il existe $fun(overline(phi), qt(G, ker(phi)), im(phi))$ telle que $overline(phi) compose pi = phi$.
   Puisque $ker(overline(phi)) = pi(ker(phi)) = pi(H) = {e}$, $overline(phi)$ est injectif, et par définition $overline(phi)$ est surjectif. Donc $overline(phi)$ est un isomorphisme.
 ]
 
@@ -760,7 +862,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
   Alors il existe $a', b' in ZZ$ tels que $a = d a'$ et $b = d b'$, d'où $m = d a' b'$. Alors
   $ (x star y)^m = x^m star y^m = (x^(d a')à)^(b') star (y^(d b'))^(a') = e $
 
-  donc $"ord"(x star y)$ divise $"ppcm"(a, b)$. 
+  donc $"ord"(x star y)$ divise $"ppcm"(a, b)$.
 ]
 
 #proposition[
@@ -774,13 +876,15 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
   Soit $(a, b)$ un générateur de $qt(ZZ, n ZZ) times qt(ZZ, m ZZ)$, c'est-à-dire $"ord"((a, b)) = n m$, alors
   $ "ppcm"("ord"(a), "ord"(b)) dot (a, b) = (overline(0), [0]) $
   donc $n m|"ppcm"("ord"(a), "ord"(b))$, on en déduit $n m|"ppcm"(n, m)$, d'où $"pcgd"(n, m) = 1$.
-  
+
   $arrow.l.double$ : Supposons que $"pgcd"(n, m) = 1$. Posons $fun(phi, ZZ, qt(ZZ, n ZZ)times qt(ZZ, m ZZ), x:x, fx:(overline(x), [x]))$. \
   Alors $phi$ est bien un morphisme, et on a
-  $ ker(phi) &= {k in ZZ | (overline(k), [k]) = (overline(0), [0])} \
+  $
+    ker(phi) &= {k in ZZ | (overline(k), [k]) = (overline(0), [0])} \
     &= {k in ZZ | n|k "et" m|k} \
-    &= {k in ZZ | n m|k} = n m ZZ $
-  
+    &= {k in ZZ | n m|k} = n m ZZ
+  $
+
   d'après le @thm-prop-univ-groupes, il existe un morphisme $overline(phi): qt(ZZ, n m ZZ) --> qt(ZZ, n ZZ) times qt(ZZ, m ZZ)$ injectif. Enfin puisque $|qt(ZZ, n m ZZ)| = |qt(ZZ, n ZZ) times qt(ZZ, m ZZ)|$, on en déduit que $overline(phi)$ est un isomorphisme.
 ]
 

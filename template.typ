@@ -1,13 +1,14 @@
 #import "@preview/great-theorems:0.1.1": *
 #import "@preview/headcount:0.1.0": *
+#import "@preview/fletcher:0.5.2": *
 #import "@preview/outrageous:0.3.0"
 
 // Counter and blocks definitions
 #let mathcounter = counter("maths")
 #let mathblock = mathblock.with(
-  breakable: false, 
-  counter: mathcounter, 
-  numbering: dependent-numbering("1.1", levels: 1)
+  breakable: false,
+  counter: mathcounter,
+  numbering: dependent-numbering("1.1", levels: 1),
 )
 
 #let definition = mathblock(blocktitle: "Définition")
@@ -24,16 +25,23 @@
 #let gen(..generators) = $angle.l #generators.pos().join(", ") angle.r$
 #let qt(numerator, denominator) = $#numerator slash #denominator$
 #let qtr(numerator, denominator) = $#denominator thin backslash thin #numerator$
-#let fun(f, E, F, x: none, fx: none) = context {
+#let fun(f, E, F, x: none, fx: none) = (
   if x == none or fx == none {
     $#f : #E -> #F$
   } else {
     $#f : #E -> #F, #x -> #fx$
-  } 
-} 
+  }
+)
 #let act = rotate(180deg, $arrow.cw$)
 
-#let maths(title: none, authors: (), color: none, header: false, date: false, body) = {
+#let maths(
+  title: none,
+  authors: (),
+  color: none,
+  header: false,
+  date: false,
+  body,
+) = {
   // Document metadata
   set document(title: title, author: authors)
 
@@ -50,27 +58,30 @@
 
   // Page options
   set page(
-    numbering: "1", 
-    header: context { 
+    numbering: "1",
+    header: context {
       if header and counter(page).get().first() > 1 {
-        align(center, if title != "" and authors != "" {
-          [#title -- #authors] 
-        } else if title != "" {
-          title
-        } else {
-          ""
-        })
+        align(
+          center,
+          if title != "" and authors != "" {
+            [#title -- #authors]
+          } else if title != "" {
+            title
+          } else {
+            ""
+          },
+        )
         line(start: (0%, -8pt), length: 100%, stroke: 0.5pt)
         v(-10pt)
       }
-    }
+    },
   )
 
   // Text options
   set text(
-    font: "TeX Gyre Pagella", 
-    size: 11pt, 
-    lang: "fr"
+    font: "TeX Gyre Pagella",
+    size: 11pt,
+    lang: "fr",
   )
 
   // Heading options
@@ -83,13 +94,13 @@
   // Outline styling
   show outline.entry: it => {
     outrageous.show-entry(
-      it, 
+      it,
       font: (auto, none),
       font-weight: ("bold", auto),
       body-transform: (level, body) => text(rgb(color), body),
-      fill:  (none, align(right, outrageous.repeat(gap: 5pt)[$dot$])), 
+      fill: (none, align(right, outrageous.repeat(gap: 5pt)[$dot$])),
     )
-  }  
+  }
 
   // Center maths block in list
   show math.equation.where(block: true): it => {
@@ -107,7 +118,7 @@
 
   // Title
   align(
-    center, 
+    center,
     [
       #text(size: 26pt)[#title]
       #if authors != none {
@@ -116,9 +127,11 @@
       }
       #v(0pt)
       #if date {
-        text(size: 13pt)[#lower(datetime.today().display("[day] [month repr:long] [year]"))]
-      }  
-    ]
+        text(size: 13pt)[#lower(
+            datetime.today().display("[day] [month repr:long] [year]"),
+          )]
+      }
+    ],
   )
 
   // Contents
