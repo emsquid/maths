@@ -22,6 +22,10 @@
 #let proof = proofblock(prefix: [_Démonstration_.])
 
 // Maths shortcuts
+#let scr(it) = text(
+  features: ("ss01",),
+  box($cal(it)$),
+)
 #let gen(..generators) = $angle.l #generators.pos().join(", ") angle.r$
 #let qt(numerator, denominator) = $#numerator slash #denominator$
 #let qtr(numerator, denominator) = $#denominator thin backslash thin #numerator$
@@ -33,6 +37,7 @@
   }
 )
 #let act = rotate(180deg, $arrow.cw$)
+#let transpose(M) = $#M^upright(T)$
 
 #let maths(
   title: none,
