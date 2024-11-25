@@ -93,7 +93,7 @@
       [$g_n$],
       [$g_n star g_1$],
       [$dots.c$],
-      [$g_n star g_j$],
+      [$g_n star g_j #h(0.01em)$],
       [$dots.c$],
       [$g_n star g_n$],
     ),
