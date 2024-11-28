@@ -226,6 +226,8 @@
   $ det(M) = det(A) det(B). $
 ])
 
+#pagebreak()
+
 = Diagonalisation
 
 = Polynôme caractéristique
@@ -247,31 +249,235 @@
 == Ecriture dans une base
 
 #definition([
-  Soit $E$ un $KK$-espace vectoriel, $cal(E) = (e_1, ..., e_n)$ une base de $E$ et $fun(Phi, E times E, E)$ une application bilinéaire. On appelle _matrice_ de $Phi$ dans la base $cal(E)$, la matrice
+  Soit $E$ un $KK$-espace vectoriel, $cal(E) = (e_1, ..., e_n)$ une base de $E$ et $fun(Phi, E times E, E)$ une forme bilinéaire. On appelle _matrice_ de $Phi$ dans la base $cal(E)$, la matrice
   $ [Phi]_cal(E) := (Phi(e_i, e_j))_(1 <= i, j <= n). $
 
 
 ])
 
 #proposition([
-  Soit $E$ un $KK$-espace vectoriel, $cal(E) = (e_1, ..., e_n)$ une base de $E$ et $fun(Phi, E times E, E)$ une application bilinéaire. Alors par bilinéarité
+  Soit $E$ un $KK$-espace vectoriel, $cal(E) = (e_1, ..., e_n)$ une base de $E$ et $fun(Phi, E times E, E)$ une forme bilinéaire. Alors par bilinéarité
   $
-    forall x = (x_1, ..., x_n), y = (y_1, ..., y_n) in E, Phi(x, y) = sum_(1 <= i, j <= n) x_i y_j Phi(e_i, e_j) = transpose([x]_cal(E)) [
+    forall x = (x_1, ..., x_n), y = (
+      y_1, ..., y_n
+    ) in E, Phi(x, y) = sum_(1 <= i, j <= n) x_i y_j Phi(e_i, e_j) = transpose([x]_cal(E)) [
       Phi
     ]_cal(E) [y]_cal(E).
   $
 ])
 
 #proposition([
-  Soit $E$ un $KK$-espace vectoriel, $cal(E)$ et $cal(F)$ deux bases de $E$, et $fun(Phi, E times E, E)$ une application bilinéaire. Alors
+  Soit $E$ un $KK$-espace vectoriel, $cal(E)$ et $cal(F)$ deux bases de $E$, et $fun(Phi, E times E, E)$ une forme bilinéaire. Alors
   $
-    [Phi]_(cal(F)) = transpose(cal(P)_(cal(E))^cal(F)) [Phi]_cal(E) cal(P)_cal(E)^(cal(F)).
+    [Phi]_(cal(F)) = transpose(cal(P)_(cal(E))^cal(F)) [
+      Phi
+    ]_cal(E) cal(P)_cal(E)^(cal(F)).
   $
 ])
 
 == Dualité
 
 #definition([
-  Soit $E$ un $KK$-espace vectoriel de dimension $n$. On appelle _dual_ de $E$, noté $E^*$, l'ensemble des formes linéaires sur $E$. Si $cal(E) = (e_1, ..., e_n)$ est une base de $E$, on appelle _base duale_, la famille $(e_1^*, ..., e_n^*)$ telle que
-  $ forall i, j in {1, ..., n}, e_i^* (e_j) := delta_(i, j) = cases(1 "si" i = j, 0 "sinon"). $
+  Soit $E$ un $KK$-espace vectoriel de dimension $n$. On appelle _dual_ de $E$, noté $E^*$, l'ensemble des formes linéaires sur $E$. Si $cal(E) = (e_1, ..., e_n)$ est une base de $E$, on appelle _base duale_, la famille $cal(E)^* = (e_1^*, ..., e_n^*)$ telle que
+  $
+    forall i, j in {1, ..., n}, e_i^* (
+      e_j
+    ) := delta_(i, j) = cases(1 "si" i = j, 0 "sinon").
+  $
+])
+
+#proposition([
+  Soit $E$ un $KK$-espace vectoriel de dimension $n$. Soit $fun(u, E, E)$ une forme linéaire, alors
+  $ u = sum_(i=0)^n u(e_i) e_i^* $
+  Soit $f$ un élément de $E$, alors
+  $ f = sum_(i=0)^n e_i^* (f) e_i. $
+])
+
+#definition([
+  Soit $E$ un $KK$-espace vectoriel et $cal(F) = (f_1, ..., f_n)$ une base de $E^*$. On appelle _base antéduale_, l'unique base $cal(E) = (e_1, ..., e_n)$ de $E$ telle que $cal(E)^* = cal(F)$.
+])
+
+#definition([
+  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire. On appelle _application linéaire associée_ à $Phi$, l'application
+  $ fun(u_Phi, E, E^*, x:x, fx: (y |-> Phi(x, y))). $
+])
+
+== Forme bilinéaire symétrique et forme quadratique
+
+#definition([
+  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire. On dit que $Phi$ est _symétrique_, si
+  $ forall (x, y) in E times E, Phi(x, y) = Phi(y, x). $
+])
+
+#definition([
+  Soit $E$ un $KK$-espace vectoriel et $fun(Q, E, KK)$ une application. On dit que $Q$ est une _forme quadratique_, s'il existe une forme bilinéaire $fun(Phi, E times E, KK)$ telle que
+  $ forall x in E, Q(x) = Phi(x, x) $
+  dans ce cas, on dit que $Q$ est la _forme quadratique associée_ à $Phi$.
+])
+
+#proposition(
+  title: "Formule de polarisation",
+  [
+    Soit $E$ un $KK$-espace vectoriel, $fun(Phi, E times E, KK)$ une forme bilinéaire et $fun(Q, E, KK)$ la forme quadratique associée à $Phi$. Alors
+    $
+      forall (x, y) in E times E, Phi(x, y) = 1 / 2(
+        Q(x + y) - Q(x) - Q(y)
+      ) = 1 / 4(Q(x + y) + Q(x - y)).
+    $
+  ],
+) <prop-form-polar>
+
+#remark([
+  Soit $E$ un $KK$-espace vectoriel et $fun(Q, E, KK)$ une forme quadratique. Alors d'après la @prop-form-polar, $Q$ détermine une forme bilinéaire symétrique, on l'appelle _forme polaire associée_ à $Q$.
+])
+
+#remark([
+  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire. Alors sa matrice dans la base canonique est symétrique.
+])
+
+== Forme quadratique définie
+
+#definition([
+  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire.
+  On dit que $Phi$ est _non-dégénérée_ si
+  $ forall x in E, (forall y in E, Phi(x, y) = 0) => x = 0. $
+])
+
+#definition([
+  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire.
+  On dit que $Phi$ est _définie_ si
+  $ forall x in E, Phi(x, x) = 0 => x = 0. $
+])
+
+#proposition([
+  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire.
+  Alors si $Phi$ est définie, elle est non-dégénérée.
+])
+
+#definition([
+  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire définie.
+  - On dit que $Phi$ est _définie positive_ si
+    $ forall x in E without {0}, Phi(x, x) > 0. $
+  - On dit que $Phi$ est _définie négative_ si
+    $ forall x in E without {0}, Phi(x, x) < 0. $
+])
+
+#proposition([
+  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire définie.
+  Alors $Q$ est soit définie positive, soit définie négative.
+])
+
+#remark([
+  On étend toutes les énoncés précédents aux formes quadratiques avec leur forme polaire associée.
+])
+
+
+== Réduction d'une forme quadratique
+
+#theorem([
+  Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $fun(Q, E, KK)$ une forme quadratique.
+  Alors il existe des formes linéaires indépendantes $f_1, ..., f_m$ sur $E$ et des éléments non-nuls $a_1, ..., a_m in KK$ tels que
+  $ forall x in E, Q(x) = a_1 f_1 (x)^2 + ... + a_m f_m (x)^2. $
+]) <thm-redu-quad>
+
+#proof([
+  On applique l'algorithme de #link("https://www.bibmath.net/dico/index.php?action=affiche&quoi=./g/gaussdecompo.html")[réduction de Gauss].
+])
+
+#remark([
+  La famille de formes linéaires indépendantes qui intervient dans le @thm-redu-quad n'est pas nécessairement unique.
+])
+
+== Invariants d'une forme quadratique
+
+#theorem(
+  title: "d'inertie de Sylvester",
+  [
+    Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $fun(Q, E, KK)$ une forme quadratique.
+    Alors le nombre $m$ de formes linéaires indépendantes qui interviennent dans une décomposition de $Q$ est égal au rang de $Q$.
+
+  ],
+)
+
+#theorem(
+  title: [d'inertie de Sylvester dans $RR$],
+  [
+    Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $fun(Q, E, KK)$ une forme quadratique.
+    Soit
+    $
+      Q = a_1 f_1^2 + ... + a_s f_s^2 - a_(s+1) f_(s+1)^2 - ... - a_(s+t) f_(s+t)^2
+    $
+    une décomposition de $Q$ en sommes de carrés telle que $forall i in {1, ..., s+t}, a_i > 0$.
+    Alors les nombres $s$ et $t$ ne dépendent que de $Q$.
+  ],
+) <thm-sylv-r>
+
+#definition([
+  Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $fun(Q, E, KK)$ une forme quadratique.
+  On appelle _signature_ de $Q$, le couple $(s, t)$ du @thm-sylv-r.
+])
+
+#pagebreak()
+
+= Espaces euclidiens
+
+#definition([
+  Soit $E$ un $RR$-espace vectoriel.
+  On appelle _produit scalaire_ sur $E$, noté $sca(dot, dot)$, une forme bilinéaire symétrique définie positive.
+  On appelle _espace euclidien_ le couple $(E, sca(dot, dot))$.
+])
+
+#definition([
+  Soit $(E, sca(dot, dot))$ un espace euclidien.
+  On appelle _norme associée au produit scalaire_, l'application $fun(||dot||, E, RR_+, x: x, fx: sqrt(sca(x, x)))$.
+])
+
+== Norme d'un vecteur
+
+#theorem(
+  title: "Inégalité de Cauchy-Schwarz",
+  [
+    Soit $(E, sca(dot, dot))$ un espace euclidien.
+    Alors
+    $ forall x, y in E, |sca(x, y)| <= ||x||||y|| $
+    avec égalité si et seulement si les deux éléments sont liés.
+  ],
+)
+
+#proposition([
+  Soit $(E, sca(dot, dot))$ un espace euclidien.
+  Alors l'application $||dot||$ est une norme.
+])
+
+== Orthogonalité, base orthogonale et base orthonormée
+
+#definition([
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $x, y in E$. 
+  On dit que $x$ et $y$ sont _orthogonaux_, noté $x perp y$, si $sca(x, y) = 0$.
+])
+
+#definition([
+    Soit $(E, sca(dot, dot))$ un espace euclidien et $F$ un sous-ensemble de $E$. 
+    On appelle _orthogonal_ de $F$, noté $F^perp$, l'ensemble
+    $ F^perp := {x in E | forall y in F, sca(x, y) = 0}. $
+])
+
+#notation([
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $x in E$. 
+  On note $x^perp := {x}^perp$.   
+])
+
+#proposition([
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $F$ un sous-ensemble de $E$. 
+  Alors $F^perp$ est un sous-espace vectoriel de $E$.
+])
+
+#proposition([
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $x, y in E$. Alors
+  $ x perp y <=> ||x+y||^2 = ||x||^2 + ||y||^2 <=> ||x-y||^2 = ||x||^2 + ||y||^2. $
+])
+
+#proposition([
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $x in E without {0}$. Alors $Vect(x)^perp = x^perp$ et  
+  $ E = Vect(x) plus.circle Vect(x)^perp. $
 ])
