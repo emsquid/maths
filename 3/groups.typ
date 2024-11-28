@@ -902,6 +902,62 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ]
 
 #notation[
-  Soit $(G, star)$ un groupe et $X$ un ensemble. Si $G$ agit sur $X$, on note $G act X$
+  Soit $(G, star)$ un groupe et $X$ un ensemble. Si $G$ agit sur $X$, on note $G act X$.
 ]
 
+#definition([
+  Soit $(G, star)$ un groupe qui agit sur un ensemble $X$ et $x in X$.
+  + On appelle _stabilisateur_ de $x$, l'ensemble $G_x := {g in G | g star x = x}$.
+  + On appelle _orbite_ de $x$, l'ensemble $O_x := {g star x | g in G}$.
+])
+
+#lemma([
+  Soit $(G, star)$ un groupe qui agit sur un ensemble $X$ et $x in X$. Alors le stabilisateur de $x$ est un sous-groupe de $G$. De plus
+  $ forall g in G, G_(g star x) = g (G_x) g^(-1). $
+])
+
+#proof([
+  On vérifie facilement que $G_x$ est un sous-groupe de $G$. Soit $g in G$, alors $h in G_(g x)$ si et seulement si $h star (g star x) = g star x$, si et seulement si $(g^(-1) star h star g) star x = x$, si et seulement si $g^(-1) star h star g in G_x$, si et seulement si $h in g (G_x) g^(-1)$.
+])
+
+== Espace des orbites
+
+#definition([
+  Soit $(G, star)$ un groupe qui agit sur un ensemble $X$ et $x, y in X$. Alors on définit la relation $tilde$ par
+  $ x tilde y <=> y in O_x. $
+])
+
+#proposition([
+  Soit $(G, star)$ un groupe qui agit sur un ensemble $X$. Alors $tilde$
+  est une relation d'équivalence sur $X$, dont les classes d'équivalences sont $forall x in X, overline(x) = O_x$.
+])
+
+#proof([
+  + Soit $x in X$, alors $x = e star x$, d'où $x in O_x$, donc $x tilde x$.
+  + Soit $x, y in X$, alors si $x tilde y$, il existe $g in G$ tel que $y = g star x$, d'où $x = g^(-1) star y$, donc $y tilde x$.
+  + Soit $x, y, z in X$, alors si $x tilde y$ et $y tilde z$, il existe $g, h in G$ tels que $y = star x$ et $z = h star y$, d'où $z = (h star g) star x$, donc $x tilde z$.
+])
+
+#definition([
+  Soit $(G, star)$ un groupe qui agit sur un ensemble $X$. On dit que l'action est
+  + _transitive_, si $forall x, y in X, exists G, y = g star x$,
+  + _fidèle_, si $forall g in G \\ {e}, exists x in X, g star x != x$,
+  + _libre_, si $forall g in G \\ {e}, forall x in X, g star x != x$.
+  Dans ce cas, on dit que $G$ agit respectivement _transitivement_, _fidèlement_ et _librement_ sur $X$.
+])
+
+#proposition([
+  Soit $(G, star)$ un groupe qui agit transitivement sur un ensemble $X$ et $x in X$. Alors l'application $fun(f_x, qt(G, G_x), X, x: g G_x, fx: g star x)$, est bien définie et est bijective.
+])
+
+#proof([
+  Soit $g, h in G$ tels que $g tilde h$. Alors $g G_x = h G_x$, d'où $h^(-1) star g in G_x$, c'est-à-dire $g star x = h star x$, donc $f_x$ est bien définie. Réciproquement $f_x$ est injective puisque $g star x = h star x$ donne $g G_x = h G_x$. Enfin $f_x$ est surjective puisque $G$ agit transitivement sur $X$.
+])
+
+#theorem(
+  title: "Formule des classes",
+  [
+    Soit $(G, star)$ un groupe fini qui agit sur un ensemble fini $X$ et $x_1, ..., x_n in X$ un système de représentant pour $tilde$. Alors 
+    $ |X| = sum_(i = 0)^n |O_x_i| $
+  ],
+)
