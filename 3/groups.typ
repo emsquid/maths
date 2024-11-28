@@ -189,17 +189,17 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
   Soit $(G, star)$ un groupe et $S$ un sous-ensemble non-vide de $G$. Alors
   $ gen(S) = attach(limits(sect.big_(H < G)), b: S subset H) H $
   ou encore
-  $gen(S) = {x_1 star ... star x_n | n in NN \\ {0}, forall i in {1, ..., n}, x_i in S "ou" x_i^(-1) in S}$.
+  $gen(S) = {x_1 star ... star x_n | n in NN without {0}, forall i in {1, ..., n}, x_i in S "ou" x_i^(-1) in S}$.
 ]
 
 #proof[
   Notons $F := {H < G | S subset H}$ et $H_S := sect.big_(H in F) H$. Puisque $G in F$, l'intersection est non-vide, et d'après la @prop-sect-sg, $H_S$ est un sous-groupe de $G$. De plus $H_S$ contient évidemment $S$. Enfin si $H_0$ est un sous-groupe de $G$ contenant $S$, on a $H_0 in F$, donc $H_0 subset H_S$. Donc $H_S$ est bien le plus petit sous-groupe de $G$ contenant $S$.
 
-  Notons $K_S := {x_1 star ... star x_n | n in NN \\ {0}, forall i in {1, ..., n}, x_i in S "ou" x_i^(-1) in S}$. On remarque que $K_S$ est stable par multiplication, par inverse et contient le neutre de $G$, donc d'après la @prop-sg-condense, $K_S$ est un sous-groupe de $G$. De plus $G_S$ contient $S$, donc $gen(S) subset G_S$. Réciproquement, puisque $gen(S)$ est un groupe, on en déduit que $forall x in K_S, x in gen(S)$, donc $K_S subset gen(S)$. Par double inclusion $gen(S) = K_S$.
+  Notons $K_S := {x_1 star ... star x_n | n in NN without {0}, forall i in {1, ..., n}, x_i in S "ou" x_i^(-1) in S}$. On remarque que $K_S$ est stable par multiplication, par inverse et contient le neutre de $G$, donc d'après la @prop-sg-condense, $K_S$ est un sous-groupe de $G$. De plus $G_S$ contient $S$, donc $gen(S) subset G_S$. Réciproquement, puisque $gen(S)$ est un groupe, on en déduit que $forall x in K_S, x in gen(S)$, donc $K_S subset gen(S)$. Par double inclusion $gen(S) = K_S$.
 ]
 
 #definition[
-  Soit $(G, star)$ un groupe et $S$ un sous-ensemble de $G$. Si $G = gen(S)$, on dit que $G$ est _engendré_ par $S$ et on appelle $S$ un _système de générateurs_ pour $G$. \
+  Soit $(G, star)$ un groupe et $S$ un sous-ensemble de $G$. Si $G = gen(S)$, on dit que $G$ est _engendré_ par $S$ et on appelle $S$ un _système de générateurs_ pour $G$. without
   - Si $S$ est fini, on dit que $G$ est _finiment engendré_.
   - Si $S$ ne contient qu'un élément, on dit que $G$ est _monogène_, si de plus $G$ est fini, on dit que $G$ est _cyclique_.
 ]
@@ -215,14 +215,14 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
   + $forall n in ZZ, gen(n) = n ZZ$,
   + soit $H$ est un sous-groupe de $(ZZ, +)$, alors il existe $n in ZZ$ tel que $H = n ZZ$,
   + soit $a, b in ZZ$ avec $b != 0$, alors $b$ divise $a$ si et seulement si $gen(a) subset gen(b)$,
-  + soit $a, b in ZZ \\ {0}$, alors $gen(a, b) = "pgcd"(a, b) ZZ$ et $gen(a) sect gen(b) = "ppcm"(a, b) ZZ$.
+  + soit $a, b in ZZ without {0}$, alors $gen(a, b) = "pgcd"(a, b) ZZ$ et $gen(a) sect gen(b) = "ppcm"(a, b) ZZ$.
 ]
 
 #proof[
   + Soit $n in ZZ$, alors $gen(n) = {k dot n | k in ZZ} = n ZZ$.
   +
     - Si $H = {0}$, alors $H = 0 ZZ$.
-    - Sinon, $H \\ {0}$ est non-vide, on prend $n$ le plus petit entier strictement positif de $H$. \
+    - Sinon, $H without {0}$ est non-vide, on prend $n$ le plus petit entier strictement positif de $H$. without
       Puisque $n in H$, on a $n ZZ subset H$. Réciproquement, soit $m in H$, par division euclidienne il existe $q, r in ZZ$ tels que $m = n q + r$ et $0 <= r < n$, puisque $r = m - n q in H$, on a nécessairement $r = 0$, d'où $m in n ZZ$, donc $H subset n ZZ$.
       Donc $H = n ZZ$.
   + On sait que $b$ divise $a$ si et seulement il existe $q in ZZ$ tel que $a = b q$ si et seulement $a in gen(b)$ si et seulement si $gen(a) subset gen(b)$.
@@ -237,16 +237,16 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #proposition[
   Soit $(G, star)$ un groupe et $x in G$. Alors
-  $ "ord"(x) = inf({d in NN \\ {0} | x^d = e}) $
+  $ "ord"(x) = inf({d in NN without {0} | x^d = e}) $
   de plus si $n in ZZ$ vérifie $x^n = e$, alors $"ord"(x)$ divise $n$.
 ]
 
 #proof[
-  - Si $"ord"(x) = +oo$, supposons par l'absurde qu'il existe $d in NN \\ {0}$ tel que $x^d = e$. \
+  - Si $"ord"(x) = +oo$, supposons par l'absurde qu'il existe $d in NN without {0}$ tel que $x^d = e$. without
     Alors $gen(x) = {e, x, ..., x^(d-1)}$ est fini, d'où une contradiction.
-  - Sinon $"ord"(x) in NN \\ {0}$. \
-    Puisque $gen(x)$ est fini, il existe $m, n in NN \\ {0}$ tels que $n < m$ et $x^m = x^n$, alors $x^(m - n) = e$, donc l'ensemble ${d in NN \\ {0} | x^d = e}$ est non-vide.
-    Posons $ d := inf({d in NN \\ {0} | x^d = e})$, puisque $x^d = e$, on obtient $gen(x) = {e, x, ..., x^(d - 1)}$, donc $"ord"(x) = |{e, x, ..., x^(d - 1)}| = d$.
+  - Sinon $"ord"(x) in NN without {0}$. without
+    Puisque $gen(x)$ est fini, il existe $m, n in NN without {0}$ tels que $n < m$ et $x^m = x^n$, alors $x^(m - n) = e$, donc l'ensemble ${d in NN without {0} | x^d = e}$ est non-vide.
+    Posons $ d := inf({d in NN without {0} | x^d = e})$, puisque $x^d = e$, on obtient $gen(x) = {e, x, ..., x^(d - 1)}$, donc $"ord"(x) = |{e, x, ..., x^(d - 1)}| = d$.
   - Soit $n in ZZ$ tel que $x^n = e$. Par division euclidienne il existe $q, r in ZZ$ tels que $n = "ord"(x)q + r$ et $0 <= r < d$, alors $x^r = x^(n - "ord"(x)q) = x^n star x^"ord"(x)^(-q) = e$, par définition de $"ord"(x)$ on a nécessairement $r = 0$, donc $"ord"(x)$ divise $n$.
 ]
 
@@ -293,9 +293,9 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 #proof[
   Soit $x, y in G$. Alors
   $
-    (psi compose phi)(x star y) &= psi(phi(x star y)) \
-    &= psi(phi(x) dot phi(y)) \
-    &= psi(phi(x)) med square.tiny.filled med psi(phi(y)) \
+    (psi compose phi)(x star y) &= psi(phi(x star y)) without
+    &= psi(phi(x) dot phi(y)) without
+    &= psi(phi(x)) med square.tiny.filled med psi(phi(y)) without
     &= (psi compose phi)(x) med square.tiny.filled med (psi compose phi)(y)
   $
   donc $psi compose phi$ est un morphisme de groupes.
@@ -318,13 +318,13 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
         x
       ) => x dot y = y dot x
     $
-    donc $H$ est abélien. \
+    donc $H$ est abélien. without
     $arrow.l.double$ : On montre la réciproque de la même manière.
   + $arrow.r.double$ : Supposons que $G$ est monogène. Alors il existe $x in G$ tel que $G = gen(x)$, ainsi
     $ H = phi(G) = phi(gen(x)) = gen(phi(x)) $
-    donc $H$ est monogène. \
+    donc $H$ est monogène. without
     $arrow.r.double$ : On montre la réciproque de la même manière.
-  + Soit $x in G$, alors $forall d in NN \\ {0}, x^d = e_G <=> phi(x)^d = e_H$, donc $"ord"(x) = "ord"(phi(x))$.
+  + Soit $x in G$, alors $forall d in NN without {0}, x^d = e_G <=> phi(x)^d = e_H$, donc $"ord"(x) = "ord"(phi(x))$.
 ]
 
 == Image et noyau
@@ -367,7 +367,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #proof[
   - Par définition.
-  - $arrow.r.double$ : Supposons que $phi$ est injectif. Soit $x in ker(phi)$, alors $phi(x) = e_H$, donc $x = e_G$. \
+  - $arrow.r.double$ : Supposons que $phi$ est injectif. Soit $x in ker(phi)$, alors $phi(x) = e_H$, donc $x = e_G$. without
     $arrow.l.double$ : Supposons que $ker(phi) = {e_G}$. Soit $x, y in G$ tels que $f(x) = f(y)$, puisque $phi$ est un morphisme on a $f(x star y^(-1)) = e_H$, et $ker(phi) = e_G$ d'où $x star y^(-1) = e_G$, donc $x = y$ et $phi$ est injectif.
 ]
 
@@ -489,7 +489,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 #proof[
   On raisonne par récurrence sur le cardinal de $"supp"(sigma)$.
   - Pour $|"supp"(sigma)| = 0$, on a $sigma = id$.
-  - Pour $|"supp"(sigma)| > 0$, supposons que la propriété soit vérifiée pour toute permutation dont le cardinal du support est inférieur. \
+  - Pour $|"supp"(sigma)| > 0$, supposons que la propriété soit vérifiée pour toute permutation dont le cardinal du support est inférieur. without
     Soit $i in "supp"(sigma)$, puisque $sigma in S_n$, il existe $p in {1, ..., n}$ minimal tel que $sigma^(p)(i) = i$, alors on pose $tau_1 = (i, sigma(i), ..., sigma^(p-1)(i))$. Alors $tau_1$ agit comme $sigma$ sur l'ensemble ${i, sigma(i), ..., sigma^(p-1)(i)}$, donc on a $|"supp"(tau_1^(-1) compose sigma)| < |"supp"(sigma)|$. Par hypothèse de récurrence, on peut écrire $tau_1^(-1) compose sigma$ comme une composition de cycles à supports disjoints $tau_2, ..., tau_m in S_n$, et $sigma = tau_1 compose tau_2 compose ... compose tau_m$.
   Soit $i in {1, ..., n}$, puisques les supports sont disjoints, $i$ se trouve dans le support d'un seul des cycles, d'où l'unicité de l'écriture et $sum_(l=1)^m k_l = n$.
 ]
@@ -504,15 +504,15 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #proof[
   #linebreak()
-  $arrow.r.double$ : Supposons que $sigma_1$ et $sigma_2$ sont conjuguées. D'après le @lem-cycle-conj, $sigma_1$ et $sigma_2$ ont le même type. \
-  $arrow.l.double$ : Supposons que $sigma_1$ et $sigma_2$ ont le même type $(k_1, ..., k_m)$. \
+  $arrow.r.double$ : Supposons que $sigma_1$ et $sigma_2$ sont conjuguées. D'après le @lem-cycle-conj, $sigma_1$ et $sigma_2$ ont le même type. without
+  $arrow.l.double$ : Supposons que $sigma_1$ et $sigma_2$ ont le même type $(k_1, ..., k_m)$. without
   D'après le @cor-cycle-conj, $sigma_1$ et $sigma_2$ sont conjuguées à
   $
     sigma_3 := (1, ..., k_1) compose (
       k_1 + 1, ..., k_1 + k_2
     ) compose ... compose (k_1 + ... + k_(m - 1) + 1, ..., k_m)
   $
-  donc il existe $tau_1, tau_2 in S_n$ telles que $sigma_1 = tau_1 compose sigma_3 compose tau_1^(-1)$ et $sigma_2 = tau_2 compose sigma_3 compose tau_2^(-1)$. \
+  donc il existe $tau_1, tau_2 in S_n$ telles que $sigma_1 = tau_1 compose sigma_3 compose tau_1^(-1)$ et $sigma_2 = tau_2 compose sigma_3 compose tau_2^(-1)$. without
   Alors $sigma_1 = (tau_1 compose tau_2^(-1)) compose sigma_2 compose (tau_2 compose tau_1^(-1))$, donc $sigma_1$ et $sigma_2$ sont conjuguées.
 ]
 
@@ -538,8 +538,8 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
   $
     "sign"(
       (1, 2)
-    ) &= (sigma(2) - sigma(1)) / (2 - i) dot product_(2 < j <= n) (sigma(j) - sigma(1)) / (j - 1) dot product_(2 < j <= n) (sigma(j) - sigma(2)) / (j - 2) dot product_(3 <= i < j <= n) (sigma(j) - sigma(i)) / (j - i) \
-    &= (2 - 1) / (1 - 2) dot product_(2 < j <= n) (j - 2) / (j - 1) (j - 1) / (j - 2) dot 1 \
+    ) &= (sigma(2) - sigma(1)) / (2 - i) dot product_(2 < j <= n) (sigma(j) - sigma(1)) / (j - 1) dot product_(2 < j <= n) (sigma(j) - sigma(2)) / (j - 2) dot product_(3 <= i < j <= n) (sigma(j) - sigma(i)) / (j - i) without
+    &= (2 - 1) / (1 - 2) dot product_(2 < j <= n) (j - 2) / (j - 1) (j - 1) / (j - 2) dot 1 without
     &= -1
   $
 ]
@@ -557,19 +557,19 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
   $
   puisque $sigma$ est une bijection, on a ${{sigma(i), sigma(j)} | 1 <= i < j <= n} = {{i, j} | 1 <= i < j <= n}$, alors
   $ |"sign"(sigma)| = product_(1 <= i < j <= n) (|j - i|) / (|j - i|) = 1 $
-  donc $"sign"(sigma) in {-1, 1}$. \
+  donc $"sign"(sigma) in {-1, 1}$. without
   Soit $tau in S_n$. Alors
   $
     "sign"(
       sigma compose tau
-    ) &= product_(1 <= i < j <= n) (sigma(tau(j)) - sigma(tau(i))) / (j - i) \
+    ) &= product_(1 <= i < j <= n) (sigma(tau(j)) - sigma(tau(i))) / (j - i) without
     &= product_(1 <= i < j <= n) (sigma(tau(j)) - sigma(tau(i))) / (tau(j) - tau(i)) dot product_(1 <= i < j <= n) (tau(j) - tau(i)) / (j - i)
   $
   puisque $tau$ est une bijection, de la même manière on a
   $
     "sign"(
       sigma compose tau
-    ) &= product_(1 <= i < j <= n) (sigma(j) - sigma(i)) / (j - i) dot product_(1 <= i < j <= n) (tau(j) - tau(i)) / (j - i) \
+    ) &= product_(1 <= i < j <= n) (sigma(j) - sigma(i)) / (j - i) dot product_(1 <= i < j <= n) (tau(j) - tau(i)) / (j - i) without
     &= "sign"(sigma) dot "sign"(tau)
   $
   donc $"sign"$ est un morphisme de groupes.
@@ -610,7 +610,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
   - si ${a, b} = {c, d}$, alors $(a, b) compose (c, d) = id$,
   - si ${a, b} sect {c, d} = {b} = {c}$, alors $(a, b) compose (c, d) = (a, b, d)$,
   - si ${a, b} sect {c, d} = emptyset$, alors $(a, b) compose (c, d) = (a, b, c) compose (b, c, d)$,
-  donc $(a, b) compose (b, c)$ est un produit de $3$-cycles. \
+  donc $(a, b) compose (b, c)$ est un produit de $3$-cycles. without
   $arrow.l.double$ : Supposons que $sigma$ est une composition de $3$-cycles. Alors $"sign"(sigma) = 1$, donc $sigma$ est paire.
 ]
 
@@ -621,7 +621,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 == Relations d'équivalence
 
 #definition[
-  Soit $E$ un ensemble. On appelle _relation_ sur $E$ un sous-ensemble $R$ de $E times E$. \
+  Soit $E$ un ensemble. On appelle _relation_ sur $E$ un sous-ensemble $R$ de $E times E$. without
   Si $(x, y) in R$, on écrit $x R y$.
 ]
 
@@ -634,7 +634,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ]
 
 #example[
-  Soit $n in N \\ {0}$, on pose $R_n := {(a, b) in ZZ^2 | n|a - b}$.
+  Soit $n in N without {0}$, on pose $R_n := {(a, b) in ZZ^2 | n|a - b}$.
   + Soit $x in ZZ$, alors $n|0 = x - x$, donc $x R_n x$,
   + soit $x, y in ZZ$, si $x R_n y$, alors $n|x - y$, d'où $n|y - x$, donc $y R_n x$,
   + soit $x, y, z in ZZ$, si $x R_n y$ et $y R_n z$, alors $n|x - y$ et $n|y - z$, d'où
@@ -683,10 +683,10 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ]
 
 #proof[
-  + $(a) => (b)$ : Supposons que $overline(x) = overline(y)$, alors $x in overline(x)$, donc $x in overline(y)$. \
-    $(b) => (c)$ : Supposons que $x in overline(y)$, alors $y in overline(y)$, donc $x tilde y$. \
+  + $(a) => (b)$ : Supposons que $overline(x) = overline(y)$, alors $x in overline(x)$, donc $x in overline(y)$. without
+    $(b) => (c)$ : Supposons que $x in overline(y)$, alors $y in overline(y)$, donc $x tilde y$. without
     $(c) => (a)$ : Supposons que $x tilde y$. Soit $z in overline(x)$, alors $z tilde x$, et par transitivité $z tilde y$, donc $z in overline(y)$. Réciproquement si $z in overline(y)$, alors $z in overline(x)$, donc $overline(x) = overline(y)$.
-  + Soit $x, y in E$. Si $overline(x) sect overline(y) != emptyset$, il existe $z in overline(x) sect overline(y)$ tel que $z tilde x$ et $z tilde y$, donc $x tilde y$ et $overline(x) = overline(y)$. \
+  + Soit $x, y in E$. Si $overline(x) sect overline(y) != emptyset$, il existe $z in overline(x) sect overline(y)$ tel que $z tilde x$ et $z tilde y$, donc $x tilde y$ et $overline(x) = overline(y)$. without
     Soit $x in E$, alors $x in overline(x) subset union.sq.big_(x in E) overline(x)$, donc $E = union.sq.big_(x in E) overline(x)$.
   +
     + Soit $x in E$, alors il existe $i in I$ tel que $x in E_i$, donc $x R x$.
@@ -716,7 +716,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
   #linebreak()
   $arrow.r.double$ : Supposons que $overline(f)$ soit bien définie et que $overline(f) compose pi = f$. Soit $x, y in E$ tels que $x tilde y$, alors $pi(x) = pi(y)$, d'où $overline(f)(pi(x)) = overline(f)(pi(y))$, donc $f(x) = f(y)$.
 
-  $arrow.l.double$ : Supposons que $forall x, y in E, x tilde y => f(x) = f(y)$. \
+  $arrow.l.double$ : Supposons que $forall x, y in E, x tilde y => f(x) = f(y)$. without
   Soit $alpha in qt(E, tilde)$, on pose $x_alpha in E$ un représentant de $alpha$, on définit $overline(f)(alpha) = f(x_alpha)$.
   Soit $beta in qt(E, tilde)$, si $beta = alpha$, alors $x_beta tilde x_alpha$, d'où $f(x_beta) = f(x_alpha)$, donc $overline(f)(beta) = overline(f)(alpha)$, c'est-à-dire $overline(f)$ est bien définie.
 ]
@@ -802,13 +802,13 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #proof[
   #linebreak()
-  $1. => 3.$ : Supposons que $H$ est distingué. \
+  $1. => 3.$ : Supposons que $H$ est distingué. without
   On considère l'application $fun(dot, qt(G, H) times qt(G, H), qt(G, H), x:(x H, y H), fx: x y H)$, alors elle est bien définie et $(qt(G, H), dot)$ forme un groupe.
 
-  $3. => 2.$ : Supposons que $qt(G, H)$ a une structure de groupe. \
+  $3. => 2.$ : Supposons que $qt(G, H)$ a une structure de groupe. without
   Alors la projection canonique $fun(pi, G, qt(G, H))$ est un morphisme de groupes et $ker(pi) = H$.
 
-  $2. => 1.$ : Supposons qu'il existe un tel morphisme $phi$. \
+  $2. => 1.$ : Supposons qu'il existe un tel morphisme $phi$. without
   Soit $h in H$ et $g in G$, alors
   $
     phi(g star h star g^(-1)) = phi(g) star phi(h) star phi(g)^(-1) = phi(x) star phi(x)^(-1) = e
@@ -826,10 +826,10 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #proof[
   #linebreak()
-  $arrow.r.double$ : Supposons qu'il existe un tel morphisme $overline(phi)$. \
+  $arrow.r.double$ : Supposons qu'il existe un tel morphisme $overline(phi)$. without
   Soit $x in H$, alors $phi(x) = overline(phi)(pi(x)) = overline(phi)({e}) = H$, donc $H subset ker(phi)$.
 
-  $arrow.l.double$ : Supposons que $H subset ker(phi)$. \
+  $arrow.l.double$ : Supposons que $H subset ker(phi)$. without
   Soit $x in H$, on définit $overline(phi)(x H) = phi(x)$, alors $overline(phi)$ est bien définie. Puisque $overline(phi) compose pi = phi$ et $pi$ est surjectif, on a $im(overline(phi)) = im(phi)$on a $ker(overline(phi)) = pi(ker(phi))$.
 ]
 
@@ -847,7 +847,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ]
 
 #proof[
-  Soit $x in G$ un générateur et $fun(phi, ZZ, G, x:m, fx:x^m)$. \
+  Soit $x in G$ un générateur et $fun(phi, ZZ, G, x:m, fx:x^m)$. without
   Alors $phi$ est un morphisme de groupes et $im(phi) = gen(x) = G$, donc $phi$ est surjectif. Soit $d := "ord"(x)$
   - si $d = +oo$, alors $phi$ est injectif, et par le @thm-iso, $qt(ZZ, ker(phi)) tilde.eq im(phi)$, c'est-à-dire $ZZ tilde.eq G$,
   - sinon $ker(phi) = d ZZ$, et par le @thm-iso, $qt(ZZ, ker(phi)) tilde.eq im(phi)$, c'est-à-dire $qt(ZZ, d ZZ) tilde.eq G$.
@@ -858,7 +858,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ]
 
 #proof[
-  Posons $m := "ppcm"(a, b)$ et $d := "pgcd"(a, b)$. \
+  Posons $m := "ppcm"(a, b)$ et $d := "pgcd"(a, b)$. without
   Alors il existe $a', b' in ZZ$ tels que $a = d a'$ et $b = d b'$, d'où $m = d a' b'$. Alors
   $ (x star y)^m = x^m star y^m = (x^(d a')à)^(b') star (y^(d b'))^(a') = e $
 
@@ -871,17 +871,17 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #proof[
   Soit $x in ZZ$.
-  Notons $overline(x) "et" [x]$ les classes respectives de $x$ modulo $n "et" m$. \
-  $arrow.r.double$ : Supposons que $qt(ZZ, n ZZ) times qt(ZZ, m ZZ)$ est isomorphe à $qt(ZZ, n m ZZ) med$. Alors $qt(ZZ, n ZZ) times qt(ZZ, m ZZ)$ est cyclique. \
+  Notons $overline(x) "et" [x]$ les classes respectives de $x$ modulo $n "et" m$. without
+  $arrow.r.double$ : Supposons que $qt(ZZ, n ZZ) times qt(ZZ, m ZZ)$ est isomorphe à $qt(ZZ, n m ZZ) med$. Alors $qt(ZZ, n ZZ) times qt(ZZ, m ZZ)$ est cyclique. without
   Soit $(a, b)$ un générateur de $qt(ZZ, n ZZ) times qt(ZZ, m ZZ)$, c'est-à-dire $"ord"((a, b)) = n m$, alors
   $ "ppcm"("ord"(a), "ord"(b)) dot (a, b) = (overline(0), [0]) $
   donc $n m|"ppcm"("ord"(a), "ord"(b))$, on en déduit $n m|"ppcm"(n, m)$, d'où $"pcgd"(n, m) = 1$.
 
-  $arrow.l.double$ : Supposons que $"pgcd"(n, m) = 1$. Posons $fun(phi, ZZ, qt(ZZ, n ZZ)times qt(ZZ, m ZZ), x:x, fx:(overline(x), [x]))$. \
+  $arrow.l.double$ : Supposons que $"pgcd"(n, m) = 1$. Posons $fun(phi, ZZ, qt(ZZ, n ZZ)times qt(ZZ, m ZZ), x:x, fx:(overline(x), [x]))$. without
   Alors $phi$ est bien un morphisme, et on a
   $
-    ker(phi) &= {k in ZZ | (overline(k), [k]) = (overline(0), [0])} \
-    &= {k in ZZ | n|k "et" m|k} \
+    ker(phi) &= {k in ZZ | (overline(k), [k]) = (overline(0), [0])} without
+    &= {k in ZZ | n|k "et" m|k} without
     &= {k in ZZ | n m|k} = n m ZZ
   $
 
@@ -941,8 +941,8 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 #definition([
   Soit $(G, star)$ un groupe qui agit sur un ensemble $X$. On dit que l'action est
   + _transitive_, si $forall x, y in X, exists G, y = g star x$,
-  + _fidèle_, si $forall g in G \\ {e}, exists x in X, g star x != x$,
-  + _libre_, si $forall g in G \\ {e}, forall x in X, g star x != x$.
+  + _fidèle_, si $forall g in G without {e}, exists x in X, g star x != x$,
+  + _libre_, si $forall g in G without {e}, forall x in X, g star x != x$.
   Dans ce cas, on dit que $G$ agit respectivement _transitivement_, _fidèlement_ et _librement_ sur $X$.
 ])
 
@@ -958,6 +958,6 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
   title: "Formule des classes",
   [
     Soit $(G, star)$ un groupe fini qui agit sur un ensemble fini $X$ et $x_1, ..., x_n in X$ un système de représentant pour $tilde$. Alors 
-    $ |X| = sum_(i = 0)^n |O_x_i| $
+    $ |X| = sum_(i = 0)^n |O_x_i| = sum_(i = 0)^n [G: G_x_i]. $
   ],
 )
