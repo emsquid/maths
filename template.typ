@@ -1,14 +1,13 @@
 #import "@preview/great-theorems:0.1.1": *
-#import "@preview/headcount:0.1.0": *
+#import "@preview/rich-counters:0.2.2": *
 #import "@preview/fletcher:0.5.2": *
 #import "@preview/outrageous:0.3.0"
 
 // Counter and blocks definitions
-#let mathcounter = counter("maths")
+#let mathcounter = rich-counter(identifier: "maths", inherited_levels: 1)
 #let mathblock = mathblock.with(
   breakable: false,
   counter: mathcounter,
-  numbering: dependent-numbering("1.1", levels: 1),
 )
 
 #let definition = mathblock(blocktitle: "Définition")
@@ -33,11 +32,19 @@
   if x == none or fx == none {
     $#f : #E -> #F$
   } else {
-    $#f : #E -> #F, #x -> #fx$
+    $#f : #E -> #F, #x |-> #fx$
   }
 )
+#let pgcd = "pgcd"
+#let ppcm = "ppcm"
+#let ord = "ord"
+#let sign = "sign"
+#let supp = "supp"
+#let Vect = "Vect"
 #let act = rotate(180deg, $arrow.cw$)
 #let transpose(M) = $#M^upright(T)$
+#let ind(E) = $bb(1)_#E$
+#let sca(x, y) = $angle.l #x, #y angle.r$
 
 #let maths(
   title: none,
@@ -91,7 +98,6 @@
 
   // Heading options
   set heading(numbering: "1.1.")
-  show heading: reset-counter(mathcounter, levels: 1)
 
   // Paragraph options
   set par(justify: true)
