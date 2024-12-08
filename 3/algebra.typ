@@ -230,6 +230,8 @@
 
 = Diagonalisation
 
+
+
 = Polynôme caractéristique
 
 = Trigonalisation
@@ -452,32 +454,214 @@
 == Orthogonalité, base orthogonale et base orthonormée
 
 #definition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $x, y in E$. 
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $x, y in E$.
   On dit que $x$ et $y$ sont _orthogonaux_, noté $x perp y$, si $sca(x, y) = 0$.
 ])
 
 #definition([
-    Soit $(E, sca(dot, dot))$ un espace euclidien et $F$ un sous-ensemble de $E$. 
-    On appelle _orthogonal_ de $F$, noté $F^perp$, l'ensemble
-    $ F^perp := {x in E | forall y in F, sca(x, y) = 0}. $
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $F$ un sous-ensemble de $E$.
+  On appelle _orthogonal_ de $F$, noté $F^perp$, l'ensemble
+  $ F^perp := {x in E | forall y in F, sca(x, y) = 0}. $
 ])
 
 #notation([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $x in E$. 
-  On note $x^perp := {x}^perp$.   
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $x in E$.
+  On note $x^perp := {x}^perp$.
 ])
 
 #proposition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $F$ un sous-ensemble de $E$. 
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $F$ un sous-ensemble de $E$.
   Alors $F^perp$ est un sous-espace vectoriel de $E$.
 ])
 
 #proposition([
   Soit $(E, sca(dot, dot))$ un espace euclidien et $x, y in E$. Alors
-  $ x perp y <=> ||x+y||^2 = ||x||^2 + ||y||^2 <=> ||x-y||^2 = ||x||^2 + ||y||^2. $
+  $
+    x perp y <=> ||x+y||^2 = ||x||^2 + ||y||^2 <=> ||x-y||^2 = ||x||^2 + ||y||^2.
+  $
 ])
 
 #proposition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $x in E without {0}$. Alors $Vect(x)^perp = x^perp$ et  
-  $ E = Vect(x) plus.circle Vect(x)^perp. $
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $x in E without {0}$. Alors $Vect(x)^perp = x^perp$ et
+  $ E = Vect(x) plus.circle x^perp. $
+])
+
+#definition([
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $cal(E) = (e_1, ..., e_n)$ une base de $E$.
+  - On dit que $cal(E)$ est _orthogonale_ si elle vérifie
+    $ forall i, j in {1, ..., n}, i != j => sca(e_i, e_j). $
+  - On dit que $cal(E)$ est _orthonormée_ si elle vérifie
+    $ forall i, j in {1, ..., n}, sca(e_i, e_j) = delta_(i, j). $
+])
+
+#remark([
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $cal(E) = (e_1, ..., e_n)$ une base orthogonale de $E$.
+  Alors la famille $(e_1/(||e_1||), ..., e_n/(||e_n||))$ est une base orthonormée de $E$.
+])
+
+#theorem([
+  Soit $(E, sca(dot, dot))$ un espace euclidien.
+  Alors il existe une base orthonormée de $E$.
+])
+
+#proposition([
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $F$ un sous-espace vectoriel de $E$. Alors
+  + $E = F plus.circle F^perp$,
+  + $dim(F^perp) = dim(E) - dim(F)$,
+  + $(F^perp)^perp = F$.
+])
+
+#theorem(
+  title: "Procédé d'orthogonalisation de Gram-Schmidt",
+  [
+    Soit $(E, sca(dot, dot))$ un espace euclidien et $(e_1, ..., e_n)$ une base de $E$. 
+    Alors il existe une base orthonormée $(f_1, ..., f_n)$ de $E$ telle que
+    $ forall k in {1, ..., n}, Vect(e_1, ..., e_k) = Vect(f_1, ..., f_k). $
+  ],
+)
+
+#proof([
+  On raisonne par récurrence sur le cardinal $k$ de la famille.
+  - Pour $k = 1$, on pose $f_1 := e_1/(||e_1||)$.
+  - Pour $k > 1$, supposons qu'il existe une famille orthonormée $(f_1, ..., f_(k-1))$ telle que
+    $ Vect(e_1, ..., e_(k-1)) = Vect(f_1, ..., f_(k-1)) $
+    alors on pose $f'_k := e_k - sum_(i=1)^(k-1) sca(e_k, f_i) f_i$. Soit $j in {1, ..., k-1}$, alors
+    $ sca(f'_k, f_j) &= sca(e_k - sum_(i=1)^(k-1) sca(e_k, f_i) f_i, f_j) $
+    et par bilinéarité du produit scalaire 
+    $ sca(f'_k, f_j) &= sca(e_k, f_j) - sum_(i=0)^(k-1) sca(e_k, f_i) sca(f_i, f_j) \
+      &= sca(e_k, f_j) - sum_(i=0)^(k-1) sca(e_k, f_i) delta_(i, j) \
+      &= sca(e_k, f_j) - sca(e_k, f_j) = 0. $
+    Enfin on pose $f_k := (f'_k)/(||f'_k||)$, donc la famille $(f_1, ..., f_k)$ est orthonormée et vérifie l'égalité.
+])
+
+== Le groupe orthogonal
+
+#definition([
+  Soit $A in GL_n (RR)$ une matrice inversible. On dit que $A$ est _orthogonale_ si $transpose(A) = A^(-1)$. On appelle _groupe orthogonal_, le sous-groupe
+  $ O_n (RR) := {A in GL_n (RR) | A transpose(A) = transpose(A) A = I_n}. $
+])
+
+#remark([
+  Soit $A in O_n (RR)$ une matrice orthogonale. Alors on remarque que $det(A) = plus.minus 1$, on appelle _groupe spécial orthogonal_, le sous-groupe
+  $ S O_n (RR) := O_n (RR) sect "det"^(-1)(1). $
+])
+
+#definition([
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $f in cal(L)(E)$ un endomorphisme. 
+  On dit que $f$ est un _endomorphisme orthogonal_ si
+  $ forall x, y in E, sca(f(x), f(y)) = sca(x, y). $
+  On appelle _groupe orthogonal_, noté $O(E)$, le sous-groupe des endomorphismes orthogonaux.
+])
+
+#proposition([
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $f in cal(L)(E)$ un endomorphisme. Alors les énoncés suivants sont équivalents
+  + $f$ est orthogonal.
+  + Soit $x in E$, alors $||f(x)|| = ||x||$.
+  + Soit $cal(E)$ une base orthonormée de $E$, alors $[f]_cal(E) in O_n (RR)$.
+  + Il existe $cal(E)$ une base orthonormée de $E$, telle que $[f]_cal(E) in O_n (RR)$.
+])
+
+#remark([
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $f in cal(L)(E)$ un endomorphisme orthogonal. 
+  Alors on remarque que $det(f) = plus.minus 1$, on appelle _groupe spécial orthogonal_ le sous-groupe
+  $ S O(E) := O(E) sect "det"^(-1)(1). $
+])
+
+== Polynômes orthogonaux
+
+#proposition([
+  Soit $[a, b]$ un intervalle fermé de $RR$ et $fun(w, [a, b], R_+ without {0})$. Alors la forme bilinéaire symétrique définie par
+  $ forall P, Q in RR[X], sca(P, Q) := integral_a^b P(t)Q(t)w(t) dif t $
+  est non-dégénérée.
+])
+
+#proof([
+  Soit $P in RR[X]$, alors
+  $ sca(P, P) = 0 &=> integral_a^b P^2 (t) w(t) = 0 \
+    &=> forall t in [a, b], P^2 (t) w(t) = 0 \
+    &=> forall t in [a, b], P(t) = 0 \
+    &=> P = 0 $
+  donc $sca(dot, dot)$ est non-dégénérée.
+])
+
+#definition([
+  Soit $sca(dot, dot)$ un produit scalaire sur $RR[X]$. On appelle _famille de polynômes orthogonaux_, une famille $(P_n)_(n in NN)$ de polynômes qui vérifie
+  $ cases(forall i"," j in NN"," i != j => sca(P_i, P_j) = 0, forall n in NN"," deg(P_n) = n) $
+])
+
+#proposition([
+  Soit $(P_n)_(n in NN)$ et $(Q_n)_(n in NN)$ deux familles de polynômes orthogonaux.
+  Soit $n in NN$, alors $P_n$ et $Q_n$ sont colinéaires.
+])
+
+#definition([
+  Soit $n in NN$ et $p_n in cal(L)(RR_n [X])$ la projection orthogonale sur $RR_(n-1) [X]$. On appelle _?_, l'application $fun(T_n, RR_(n-1) [X], RR_(n-1) [X], x: P, fx: p_n (X P))$.
+])
+
+#proposition([
+  Soit $(P_n)_(n in NN)$ une famille de polynômes orthogonaux. 
+  Soit $n in NN$, alors $T_n$ est symétrique et son spectre est de cardinal $n$. 
+  Soit $lambda$ une valeur propre de $T_n$, alors $lambda$ est racine de $P_n$ et l'espace propre associé est la droite engendrée par le quotient de $P_n$ par $X - lambda$. 
+])
+
+#proof([
+  Soit $P, Q in RR_(n-1) [X]$, alors
+  $ sca(T_n (P), Q) = sca(p_n (X P), Q) $
+])
+
+#pagebreak()
+
+= Endomorphisme symétrique d'un espace euclidien
+
+#notation([
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme. 
+  On note $fun(theta_u, E, E^*)$, l'application définie par
+  $ forall y in E, theta_u (y) := x |-> sca(u(x), y). $
+])
+
+#definition([
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme. 
+  On appelle _application transposée_ (ou _adjoint_) de $u$, l'application définie par $u^* := theta^(-1)_id compose theta_u$.  
+])
+
+#proposition([
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme. 
+  Alors
+  $ forall x, y in E, sca(x, u^*(y)) = sca(u(x), y). $
+  Soit $cal(E)$ une base orthonormée de $E$, on a $[u^*]_cal(E) = transpose([u]_cal(E))$.
+])
+
+#proof([
+  Soit $x, y in E$. Alors
+  $ sca(x, u^*(y)) = theta_id (u^*(y))(x) = (theta_id compose u^*)(y)(x) = theta_u (y)(x) = sca(u(x), y). $
+])
+
+#definition([
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme. 
+  On dit que $u$ est _symétrique_ (ou _auto-adjoint_), si $u^* = u$.
+])
+
+#proposition([
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme. 
+  Alors $u$ est symétrique si et seulement si sa matrice dans une base orthonormée de $E$ est symétrique.
+])
+
+#proposition([
+  Soit $M in cal(M)_n (RR)$ une matrice symétrique. 
+  Alors toutes les valeurs propres complexes de $M$ sont réelles.
+])
+
+#theorem([
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme. 
+  Alors $u$ est diagonalisable dans une base orthonormée de $E$.
+])
+
+#theorem([
+  Soit $M in cal(M)_n (RR)$ une matrice symétrique. Alors il existe une matrice orthogonale $P$ telle que $transpose(P) M P$ soit diagonale.
+])
+
+#corollary([
+  Soit $(E, sca(dot, dot))$ un espace euclidien, $Q$ une forme quadratique définie positive sur $E$ et $lambda_1 <= ... <= lambda_n$ ses valeurs propres ordonnées. Alors 
+  $ forall x in E, lambda_1||x||^2 <= Q(x) <= lambda_n||x||^2 $ 
+  et ces inégalités sont optimales.
 ])
