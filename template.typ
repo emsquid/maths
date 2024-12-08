@@ -42,6 +42,7 @@
 #let supp = "supp"
 #let Vect = "Vect"
 #let act = rotate(180deg, $arrow.cw$)
+#let GL = "GL"
 #let transpose(M) = $#M^upright(T)$
 #let ind(E) = $bb(1)_#E$
 #let sca(x, y) = $angle.l #x, #y angle.r$
