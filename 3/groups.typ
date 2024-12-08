@@ -951,13 +951,129 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ])
 
 #proof([
-  Soit $g, h in G$ tels que $g tilde h$. Alors $g G_x = h G_x$, d'où $h^(-1) star g in G_x$, c'est-à-dire $g star x = h star x$, donc $f_x$ est bien définie. Réciproquement $f_x$ est injective puisque $g star x = h star x$ donne $g G_x = h G_x$. Enfin $f_x$ est surjective puisque $G$ agit transitivement sur $X$.
+  Soit $g, h in G$ tels que $g tilde h$. Alors $g G_x = h G_x$, d'où $h^(-1) star g in G_x$, c'est-à-dire $g star x = h star x$, donc $f_x$ est bien définie. De plus $f_x$ est injective puisque $g star x = h star x$ donne $g G_x = h G_x$. Enfin $f_x$ est surjective puisque $G$ agit transitivement sur $X$.
 ])
 
 #theorem(
   title: "Formule des classes",
   [
-    Soit $(G, star)$ un groupe fini qui agit sur un ensemble fini $X$ et $x_1, ..., x_n in X$ un système de représentant pour $tilde$. Alors 
+    Soit $(G, star)$ un groupe fini qui agit sur un ensemble fini $X$ et $x_1, ..., x_n in X$ un système de représentant pour $tilde$. Alors
     $ |X| = sum_(i = 0)^n |O_x_i| = sum_(i = 0)^n [G: G_x_i]. $
   ],
 )
+
+// #theorem(
+//   title: "Formule de Burnside",
+//   []
+// )
+
+= Classification des groupes abéliens finis
+
+== Décomposition en $p$-groupes
+
+#definition([
+  Soit $(G, star)$ un groupe abélien d'ordre $n$ et $p$ un nombre premier qui divise $n$.
+  On appelle composante _$p$-primaire_ de $G$, l'ensemble
+  $ G_p := {x in G | exists q in NN, ord(x) = p^q}. $
+])
+
+#remark([
+  Soit $(G, star)$ un groupe abélien d'ordre $n$ et $p_1^(r_1)...p_k^(r_k)$ la décomposition de $n$ en facteurs premiers.
+  Alors
+  $ forall i in {1, ..., k}, G_p_i = {x in G | x^(p_i^r_i) = e}. $
+])
+
+#lemma([
+  Soit $(G, star)$ un groupe abélien d'ordre $n = a b$ tels que $pgcd(a, b) = 1$. Soit $k in NN$,
+  $ G(k) := {x in G | x^k = e} $
+  alors $G(k)$ est un sous-groupe de $G$ et $G$ est isomorphe à $G(a) times G(b)$.
+]) <lem-comp-group>
+
+#proof([
+  Puisque $G$ est abélien, l'application $fun(phi_k, NN, G, x:x, fx:x^k)$ est un morphisme de groupes, donc $G(k) = ker(phi_k)$ est un sous-groupe de $G$.
+
+  Posons $fun(phi, G(a) times G(b), G, x: (x, y), fx:x star y)$, $G$ est abélien donc c'est un morphisme de groupes. Soit $x in G$, puisque $pgcd(a, b) = 1$, il existe $u, v in ZZ$ tels que $a u + b v = 1$, alors
+  $ x = x^(a u + b v) = x^(a u) star x^(b v) $
+  or $(x^(b v))^a = (x^v)^n = e$ et $(x^(a u))^b = (x^u)^n = e$, d'où $x^(b v) in G(a)$ et $x^(a u) in G(b)$, on en déduit que $phi$ est surjectif puisque $x = phi(x^(b v), x^(a u))$. \
+  Soit $(x, y) in G(a) times G(b)$ tel que $phi(x, y) = e$, alors $x = y^(-1) in G(a) sect G(b)$, on en déduit $ord(x)|a$ et $ord(x)|b$, d'où $ord(x)|pgcd(a, b)=1$ et $x = y = e$, donc $phi$ est injectif. Donc $G$ est isomorphe à $G(a) times G(b)$
+])
+
+#definition([
+  Soit $(G, star)$ un groupe d'ordre $n$ et $p$ un nombre premier. On dit que $G$ est un _$p$-groupe_ s'il existe $k in NN$ tel $n = p^k$.
+])
+
+#lemma([
+  Soit $(G, star)$ un groupe abélien d'ordre $n$ et $p$ un nombre premier tel que
+  $ forall x in G, exists l_x in NN, ord(x) = p^(l_x). $
+  Alors $G$ est un $p$-groupe.
+]) <lem-p-group>
+
+#proof([
+  Notons $G := {x_1, ..., x_n}$. \
+  Posons $fun(phi, H = gen(x_1) times ... times gen(x_n), G, x:(y_1, ..., y_n), fx: y_1...y_n)$, puisque $G$ est abélien $phi$ est un morphisme de groupes. Il est évidemment surjectif, alors d'après le @thm-iso, $G$ est isomorphe à $qt(H, ker(phi))$. De plus $|H| = product_(i = 1)^n p^(l_x_i) = p^(sum_(i=1)^n l_x_i)$, et $|G|$ divise $|qt(H, ker(phi))| dot |ker(phi)| = |H|$, donc $G$ est un $p$-groupe.
+])
+
+#theorem([
+  Soit $(G, star)$ un groupe abélien d'ordre $n$ et $p_1^(r_1)...p_k^(r_k)$ la décomposition de $n$ en facteurs premiers.
+  Soit $i in {1, ..., k}$, alors la composante $p_i$-primaire de $G$ est un groupe à $p_i^(r_i)$ éléments et $G$ est isomorphe à $G_p_1 times ... times G_p_k$.
+])
+
+#proof([
+  Soit $i in {1, ..., k}$, on a d'après les @lem-comp-group et @lem-p-group, avec $G_p_i = G(p_i^(r_i))$ est bien un sous-groupe de $G$, et donc un $p_i$-groupe.
+  Par récurrence directe sur le @lem-comp-group, $G$ est isomorphe à $G_p_1 times ... times G_p_k$, en comparant l'ordre des deux groupes, on en déduit que $G_p_i$ est d'ordre $p_i^(r_i)$.
+])
+
+== Décomposition des $p$-groupes en produit de groupes cycliques
+
+#theorem([
+  Soit $p$ un nombre premier et $(G, star)$ un $p$-groupe abélien.
+  Alors il existe $n_1, ..., n_k in NN$, uniquement déterminés par $G$, tels que $G$ est isomorphe à $ (qt(ZZ, p^k ZZ))^(n_k) times ... times (qt(ZZ, p ZZ))^(n_1). $
+])
+
+#proof([
+  Admis.
+])
+
+#corollary([
+  Soit $(G, star)$ un groupe abélien fini. Alors $G$ est isomorphe à un produit de groupes cycliques
+])
+
+#corollary([
+  Soit $(G, star)$ un groupe abélien fini.
+  Alors il existe $n_1, ..., n_k in NN$, uniquement déterminés par $G$, tels que $n_1|...|n_k$ et $G$ est isomorphe à
+  $ qt(ZZ, n_1 ZZ) times ... times qt(ZZ, n_k ZZ). $
+])
+
+#example([
+  Considérons le groupe
+  $
+    G = qt(ZZ, 4ZZ) times (
+      qt(ZZ, 8ZZ)
+    )^2 times qt(ZZ, 3ZZ) times qt(ZZ, 9ZZ) times (qt(ZZ, 5ZZ))^2
+  $
+  dans lequel 3 est le nombre maximal de facteurs dans la décomposition d'un $p$-groupe ($p = 2$). On fait donc un tableau avec 3 colonnes
+  #align(
+    center,
+    table(
+      align: center,
+      columns: 4,
+      inset: 6pt,
+      [$p = 2$], [$2^2$], [$2^3$], [$2^3$],
+      [$p = 3$], [$1$], [$3$], [$3^2$],
+      [$p = 5$], [$1$], [$5$], [$5$],
+      [], [$4$], [$120$], [$360$],
+    ),
+  )
+  et on en déduit que
+  $ G tilde.eq qt(ZZ, 4ZZ) times qt(ZZ, 120ZZ) times qt(ZZ, 360ZZ). $
+])
+
+== Facteurs invariants d'un groupe
+
+#definition([
+  Soit $(G, star)$ un groupe abélien fini. On appelle _facteurs invariants_ de $G$, les $n_1, ..., n_k in NN$ de sa décomposition en groupes cycliques
+])
+
+#corollary([
+  Soit $(G, star)$ et $(H, dot)$ deux groupes abéliens finis. Alors $G$ et $H$ sont isomorphes si et seulement si ils ont les mêmes facteurs invariants.
+])
