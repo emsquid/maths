@@ -411,7 +411,6 @@
 #theorem([
   Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u in cal(L)(E)$ un endomorphisme.
   Alors $u$ est diagonalisable si et seulement si son polynôme minimal est simplement scindé.
-
 ])
 
 = Réduction d'endomorphisme
@@ -419,16 +418,126 @@
 == Décomposition de Dunford
 
 #lemma([
-  Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u, v in cal(L)(E)$ deux endomorphismes diagonalisables. 
+  Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u, v in cal(L)(E)$ deux endomorphismes diagonalisables.
   Alors si $u$ et $v$ commutent, il existe une base $cal(E)$ de $E$ telle que $[u]_cal(E)$ et $[v]_cal(E)$ soient diagonales. On dit que $u$ et $v$ sont _codiagonalisables_.
 ])
 
 #definition([
-  Soit $E$ un $KK$-espace vectoriel de dimension $n$, $u in cal(L)(E)$ un endomorphisme, $lambda in KK$ une valeur propre de $u$ et $n_lambda$ sa multiplicité en tant que racine. 
+  Soit $E$ un $KK$-espace vectoriel de dimension $n$, $u in cal(L)(E)$ un endomorphisme, $lambda in KK$ une valeur propre de $u$ et $n_lambda$ sa multiplicité en tant que racine.
   On appelle _sous-espace caractéristique_ associé à $lambda$ l'ensemble
   $ N_lambda (u) := ker((u - lambda id)^(n_lambda)). $
-  
 ])
+
+#proposition([
+  Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u in cal(L)(E)$ un endomorphisme de polynôme caractéristique scindé.
+  Alors
+  $ E = plus.circle.big_(lambda in Sp(u)) N_lambda (u). $
+])
+
+#theorem(
+  title: "Décomposition de Dunford",
+  [
+    Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u in cal(L)(E)$ un endomorphisme de polynôme caractéristique scindé.
+    Alors il existe $d, v in cal(L)(E)$ tels que $u = d + v$ vérifiant les propriétés suivantes
+    - $d$ est diagonalisable,
+    - $v$ est nilpotent,
+    - $d$ et $v$ commutent.
+  ],
+)
+
+== Réduction de Jordan
+
+#proposition([
+  Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u in cal(L)(E)$ un endomorphisme.
+  Alors il existe un unique $r in NN$ tel que
+  $
+    {
+      0
+    } = ker(u^0) subset.neq ker(u) subset.neq ... subset.neq ker(u^r) = ker(u^(r+1)) = ...
+  $
+]) <prop-indice>
+
+#definition([
+  Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u in cal(L)(E)$ un endomorphisme.
+  On appelle _indice_ de $u$ l'entier vérifiant la @prop-indice.
+])
+
+#remark([
+  L'indice de $u$ est aussi
+  - le plus petit $r in NN$ vérifiant $ker(u^r) = ker(u^(r+1))$,
+  - si $u$ est nilpotent, le plus petit $r in NN$ vérifiant $u^r = 0$,
+  - le nombre $r in NN$ vérifiant $E = im(u^r) plus.circle ker(u^r)$ et
+    $
+      E = im(u^0) supset.neq im(u) supset.neq ... supset.neq im(u^r) = im(u^(r+1)) = ...
+    $
+])
+
+#theorem([
+  Soit $E$ un $KK$-espace vectoriel de dimension $n$, $u in cal(L)(E)$ un endomorphisme de polynôme caractéristique scindé et $lambda in KK$ une valeur propre de $u$.
+  Alors la multiplicité de $lambda$ en tant que racine est donnée par l'indice de l'endomorphisme $u - lambda id$.
+])
+
+#definition([
+  Soit $lambda in KK$ et $k in NN$. On appelle _bloc de Jordan_ la matrice de la forme
+  $
+    J_(k)(
+      lambda
+    ) := mat(
+      lambda, 1, 0, dots.c, 0;
+      0, lambda, dots.down, dots.down, dots.v;
+      dots.v, dots.down, dots.down, dots.down, 0;
+      dots.v, dots.down, dots.down, lambda, 1;
+      0, dots.c, dots.c, 0, lambda
+    ).
+  $
+  Soit $lambda_1, ..., lambda_r in KK$ et $k_1, ..., k_r in NN$. On appelle _matrice de Jordan_ la matrice de la forme
+  $
+    J := mat(
+      J_(k_1)(lambda_1), 0, dots.c, 0;
+      0, J_(k_2)(lambda_2), dots.down, dots.v;
+      dots.v, dots.down, dots.down, 0;
+      0, dots.c, 0, J_(k_r)(lambda_r)
+    ).
+  $
+])
+
+#theorem(
+  title: "Réduction de Jordan d'un endomorphisme nilpotent",
+  [
+    Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u in cal(L)(E)$ un endomorphisme nilpotent.
+    Alors il existe une base $cal(E)$ de $E$ et des entiers $k_1, ..., k_r in NN$ tels que
+    $
+      [
+        u
+      ]_cal(E) = mat(
+      J_(k_1)(0), 0, dots.c, 0;
+      0, J_(k_2)(0), dots.down, dots.v;
+      dots.v, dots.down, dots.down, 0;
+      0, dots.c, 0, J_(k_r)(0)
+    ).
+    $
+  ],
+)
+
+#theorem(
+  title: "Réduction de Jordan d'un endomorphisme",
+  [
+    Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u in cal(L)(E)$ un endomorphisme de polynôme caractéristique simplement scindé.
+    Alors il existe une base $cal(E)$ de $E$, des nombres $lambda_1, ..., lambda_r in KK$ et $k_1, ..., k_r in NN$ tels que
+    $
+      [
+        u
+      ]_cal(E) = mat(
+      J_(k_1)(lambda_1), 0, dots.c, 0;
+      0, J_(k_2)(lambda_2), dots.down, dots.v;
+      dots.v, dots.down, dots.down, 0;
+      0, dots.c, 0, J_(k_r)(lambda_r)
+    ).
+    $
+
+  ],
+)
+
 
 #pagebreak()
 
