@@ -226,19 +226,209 @@
   $ det(M) = det(A) det(B). $
 ])
 
-#pagebreak()
-
 = Diagonalisation
 
+#definition([
+  Soit $E$ un $KK$-espace vectoriel, $F$ un sous-espace vectoriel de $E$ et $u in cal(L)(E)$ un endomorphisme.
+  On dit que $F$ est _stable_ par $u$ si $u(F) subset F$, dans ce cas on note $u_F := u|_F^F in cal(L)(F)$ l'endomorphisme induit.
+])
+
+#definition([
+  Soit $E$ un $KK$-espace vectoriel, $u in cal(L)(E)$ un endomorphisme et $lambda in KK$.
+  On dit que $lambda$ est une _valeur propre_ de $u$ s'il existe $x in E without {0}$ tel que $u(x) = lambda x$, on dit que $x$ est un _vecteur propre_ associé à $lambda$.
+])
+
+#definition([
+  Soit $E$ un $KK$-espace vectoriel, $u in cal(L)(E)$ un endomorphisme et $lambda in KK$ une valeur propre de $u$. On appelle _espace propre_ associé à $lambda$, l'ensemble
+  $ E_lambda (u) := ker(u - lambda id). $
+])
+
+#theorem([
+  Soit $E$ un $KK$-espace vectoriel et $u in cal(L)(E)$ un endomorphisme.
+  Alors les espaces propres de $u$ sont en somme directe.
+])
+
+#corollary([
+  Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u in cal(L)(E)$ un endomorphisme.
+  Alors $u$ a au plus $n$ valeurs propres.
+])
+
+#definition([
+  Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u in cal(L)(E)$ un endomorphisme.
+  On appelle _spectre_ de $u$, noté $Sp(u)$, l'ensemble des valeurs propres de
+])
+
+#definition([
+  Soit $E$ un $KK$-espace vectoriel et $u in cal(L)(E)$ un endomorphisme.
+  On dit que $u$ est _diagonalisable_ si $E$ est la somme directe des espaces propres de $u$.
+
+])
+
+#proposition([
+  Soit $E$ un $KK$-espace vectoriel et $u in cal(L)(E)$ un endomorphisme.
+  Alors $u$ est diagonalisable si et seulement si il existe une base $cal(E)$ de $E$ telle que $[u]_cal(E)$ est diagonale.
+])
+
+#theorem([
+  Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u in cal(L)(E)$ un endomorphisme.
+  Alors si $u$ admet $n$ valeurs propres distinctes, $u$ est diagonalisable.
+])
+
+#definition([
+  Soit $M in cal(M)_n (KK)$ une matrice carrée.
+  On étend toutes les définitions précédentes à $M$ en l'associant à $fun(u_M, KK^n, KK^n, x: X, fx: M X)$.
+])
 
 
 = Polynôme caractéristique
 
+#definition([
+  Soit $M in cal(M)_n (KK)$ une matrice carrée.
+  On appelle _polynôme caractéristique_, le polynôme $chi_M := det(X I_n - M)$.
+])
+
+#lemma([
+  Soit $M, N in cal(M)_n (KK)$ deux matrices carrées.
+  Alors si $M$ et $N$ sont semblables, elles ont le même polynôme caractéristique.
+])
+
+#definition([
+  Soit $E$ un $KK$-espace vectoriel et $u in cal(L)(E)$ un endomorphisme.
+  On étend la définition de _polynôme caractéristique_ en lui associant la matrice de $u$ dans une base de $E$.
+])
+
+#proposition([
+  Soit $E$ un $KK$-espace vectoriel, $u in cal(L)(E)$ un endomorphisme, et $lambda in KK$.
+  Alors $lambda$ est une valeur propre de $u$ si et seulement si $chi_u (lambda) = 0$.
+])
+
+#proposition([
+  Soit $E$ un $KK$-espace vectoriel, $F$ un sous-espace vectoriel de $E$ et $u in cal(L)(E)$ un endomorphisme.
+  Alors si $F$ est stable par $u$, le polynôme $chi_u_F$ divise $chi_u$.
+])
+
+#proposition([
+  Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u in cal(L)(E)$ un endomorphisme nilpotent.
+  Alors $chi_u = X^n$
+])
+
+#theorem([
+  Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u in cal(L)(E)$ un endomorphisme.
+  Alors $u$ est diagonalisable si et seulement si son polynôme caractéristique est scindé et si la multiplicité de chaque valeur propre en tant que racine est égale à la dimension de son espace propre associé, c'est-à-dire
+  $ chi_u = product_(lambda in Sp(u)) (X - lambda)^(dim(E_lambda (u))). $
+])
+
 = Trigonalisation
+
+#definition([
+  Soit $E$ un $KK$-espace vectoriel et $u in cal(L)(E)$ un endomorphisme.
+  On dit que $u$ est _trigonalisable_ s'il existe une base $cal(E)$ de $E$ telle que $[u]_cal(E)$ est triangulaire supérieure.
+])
+
+#theorem([
+  Soit $E$ un $KK$-espace vectoriel et $u in cal(L)(E)$ un endomorphisme.
+  Alors $u$ est trigonalisable si et seulement si $chi_u$ est scindé.
+])
+
+#corollary([
+  Tout endomorphisme sur un $CC$-espace vectoriel est trigonalisable.
+])
 
 = Polynôme d'endomorphisme
 
+#definition([
+  Soit $E$ un $KK$-espace vectoriel, $u in cal(L)(E)$ un endomorphisme et $P = sum_(k=0)^n a_k X^k$ un polynôme.
+  On note
+  $ P(u) := sum_(k=0)^n a_k u^k. $
+])
+
+#proposition([
+  Soit $E$ un $KK$-espace vectoriel, $u in cal(L)(E)$ un endomorphisme et $P, Q$ deux polynômes.
+  Alors $P(u) + Q(u) = (P + Q)(u)$ et $P(u) compose Q(u) = (P Q)(u) = (Q P)(u)$.
+])
+
+#proposition([
+  Soit $E$ un $KK$-espace vectoriel, $u in cal(L)(E)$ un endomorphisme et $P$ un polynôme.
+  Alors si $P(u) = 0$, les valeurs propres de $u$ sont racines de $P$.
+])
+
+== Décomposition des noyaux
+
+#theorem(
+  title: "Lemme des noyaux",
+  [
+    Soit $E$ un $KK$-espace vectoriel, $u in cal(L)(E)$ un endomorphisme et $(P_i)_(1 <= i <= n)$ une famille de polynômes deux à deux premiers entre eux. Alors
+    $ ker((P_1 ... P_n)(u)) = plus.circle.big_(i = 1)^n ker(P_i (u)) $
+  ],
+)
+
+#theorem([
+  Soit $E$ un $KK$-espace vectoriel et $u in cal(L)(E)$ un endomorphisme.
+  Alors $u$ est diagonalisable si et seulement s'il existe un polynôme $P$ simplement scindé tel que $P(u) = 0$.
+])
+
+#corollary([
+  Soit $E$ un $KK$-espace vectoriel, $F$ un sous-espace vectoriel de $E$ et $u in cal(L)(E)$ un endomorphisme diagonalisable. Alors si $F$ est stable par $u$, $u_F$ est diagonalisable.
+
+])
+
+== Théorème de Cayley-Hamilton
+
+#definition([
+  Soit $E$ un $KK$-espace vectoriel et $u in cal(L)(E)$ un endomorphisme.
+  On appelle _polynômes annulateurs_ de $u$ l'ensemble
+  $ I_u := {P in KK[X] | P(u) = 0}. $
+])
+
+#proposition([
+  Soit $E$ un $KK$-espace vectoriel et $u in cal(L)(E)$ un endomorphisme.
+  Alors $I_u$ est un idéal de $KK[X]$, c'est-à-dire qu'il vérifie les propriétés suivantes
+  + $0 in I_u$,
+  + $forall P, Q in I_u, P + Q in I_u$,
+  + $forall P in I_u, Q in KK[X], P Q in I_u$.
+])
+
+#theorem(
+  title: "de Cayley-Hamilton",
+  [
+    Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u in cal(L)(E)$ un endomorphisme.
+    Alors $chi_u (u) = 0$.
+  ],
+)
+
+== Polynôme minimal
+
+#definition([
+  Soit $E$ un $KK$-espace vectoriel et $u in cal(L)(E)$ un endomorphisme.
+  On appelle _polynôme minimal_ de $u$, noté $mu_u$, le polynôme unitaire non-nul de degré minimal dans $I_u$.
+])
+
+#proposition([
+  Soit $E$ un $KK$-espace vectoriel et $u in cal(L)(E)$ un endomorphisme.
+  Alors le polynôme minimal de $u$ divise tout élément de $I_u$.
+])
+
+#theorem([
+  Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u in cal(L)(E)$ un endomorphisme.
+  Alors $u$ est diagonalisable si et seulement si son polynôme minimal est simplement scindé.
+
+])
+
 = Réduction d'endomorphisme
+
+== Décomposition de Dunford
+
+#lemma([
+  Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u, v in cal(L)(E)$ deux endomorphismes diagonalisables. 
+  Alors si $u$ et $v$ commutent, il existe une base $cal(E)$ de $E$ telle que $[u]_cal(E)$ et $[v]_cal(E)$ soient diagonales. On dit que $u$ et $v$ sont _codiagonalisables_.
+])
+
+#definition([
+  Soit $E$ un $KK$-espace vectoriel de dimension $n$, $u in cal(L)(E)$ un endomorphisme, $lambda in KK$ une valeur propre de $u$ et $n_lambda$ sa multiplicité en tant que racine. 
+  On appelle _sous-espace caractéristique_ associé à $lambda$ l'ensemble
+  $ N_lambda (u) := ker((u - lambda id)^(n_lambda)). $
+  
+])
 
 #pagebreak()
 
@@ -253,8 +443,6 @@
 #definition([
   Soit $E$ un $KK$-espace vectoriel, $cal(E) = (e_1, ..., e_n)$ une base de $E$ et $fun(Phi, E times E, E)$ une forme bilinéaire. On appelle _matrice_ de $Phi$ dans la base $cal(E)$, la matrice
   $ [Phi]_cal(E) := (Phi(e_i, e_j))_(1 <= i, j <= n). $
-
-
 ])
 
 #proposition([
@@ -514,7 +702,7 @@
 #theorem(
   title: "Procédé d'orthogonalisation de Gram-Schmidt",
   [
-    Soit $(E, sca(dot, dot))$ un espace euclidien et $(e_1, ..., e_n)$ une base de $E$. 
+    Soit $(E, sca(dot, dot))$ un espace euclidien et $(e_1, ..., e_n)$ une base de $E$.
     Alors il existe une base orthonormée $(f_1, ..., f_n)$ de $E$ telle que
     $ forall k in {1, ..., n}, Vect(e_1, ..., e_k) = Vect(f_1, ..., f_k). $
   ],
@@ -527,10 +715,12 @@
     $ Vect(e_1, ..., e_(k-1)) = Vect(f_1, ..., f_(k-1)) $
     alors on pose $f'_k := e_k - sum_(i=1)^(k-1) sca(e_k, f_i) f_i$. Soit $j in {1, ..., k-1}$, alors
     $ sca(f'_k, f_j) &= sca(e_k - sum_(i=1)^(k-1) sca(e_k, f_i) f_i, f_j) $
-    et par bilinéarité du produit scalaire 
-    $ sca(f'_k, f_j) &= sca(e_k, f_j) - sum_(i=0)^(k-1) sca(e_k, f_i) sca(f_i, f_j) \
+    et par bilinéarité du produit scalaire
+    $
+      sca(f'_k, f_j) &= sca(e_k, f_j) - sum_(i=0)^(k-1) sca(e_k, f_i) sca(f_i, f_j) \
       &= sca(e_k, f_j) - sum_(i=0)^(k-1) sca(e_k, f_i) delta_(i, j) \
-      &= sca(e_k, f_j) - sca(e_k, f_j) = 0. $
+      &= sca(e_k, f_j) - sca(e_k, f_j) = 0.
+    $
     Enfin on pose $f_k := (f'_k)/(||f'_k||)$, donc la famille $(f_1, ..., f_k)$ est orthonormée et vérifie l'égalité.
 ])
 
@@ -547,7 +737,7 @@
 ])
 
 #definition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $f in cal(L)(E)$ un endomorphisme. 
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $f in cal(L)(E)$ un endomorphisme.
   On dit que $f$ est un _endomorphisme orthogonal_ si
   $ forall x, y in E, sca(f(x), f(y)) = sca(x, y). $
   On appelle _groupe orthogonal_, noté $O(E)$, le sous-groupe des endomorphismes orthogonaux.
@@ -562,7 +752,7 @@
 ])
 
 #remark([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $f in cal(L)(E)$ un endomorphisme orthogonal. 
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $f in cal(L)(E)$ un endomorphisme orthogonal.
   Alors on remarque que $det(f) = plus.minus 1$, on appelle _groupe spécial orthogonal_ le sous-groupe
   $ S O(E) := O(E) sect "det"^(-1)(1). $
 ])
@@ -572,21 +762,25 @@
 #proposition([
   Soit $[a, b]$ un intervalle fermé de $RR$ et $fun(w, [a, b], R_+ without {0})$. Alors la forme bilinéaire symétrique définie par
   $ forall P, Q in RR[X], sca(P, Q) := integral_a^b P(t)Q(t)w(t) dif t $
-  est non-dégénérée.
+  est un produit scalaire.
 ])
 
 #proof([
-  Soit $P in RR[X]$, alors
-  $ sca(P, P) = 0 &=> integral_a^b P^2 (t) w(t) = 0 \
+  Soit $P in RR[X]$, alors $P^2 w$ est continue et positive, de plus
+  $
+    sca(P, P) = 0 &=> integral_a^b P^2 (t) w(t) = 0 \
     &=> forall t in [a, b], P^2 (t) w(t) = 0 \
     &=> forall t in [a, b], P(t) = 0 \
-    &=> P = 0 $
-  donc $sca(dot, dot)$ est non-dégénérée.
+    &=> P = 0
+  $
+  donc $sca(dot, dot)$ est un produit scalaire.
 ])
 
 #definition([
   Soit $sca(dot, dot)$ un produit scalaire sur $RR[X]$. On appelle _famille de polynômes orthogonaux_, une famille $(P_n)_(n in NN)$ de polynômes qui vérifie
-  $ cases(forall i"," j in NN"," i != j => sca(P_i, P_j) = 0, forall n in NN"," deg(P_n) = n) $
+  $
+    cases(forall i"," j in NN"," i != j => sca(P_i, P_j) = 0, forall n in NN"," deg(P_n) = n)
+  $
 ])
 
 #proposition([
@@ -594,38 +788,48 @@
   Soit $n in NN$, alors $P_n$ et $Q_n$ sont colinéaires.
 ])
 
+#proof([
+  $P_n$ et $Q_n$ appartiennent à la même droite $RR_n [X] sect RR_n [X]^perp$.
+])
+
 #definition([
-  Soit $n in NN$ et $p_n in cal(L)(RR_n [X])$ la projection orthogonale sur $RR_(n-1) [X]$. On appelle _?_, l'application $fun(T_n, RR_(n-1) [X], RR_(n-1) [X], x: P, fx: p_n (X P))$.
+  Soit $n in NN$ et $p_n in cal(L)(RR_n [X])$ la projection orthogonale sur $RR_(n-1) [X]$. On pose l'application $fun(T_n, RR_(n-1) [X], RR_(n-1) [X], x: P, fx: p_n (X P))$.
 ])
 
 #proposition([
-  Soit $(P_n)_(n in NN)$ une famille de polynômes orthogonaux. 
-  Soit $n in NN$, alors $T_n$ est symétrique et son spectre est de cardinal $n$. 
-  Soit $lambda$ une valeur propre de $T_n$, alors $lambda$ est racine de $P_n$ et l'espace propre associé est la droite engendrée par le quotient de $P_n$ par $X - lambda$. 
+  Soit $(P_n)_(n in NN)$ une famille de polynômes orthogonaux.
+  Soit $n in NN$, alors $T_n$ est symétrique et son spectre est de cardinal $n$.
+  Soit $lambda$ une valeur propre de $T_n$, alors $lambda$ est racine de $P_n$ et l'espace propre associé est la droite engendrée par le quotient de $P_n$ par $X - lambda$.
 ])
 
 #proof([
   Soit $P, Q in RR_(n-1) [X]$, alors
-  $ sca(T_n (P), Q) = sca(p_n (X P), Q) $
+  $
+    sca(T_n (P), Q) &= sca(p_n (X P), Q) \
+    &= sca(X P, p_n (Q)) \
+    &= sca(X P, Q) \
+    &= sca(P, X Q)
+    = sca(P, T_n (Q))
+  $
+  donc $T_n$ est symétrique.
 ])
 
-#pagebreak()
 
-= Endomorphisme symétrique d'un espace euclidien
+== Endomorphismes symétriques
 
 #notation([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme. 
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
   On note $fun(theta_u, E, E^*)$, l'application définie par
   $ forall y in E, theta_u (y) := x |-> sca(u(x), y). $
 ])
 
 #definition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme. 
-  On appelle _application transposée_ (ou _adjoint_) de $u$, l'application définie par $u^* := theta^(-1)_id compose theta_u$.  
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
+  On appelle _application transposée_ (ou _adjoint_) de $u$, l'application définie par $u^* := theta^(-1)_id compose theta_u$.
 ])
 
 #proposition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme. 
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
   Alors
   $ forall x, y in E, sca(x, u^*(y)) = sca(u(x), y). $
   Soit $cal(E)$ une base orthonormée de $E$, on a $[u^*]_cal(E) = transpose([u]_cal(E))$.
@@ -633,26 +837,42 @@
 
 #proof([
   Soit $x, y in E$. Alors
-  $ sca(x, u^*(y)) = theta_id (u^*(y))(x) = (theta_id compose u^*)(y)(x) = theta_u (y)(x) = sca(u(x), y). $
+  $
+    sca(x, u^*(y)) = theta_id (u^*(y))(x) = (theta_id compose u^*)(y)(
+      x
+    ) = theta_u (y)(x) = sca(u(x), y).
+  $
 ])
 
 #definition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme. 
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
   On dit que $u$ est _symétrique_ (ou _auto-adjoint_), si $u^* = u$.
 ])
 
 #proposition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme. 
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
   Alors $u$ est symétrique si et seulement si sa matrice dans une base orthonormée de $E$ est symétrique.
 ])
 
 #proposition([
-  Soit $M in cal(M)_n (RR)$ une matrice symétrique. 
+  Soit $M in cal(M)_n (RR)$ une matrice symétrique.
   Alors toutes les valeurs propres complexes de $M$ sont réelles.
 ])
 
+#proof([
+  Soit $lambda in CC$ une valeur propre de $M$ et $X$ un vecteur propre associé.
+  On a $M X = lambda X$, en passant au conjugué $M overline(X) = overline(lambda) thin overline(X)$, et en passant à la transposée $transpose(overline(X)) M = overline(lambda) thin transpose(overline(X))$. En multipliant par $X$ on obtient
+  $
+    lambda transpose(overline(X)) X
+    = transpose(overline(X)) (M X)
+    = (transpose(overline(X)) M) X
+    = overline(lambda) thin transpose(overline(X)) X
+  $
+  or $transpose(overline(X)) X > 0$, on en déduit que $lambda = overline(lambda)$ est un nombre réel.
+])
+
 #theorem([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme. 
+  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
   Alors $u$ est diagonalisable dans une base orthonormée de $E$.
 ])
 
@@ -661,7 +881,7 @@
 ])
 
 #corollary([
-  Soit $(E, sca(dot, dot))$ un espace euclidien, $Q$ une forme quadratique définie positive sur $E$ et $lambda_1 <= ... <= lambda_n$ ses valeurs propres ordonnées. Alors 
-  $ forall x in E, lambda_1||x||^2 <= Q(x) <= lambda_n||x||^2 $ 
+  Soit $(E, sca(dot, dot))$ un espace euclidien, $Q$ une forme quadratique définie positive sur $E$ et $lambda_1 <= ... <= lambda_n$ ses valeurs propres ordonnées. Alors
+  $ forall x in E, lambda_1||x||^2 <= Q(x) <= lambda_n||x||^2 $
   et ces inégalités sont optimales.
 ])
