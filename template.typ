@@ -41,6 +41,7 @@
 #let sign = "sign"
 #let supp = "supp"
 #let Vect = "Vect"
+#let Sp = "Sp"
 #let act = rotate(180deg, $arrow.cw$)
 #let GL = "GL"
 #let transpose(M) = $#M^upright(T)$
