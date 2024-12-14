@@ -751,7 +751,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 
 #proposition[
-  Soit $(G, star)$ un groupe et $H$ un sous-groupe de $G$. Alors les ensembles $qt(G, H)$ et $qtr(G, H)$ sont isomorphes. En particulier si $G$ est fini, on a $|qt(G, H)| = |qtr(H, G)|$.
+  Soit $(G, star)$ un groupe et $H$ un sous-groupe de $G$. Alors les ensembles $qt(G, H)$ et $qtr(G, H)$ sont isomorphes. En particulier si $G$ est fini, on a $|qt(G, H)| = |qtr(G, H)|$.
 ]
 
 #proof[
