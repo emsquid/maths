@@ -5,7 +5,6 @@
 = Groupes
 
 #definition[
-  test
   Soit $G$ un ensemble et $star: G times G --> G$ une loi de composition interne. On dit que le couple $(G, star)$ forme un _groupe_ s'il vérifie les propriétes suivantes
   + la loi $star$ est associative, $forall x, y, z in G, (x star y) star z = x star (y star z)$,
   + il existe un neutre $e_G in G$, $forall x in G, x star e_G = e_G star x = x$,
