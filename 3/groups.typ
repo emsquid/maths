@@ -5,7 +5,7 @@
 = Groupes
 
 #definition[
-  Soit $G$ un ensemble et $star: G times G --> G$ une loi de composition interne. On dit que le couple $(G, star)$ forme un _groupe_ s'il vérifie les propriétes suivantes
+  Soit $G$ un ensemble et $fun(star, G times G, G)$ une loi de composition interne. On dit que le couple $(G, star)$ forme un _groupe_ s'il vérifie les propriétes suivantes
   + la loi $star$ est associative, $forall x, y, z in G, (x star y) star z = x star (y star z)$,
   + il existe un neutre $e_G in G$, $forall x in G, x star e_G = e_G star x = x$,
   + existence d'un inverse, $forall x in G, exists x^(-1) in G, x star x^(-1) = x^(-1) star x = e_G$.
@@ -256,14 +256,14 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 == Définitions
 
 #definition[
-  Soit $(G, star)$ et $(H, dot)$ deux groupes. Une application $phi: G --> H$ est un _morphisme de groupes_ si elle vérifie
+  Soit $(G, star)$ et $(H, dot)$ deux groupes. Une application $fun(phi, G, H)$ est un _morphisme de groupes_ si elle vérifie
   $ forall x, y in G, phi(x star y) = phi(x) dot phi(y). $
   - Si $H = G$, on dit que $phi$ est un _endomorphisme_.
   - Si $phi$ est une bijection, on dit que $phi$ est un _isomorphisme_, et $G$ et $H$ sont _isomorphes_, noté $G tilde.eq H$.
 ]
 
 #proposition[
-  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $phi: G --> H$ un morphisme de groupes.
+  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $fun(phi, G, H)$ un morphisme de groupes.
   + le neutre est envoyé sur le neutre, $phi(e_G) = e_H$,
   + l'inverse est envoyé sur l'inverse, $forall x in G, phi(x^(-1)) = phi(x)^(-1)$.
 ]
@@ -274,7 +274,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ]
 
 #proposition[
-  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $phi: G --> H$ un isomorphisme. Alors son inverse, noté $phi^(-1)$, est un isomorphisme.
+  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $fun(phi, G, H)$ un isomorphisme. Alors son inverse, noté $phi^(-1)$, est un isomorphisme.
 ]
 
 #proof[
@@ -286,7 +286,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ]
 
 #proposition[
-  Soit $(G, star)$, $(H, dot)$ et $(K, square.tiny.filled)$ trois groupes, et $phi: G --> H$ et $psi: H --> K$ deux morphismes de groupes. Alors $psi compose phi$ est un morphisme de groupes.
+  Soit $(G, star)$, $(H, dot)$ et $(K, square.tiny.filled)$ trois groupes, et $fun(phi, G, H)$ et $fun(psi, H, K)$ deux morphismes de groupes. Alors $psi compose phi$ est un morphisme de groupes.
 ]
 
 #proof[
@@ -305,11 +305,11 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
   + $G$ et $H$ ont le même ordre,
   + $G$ est abélien si et seulement si $H$ est abélien,
   + $G$ est monogène si et seulement si $H$ est monogène,
-  + $forall phi: G --> H$ isomorphisme, $forall x in G, "ord"(x) = "ord"(phi(x))$.
+  + $forall fun(phi, G, H)$ isomorphisme, $forall x in G, "ord"(x) = "ord"(phi(x))$.
 ]
 
 #proof[
-  Soit $phi: G --> H$ un isomorphisme.
+  Soit $fun(phi, G, H)$ un isomorphisme.
   + $G$ et $H$ sont en bijection, donc $|G| = |H|$.
   + $arrow.r.double$ : Supposons que $G$ est abélien. Soit $x, y in H$, puisque $phi$ est un isomorphisme
     $
@@ -329,13 +329,13 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 == Image et noyau
 
 #definition[
-  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $phi: G --> H$ un morphisme de groupes.
+  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $fun(phi, G, H)$ un morphisme de groupes.
   - On appelle _image_ de $phi$ l'ensemble $im(phi) := phi(G)$.
   - On appelle _noyau_ de $phi$ l'ensemble $ker(phi) := phi^(-1)(e_H)$.
 ]
 
 #proposition[
-  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $phi: G --> H$ un morphisme de groupes. Alors $im(phi)$ est un sous-groupe de $H$ et $ker(phi)$ est un sous-groupe de $G$. Plus généralement si $G'$ est un sous groupe de $G$ et $H'$ un sous-groupe de $H$, alors $phi(G')$ est un sous-groupe de $H$ et $phi^(-1)(H')$ est un sous-groupe de $G$.
+  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $fun(phi, G, H)$ un morphisme de groupes. Alors $im(phi)$ est un sous-groupe de $H$ et $ker(phi)$ est un sous-groupe de $G$. Plus généralement si $G'$ est un sous groupe de $G$ et $H'$ un sous-groupe de $H$, alors $phi(G')$ est un sous-groupe de $H$ et $phi^(-1)(H')$ est un sous-groupe de $G$.
 ]
 
 #proof[
@@ -359,7 +359,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ]
 
 #proposition[
-  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $phi: G --> H$ un morphisme de groupes.
+  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $fun(phi, G, H)$ un morphisme de groupes.
   - $phi$ est surjectif si et seulement si $im(phi) = H$.
   - $phi$ est injectif si et seulement si $ker(phi) = {e_G}$.
 ]
@@ -544,7 +544,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ]
 
 #theorem[
-  L'application $"sign": (S_n, compose) --> ({-1, 1}, dot)$ est un morphisme de groupes.
+  L'application $fun("sign", (S_n, compose), ({-1, 1}, dot))$ est un morphisme de groupes.
 ]
 
 #proof[
@@ -633,7 +633,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ]
 
 #example[
-  Soit $n in N without {0}$, on pose $R_n := {(a, b) in ZZ^2 | n|a - b}$.
+  Soit $n in NN without {0}$, on pose $R_n := {(a, b) in ZZ^2 | n|a - b}$.
   + Soit $x in ZZ$, alors $n|0 = x - x$, donc $x R_n x$,
   + soit $x, y in ZZ$, si $x R_n y$, alors $n|x - y$, d'où $n|y - x$, donc $y R_n x$,
   + soit $x, y, z in ZZ$, si $x R_n y$ et $y R_n z$, alors $n|x - y$ et $n|y - z$, d'où
@@ -884,7 +884,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
     &= {k in ZZ | n m|k} = n m ZZ
   $
 
-  d'après le @thm-prop-univ-groupes, il existe un morphisme $overline(phi): qt(ZZ, n m ZZ) --> qt(ZZ, n ZZ) times qt(ZZ, m ZZ)$ injectif. Enfin puisque $|qt(ZZ, n m ZZ)| = |qt(ZZ, n ZZ) times qt(ZZ, m ZZ)|$, on en déduit que $overline(phi)$ est un isomorphisme.
+  d'après le @thm-prop-univ-groupes, il existe un morphisme $fun(overline(phi), qt(ZZ, n m ZZ), qt(ZZ, n ZZ) times qt(ZZ, m ZZ))$ injectif. Enfin puisque $|qt(ZZ, n m ZZ)| = |qt(ZZ, n ZZ) times qt(ZZ, m ZZ)|$, on en déduit que $overline(phi)$ est un isomorphisme.
 ]
 
 #pagebreak()
@@ -894,7 +894,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 == Définitions
 
 #definition[
-  Soit $(G, star)$ un groupe et $X$ un ensemble. On appelle _action_ de $G$ sur $X$ une application $psi: G times X --> X$ qui vérifie les propriétés suivantes
+  Soit $(G, star)$ un groupe et $X$ un ensemble. On appelle _action_ de $G$ sur $X$ une application $fun(psi, G times X, X)$ qui vérifie les propriétés suivantes
   + $forall x in X, psi(e, x) = x$,
   + $forall g, h in G, forall x in X, psi(g, psi(h, X)) = psi(g h, x)$.
   Dans ce cas, on notera $forall g in G, forall x in X, g star x := psi(g, x)$.
@@ -916,7 +916,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ])
 
 #proof([
-  On vérifie facilement que $G_x$ est un sous-groupe de $G$. Soit $g in G$, alors $h in G_(g x)$ si et seulement si $h star (g star x) = g star x$, si et seulement si $(g^(-1) star h star g) star x = x$, si et seulement si $g^(-1) star h star g in G_x$, si et seulement si $h in g (G_x) g^(-1)$.
+  On vérifie facilement que $G_x$ est un sous-groupe de $G$. Soit $g in G$, alors $h in G_(g star x)$ si et seulement si $h star (g star x) = g star x$, si et seulement si $(g^(-1) star h star g) star x = x$, si et seulement si $g^(-1) star h star g in G_x$, si et seulement si $h in g (G_x) g^(-1)$.
 ])
 
 == Espace des orbites
@@ -934,12 +934,12 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 #proof([
   + Soit $x in X$, alors $x = e star x$, d'où $x in O_x$, donc $x tilde x$.
   + Soit $x, y in X$, alors si $x tilde y$, il existe $g in G$ tel que $y = g star x$, d'où $x = g^(-1) star y$, donc $y tilde x$.
-  + Soit $x, y, z in X$, alors si $x tilde y$ et $y tilde z$, il existe $g, h in G$ tels que $y = star x$ et $z = h star y$, d'où $z = (h star g) star x$, donc $x tilde z$.
+  + Soit $x, y, z in X$, alors si $x tilde y$ et $y tilde z$, il existe $g, h in G$ tels que $y = g star x$ et $z = h star y$, d'où $z = (h star g) star x$, donc $x tilde z$.
 ])
 
 #definition([
   Soit $(G, star)$ un groupe qui agit sur un ensemble $X$. On dit que l'action est
-  + _transitive_, si $forall x, y in X, exists G, y = g star x$,
+  + _transitive_, si $forall x, y in X, exists g in G, y = g star x$,
   + _fidèle_, si $forall g in G without {e}, exists x in X, g star x != x$,
   + _libre_, si $forall g in G without {e}, forall x in X, g star x != x$.
   Dans ce cas, on dit que $G$ agit respectivement _transitivement_, _fidèlement_ et _librement_ sur $X$.
@@ -1024,9 +1024,26 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #example([
   On considère $G := qt(ZZ, 2ZZ) times qt(ZZ, 5ZZ) times qt(ZZ, 5^2ZZ) times qt(ZZ, 7^3ZZ)$. Alors les composantes $p$-primaires de $G$ sont
-  $ G_2 &= qt(ZZ, 2ZZ) times {overline(0)} times {overline(0)} times {overline(0)} \
-    G_5 &= {overline(0)} times qt(ZZ, 5ZZ) times qt(ZZ, 5^2ZZ) times {overline(0)} \
-    G_7 &= {overline(0)} times {overline(0)} times {overline(0)} times qt(ZZ, 7^3ZZ). $
+  $
+    G_2 &= qt(ZZ, 2ZZ) times {overline(0)} times {overline(0)} times {
+      overline(0)
+    } \
+    G_5 &= {overline(0)} times qt(ZZ, 5ZZ) times qt(ZZ, 5^2ZZ) times {
+      overline(0)
+    } \
+    G_7 &= {overline(0)} times {overline(0)} times {
+      overline(0)
+    } times qt(ZZ, 7^3ZZ).
+  $
+  On considère $H := qt(ZZ, 6ZZ) times qt(ZZ, 60ZZ)$. On a $|H| = 6 dot 60 = (2 dot 3)(2^2 dot 3 dot 5)$, alors les composantes $p$-primaires de $H$ sont
+  $
+    H_2 &= {(overline(a), [b]) in H | 2^3 a in 6ZZ "et" 2^3 b in 60ZZ} \
+    &= {(overline(a), [b]) in H | 2^2 a in 3ZZ "et" 2 b in 15ZZ} \
+    &= {(overline(a), [b]) in H | a in 3ZZ "et" b in 15ZZ} \
+    &tilde.eq qt(ZZ, 2ZZ) times qt(ZZ, 4ZZ) \
+    H_3 &tilde.eq qt(ZZ, 3ZZ) times qt(ZZ, 3ZZ) \
+    H_5 &tilde.eq {overline(0)} times qt(ZZ, 5ZZ).
+  $
 ])
 
 == Décomposition des $p$-groupes en produit de groupes cycliques
