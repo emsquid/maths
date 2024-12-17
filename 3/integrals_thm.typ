@@ -2,6 +2,13 @@
 
 #show: maths.with(title: "Calcul intégral et applications", color: "#718355")
 
+= Intégrale de Lebesgue et intégrale de Riemann
+
+#theorem([
+  Soit $a, b in overline(RR)$ et $fun(f, lr(\]a, b\[), RR)$ une fonction. Alors $f$ est *Lebesgue-intégrable* si et seulement si $f$ est *localement Riemann-intégrable* et que son intégrale impropre est *absolument convergente* sur $lr(\]a, b\[)$. Dans ce cas
+  $ integral_lr(\]a, b\[) f(x) dif lambda(x) = integral_a^b f(x) dif x. $ 
+])
+
 = Théorèmes
 
 == Convergence monotone (ou Beppo-Levi)
