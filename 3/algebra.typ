@@ -36,7 +36,7 @@
 #definition([
   Soit $E$ un $KK$-espace vectoriel et $x_1, ..., x_n in E$. On appelle _sous-espace vectoriel engendré par $x_1, ..., x_n$_, l'ensemble des combinaisons linéaires de $x_1, ..., x_n$, noté
   $
-    "Vect"(x_1, ..., x_n) = {
+    "Vect"(x_1, ..., x_n) := {
       a_1 dot x_1 + ... + a_n dot x_n | a_1, ..., a_n in KK
     }.
   $
@@ -586,10 +586,10 @@
 ])
 
 #proposition([
-  Soit $E$ un $KK$-espace vectoriel de dimension $n$. Soit $fun(u, E, E)$ une forme linéaire, alors
-  $ u = sum_(i=0)^n u(e_i) e_i^* $
+  Soit $E$ un $KK$-espace vectoriel de dimension $n$. Soit $fun(u, E, KK)$ une forme linéaire, alors
+  $ u = sum_(i=1)^n u(e_i) e_i^* $
   Soit $f$ un élément de $E$, alors
-  $ f = sum_(i=0)^n e_i^* (f) e_i. $
+  $ f = sum_(i=1)^n e_i^* (f) e_i. $
 ])
 
 #definition([
@@ -609,7 +609,7 @@
 ])
 
 #definition([
-  Soit $E$ un $KK$-espace vectoriel et $fun(Q, E, KK)$ une application. On dit que $Q$ est une _forme quadratique_, s'il existe une forme bilinéaire $fun(Phi, E times E, KK)$ telle que
+  Soit $E$ un $KK$-espace vectoriel et $fun(Q, E, KK)$ une application. On dit que $Q$ est une _forme quadratique_, s'il existe une forme bilinéaire symétrique $fun(Phi, E times E, KK)$ telle que
   $ forall x in E, Q(x) = Phi(x, x) $
   dans ce cas, on dit que $Q$ est la _forme quadratique associée_ à $Phi$.
 ])
@@ -621,7 +621,7 @@
     $
       forall (x, y) in E times E, Phi(x, y) = 1 / 2(
         Q(x + y) - Q(x) - Q(y)
-      ) = 1 / 4(Q(x + y) + Q(x - y)).
+      ) = 1 / 4(Q(x + y) - Q(x - y)).
     $
   ],
 ) <prop-form-polar>
@@ -631,30 +631,30 @@
 ])
 
 #remark([
-  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire. Alors sa matrice dans la base canonique est symétrique.
+  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire symétrique. Alors sa matrice dans la base canonique est symétrique.
 ])
 
 == Forme quadratique définie
 
 #definition([
-  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire.
+  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire symétrique.
   On dit que $Phi$ est _non-dégénérée_ si
   $ forall x in E, (forall y in E, Phi(x, y) = 0) => x = 0. $
 ])
 
 #definition([
-  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire.
+  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire symétrique.
   On dit que $Phi$ est _définie_ si
   $ forall x in E, Phi(x, x) = 0 => x = 0. $
 ])
 
 #proposition([
-  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire.
+  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire symétrique.
   Alors si $Phi$ est définie, elle est non-dégénérée.
 ])
 
 #definition([
-  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire définie.
+  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire symétrique définie.
   - On dit que $Phi$ est _définie positive_ si
     $ forall x in E without {0}, Phi(x, x) > 0. $
   - On dit que $Phi$ est _définie négative_ si
@@ -662,7 +662,7 @@
 ])
 
 #proposition([
-  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire définie.
+  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire symétrique définie.
   Alors $Q$ est soit définie positive, soit définie négative.
 ])
 
@@ -693,7 +693,7 @@
   title: "d'inertie de Sylvester",
   [
     Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $fun(Q, E, KK)$ une forme quadratique.
-    Alors le nombre $m$ de formes linéaires indépendantes qui interviennent dans une décomposition de $Q$ est égal au rang de $Q$.
+    Alors le nombre $m$ de formes linéaires indépendantes qui interviennent dans une décomposition de $Q$ est égal au rang de la forme polaire de $Q$.
 
   ],
 )
@@ -701,7 +701,7 @@
 #theorem(
   title: [d'inertie de Sylvester dans $RR$],
   [
-    Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $fun(Q, E, KK)$ une forme quadratique.
+    Soit $E$ un $RR$-espace vectoriel de dimension $n$ et $fun(Q, E, RR)$ une forme quadratique.
     Soit
     $
       Q = a_1 f_1^2 + ... + a_s f_s^2 - a_(s+1) f_(s+1)^2 - ... - a_(s+t) f_(s+t)^2
@@ -723,7 +723,7 @@
 #definition([
   Soit $E$ un $RR$-espace vectoriel.
   On appelle _produit scalaire_ sur $E$, noté $sca(dot, dot)$, une forme bilinéaire symétrique définie positive.
-  On appelle _espace euclidien_ le couple $(E, sca(dot, dot))$.
+  Si $E$ est de dimension finie, on appelle _espace euclidien_ le couple $(E, sca(dot, dot))$.
 ])
 
 #definition([
@@ -786,7 +786,7 @@
 #definition([
   Soit $(E, sca(dot, dot))$ un espace euclidien et $cal(E) = (e_1, ..., e_n)$ une base de $E$.
   - On dit que $cal(E)$ est _orthogonale_ si elle vérifie
-    $ forall i, j in {1, ..., n}, i != j => sca(e_i, e_j). $
+    $ forall i, j in {1, ..., n}, i != j => sca(e_i, e_j) = 0. $
   - On dit que $cal(E)$ est _orthonormée_ si elle vérifie
     $ forall i, j in {1, ..., n}, sca(e_i, e_j) = delta_(i, j). $
 ])
@@ -826,8 +826,8 @@
     $ sca(f'_k, f_j) &= sca(e_k - sum_(i=1)^(k-1) sca(e_k, f_i) f_i, f_j) $
     et par bilinéarité du produit scalaire
     $
-      sca(f'_k, f_j) &= sca(e_k, f_j) - sum_(i=0)^(k-1) sca(e_k, f_i) sca(f_i, f_j) \
-      &= sca(e_k, f_j) - sum_(i=0)^(k-1) sca(e_k, f_i) delta_(i, j) \
+      sca(f'_k, f_j) &= sca(e_k, f_j) - sum_(i=1)^(k-1) sca(e_k, f_i) sca(f_i, f_j) \
+      &= sca(e_k, f_j) - sum_(i=1)^(k-1) sca(e_k, f_i) delta_(i, j) \
       &= sca(e_k, f_j) - sca(e_k, f_j) = 0.
     $
     Enfin on pose $f_k := (f'_k)/(||f'_k||)$, donc la famille $(f_1, ..., f_k)$ est orthonormée et vérifie l'égalité.
