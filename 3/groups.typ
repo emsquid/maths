@@ -796,7 +796,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
   Soit $(G, star)$ un groupe et $H$ un sous-groupe de $G$. Alors les énoncés suivants sont équivalents
   + $H$ est distingué.
   + Il existe un morphisme $fun(phi, G, G)$ tel que $H = ker(phi)$.
-  + $qt(G, H)$ a une structure de groupes.
+  + $qt(G, H)$ a une structure de groupes telle que la projection canonique $fun(pi, G, qt(G, H))$ est un morphisme de groupes.
 ]
 
 #proof[
