@@ -4,28 +4,28 @@
 #import "@preview/outrageous:0.3.0"
 
 // Counter and blocks definitions
-#let mathcounter = rich-counter(identifier: "maths", inherited_levels: 1)
-#let mathblock = mathblock.with(
+#let coursecounter = rich-counter(identifier: "maths", inherited_levels: 1)
+#let courseblock = mathblock.with(
   breakable: false,
-  counter: mathcounter,
+  counter: coursecounter,
 )
-#let excounter = rich-counter(identifier: "ex", inherited_levels: 0)
-#let exblock = mathblock.with(
+#let exercisecounter = rich-counter(identifier: "ex", inherited_levels: 0)
+#let exerciseblock = mathblock.with(
   breakable: false,
-  counter: excounter,
+  counter: exercisecounter,
 )
 
-#let definition = mathblock(blocktitle: "Définition")
-#let notation = mathblock(blocktitle: "Notation")
-#let theorem = mathblock(blocktitle: "Théorème")
-#let lemma = mathblock(blocktitle: "Lemme")
-#let corollary = mathblock(blocktitle: "Corollaire")
-#let proposition = mathblock(blocktitle: "Proposition")
-#let example = mathblock(blocktitle: "Exemple")
-#let remark = mathblock(blocktitle: "Remarque")
+#let definition = courseblock(blocktitle: "Définition")
+#let notation = courseblock(blocktitle: "Notation")
+#let theorem = courseblock(blocktitle: "Théorème")
+#let lemma = courseblock(blocktitle: "Lemme")
+#let corollary = courseblock(blocktitle: "Corollaire")
+#let proposition = courseblock(blocktitle: "Proposition")
+#let example = courseblock(blocktitle: "Exemple")
+#let remark = courseblock(blocktitle: "Remarque")
 #let proof = proofblock(prefix: [_Démonstration_.])
 
-#let exercise = exblock(blocktitle: "Exercice")
+#let exercise = exerciseblock(blocktitle: "Exercice")
 
 // Maths shortcuts
 #let scr(it) = text(
