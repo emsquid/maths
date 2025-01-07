@@ -9,6 +9,11 @@
   breakable: false,
   counter: mathcounter,
 )
+#let excounter = rich-counter(identifier: "ex", inherited_levels: 0)
+#let exblock = mathblock.with(
+  breakable: false,
+  counter: excounter,
+)
 
 #let definition = mathblock(blocktitle: "Définition")
 #let notation = mathblock(blocktitle: "Notation")
@@ -19,6 +24,8 @@
 #let example = mathblock(blocktitle: "Exemple")
 #let remark = mathblock(blocktitle: "Remarque")
 #let proof = proofblock(prefix: [_Démonstration_.])
+
+#let exercise = exblock(blocktitle: "Exercice")
 
 // Maths shortcuts
 #let scr(it) = text(

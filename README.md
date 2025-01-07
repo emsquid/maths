@@ -4,8 +4,8 @@
 
 ### 1er semestre
 
-- [Algèbre Linéaire et bilinéaire](3/algebra.pdf)
-- [Calcul intégral et applications](3/integrals.pdf)
-  - [Théorèmes](3/integrals_thm.pdf)
-- [Théorie des groupes](3/groups.pdf)
-- [Topologie et calcul différentiel](3/topcd.pdf)
+- [Algèbre Linéaire et bilinéaire](y3/s1/algebra.pdf)
+- [Calcul intégral et applications](y3/s1/integrals.pdf)
+  - [Théorèmes](y3/s1/integrals_thm.pdf)
+- [Théorie des groupes](y3/s1/groups.pdf)
+- [Topologie et calcul différentiel](y3/s1/topcd.pdf)

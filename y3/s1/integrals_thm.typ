@@ -1,4 +1,4 @@
-#import "../template.typ": *
+#import "../../template.typ": *
 
 #show: maths.with(title: "Calcul intégral et applications", color: "#718355")
 

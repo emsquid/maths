@@ -1,4 +1,4 @@
-#import "../template.typ": *
+#import "../../template.typ": *
 
 #show: maths.with(title: "Algèbre linéaire et bilinéaire", color: "#718355")
 

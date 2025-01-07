@@ -1,4 +1,4 @@
-#import "../template.typ": *
+#import "../../template.typ": *
 
 #show: maths.with(title: "Théorie des groupes", color: "#718355")
 
