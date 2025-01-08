@@ -55,6 +55,8 @@
 #let transpose(M) = $#M^upright(T)$
 #let ind(E) = $bb(1)_#E$
 #let sca(x, y) = $angle.l #x, #y angle.r$
+#let seq(name, index: "n", start: 1) = $(#name _#index)_(#index >= #start)$
+#let borel(U) = $cal(B)(#U)$
 
 #let maths(
   title: none,
