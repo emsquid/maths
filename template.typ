@@ -22,6 +22,7 @@
 #let corollary = courseblock(blocktitle: "Corollaire")
 #let proposition = courseblock(blocktitle: "Proposition")
 #let example = courseblock(blocktitle: "Exemple")
+#let examples = courseblock(blocktitle: "Exemples")
 #let remark = courseblock(blocktitle: "Remarque")
 #let proof = proofblock(prefix: [_Démonstration_.])
 
