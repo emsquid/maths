@@ -109,7 +109,10 @@
   )
 
   // Heading options
-  set heading(numbering: "1.1.")
+  set heading(numbering: "1.")
+
+  // Enum options
+  set enum(numbering: "1.a.i.A.")
 
   // Paragraph options
   set par(justify: true)
