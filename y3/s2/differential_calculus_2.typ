@@ -125,8 +125,8 @@
     2. On pose $U' := {(x, y) in U | x > 0}$, qui est un ouvert de $RR^2$ sur lequel $f$ est injective.
       En effet si $f(x_1, y_1) = f(x_2, y_2)$, alors on pose
       $
-        cases(x_1 = r_1 cos(theta_1), y_1 = r_1 sin(theta_1),
-        x_2 = r_2 cos(theta_2), y_2 = r_2 sin(theta_2)) quad "où" r_1, r_2 > 0 "et" theta_1, theta_2 in ]-pi / 2, pi / 2[
+        cases((x_1, y_1) = r_1(cos(theta_1),sin(theta_1)),
+          (x_2, y_2) = r_2(cos(theta_2),sin(theta_2))) quad "où" r_1, r_2 > 0 "et" theta_1, theta_2 in ]-pi / 2, pi / 2[
       $
       et on trouve
       $
@@ -142,8 +142,69 @@
   title: "Théorème des fonctions implicites",
   [
     Soit $U$ un ouvert de $RR^n times RR^p$, $(a, b) in U$ et $fun(f = (f_1, ..., f_p), U, RR^p)$ une application de classe $C^k$.
-    On suppose que $f(a, b) = 0$ et que la matrice jacobienne de $f$ par rapport à $y$ en $(a, b)$ est inversible. Alors il existe un voisinage ouvert $V$ de $a$, un voisinage ouvert $W$ de $b$ avec $V times W subset U$ et une application $fun(phi, V, W)$ avec $phi(a) = b$, tels que
+    On suppose que $f(a, b) = 0$ et que la matrice jacobienne de $f$ par rapport à la deuxième variable en $(a, b)$ est inversible. Alors il existe un voisinage ouvert $V$ de $a$, un voisinage ouvert $W$ de $b$ avec $V times W subset U$ et une application $fun(phi, V, W)$ qui est $C^oo$ avec $phi(a) = b$, tels que
     $ cases((x, y) in V times W, f(x, y) = 0) <==> cases(x in V, y = phi(x)) $
-    de plus pour tout $x in V, dif phi(x) = -(dif_y f(x, phi))^(-1) compose dif_x f(x, phi(x))$.
+    de plus pour tout $x in V, dif phi(x) = -(dif_y f(x, phi(x)))^(-1) compose dif_x f(x, phi(x))$.
   ],
-)
+) <thm-fonctions-implicites>
+
+#examples([
+  + On considère $fun(f, RR^2, RR, x: (x, y), fx: x^2+y^2-1)$ et $SS^1 := {(x, y) in RR^2 | f(x, y) = 0}$. Les dérivées partielles de $f$ sont
+    $
+      (partial f) / (partial x) (x, y) &= 2x "et"
+      (partial f) / (partial y) (x, y) &= 2y.
+    $
+    On remarque que pour $(x, y) in RR^2$ vérifiant
+    $
+      cases((x, y) in SS^1, (partial f)/(partial y) (x, y) != 0)
+      &<==> cases((x, y) in SS^1, y != 0)
+    $
+    on a $(x, y) in SS^1 without {(1, 0), (-1, 0)}$. On peut donc appliquer le @thm-fonctions-implicites, au voisinage $V$ de $x$, $SS^1$ est le graphe d'une application $fun(phi, V, RR)$.
+    De plus on a
+    $ forall x in V, x^2 + phi(x)^2 - 1 = 0 $
+    en dérivant on trouve
+    $ forall x in V, 2x + 2phi(x)phi'(x) = 0 $
+    et donc $phi'(x) = -x/phi(x)$.
+  + On considère $fun(f, RR^3, RR, x: (x, y, z), fx: x^2 + y^2 + z^2 - 1)$, $SS^2 := {(x, y, z) in RR^3 | f(x, y, z) = 0}$. Les dérivées partielles de $f$ sont
+    $ forall a in {x, y, z}, (partial f) / (partial a) (x, y, z) = 2a. $
+    On remarque que pour $(x, y, z) in RR^3$ vérifiant
+    $
+      cases((x, y, z) in SS^2, (partial f)/(partial z) (x, y, z) != 0)
+      &<==> cases((x, y, z) in SS^2, z != 0) \
+      &<==> cases((x, y, z) in SS^2, (x, y, z) != (a, b, 0) "où" (a, b) in SS^1)
+    $
+    on a $(x, y, z) in SS^2 without (SS^1 times {0})$. On peut donc appliquer le @thm-fonctions-implicites, au voisinage $V$ de $(x, y)$, $SS^2$ est le graphe d'une application $fun(phi, V, RR)$. De plus on a
+    $ forall (x, y) in V, x^2 + y^2 + phi(x, y)^2 - 1 = 0 $
+    en dérivant par rapport à $x$ on trouve
+    $ forall (x, y) in V, 2x + 2 (partial f) / (partial x) (x, y) phi(x, y) = 0 $
+    donc $(partial f)/(partial x) (x, y) = -x/phi(x, y)$, et en dérivant par rapport à $y$ on trouve
+    $ forall (x, y) in V, 2y + 2 (partial f) / (partial y) (x, y) phi(x, y) = 0 $
+    donc $(partial f)/(partial y) (x, y) = -y/phi(x, y)$.
+])
+
+#pagebreak()
+
+= Sous-variétés de $RR^n$
+
+== Sous-variétés
+
+#definition([
+  Soit $X$ une partie de $RR^n$.
+  On dit que $X$ est une _sous-variété de $RR^n$ de classe $C^k$ et de dimension $d in NN$_, si pour tout $x in X$ il existe un voisinage ouvert $V$ de $x$ dans $RR^n$ et un $C^k$-difféomorphisme $phi$ d'un ouvert $U$ de $RR^n$ dans $V$, tels que
+    $ V sect X = phi(U sect (RR^d times {0})). $
+  On appelle _codimension_ de $X$ l'entier $n - d$.
+])
+
+#remark([
+  Une sous-variété de dimension 1 est une _courbe_, une sous-variété de dimension 2 est une _surface_, une sous-variété de dimension $n - 1$ (codimension 1) est une _hypersurface_
+])
+
+#examples([
+  + Une courbe dans $RR^2$ est difféomorphe à un segment.
+  + On considère le cercle $SS^1$, on pose $U' := ]0, +oo[ times ]-pi, pi[$, $V = RR^2 without {]-oo, 0] times {0}}$, ainsi que $fun(psi, U', V, x: (r, theta), fx: r (cos(theta), sin(theta)))$ qui est un difféomorphisme de classe $C^oo$. On a
+    $ V sect SS^1 &= SS^1 without {(-1, 0)} \
+      &= psi({1} times bracket.r -pi, pi bracket.l) \
+      &= psi(U' sect ({1} times RR)) $
+    on prend alors $U: ]-pi, pi[ times ]0, +oo[$ et $fun(phi, U, V, x: (theta, r), fx: psi(r+1, theta))$, donc $SS^1$ est bien une sous-variété de $RR^2$ de classe $C^oo$ et de dimension 1.
+])
+

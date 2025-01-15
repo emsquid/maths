@@ -68,10 +68,14 @@
     $(#name _#index)_(#index in NN)$
   } else {
     $(#name _#index)_(#index >= #start)$
-  } 
+  }
 )
 #let borel(U) = $cal(B)(#U)$
 #let underbraced(body, text) = $attach(limits(underbrace(#body)), b: #text)$
+// TODO
+// #let partial(f, x) = (
+//   $(partial #f)/(partial #x)$
+// )
 
 
 #let maths(
@@ -169,9 +173,7 @@
       }
       #v(0pt)
       #if date {
-        text(size: 13pt)[#lower(
-            datetime.today().display("[day] [month repr:long] [year]"),
-          )]
+        text(size: 13pt)[#lower(datetime.today().display("[day] [month repr:long] [year]"))]
       }
     ],
   )
