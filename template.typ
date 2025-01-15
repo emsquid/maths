@@ -9,6 +9,14 @@
   breakable: false,
   counter: coursecounter,
 )
+#let exampleblock = mathblock.with(
+  breakable: true,
+  counter: coursecounter,
+  bodyfmt: body => {
+    set enum(numbering: "1.a.i.A.")
+    body
+  },
+)
 #let exercisecounter = rich-counter(identifier: "ex", inherited_levels: 0)
 #let exerciseblock = mathblock.with(
   breakable: false,
@@ -21,8 +29,8 @@
 #let lemma = courseblock(blocktitle: "Lemme")
 #let corollary = courseblock(blocktitle: "Corollaire")
 #let proposition = courseblock(blocktitle: "Proposition")
-#let example = courseblock(blocktitle: "Exemple")
-#let examples = courseblock(blocktitle: "Exemples")
+#let example = exampleblock(blocktitle: "Exemple")
+#let examples = exampleblock(blocktitle: "Exemples")
 #let remark = courseblock(blocktitle: "Remarque")
 #let proof = proofblock(prefix: [_Démonstration_.])
 
@@ -55,8 +63,16 @@
 #let transpose(M) = $#M^upright(T)$
 #let ind(E) = $bb(1)_#E$
 #let sca(x, y) = $angle.l #x, #y angle.r$
-#let seq(name, index: "n", start: 1) = $(#name _#index)_(#index >= #start)$
+#let seq(name, index: "n", start: none) = (
+  if start == none {
+    $(#name _#index)_(#index in NN)$
+  } else {
+    $(#name _#index)_(#index >= #start)$
+  } 
+)
 #let borel(U) = $cal(B)(#U)$
+#let underbraced(body, text) = $attach(limits(underbrace(#body)), b: #text)$
+
 
 #let maths(
   title: none,
@@ -112,7 +128,7 @@
   set heading(numbering: "1.")
 
   // Enum options
-  set enum(numbering: "1.a.i.A.")
+  set enum(numbering: "(1.a.i.A)")
 
   // Paragraph options
   set par(justify: true)
