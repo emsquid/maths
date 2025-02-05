@@ -229,7 +229,9 @@ Se référer au cours de _Probabilités_ de deuxième année.
     integral_(A_+) f - g dif lambda &= mu_f (A_+) - mu_g (A_+) = 0 = integral_(A_-) f - g dif lambda
   $
   de plus $A := {x in RR | abs(f(x) - g(x)) > 0} = A_+ union A_-$, on en déduit
-  $ integral_A abs(f - g) dif lambda = integral_A (f - g)ind(A_+) + (g - f)ind(A_-) dif lambda = 0 $
+  $
+    integral_A abs(f - g) dif lambda = integral_A (f - g)ind(A_+) + (g - f)ind(A_-) dif lambda = 0
+  $
   donc $f - g = 0$ presque partout et $f = g$ presque partout.
 
 
@@ -240,7 +242,7 @@ Se référer au cours de _Probabilités_ de deuxième année.
   title: "Loi uniforme",
   [
     Soit $c, d in RR$ avec $c < d$. Alors la fonction $fun(f, RR, RR, x:x, fx: (ind([c, d])(x))/(d - c))$ est une densité de probabilité. En particulier, pour tout $[a, b] subset [c, d]$
-    $ mu_f ([a, b]) = integral_[a, b] f(x) dif lambda x = (b-a) / (d-c). $
+    $ mu_f ([a, b]) = integral_[a, b] f(x) dif lambda(x) = (b-a) / (d-c). $
     On note la probabilité associée $cal(U)([c, d])$.
   ],
 )
@@ -321,7 +323,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 
 #pagebreak()
 
-= Variables et vecteurs aléatoires
+== Variables et vecteurs aléatoires
 
 #definition([
   Soit $(Omega, cal(F))$ un espace probabilisable. On appelle _vecteur aléatoire_ une application borélienne $fun(X, (Omega, cal(F)), (RR^d, borel(RR^d)))$. Dans le cas $d = 1$, on dit que $X$ est une _variable aléatoire_.
@@ -350,10 +352,10 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 
 #proof([
   + On remarque que pour tout $t in RR$ on a $S^(-1)(]-oo, t]) = sect.big_(n in NN) X^(-1)(]-oo, t])$ et que l'on peut écrire de la même manière pour $I$.
-  + On remarque que $X = lim_(n->+oo) X_n = limsup_(n->+oo) X_n = liminf_(n->+oo) X_n$.
+  + On remarque que $X = lim_(n->+oo) X_n = limsup_(n->+oo) X_n = inf_(m->+oo) (sup_(n >= m) X_n)$.
 ])
 
-== Loi d'un vecteur aléatoire
+=== Loi d'un vecteur aléatoire
 
 #proposition([
   Soit $(Omega, cal(F), PP)$ un espace probabilisé et $fun(X, Omega, RR^d)$ un vecteur aléatoire.
@@ -368,24 +370,262 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 #definition([
   Soit $(Omega, cal(F), PP)$ un espace probabilisé et $fun(X, Omega, RR^d)$ un vecteur aléatoire. On appelle _atomes de X_, noté $cal(V)_X$, l'ensemble
   $ cal(V)_X := {x in RR^d | PP_X ({x}) > 0}. $
-  
+
 ])
 
 #example(
   title: "Loi de Bernoulli",
   [
     On considère $(Omega, cal(F), PP)$ avec $Omega = RR$, $cal(F) = borel(RR)$ et $PP$ la mesure uniforme sur $[0, 1]$. On prend $X = ind([0, p])$ avec $p in [0, 1]$. Soit $A in borel(RR)$, alors
-    $ PP_X (A) &= PP(X^(-1) (A)) = PP(X^(-1)(A sect {0})) + PP(X^(-1)(A sect {1})) \
-      &= delta_0 (A) PP(X^(-1)(0)) + delta_1 (A) PP(X^(-1)(1)) = delta_0 (A) (1 - p) + delta_1 (A) p $
+    $
+      PP_X (A) &= PP(X^(-1) (A)) = PP(X^(-1)(A sect {0})) + PP(X^(-1)(A sect {1})) \
+      &= delta_0 (A) PP(X^(-1)(0)) + delta_1 (A) PP(X^(-1)(1)) = delta_0 (A) (1 - p) + delta_1 (A) p
+    $
     donc $PP_X = delta_0 (1-p) + delta_1 p$.
   ],
 )
 
 #proposition([
   Soit $(Omega, cal(F), PP)$ un espace probabilisé et $fun(X = (X_1, ..., X_d), Omega, RR^d)$ un vecteur aléatoire. Si $X$ admet une densité $fun(f, RR^d, RR_+)$, alors les variables aléatoires $X_1, ..., X_d$ admettent des densités $fun(f_1","... "," f_d, RR, RR_+)$ avec
-  $ forall i in {1, ..., d}, f_i (x) := integral_(RR^(d-1)) f(x_1, ..., x_(i-1), x, x_(i+1), ..., x_d) dif lambda(x_1, ..., x_(i-1), x_(i+1), ..., x_n). $
+  $
+    forall i in {1, ..., d}, f_i (x) := integral_(RR^(d-1)) f(x_1, ..., x_(i-1), x, x_(i+1), ..., x_d) dif lambda(x_1, ..., x_(i-1), x_(i+1), ..., x_n).
+  $
 ])
 
 #proof([
   Il suffit d'appliquer le théorème de Fubini.
+])
+
+== Fonction de répartition
+
+#definition([
+  Soit $mu$ une mesure de probabilité sur $(RR, borel(RR))$. On appelle _fonction de répartition_, notée $F_mu$, la fonction $fun(F_mu, RR, RR_+, x: t, fx: mu(]-oo, t]))$.
+])
+
+#definition([
+  Soit $(RR, borel(RR), PP)$ un espace probabilisé, et $X$ une variable aléatoire. On appelle _fonction de répartition de $X$_, notée $F_X$, la fonction de répartition liée à $PP_X$.
+])
+
+#proposition([
+  Soit $(RR, borel(RR), PP)$ un espace probabilisé, et $fun(X\, Y, RR, RR)$ deux variables aléatoires. Alors $X$ et $Y$ ont la même loi si et seulement si elles ont la même fonction de répartition.
+])
+
+#proof([
+  #linebreak()
+  $arrow.r.double$ : Supposons que $PP_X = PP_Y$. Alors on a
+  $ forall t in RR, F_X (t) = PP_X (]-oo, t]) = PP_Y (]-oo, t]) = F_Y (t) $
+  donc $F_X = F_Y$.
+
+  $arrow.l.double$ : Supposons que $F_X = F_Y$. Alors on pose $cal(A) := {]-oo, t] | t in RR}$ qui est stable par intersection avec $sigma(cal(A)) = borel(RR)$, on pose $cal(C) := {A in borel(RR) | P_X (A) = P_Y (A)}$ qui est une classe monotone, alors d'après le théorème de la classe monotone $cal(C) = borel(RR)$. Donc $P_X = P_Y$
+])
+
+=== Reconnaitre une densité de probabilité
+
+#proposition([
+  Soit $(RR, borel(RR), PP)$ un espace probabilisé et $fun(X, RR, RR)$ une variable aléatoire.
+  Alors si la fonction de répartition de $X$ est $C^1$ par morceaux, $X$ admet une densité de probabilité définie par $f = F'_X$ si $F_X$ est dérivable et $f = 0$ sinon.
+])
+
+#proof([
+  Puisque $F_X$ est $C^k$ par morceaux, il existe une suite croissante $(a_n)_(n in ZZ)$ telle que
+  $ lim_(n->+oo) a_n = -lim_(n->-oo) a_k = +oo $
+  et pour tout $n in ZZ$, $F_X$ soit dérivable sur $]a_(n), a_(n+1)[$. Soit $n in ZZ$, alors
+  $ forall s, t in ]a_n, a_(n+1)[, integral_s^t f(x) dif x = F_X (t) - F_X (s) $
+  et par passage à la limite pour $s --> a_n$ et $t --> a_(n+1)$ on a
+  $ integral_(a_n)^(a_(n+1)) f(x) dif x = F_X (a_n) - F_X (a_(n+1)). $
+  Soit $t in RR$, alors il existe $n in ZZ$ tel que $t in ]a_n, a_(n+1)[$ et
+  $
+    integral_(-oo)^t f(x) dif x = sum_(k=-oo)^(n) integral_(a_n)^(a_(n+1)) f(x) dif x + integral_(a_n)^t f(x) dif x
+  $
+  on reconnait une somme téléscopique et on a donc
+  $
+    integral_(-oo)^t f(x) dif x = F_X (t) - underbraced(lim_(k -> -oo) F_X (a_k), =0) = F_X (t) = PP_X (]-oo, t]).
+  $
+])
+
+=== Reconnaitre une loi discrète
+
+#definition([
+  Soit $(RR, borel(RR), PP)$ un espace probabilisé et $fun(X, RR, RR)$ une variable aléatoire.
+  On appelle _saut_ de la fonction de répartition de $X$, noté $Delta_X$, la fonction définie par
+  $ forall t in RR, Delta_X (t) := F_X (t) - lim_(x -> t^-) F_X (x). $
+])
+
+#lemma([
+  Soit $(RR, borel(RR), PP)$ un espace probabilisé et $fun(X, RR, RR)$ une variable aléatoire.
+  Alors l'ensemble des points de discontinuités, noté $cal(D)_X := {t in RR | Delta_X (t) > 0 }$, est dénombrable avec
+  $sum_(t in cal(D_X)) Delta_X (t) <= 1$
+  de plus $X$ est discrète si et seulement si
+  $sum_(t in cal(D_X)) Delta_X (t) = 1$.
+])
+
+// #proof([
+//   On pose pour tout $n in NN without {0}$, $I_n := {t in RR mid(|) Delta_X (t) >= 1/n}$.
+// ])
+
+#pagebreak()
+
+= Espérance
+
+== Calculs de l'espérance
+
+=== Définition et formule de transfert
+
+#definition([
+  Soit $(Omega, cal(F), PP)$ un espace probabilisable et $fun(X, Omega, RR_d)$ un vecteur aléatoire.
+  On appelle _espérance_ de $X$, notée $EE[X]$, la valeur
+  $
+    EE[X] := integral_Omega X(omega) dif PP(omega) = integral_(RR^d) x dif PP_X (x).
+  $
+])
+
+#remark([
+  Pour que l'intégrale précédente ait du sens dans $RR$ on a besoin que :
+  - $X >= 0$ presque sûrement,
+  - $X$ soit intégrable sur $(Omega, cal(F), PP)$.
+])
+
+#theorem(
+  title: "Formule de transfert",
+  [
+    Soit $(Omega, cal(F), PP)$ un espace probabilisable, $fun(X, Omega, RR_d)$ un vecteur aléatoire et $fun(phi, RR^d, RR_+ union {+oo})$ une application mesurable. Alors
+    $
+      EE[phi(X)] = integral_Omega phi(X(omega)) dif PP(omega) = integral_(RR^d) phi(x) dif PP_X (x).
+    $
+  ],
+)
+
+#remark([
+  Pour que l'intégrale précédente ait du sens on a besoin que :
+  - $phi(X)$ soit intégrable sur $(Omega, cal(F), PP)$, c'est-à-dire que $phi$ soit intégrable sur $(RR^d, borel(RR^d), PP_X)$.
+])
+
+#proposition(
+  title: "Cas discret",
+  [
+    Soit $(Omega, cal(F), PP)$ un espace probabilisable, $fun(X, Omega, RR_d)$ un vecteur aléatoire et $fun(phi, RR^d, RR_+ union {+oo})$ une application mesurable. Alors
+    $ EE[phi(X)] = sum_(omega in cal(V_X)) phi(omega) PP(X = omega). $
+  ],
+)
+
+#proposition(
+  title: "Cas à densité",
+  [
+    Soit $(Omega, cal(F), PP)$ un espace probabilisable, $fun(X, Omega, RR_d)$ un vecteur aléatoire à densité $fun(f, RR^d, RR_+)$ et $fun(phi, RR^d, RR_+ union {+oo})$ une application mesurable. Alors
+    $ EE[phi(X)] = integral_(RR^d) phi(x) f(x) dif lambda(x). $
+  ],
+)
+
+=== Variance
+
+#definition([
+  Soit $(Omega, cal(F), PP)$ un espace probabilisable et $fun(X, Omega, RR_d)$ un vecteur aléatoire.
+  On appelle _variance_ de $X$, notée $V(X)$, la valeur
+  $ V(X) := EE[(X - EE[X])^2]. $
+])
+
+#proposition([
+  Soit $(Omega, cal(F), PP)$ un espace probabilisable et $fun(X, Omega, RR_d)$ un vecteur aléatoire.
+  Alors la variance de $X$ vérifie les propriétés suivantes :
+  + $V(X)$ ne dépend que de $X$.
+  + $V(X) >= 0$, avec égalité si et seulement si $X$ est constante.
+  + $forall a, b in RR, V(a X + b) = a^2 V(X)$.
+  + $V(X) = EE[X^2] - EE[X]^2$.
+])
+
+=== Covariance
+
+#definition([
+  Soit $(Omega, cal(F), PP)$ un espace probabilisable et $fun(X\, Y, Omega, RR_d)$ deux vecteurs aléatoires.
+  On appelle _covariance_ de $X$ et $X$, notée $"Cov"(X, Y)$, la valeur
+  $ "Cov"(X, Y) := EE[(X - EE[X])(Y - EE[Y])]. $
+])
+
+#proposition([
+  Soit $(Omega, cal(F), PP)$ un espace probabilisable et $fun(X\, Y, Omega, RR_d)$ deux vecteurs aléatoires.
+  Alors la covariance vérifie les propriétés suivantes :
+  + $"Cov"$ est bilinéaire symetrique.
+  + $"Cov"(X, X) = V(X)$.
+  + $"Cov"(X, Y) = EE[X Y] - EE[X]EE[Y]$.
+  + $"Cov"(X, Y) <= sqrt(V(X)V(Y))$, avec égalité si et seulement si $X$ et $Y$ sont en relation affine.
+  + $V(X + Y) = V(X) + V(Y) + 2 "Cov"(X, Y)$.
+])
+
+=== Concentration
+
+#definition([
+  Soit $(Omega, cal(F), PP)$ un espace probabilisable et $fun(X\, Y, Omega, RR_d)$ deux vecteurs aléatoires.
+  Alors si $"Cov"(X, Y) = 0$ on dit que $X$ et $Y$ sont _non correlées_.
+])
+
+#corollary([
+  Soit $(Omega, cal(F), PP)$ un espace probabilisable et $fun(X\, Y, Omega, RR_d)$ deux vecteurs aléatoires.
+  Alors si $X$ et $Y$ sont non-correlées, on a $V(X + Y) = V(X) + V(Y)$.
+])
+
+#definition([
+  Soit $(Omega, cal(F), PP)$ un espace probabilisable et $fun(X_1\, ...\, X_n, Omega, RR_d)$ des vecteurs aléatoires.
+  On appelle _moyenne empirique_ de $X_1, ..., X_n$, notée $overline(X)_n$, le vecteur aléatoire
+  $ overline(X)_n := 1 / n sum_(k=1)^n X_k. $
+])
+
+#proposition([
+  Soit $(Omega, cal(F), PP)$ un espace probabilisable et $fun(X_1\, ...\, X_n, Omega, RR_d)$ des vecteurs aléatoires. Alors l'espérance de $overline(X)_n$ est donnée par
+  $ EE[overline(X)_n] = 1 / n sum_(k=1)^n EE[X_k] $
+  et sa variance par
+  $ V(overline(X)_n) = 1 / (n^2) sum_(k=1)^n V(X_k) $
+])
+
+#proposition(
+  title: "Inégalité de Markov et de Bienaymé-Chebychev",
+  [
+    Soit $(Omega, cal(F), PP)$ un espace probabilisable et $fun(X, Omega, RR)$ une variable aléatoire.
+    + Si $X >= 0$ presque sûrement, alors on a
+      $ forall epsilon > 0, PP(X > epsilon) <= EE[X] / epsilon. $
+    + Si $X$ est intégrable, alors on a
+      $ forall epsilon > 0, PP(abs(X - EE[X]) > epsilon) <= V(X) / epsilon^2. $
+  ],
+)
+
+#proof([
+  #linebreak()
+  + Soit $epsilon > 0$, on remarque que l'on a toujours l'inégalité
+    $ epsilon ind({X >= epsilon}) <= X $
+    par passage à l'espérance on trouve
+    $ epsilon EE[ind({X >= epsilon})] <= EE[X] $
+    ce qui donne bien l'inégalité de Markov.
+  + On applique l'inégalité de Markov à $(X - EE[X])^2$.
+])
+
+#theorem(
+  title: "Inégalité de Jensen",
+  [
+    Soit $(Omega, cal(F), PP)$ un espace probabilisable, $fun(X, Omega, RR)$ une variable aléatoire intégrable et $fun(phi, RR, RR)$ une fonction convexe bornée inférieurement.
+    Alors
+    $ phi(EE[X]) <= EE[phi(X)]. $
+  ],
+)
+
+#theorem(
+  title: "Inégalité de Hoeffding",
+  [
+    Soit $(Omega, cal(F), PP)$ un espace probabilisable et $fun(X_1\, ...\, X_n, Omega, RR)$ des variables aléatoires indépendantes de sorte que pour tout $k in {1, ..., n}$, il existe $a_k, b_k in RR$ tels que $a_k <= X_k <= b_k$ presque sûrement.
+    Si on note $S_n := X_1 + ... + X_n$, alors
+    $
+      forall t > 0, max(PP(S_n - EE[S_n] >= t), PP(S_n - EE[S_n] < t)) < exp(-(t^2)/(sum_(k=1)^n (b_k - a_k)^2)).
+    $
+  ],
+)
+
+== Application au calcul de lois
+
+=== Méthode de la fonction muette
+
+#proposition(title: "Méthode", [
+  Soit $(Omega, cal(F), PP)$ un espace probabilisable et $fun(X, Omega, RR_d)$ un vecteur aléatoire de densité $fun(f, RR^d, RR_+)$.
+  Alors pour toute fonction borélienne positive
+  $ EE[h(X)] = integral_(RR^d) h(x) f(x) dif lambda(x) $
+  en particulier pour tout $A in cal(F)$ en prenant $h := ind(A)$ on trouve
+  $ PP(X in A) = EE[ind(A)(X)] = integral_A f(x) dif lambda(x). $
+  ce qui montre que $X$ est de densité $f$.
 ])

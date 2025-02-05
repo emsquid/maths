@@ -176,9 +176,13 @@
     on a $(x, y, z) in SS^2 without (SS^1 times {0})$. On peut donc appliquer le @thm-fonctions-implicites, au voisinage $V$ de $(x, y)$, $SS^2$ est le graphe d'une application $fun(phi, V, RR)$. De plus on a
     $ forall (x, y) in V, x^2 + y^2 + phi(x, y)^2 - 1 = 0 $
     en dérivant par rapport à $x$ on trouve
-    $ forall (x, y) in V, 2x + 2 (partial f) / (partial x) (x, y) phi(x, y) = 0 $
+    $
+      forall (x, y) in V, 2x + 2 (partial f) / (partial x) (x, y) phi(x, y) = 0
+    $
     donc $(partial f)/(partial x) (x, y) = -x/phi(x, y)$, et en dérivant par rapport à $y$ on trouve
-    $ forall (x, y) in V, 2y + 2 (partial f) / (partial y) (x, y) phi(x, y) = 0 $
+    $
+      forall (x, y) in V, 2y + 2 (partial f) / (partial y) (x, y) phi(x, y) = 0
+    $
     donc $(partial f)/(partial y) (x, y) = -y/phi(x, y)$.
 ])
 
@@ -191,7 +195,7 @@
 #definition([
   Soit $X$ une partie de $RR^n$.
   On dit que $X$ est une _sous-variété de $RR^n$ de classe $C^k$ et de dimension $d in NN$_, si pour tout $x in X$ il existe un voisinage ouvert $V$ de $x$ dans $RR^n$ et un $C^k$-difféomorphisme $phi$ d'un ouvert $U$ de $RR^n$ dans $V$, tels que
-    $ V sect X = phi(U sect (RR^d times {0})). $
+  $ V sect X = phi(U sect (RR^d times {0})). $
   On appelle _codimension_ de $X$ l'entier $n - d$.
 ])
 
@@ -201,10 +205,179 @@
 
 #examples([
   + Une courbe dans $RR^2$ est difféomorphe à un segment.
+  + Un ouvert de $RR^n$ est une sous-variété de dimension $n$.
   + On considère le cercle $SS^1$, on pose $U' := ]0, +oo[ times ]-pi, pi[$, $V = RR^2 without {]-oo, 0] times {0}}$, ainsi que $fun(psi, U', V, x: (r, theta), fx: r (cos(theta), sin(theta)))$ qui est un difféomorphisme de classe $C^oo$. On a
-    $ V sect SS^1 &= SS^1 without {(-1, 0)} \
+    $
+      V sect SS^1 &= SS^1 without {(-1, 0)} \
       &= psi({1} times bracket.r -pi, pi bracket.l) \
-      &= psi(U' sect ({1} times RR)) $
+      &= psi(U' sect ({1} times RR))
+    $
     on prend alors $U: ]-pi, pi[ times ]0, +oo[$ et $fun(phi, U, V, x: (theta, r), fx: psi(r+1, theta))$, donc $SS^1$ est bien une sous-variété de $RR^2$ de classe $C^oo$ et de dimension 1.
 ])
 
+#definition([
+  Soit $U$ un ouvert de $RR^n$ et $fun(f, U, RR^p)$ une application de classe $C^k$.
+  On dit que $f$ est une _submersion_ en $x_0 in U$ si $dif_x_0 f$ est surjective.
+])
+
+#theorem([
+  Soit $X$ une partie de $RR^n$.
+  Alors $X$ est une sous-variété de $RR^n$ classe $C^k$ et de dimension $d in {0, ..., n}$ si et seulement si pour tout $a in X$, il existe un voisinage ouvert $V$ de $a$ dans $RR^n$ et une submersion en $a$ $fun(f, V, RR^(n-d))$ de classe $C^k$ vérifiant $V sect X = f^(-1)(f(a))$.
+])
+
+#proof([
+  #linebreak()
+  $arrow.r.double$ : Supposons que $X$ est une sous-variété de $RR^n$ de classe $C^k$ et de dimension $d$.
+  Soit $a in X$, alors il existe un voisinage ouvert $V$ de $a$ et un $C^k$-difféomorphisme $phi$ d'un ouvert $U$ de $RR^n$ dans $V$, tels que
+  $ V sect X = phi(U sect (RR^d times {0})). $
+  On écrit $phi^(-1) = (g_1, ..., g_d, f_1, ..., f_(n - d))$, alors
+  $ V sect X = {x in V | f_1 (x) = ... = f_(n-d)(x) = 0}. $
+  On pose $f := (f_1, ..., f_(n-d))$, puisque $phi$ est un difféomorphisme on en déduit que $dif_a f$ est surjective, donc $f$ est une submersion en $a$.
+
+  $arrow.l.double$ : Supposons que les hypothèses soient vérifiées.
+  Sans perte de généralité on suppose que $f(a) = 0$ et que $det("Jac"_f (a)) != 0$.
+  On pose $fun(psi, V, RR^n)$ définie par
+  $
+    psi(x_1, ..., x_n) = (x_1 - a_1, ..., x_d - a_d, f_1 (x_(d+1)), ..., f_(n-d)(x_n))
+  $
+  alors $det("Jac"_psi (a)) = det("Jac"_f (a)) != 0$, quitte à restreindre $V$, $psi$ est un $C^k$-difféomorphisme de $V$ sur $U := psi(V)$. En prenant $phi := psi^(-1)$, on a bien
+  $ V sect X = phi(U sect (RR^d times {0})). $
+])
+
+#example([
+  On considère le cercle $SS^2$ décrit par $fun(f, RR^3, RR, x:(x, y, z), fx: x^2 + y^2 + z^2)$.
+  Alors $f$ est de classe $C^k$ sur $RR^3$ et $det("Jac"_f) != 0$ sur $SS^2$, donc $f$ est une submersion en tout point de $SS^2$. On en déduit que $SS^2$ est une sous-variété de $RR$ de classe $C^k$ et de dimension $3 - 1 = 2$.
+])
+
+== Espace tangent à une sous-variété
+
+#definition([
+  Soit $X$ une sous-variété de $RR^n$ de classe $C^k$ et de dimension $d$, $a in X$ un point et $v$ un vecteur de $RR^n$.
+  On dit que $v$ est _tangent_ à $X$ en $a$ s'il existe $epsilon > 0$ et une courbe $fun(gamma, bracket.r -epsilon\, epsilon bracket.l, RR^n)$ de classe $C^k$ vérifiant :
+  + $gamma(0) = a$,
+  + $gamma'(0) = v$,
+  + $im(gamma) subset X$.
+  On appelle _espace tangent_ à $X$ en $a$, noté $T_a X$, l'ensemble des vecteurs tangents à $X$ en $a$.
+])
+
+#examples([
+  Soit $X$ une sous-variété de $RR^n$ de classe $C^k$ et de dimension $d$ et $a in X$ un point.
+  + Le vecteur nul est tangent à $X$ en tout point, avec $gamma: t |-> a$.
+  + Pour tout vecteur $v$ tangent à $X$ en $a$, pour tout $lambda in RR, lambda v$ est tangent à $X$ en $a$.
+  + Si $X$ est un ouvert de $RR^n$, alors pour tout $v in RR^n$, $v$ est tangent à $X$ en $a$.
+  + Si $X$ est un point, alors le seul vecteur tangent à $X$ en $a$ est $0$.
+])
+
+#theorem([
+  Soit $X$ une sous-variété de $RR^n$ classe $C^k$ et de dimension $d$ et $a in X$ un point.
+  Alors l'espace tangent $T_a X$ est un espace vectoriel de dimension $d$ et on a les caractérisations :
+  + S'il existe un voisinage ouvert $V$ de $a$ et un $C^k$-difféomorphisme $phi$ d'un ouvert $U$ de $RR^n$ dans $V$ vérifiant $V sect X = phi(U sect (RR^d times {0}))$, alors $T_a X = dif_(phi^(-1)(a)) phi (RR^d times {0})$.
+  + S'il existe un voisinage ouvert $V$ de $a$ et une submersion en $a$ $fun(f, V, RR^(n-d))$ de classe $C^k$ vérifiant $V sect X = f^(-1)(f(a))$, alors $T_a X = ker(dif_a f)$.
+])
+
+#proof([
+  + Supposons sans perte de généralité que $phi^(-1)(a) = 0$. \
+    Soit $v in T_a X$, alors il existe $epsilon > 0$ et une courbe $fun(gamma, bracket.r -epsilon\, epsilon bracket.l, V sect X)$ de classe $C^k$ vérifiant $gamma(0) = a$ et $gamma'(0) = v$.
+    On pose $delta := phi^(-1)(gamma)$, alors on a $im(delta) subset U sect (RR^d times {0})$, $delta(0) = 0$ et
+    $ delta'(t) = dif_(gamma(t)) phi^(-1)(gamma'(t)) $
+    d'où $ delta'(0) = dif_(a) phi^(-1) (v)$ et $v = dif_(phi^(-1)(a)) phi (delta'(0))$, donc $T_a X subset dif_(phi^(-1)(a)) phi (RR^d times {0})$. \
+    Réciproquement on montre de la même manière que $dif_(phi^(-1)(a)) phi (RR^d times {0}) subset T_a X$.
+    Donc $T_a X = dif_(phi^(-1)(a)) phi (RR^d times {0})$, on en déduit que $T_a X$ est un espace vectoriel de dimension $d$.
+  + Soit $v in T_a X$, alors il existe $epsilon > 0$ et une courbe $fun(gamma, bracket.r -epsilon\, epsilon bracket.l, V sect X)$ de classe $C^k$ vérifiant $gamma(0) = a$ et $gamma'(0) = v$. Soit $t in ]-epsilon, epsilon[$, alors
+    $
+      gamma(t) in V sect X => (f compose gamma)(t) = f(a) => (f compose gamma)'(t) = 0
+    $
+    or $(f compose gamma)(t) = dif_gamma(t) f (gamma'(t))$ et $dif_a f (v) = 0$, donc $T_a X subset ker(dif _a f)$. L'égalité des dimensions entraine l'égalité des espaces.
+])
+
+#remark([
+  S'il existe un voisinage ouvert $V$ de $a$ et une submersion en $a$ $fun(f, V, RR^(n-d))$ de classe $C^k$ vérifiant $V sect X = f^(-1)(f(a))$, alors $T_a X = Vect(gradient_f_1 (a), ..., gradient_f_(n-d) (a))^perp$
+])
+
+#pagebreak()
+
+= Extrema liés
+
+// FIXME
+#theorem(
+  title: "Théorèmes des extrema liés",
+  [
+    Soit $X$ une sous-variété de $RR^n$ de classe $C^k$ et de dimension $d$, $U$ un ouvert de $RR^n$ et $fun(f, U, RR)$ une fonction de classe $C^k$. Alors s'il existe une submersion $fun(g, U, RR^(n-d))$ de classe $C^k$ et $a in RR^(n-d)$ tels que $X = g^(-1)(a)$, et si $f|_X$ admet un extremum local en $x_0 in X$, il existe des uniques $lambda_1, ..., lambda_(n-d) in RR$, appelés _multiplicateurs de Lagrange_, tels que $gradient_f (x_0) = sum_(i=1)^(n-d) lambda_i gradient_g_i (x_0)$.
+  ],
+)
+
+#proof([
+  // TODO
+])
+
+#example([
+  On cherche les extrema de la fonction $fun(f, RR^2, RR, x:(x, y), fx: x+y)$, que l'on restreint à l'ensemble $M := {(x, y) in RR^2 | x^4 + y^4 = 1}$. \
+  On remarque que $M$ est une sous-variété de $RR^2$ de classe $C^oo$, en effet $fun(f, RR^2, RR, x: (x, y), fx: x^4 + y^4)$ est une submersion en tout point de $M$. Si $f|_M$ admet un extremum local en un point $(a, b) in M$, alors il existe $lambda in RR$ tel que $gradient(f)(a, b) = lambda gradient(g)(a, b)$. On a donc le système suivant
+  $ cases(1 = lambda 4a^3, 1 = lambda 4b^3) $
+  et on en déduit que $lambda != 0$ et $a^3 = b^3 = 1/(4 lambda)$, d'où $a = b$. \
+  Comme $(a, b) in M$ on a $a^4 + b^4 = 1$, d'où $2a^4 = 1$, donc $a = b = plus.minus 1/(root(4, 2))$. On a deux extrema possibles
+  $
+    m_1 := (1 / root(4, 2), 1 / root(4, 2)) "et" m_2 := (-1 / root(4, 2), -1 / root(4, 2))
+  $
+  comme $f$ est continue et $M$ est compact (comme fermé borné de $RR^2$), $f$ admet au moins un minimum global et un maximum global, elle en a donc exactement deux : $m_1$ et $m_2$. \
+  On a $f(m_1) = -f(m_2) = 2/root(4, 2) $, donc $f$ atteint son minimum en $m_2$ et son maximum en $m_1$.
+])
+
+= Équations différentielles
+
+== Résultats fondamentaux
+
+=== Équations différentielles du premier ordre
+
+#definition([
+  Soit $U$ un ouvert de $RR times RR^n$ et $fun(f, U, RR^n)$ une fonction continue.
+  On appelle _équation différentielle d'ordre 1 dans $RR^n$_ une équation de la forme suivante :
+  $ y' = f(t, y) $
+  on dit que $t$ est la variable de temps et que $y$ est la variable d'état.
+])
+
+#definition([
+  Soit $(E)$ une équation différentielle d'ordre 1.
+  On appelle _solution_ de $(E)$ un couple de la forme $(I, y)$ où $I$ est un intervalle de $RR$ et $fun(y, I, RR^n)$ est une fonction dérivable sur $I$ vérifiant :
+  + $forall t in I, (t, y(t)) in I$,
+  + $forall t in I, y'(t) = f(t, y(t))$.
+])
+
+#remark([
+  Dans le cas où $I$ n'est pas ouvert, la dérivabilité s'entend comme la dérivabilité à droite ou à gauche (selon l'extrémité).
+])
+
+#examples([
+  + On considère l'équation différentielle d'ordre 1 donnée par $y' = y$. Le couple $(]1, 2[, t |-> e^t)$ est une solution de cette équation.
+  + L'équation donnée par $y' = y^2 + t$ est une équation différentielle d'ordre 1 sur $RR$.
+  + L'équation donnée par $y' = (y + 1)/(t ln(t))$ est une équation différentielle d'ordre 1 sur $RR$. Le couple $(]0, 1[, t |-> -1 + ln(t))$ est une solution de cette équation.
+])
+
+=== Problème de Cauchy
+
+#definition([
+  Soit $(E)$ une équation différentielle et $(t_0, y_0) in RR times RR^n$.
+  On appelle _problème de Cauchy_ avec donnée $(t_0, y_0)$ l'équation $(E)$ à laquelle on impose la condition $y(t_0) = y_0$. On dit que la condition $y(t_0) = y_0$ est la condition initiale (ou de Cauchy).
+])
+
+#example([
+  La fonction $function(y, RR, RR, t, 2e^(-t))$ est une solution de l'équation différentielle $y' = -y$ de condition initiale $y(0) = 2$.
+])
+
+#definition([
+  Soit $U$ un ouvert de $RR times RR$ et $y' = f(x, y)$ une équation différentielle d'ordre 1. Soit $M$ un point de $U$, on note $cal(D)_M$ la droite passant par $M$ et de coefficient directeur $f(M)$.
+  On appelle _champ des tangentes_ l'application $M |-> cal(D)_M$ associée à l'équation $y' = f(x, y)$.
+  On appelle _courbe intégrale_ une courbe $cal(C)$ de $RR times RR$ qui a pour tangente en chaque point $M$ la droite $cal(D)_M$ du champ des tangentes.
+])
+
+#remark([
+  Soit $(x_0, y_0) in RR times RR$. Alors $cal(D)_((x_0, y_0))$ a pour équation $y - y_0 = f(x_0, y_0)(x - y_0)$.
+])
+
+#examples([
+  + On considère l'équation différentielle $y' = 0$, ici $f equiv 0$.
+    Soit $M := (x_0, y_0) in RR times RR$. Alors $cal(D)_M$ est la droite d'équation $y = y_0$ et les courbes intégrales sont les droites $cal(D)_M$.
+  + On considère l'équation différentielle $y' = y$, ici $f(x, y) = y$.
+    Soit $M := (x_0, y_0) in RR times RR$. Alors $cal(D)_M$ est la droite d'équation $y = y_0 + y_0 (x - x_0)$.
+
+])

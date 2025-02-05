@@ -2,6 +2,7 @@
 #import "@preview/rich-counters:0.2.2": *
 #import "@preview/fletcher:0.5.2": *
 #import "@preview/outrageous:0.3.0"
+#import "@local/mathematica:0.1.0": *
 
 // Counter and blocks definitions
 #let coursecounter = rich-counter(identifier: "maths", inherited_levels: 1)
@@ -123,10 +124,12 @@
 
   // Text options
   set text(
-    font: "TeX Gyre Pagella",
+    font: "STIX Two Text",
     size: 11pt,
     lang: "fr",
   )
+
+  show math.equation: set text(font: "STIX Two Math")
 
   // Heading options
   set heading(numbering: "1.")
@@ -153,8 +156,8 @@
     block(width: 100%, inset: 0em, [#align(center)[#it]])
   }
 
-  // Unbreakable math equation
-  show math.equation.where(block: false): box
+  // // Unbreakable math equation
+  // show math.equation.where(block: false): box
 
   // Link colors
   show link: it => text(rgb(color), it)
