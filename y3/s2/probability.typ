@@ -57,7 +57,7 @@
 
   + $PP(B) = sum_(n=1)^(+oo) PP(A_n)P(B|A_n)$,
 
-  + $forall i >= 1, PP(A_i|B) = display((PP(A_i)PP(B|A_i))/(sum_(n=1)^(+oo) PP(A_n)PP(B|A_n))).$
+  + $forall i >= 1, PP(A_i|B) = (PP(A_i)PP(B|A_i)) / (sum_(n=1)^(+oo) PP(A_n)PP(B|A_n)).$
 ])
 
 #theorem(
@@ -143,7 +143,7 @@
   Soit $A$ un événement de $(Omega, cal(F), PP)$. Alors $sigma({A}) = {emptyset, A, A^c, Omega}$.
 ])
 
-== Exemples d'espace probabilisés
+=== Exemples d'espaces probabilisés
 
 #definition([
   Soit $(E, cal(O))$ un espace topologique. On appelle _tribu borélienne_ sur $E$, notée $borel(E)$, la tribu engendrée par les intervalles ouverts de $E$, c'est-à-dire $borel(E) := sigma(cal(O))$.
@@ -153,11 +153,11 @@
   Soit $sequence(mu)$ une suite de mesures de probabilité sur $(Omega, cal(F))$ et $sequence(lambda)$ une suite de nombres réels positifs telle que $sum_(n=1)^(+oo) lambda_n = 1$. Alors $mu = sum_(n=1)^(+oo) lambda_n mu_n$ est une mesure de probabilité sur $(Omega, cal(F))$.
 ])
 
-=== Univers $Omega = NN$
+==== Univers $Omega = NN$
 
 Se référer au cours de _Probabilités_ de deuxième année.
 
-=== Univers $Omega = RR$
+==== Univers $Omega = RR$
 
 #example(
   title: "Mesure de Dirac",
@@ -263,11 +263,11 @@ Se référer au cours de _Probabilités_ de deuxième année.
   ],
 )
 
-=== Univers $Omega = RR^d$
+==== Univers $Omega = RR^d$
 
 On peut étendre les exemples de $RR$, ainsi que les définitions de densité et de mesures de probabilité associée.
 
-== Classe monotone
+=== Classe monotone
 
 #definition([
   Soit $cal(C)$ une famille de parties d'un ensemble $Omega$. On dit que $cal(C)$ est une _classe monotone_ si elle vérifie :
@@ -422,7 +422,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 
 #proposition([
   Soit $(RR, borel(RR), PP)$ un espace probabilisé et $func(X, RR, RR)$ une variable aléatoire.
-  Alors si la fonction de répartition de $X$ est $C^1$ par morceaux, $X$ admet une densité de probabilité définie par $f = F'_X$ si $F_X$ est dérivable et $f = 0$ sinon.
+  Alors si la fonction de répartition de $X$ est $C^1$ par morceaux, $X$ admet une densité de probabilité définie pour tout $x in RR$ par $f(x) = F'_X (x)$ si $F_X$ est dérivable en $x$ et $f(x) = 0$ sinon.
 ])
 
 #proof([
@@ -630,8 +630,6 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
     ce qui montre que $X$ est de densité $f$.
   ],
 )
-#set-maths()
-
 
 #pagebreak()
 
@@ -650,8 +648,6 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 #lemma([
   Soit $(Omega, cal(F), PP)$ un espace probabilisable, et $func(X, Omega, RR^p)$ et $func(Y, Omega, RR^q)$ deux vecteurs aléatoires.
   Alors les assertions suivantes sont équivalentes :
-  #set-maths()
-
   + $X$ et $Y$ sont indépendants.
   + $PP_((X, Y)) = PP_X times.circle PP_Y$.
   + Pour toutes fonctions boréliennes positives $g$ et $h$, $EE[g(X)h(Y)] = EE[g(X)]EE[h(Y)]$
@@ -671,12 +667,10 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 
   (2) $=>$ (3) : Soit $g$ et $h$ deux fonctions boréliennes positives.
   Alors par la formule de transfert, en posant $func(phi, RR^p times RR^q, RR_+, (x, y), g(x)h(y))$, on a
-  #set-maths()
 
   $
     EE[phi(X, Y)] &= integral_(RR^p times RR^q) phi(x, y) dif PP_((X, Y))(x, y) \
     &= integral_(RR^p times RR^q) g(x)h(y) dif (PP_X times.circle PP_Y)(x, y)
-#set-maths()
   $
   en appliquant Fubini, on trouve
   $
@@ -690,7 +684,6 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
   Il suffit de prendre $g := ind(A)$ et $h := ind(B)$ pour obtenir l'indépendance.
 ])
 
-#set-maths()
 
 #proposition([
   Soit $(Omega, cal(F), PP)$ un espace probabilisable.
@@ -717,8 +710,6 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
   Soit $A in borel(RR^q)$ et $B in borel(RR^q)$ alors
   $
     PP(X in A, Y in B) &= sum_(x in cal(V)_X sect A) sum_(y in cal(V)_Y sect B) P(X = x, Y = y) \
-#set-maths()
-
     &= sum_(x in cal(V)_X sect A) sum_(y in cal(V)_Y sect B) f(x)g(y) \
     &= sum_(x in cal(V)_X sect A) f(x) sum_(y in cal(V)_Y sect B) g(y)
   $
@@ -730,8 +721,6 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
     &= PP(X in A)PP(X in B)
   $
   donc $X$ et $Y$ sont indépendants.
-  #set-maths()
-
 ])
 
 === Critère d'indépendance pour des vecteurs à densité
@@ -753,8 +742,6 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
     puisque $X$ et $Y$ sont indépendantes on a
     $
       EE[phi(X, Y)] &= integral_(RR^p times RR^q) phi(x, y) dif PP_X (x) times.circle PP_Y (y) \
-#set-maths()
-
       &= integral_(RR^q) integral_(RR^p) phi(x, y) dif PP_X (x) dif PP_Y (y)
     $
     et puisque $X$ et $Y$ admettent des densités
@@ -763,7 +750,6 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
       &= integral_(RR^(p + q)) phi(x, y) f_X (x) f_Y (y) dif lambda(x, y).
     $
     Donc $(X, Y)$ admet bien une densité $(x, y) |-> f_X (x) f_Y (y)$.
-  #set-maths()
 
   + La réciproque se montre une nouvelle fois en appliquant le théorème de Fubini // TODO
 
@@ -776,8 +762,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 #proposition([
   Soit $(Omega, cal(F), PP)$ un espace probabilisable, et $func(X\, Y, Omega, NN)$ deux variables aléatoires discrètes indépendantes à valeurs entières.
   On pose $S := X + Y$. Alors on a
-  $ forall n in NN, PP(S = n) = sum_(k in NN) PP(X = k)P(Y = n - k) $
-])
+  $ forall n in NN, PP(S = n) = sum_(k in NN) PP(X = k)P(Y = n - k) $])
 
 === Cas de variables aléatoires à densité
 
