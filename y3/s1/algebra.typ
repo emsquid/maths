@@ -8,8 +8,8 @@
 
 #definition([
   Soit $KK$ un corps commutatif. On appelle _espace vectoriel sur $KK$_, ou _$KK$-espace vectoriel_, un ensemble $E$ muni de deux lois
-  - une loi de composition interne $fun(+, E times E, E)$, telle que le couple $(E, +)$ forme un groupe commutatif,
-  - et d'une loi de composition externe $fun(dot, KK times E, E)$, vérifiant les propriétés suivantes
+  - une loi de composition interne $func(+, E times E, E)$, telle que le couple $(E, +)$ forme un groupe commutatif,
+  - et d'une loi de composition externe $func(dot, KK times E, E)$, vérifiant les propriétés suivantes
     + la loi $dot$ est distributive à droite, $forall a, b in KK, forall x in E, (a + b) dot x = a dot x + b dot x$,
     + la loi $dot$ est distributive à gauche, $forall a in KK, forall x, y in E, a dot (x + y) = a dot x + a dot y$,
     + la loi $dot$ est associative mixte, $forall a, b in KK, forall x in E, a dot (b dot x) = (a b) dot x,$
@@ -36,7 +36,7 @@
 #definition([
   Soit $E$ un $KK$-espace vectoriel et $x_1, ..., x_n in E$. On appelle _sous-espace vectoriel engendré par $x_1, ..., x_n$_, l'ensemble des combinaisons linéaires de $x_1, ..., x_n$, noté
   $
-    "Vect"(x_1, ..., x_n) := {
+    span(x_1, ..., x_n) := {
       a_1 dot x_1 + ... + a_n dot x_n | a_1, ..., a_n in KK
     }.
   $
@@ -66,7 +66,7 @@
 ])
 
 #definition([
-  Soit $E$ un $KK$-espace vectoriel et $x_1, ..., x_n in E$. On dit que $(x_1, ..., x_n)$ est une _famille génératrice_ si $"Vect"(x_1, ..., x_n) = E$, c'est-à-dire
+  Soit $E$ un $KK$-espace vectoriel et $x_1, ..., x_n in E$. On dit que $(x_1, ..., x_n)$ est une _famille génératrice_ si $span(x_1, ..., x_n) = E$, c'est-à-dire
   $
     forall x in E, exists a_1, ..., a_n in KK, a_1 dot x_1 + ... + a_1 dot x_n = x.
   $
@@ -119,7 +119,7 @@
 == Applications linéaires
 
 #definition([
-  Soit $E$ et $F$ deux $KK$-espaces vectoriels, et $fun(u, E, F)$ une application. On dit que $u$ est _linéaire_, si elle vérifie
+  Soit $E$ et $F$ deux $KK$-espaces vectoriels, et $func(u, E, F)$ une application. On dit que $u$ est _linéaire_, si elle vérifie
   $
     forall a, b in KK, forall x, y in E, u(a dot x + b dot y) = a dot u(
       x
@@ -133,31 +133,31 @@
 ])
 
 #definition([
-  Soit $E$ et $F$ deux $KK$-espaces vectoriels, et $fun(u, E, F)$ une application linéaire.
+  Soit $E$ et $F$ deux $KK$-espaces vectoriels, et $func(u, E, F)$ une application linéaire.
   - On appelle _image_ de $u$ l'ensemble $im(u) := {u(x) | x in E}$.
   - On appelle _noyau_ de $u$ l'ensemble $ker(u) := {x in E| u(x) = 0}$.
 ])
 
 #proposition([
-  Soit $E$ et $F$ deux $KK$-espaces vectoriels, et $fun(u, E, F)$ une application linéaire.
+  Soit $E$ et $F$ deux $KK$-espaces vectoriels, et $func(u, E, F)$ une application linéaire.
   Alors $ker(u)$ et $im(u)$ sont des espaces vectoriels.
 ])
 
 #definition([
-  Soit $E$ et $F$ deux $KK$-espaces vectoriels, et $fun(u, E, F)$ une application linéaire.
+  Soit $E$ et $F$ deux $KK$-espaces vectoriels, et $func(u, E, F)$ une application linéaire.
   On appelle _rang_ de $u$, noté $"rg"(u)$, la dimension de $im(u)$.
 ])
 
 #theorem(
   title: "du rang",
   [
-    Soit $E$ et $F$ deux $KK$-espaces vectoriels, et $fun(u, E, F)$ une application linéaire. Alors
+    Soit $E$ et $F$ deux $KK$-espaces vectoriels, et $func(u, E, F)$ une application linéaire. Alors
     $ dim(E) = dim(im(u)) + dim(ker(u)). $
   ],
 )
 
 #corollary([
-  Soit $E$ et $F$ deux $KK$-espaces vectoriels, et $fun(u, E, F)$ une application linéaire. Alors les énoncés suivants sont équivalents
+  Soit $E$ et $F$ deux $KK$-espaces vectoriels, et $func(u, E, F)$ une application linéaire. Alors les énoncés suivants sont équivalents
   + $u$ est bijective,
   + $u$ est injective,
   + $u$ est surjective.
@@ -166,18 +166,18 @@
 == Matrice d'une application linéaire
 
 #definition([
-  Soit $E$ et $F$ deux $KK$-espaces vectoriels, $cal(E) = (e_1, ..., e_n)$ une base de $E$ et $cal(F)$ une base de $F$, et $fun(u, E, F)$ une application linéaire. On appelle _matrice de $u$_ dans les bases $cal(E)$ et $cal(F)$, la matrice
+  Soit $E$ et $F$ deux $KK$-espaces vectoriels, $cal(E) = (e_1, ..., e_n)$ une base de $E$ et $cal(F)$ une base de $F$, et $func(u, E, F)$ une application linéaire. On appelle _matrice de $u$_ dans les bases $cal(E)$ et $cal(F)$, la matrice
   $ [u]_cal(E)^cal(F) := ([u(e_1)]_cal(F) med dots.c med [u(e_n)]_cal(F)). $
   Si $E = F$, on notera $[u]_cal(E) := [u]_cal(E)^cal(F)$, et on remarque $cal(P)_cal(E)^cal(F) = [id]_cal(F)^cal(E)$.
 ])
 
 #proposition([
-  Soit $E, F$ et $G$ trois $KK$-espaces vectoriels, $cal(E), cal(F)$ et $cal(G)$ des bases respectives de $E, F$ et $G$, et $fun(u, E, F)$ et $fun(v, F, G)$ deux applications linéaires. Alors
+  Soit $E, F$ et $G$ trois $KK$-espaces vectoriels, $cal(E), cal(F)$ et $cal(G)$ des bases respectives de $E, F$ et $G$, et $func(u, E, F)$ et $func(v, F, G)$ deux applications linéaires. Alors
   $ [v compose u]_cal(E)^cal(G) = [v]_cal(F)^cal(G) [u]_cal(E)^cal(F). $
 ])
 
 #corollary([
-  Soit $E$ un $KK$-espace vectoriel, $cal(E)$ et $cal(F)$ deux bases de $E$, et $fun(u, E, E)$ un endomorphisme sur $E$. Alors
+  Soit $E$ un $KK$-espace vectoriel, $cal(E)$ et $cal(F)$ deux bases de $E$, et $func(u, E, E)$ un endomorphisme sur $E$. Alors
   $
     [u]_(cal(F)) = cal(P)_(cal(F))^cal(E) [u]_cal(E) cal(P)_cal(E)^(cal(F)).
   $
@@ -207,16 +207,16 @@
 ])
 
 #corollary([
-  Soit $E$ un $KK$-espace vectoriel, $cal(E)$ et $cal(F)$ deux bases de $E$, et $fun(u, E, E)$ un endomorphisme sur $E$. Alors
+  Soit $E$ un $KK$-espace vectoriel, $cal(E)$ et $cal(F)$ deux bases de $E$, et $func(u, E, E)$ un endomorphisme sur $E$. Alors
   $ det([u]_cal(E)) = det([u]_cal(F)). $
 ])
 
 #definition([
-  Soit $E$ un $KK$-espace vectoriel et $fun(u, E, E)$ un endomorphisme sur $E$. On appelle _déterminant_ de $u$, noté $det(u)$, le déterminant de la matrice de $u$ dans une base de $E$.
+  Soit $E$ un $KK$-espace vectoriel et $func(u, E, E)$ un endomorphisme sur $E$. On appelle _déterminant_ de $u$, noté $det(u)$, le déterminant de la matrice de $u$ dans une base de $E$.
 ])
 
 #proposition([
-  Soit $E$ un $KK$-espace vectoriel et $fun(u, E, E)$ un endomorphisme sur $E$. Alors $u$ est inversible si et seulement si son déterminant est non-nul.
+  Soit $E$ un $KK$-espace vectoriel et $func(u, E, E)$ un endomorphisme sur $E$. Alors $u$ est inversible si et seulement si son déterminant est non-nul.
 ])
 
 #proposition([
@@ -255,7 +255,7 @@
 
 #definition([
   Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u in cal(L)(E)$ un endomorphisme.
-  On appelle _spectre_ de $u$, noté $Sp(u)$, l'ensemble des valeurs propres de
+  On appelle _spectre_ de $u$, noté $spectrum(u)$, l'ensemble des valeurs propres de
 ])
 
 #definition([
@@ -276,7 +276,7 @@
 
 #definition([
   Soit $M in cal(M)_n (KK)$ une matrice carrée.
-  On étend toutes les définitions précédentes à $M$ en l'associant à $fun(u_M, KK^n, KK^n, x: X, fx: M X)$.
+  On étend toutes les définitions précédentes à $M$ en l'associant à $func(u_M, KK^n, KK^n, X, M X)$.
 ])
 
 
@@ -315,7 +315,7 @@
 #theorem([
   Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u in cal(L)(E)$ un endomorphisme.
   Alors $u$ est diagonalisable si et seulement si son polynôme caractéristique est scindé et si la multiplicité de chaque valeur propre en tant que racine est égale à la dimension de son espace propre associé, c'est-à-dire
-  $ chi_u = product_(lambda in Sp(u)) (X - lambda)^(dim(E_lambda (u))). $
+  $ chi_u = product_(lambda in spectrum(u)) (X - lambda)^(dim(E_lambda (u))). $
 ])
 
 = Trigonalisation
@@ -431,7 +431,7 @@
 #proposition([
   Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u in cal(L)(E)$ un endomorphisme de polynôme caractéristique scindé.
   Alors
-  $ E = plus.circle.big_(lambda in Sp(u)) N_lambda (u). $
+  $ E = plus.circle.big_(lambda in spectrum(u)) N_lambda (u). $
 ])
 
 #theorem(
@@ -544,18 +544,18 @@
 = Formes bilinéaires
 
 #definition([
-  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, E)$ une application. On dit que $Phi$ est une _forme bilinéaire_, si pour tout $x in E$, les applications $y |-> Phi(x, y)$ et $y |-> Phi(y, x)$ sont linéaires.
+  Soit $E$ un $KK$-espace vectoriel et $func(Phi, E times E, E)$ une application. On dit que $Phi$ est une _forme bilinéaire_, si pour tout $x in E$, les applications $y |-> Phi(x, y)$ et $y |-> Phi(y, x)$ sont linéaires.
 ])
 
 == Ecriture dans une base
 
 #definition([
-  Soit $E$ un $KK$-espace vectoriel, $cal(E) = (e_1, ..., e_n)$ une base de $E$ et $fun(Phi, E times E, E)$ une forme bilinéaire. On appelle _matrice_ de $Phi$ dans la base $cal(E)$, la matrice
+  Soit $E$ un $KK$-espace vectoriel, $cal(E) = (e_1, ..., e_n)$ une base de $E$ et $func(Phi, E times E, E)$ une forme bilinéaire. On appelle _matrice_ de $Phi$ dans la base $cal(E)$, la matrice
   $ [Phi]_cal(E) := (Phi(e_i, e_j))_(1 <= i, j <= n). $
 ])
 
 #proposition([
-  Soit $E$ un $KK$-espace vectoriel, $cal(E) = (e_1, ..., e_n)$ une base de $E$ et $fun(Phi, E times E, E)$ une forme bilinéaire. Alors par bilinéarité
+  Soit $E$ un $KK$-espace vectoriel, $cal(E) = (e_1, ..., e_n)$ une base de $E$ et $func(Phi, E times E, E)$ une forme bilinéaire. Alors par bilinéarité
   $
     forall x = (x_1, ..., x_n), y = (
       y_1, ..., y_n
@@ -566,7 +566,7 @@
 ])
 
 #proposition([
-  Soit $E$ un $KK$-espace vectoriel, $cal(E)$ et $cal(F)$ deux bases de $E$, et $fun(Phi, E times E, E)$ une forme bilinéaire. Alors
+  Soit $E$ un $KK$-espace vectoriel, $cal(E)$ et $cal(F)$ deux bases de $E$, et $func(Phi, E times E, E)$ une forme bilinéaire. Alors
   $
     [Phi]_(cal(F)) = transpose(cal(P)_(cal(E))^cal(F)) [
       Phi
@@ -586,7 +586,7 @@
 ])
 
 #proposition([
-  Soit $E$ un $KK$-espace vectoriel de dimension $n$. Soit $fun(u, E, KK)$ une forme linéaire, alors
+  Soit $E$ un $KK$-espace vectoriel de dimension $n$. Soit $func(u, E, KK)$ une forme linéaire, alors
   $ u = sum_(i=1)^n u(e_i) e_i^* $
   Soit $f$ un élément de $E$, alors
   $ f = sum_(i=1)^n e_i^* (f) e_i. $
@@ -597,19 +597,19 @@
 ])
 
 #definition([
-  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire. On appelle _application linéaire associée_ à $Phi$, l'application
-  $ fun(u_Phi, E, E^*, x:x, fx: (y |-> Phi(x, y))). $
+  Soit $E$ un $KK$-espace vectoriel et $func(Phi, E times E, KK)$ une forme bilinéaire. On appelle _application linéaire associée_ à $Phi$, l'application
+  $ func(u_Phi, E, E^*, x, (y |-> Phi(x, y))). $
 ])
 
 == Forme bilinéaire symétrique et forme quadratique
 
 #definition([
-  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire. On dit que $Phi$ est _symétrique_, si
+  Soit $E$ un $KK$-espace vectoriel et $func(Phi, E times E, KK)$ une forme bilinéaire. On dit que $Phi$ est _symétrique_, si
   $ forall (x, y) in E times E, Phi(x, y) = Phi(y, x). $
 ])
 
 #definition([
-  Soit $E$ un $KK$-espace vectoriel et $fun(Q, E, KK)$ une application. On dit que $Q$ est une _forme quadratique_, s'il existe une forme bilinéaire symétrique $fun(Phi, E times E, KK)$ telle que
+  Soit $E$ un $KK$-espace vectoriel et $func(Q, E, KK)$ une application. On dit que $Q$ est une _forme quadratique_, s'il existe une forme bilinéaire symétrique $func(Phi, E times E, KK)$ telle que
   $ forall x in E, Q(x) = Phi(x, x) $
   dans ce cas, on dit que $Q$ est la _forme quadratique associée_ à $Phi$.
 ])
@@ -617,7 +617,7 @@
 #proposition(
   title: "Formule de polarisation",
   [
-    Soit $E$ un $KK$-espace vectoriel, $fun(Phi, E times E, KK)$ une forme bilinéaire et $fun(Q, E, KK)$ la forme quadratique associée à $Phi$. Alors
+    Soit $E$ un $KK$-espace vectoriel, $func(Phi, E times E, KK)$ une forme bilinéaire et $func(Q, E, KK)$ la forme quadratique associée à $Phi$. Alors
     $
       forall (x, y) in E times E, Phi(x, y) = 1 / 2(
         Q(x + y) - Q(x) - Q(y)
@@ -627,34 +627,34 @@
 ) <prop-form-polar>
 
 #remark([
-  Soit $E$ un $KK$-espace vectoriel et $fun(Q, E, KK)$ une forme quadratique. Alors d'après la @prop-form-polar, $Q$ détermine une forme bilinéaire symétrique, on l'appelle _forme polaire associée_ à $Q$.
+  Soit $E$ un $KK$-espace vectoriel et $func(Q, E, KK)$ une forme quadratique. Alors d'après la @prop-form-polar, $Q$ détermine une forme bilinéaire symétrique, on l'appelle _forme polaire associée_ à $Q$.
 ])
 
 #remark([
-  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire symétrique. Alors sa matrice dans la base canonique est symétrique.
+  Soit $E$ un $KK$-espace vectoriel et $func(Phi, E times E, KK)$ une forme bilinéaire symétrique. Alors sa matrice dans la base canonique est symétrique.
 ])
 
 == Forme quadratique définie
 
 #definition([
-  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire symétrique.
+  Soit $E$ un $KK$-espace vectoriel et $func(Phi, E times E, KK)$ une forme bilinéaire symétrique.
   On dit que $Phi$ est _non-dégénérée_ si
   $ forall x in E, (forall y in E, Phi(x, y) = 0) => x = 0. $
 ])
 
 #definition([
-  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire symétrique.
+  Soit $E$ un $KK$-espace vectoriel et $func(Phi, E times E, KK)$ une forme bilinéaire symétrique.
   On dit que $Phi$ est _définie_ si
   $ forall x in E, Phi(x, x) = 0 => x = 0. $
 ])
 
 #proposition([
-  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire symétrique.
+  Soit $E$ un $KK$-espace vectoriel et $func(Phi, E times E, KK)$ une forme bilinéaire symétrique.
   Alors si $Phi$ est définie, elle est non-dégénérée.
 ])
 
 #definition([
-  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire symétrique définie.
+  Soit $E$ un $KK$-espace vectoriel et $func(Phi, E times E, KK)$ une forme bilinéaire symétrique définie.
   - On dit que $Phi$ est _définie positive_ si
     $ forall x in E without {0}, Phi(x, x) > 0. $
   - On dit que $Phi$ est _définie négative_ si
@@ -662,7 +662,7 @@
 ])
 
 #proposition([
-  Soit $E$ un $KK$-espace vectoriel et $fun(Phi, E times E, KK)$ une forme bilinéaire symétrique définie.
+  Soit $E$ un $KK$-espace vectoriel et $func(Phi, E times E, KK)$ une forme bilinéaire symétrique définie.
   Alors $Q$ est soit définie positive, soit définie négative.
 ])
 
@@ -674,7 +674,7 @@
 == Réduction d'une forme quadratique
 
 #theorem([
-  Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $fun(Q, E, KK)$ une forme quadratique.
+  Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $func(Q, E, KK)$ une forme quadratique.
   Alors il existe des formes linéaires indépendantes $f_1, ..., f_m$ sur $E$ et des éléments non-nuls $a_1, ..., a_m in KK$ tels que
   $ forall x in E, Q(x) = a_1 f_1 (x)^2 + ... + a_m f_m (x)^2. $
 ]) <thm-redu-quad>
@@ -692,7 +692,7 @@
 #theorem(
   title: "d'inertie de Sylvester",
   [
-    Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $fun(Q, E, KK)$ une forme quadratique.
+    Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $func(Q, E, KK)$ une forme quadratique.
     Alors le nombre $m$ de formes linéaires indépendantes qui interviennent dans une décomposition de $Q$ est égal au rang de la forme polaire de $Q$.
 
   ],
@@ -701,7 +701,7 @@
 #theorem(
   title: [d'inertie de Sylvester dans $RR$],
   [
-    Soit $E$ un $RR$-espace vectoriel de dimension $n$ et $fun(Q, E, RR)$ une forme quadratique.
+    Soit $E$ un $RR$-espace vectoriel de dimension $n$ et $func(Q, E, RR)$ une forme quadratique.
     Soit
     $
       Q = a_1 f_1^2 + ... + a_s f_s^2 - a_(s+1) f_(s+1)^2 - ... - a_(s+t) f_(s+t)^2
@@ -712,7 +712,7 @@
 ) <thm-sylv-r>
 
 #definition([
-  Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $fun(Q, E, KK)$ une forme quadratique.
+  Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $func(Q, E, KK)$ une forme quadratique.
   On appelle _signature_ de $Q$, le couple $(s, t)$ du @thm-sylv-r.
 ])
 
@@ -722,13 +722,13 @@
 
 #definition([
   Soit $E$ un $RR$-espace vectoriel.
-  On appelle _produit scalaire_ sur $E$, noté $sca(dot, dot)$, une forme bilinéaire symétrique définie positive.
-  Si $E$ est de dimension finie, on appelle _espace euclidien_ le couple $(E, sca(dot, dot))$.
+  On appelle _produit scalaire_ sur $E$, noté $dotproduct(dot, dot)$, une forme bilinéaire symétrique définie positive.
+  Si $E$ est de dimension finie, on appelle _espace euclidien_ le couple $(E, dotproduct(dot, dot))$.
 ])
 
 #definition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien.
-  On appelle _norme associée au produit scalaire_, l'application $fun(||dot||, E, RR_+, x: x, fx: sqrt(sca(x, x)))$.
+  Soit $(E, dotproduct(dot, dot))$ un espace euclidien.
+  On appelle _norme associée au produit scalaire_, l'application $func(||dot||, E, RR_+, x, sqrt(dotproduct(x, x)))$.
 ])
 
 == Norme d'un vecteur
@@ -736,73 +736,73 @@
 #theorem(
   title: "Inégalité de Cauchy-Schwarz",
   [
-    Soit $(E, sca(dot, dot))$ un espace euclidien.
+    Soit $(E, dotproduct(dot, dot))$ un espace euclidien.
     Alors
-    $ forall x, y in E, |sca(x, y)| <= ||x||||y|| $
+    $ forall x, y in E, |dotproduct(x, y)| <= ||x||||y|| $
     avec égalité si et seulement si les deux éléments sont liés.
   ],
 )
 
 #proposition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien.
+  Soit $(E, dotproduct(dot, dot))$ un espace euclidien.
   Alors l'application $||dot||$ est une norme.
 ])
 
 == Orthogonalité, base orthogonale et base orthonormée
 
 #definition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $x, y in E$.
-  On dit que $x$ et $y$ sont _orthogonaux_, noté $x perp y$, si $sca(x, y) = 0$.
+  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $x, y in E$.
+  On dit que $x$ et $y$ sont _orthogonaux_, noté $x perp y$, si $dotproduct(x, y) = 0$.
 ])
 
 #definition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $F$ un sous-ensemble de $E$.
+  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $F$ un sous-ensemble de $E$.
   On appelle _orthogonal_ de $F$, noté $F^perp$, l'ensemble
-  $ F^perp := {x in E | forall y in F, sca(x, y) = 0}. $
+  $ F^perp := {x in E | forall y in F, dotproduct(x, y) = 0}. $
 ])
 
 #notation([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $x in E$.
+  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $x in E$.
   On note $x^perp := {x}^perp$.
 ])
 
 #proposition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $F$ un sous-ensemble de $E$.
+  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $F$ un sous-ensemble de $E$.
   Alors $F^perp$ est un sous-espace vectoriel de $E$.
 ])
 
 #proposition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $x, y in E$. Alors
+  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $x, y in E$. Alors
   $
     x perp y <=> ||x+y||^2 = ||x||^2 + ||y||^2 <=> ||x-y||^2 = ||x||^2 + ||y||^2.
   $
 ])
 
 #proposition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $x in E without {0}$. Alors $Vect(x)^perp = x^perp$ et
-  $ E = Vect(x) plus.circle x^perp. $
+  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $x in E without {0}$. Alors $span(x)^perp = x^perp$ et
+  $ E = span(x) plus.circle x^perp. $
 ])
 
 #definition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $cal(E) = (e_1, ..., e_n)$ une base de $E$.
+  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $cal(E) = (e_1, ..., e_n)$ une base de $E$.
   - On dit que $cal(E)$ est _orthogonale_ si elle vérifie
-    $ forall i, j in {1, ..., n}, i != j => sca(e_i, e_j) = 0. $
+    $ forall i, j in {1, ..., n}, i != j => dotproduct(e_i, e_j) = 0. $
   - On dit que $cal(E)$ est _orthonormée_ si elle vérifie
-    $ forall i, j in {1, ..., n}, sca(e_i, e_j) = delta_(i, j). $
+    $ forall i, j in {1, ..., n}, dotproduct(e_i, e_j) = delta_(i, j). $
 ])
 
 #remark([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $cal(E) = (e_1, ..., e_n)$ une base orthogonale de $E$.
+  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $cal(E) = (e_1, ..., e_n)$ une base orthogonale de $E$.
   Alors la famille $(e_1/(||e_1||), ..., e_n/(||e_n||))$ est une base orthonormée de $E$.
 ])
 
 #theorem([
-  Soit $(E, sca(dot, dot))$ un espace euclidien.
+  Soit $(E, dotproduct(dot, dot))$ un espace euclidien.
   Alors il existe une base orthonormée de $E$.
 ])
 
 #proposition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $F$ un sous-espace vectoriel de $E$. Alors
+  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $F$ un sous-espace vectoriel de $E$. Alors
   + $E = F plus.circle F^perp$,
   + $dim(F^perp) = dim(E) - dim(F)$,
   + $(F^perp)^perp = F$.
@@ -811,9 +811,9 @@
 #theorem(
   title: "Procédé d'orthogonalisation de Gram-Schmidt",
   [
-    Soit $(E, sca(dot, dot))$ un espace euclidien et $(e_1, ..., e_n)$ une base de $E$.
+    Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $(e_1, ..., e_n)$ une base de $E$.
     Alors il existe une base orthonormée $(f_1, ..., f_n)$ de $E$ telle que
-    $ forall k in {1, ..., n}, Vect(e_1, ..., e_k) = Vect(f_1, ..., f_k). $
+    $ forall k in {1, ..., n}, span(e_1, ..., e_k) = span(f_1, ..., f_k). $
   ],
 )
 
@@ -821,14 +821,14 @@
   On raisonne par récurrence sur le cardinal $k$ de la famille.
   - Pour $k = 1$, on pose $f_1 := e_1/(||e_1||)$.
   - Pour $k > 1$, supposons qu'il existe une famille orthonormée $(f_1, ..., f_(k-1))$ telle que
-    $ Vect(e_1, ..., e_(k-1)) = Vect(f_1, ..., f_(k-1)) $
-    alors on pose $f'_k := e_k - sum_(i=1)^(k-1) sca(e_k, f_i) f_i$. Soit $j in {1, ..., k-1}$, alors
-    $ sca(f'_k, f_j) &= sca(e_k - sum_(i=1)^(k-1) sca(e_k, f_i) f_i, f_j) $
+    $ span(e_1, ..., e_(k-1)) = span(f_1, ..., f_(k-1)) $
+    alors on pose $f'_k := e_k - sum_(i=1)^(k-1) dotproduct(e_k, f_i) f_i$. Soit $j in {1, ..., k-1}$, alors
+    $ dotproduct(f'_k, f_j) &= dotproduct(e_k - sum_(i=1)^(k-1) dotproduct(e_k, f_i) f_i, f_j) $
     et par bilinéarité du produit scalaire
     $
-      sca(f'_k, f_j) &= sca(e_k, f_j) - sum_(i=1)^(k-1) sca(e_k, f_i) sca(f_i, f_j) \
-      &= sca(e_k, f_j) - sum_(i=1)^(k-1) sca(e_k, f_i) delta_(i, j) \
-      &= sca(e_k, f_j) - sca(e_k, f_j) = 0.
+      dotproduct(f'_k, f_j) &= dotproduct(e_k, f_j) - sum_(i=1)^(k-1) dotproduct(e_k, f_i) dotproduct(f_i, f_j) \
+      &= dotproduct(e_k, f_j) - sum_(i=1)^(k-1) dotproduct(e_k, f_i) delta_(i, j) \
+      &= dotproduct(e_k, f_j) - dotproduct(e_k, f_j) = 0.
     $
     Enfin on pose $f_k := (f'_k)/(||f'_k||)$, donc la famille $(f_1, ..., f_k)$ est orthonormée et vérifie l'égalité.
 ])
@@ -846,14 +846,14 @@
 ])
 
 #definition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $f in cal(L)(E)$ un endomorphisme.
+  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $f in cal(L)(E)$ un endomorphisme.
   On dit que $f$ est un _endomorphisme orthogonal_ si
-  $ forall x, y in E, sca(f(x), f(y)) = sca(x, y). $
+  $ forall x, y in E, dotproduct(f(x), f(y)) = dotproduct(x, y). $
   On appelle _groupe orthogonal_, noté $O(E)$, le sous-groupe des endomorphismes orthogonaux.
 ])
 
 #proposition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $f in cal(L)(E)$ un endomorphisme. Alors les énoncés suivants sont équivalents
+  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $f in cal(L)(E)$ un endomorphisme. Alors les énoncés suivants sont équivalents
   + $f$ est orthogonal.
   + Soit $x in E$, alors $||f(x)|| = ||x||$.
   + Soit $cal(E)$ une base orthonormée de $E$, alors $[f]_cal(E) in O_n (RR)$.
@@ -861,7 +861,7 @@
 ])
 
 #remark([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $f in cal(L)(E)$ un endomorphisme orthogonal.
+  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $f in cal(L)(E)$ un endomorphisme orthogonal.
   Alors on remarque que $det(f) = plus.minus 1$, on appelle _groupe spécial orthogonal_ le sous-groupe
   $ S O(E) := O(E) sect "det"^(-1)(1). $
 ])
@@ -869,26 +869,26 @@
 == Polynômes orthogonaux
 
 #proposition([
-  Soit $[a, b]$ un intervalle fermé de $RR$ et $fun(w, [a, b], R_+ without {0})$. Alors la forme bilinéaire symétrique définie par
-  $ forall P, Q in RR[X], sca(P, Q) := integral_a^b P(t)Q(t)w(t) dif t $
+  Soit $[a, b]$ un intervalle fermé de $RR$ et $func(w, [a, b], R_+ without {0})$. Alors la forme bilinéaire symétrique définie par
+  $ forall P, Q in RR[X], dotproduct(P, Q) := integral_a^b P(t)Q(t)w(t) dif t $
   est un produit scalaire.
 ])
 
 #proof([
   Soit $P in RR[X]$, alors $P^2 w$ est continue et positive, de plus
   $
-    sca(P, P) = 0 &=> integral_a^b P^2 (t) w(t) = 0 \
+    dotproduct(P, P) = 0 &=> integral_a^b P^2 (t) w(t) = 0 \
     &=> forall t in [a, b], P^2 (t) w(t) = 0 \
     &=> forall t in [a, b], P(t) = 0 \
     &=> P = 0
   $
-  donc $sca(dot, dot)$ est un produit scalaire.
+  donc $dotproduct(dot, dot)$ est un produit scalaire.
 ])
 
 #definition([
-  Soit $sca(dot, dot)$ un produit scalaire sur $RR[X]$. On appelle _famille de polynômes orthogonaux_, une famille $(P_n)_(n in NN)$ de polynômes qui vérifie
+  Soit $dotproduct(dot, dot)$ un produit scalaire sur $RR[X]$. On appelle _famille de polynômes orthogonaux_, une famille $(P_n)_(n in NN)$ de polynômes qui vérifie
   $
-    cases(forall i"," j in NN"," i != j => sca(P_i, P_j) = 0, forall n in NN"," deg(P_n) = n)
+    cases(forall i"," j in NN"," i != j => dotproduct(P_i, P_j) = 0, forall n in NN"," deg(P_n) = n)
   $
 ])
 
@@ -902,7 +902,7 @@
 ])
 
 #definition([
-  Soit $n in NN$ et $p_n in cal(L)(RR_n [X])$ la projection orthogonale sur $RR_(n-1) [X]$. On pose l'application $fun(T_n, RR_(n-1) [X], RR_(n-1) [X], x: P, fx: p_n (X P))$.
+  Soit $n in NN$ et $p_n in cal(L)(RR_n [X])$ la projection orthogonale sur $RR_(n-1) [X]$. On pose l'application $func(T_n, RR_(n-1) [X], RR_(n-1) [X], P, p_n (X P))$.
 ])
 
 #proposition([
@@ -914,11 +914,11 @@
 #proof([
   Soit $P, Q in RR_(n-1) [X]$, alors
   $
-    sca(T_n (P), Q) &= sca(p_n (X P), Q) \
-    &= sca(X P, p_n (Q)) \
-    &= sca(X P, Q) \
-    &= sca(P, X Q)
-    = sca(P, T_n (Q))
+    dotproduct(T_n (P), Q) &= dotproduct(p_n (X P), Q) \
+    &= dotproduct(x P, p_n (Q)) \
+    &= dotproduct(x P, Q) \
+    &= dotproduct(P, X Q)
+    = dotproduct(P, T_n (Q))
   $
   donc $T_n$ est symétrique.
 ])
@@ -927,39 +927,39 @@
 == Endomorphismes symétriques
 
 #notation([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
-  On note $fun(theta_u, E, E^*)$, l'application définie par
-  $ forall y in E, theta_u (y) := x |-> sca(u(x), y). $
+  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
+  On note $func(theta_u, E, E^*)$, l'application définie par
+  $ forall y in E, theta_u (y) := x |-> dotproduct(u(x), y). $
 ])
 
 #definition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
+  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
   On appelle _application transposée_ (ou _adjoint_) de $u$, l'application définie par $u^* := theta^(-1)_id compose theta_u$.
 ])
 
 #proposition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
+  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
   Alors
-  $ forall x, y in E, sca(x, u^*(y)) = sca(u(x), y). $
+  $ forall x, y in E, dotproduct(x, u^*(y)) = dotproduct(u(x), y). $
   Soit $cal(E)$ une base orthonormée de $E$, on a $[u^*]_cal(E) = transpose([u]_cal(E))$.
 ])
 
 #proof([
   Soit $x, y in E$. Alors
   $
-    sca(x, u^*(y)) = theta_id (u^*(y))(x) = (theta_id compose u^*)(y)(
+    dotproduct(x, u^*(y)) = theta_id (u^*(y))(x) = (theta_id compose u^*)(y)(
       x
-    ) = theta_u (y)(x) = sca(u(x), y).
+    ) = theta_u (y)(x) = dotproduct(u(x), y).
   $
 ])
 
 #definition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
+  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
   On dit que $u$ est _symétrique_ (ou _auto-adjoint_), si $u^* = u$.
 ])
 
 #proposition([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
+  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
   Alors $u$ est symétrique si et seulement si sa matrice dans une base orthonormée de $E$ est symétrique.
 ])
 
@@ -981,7 +981,7 @@
 ])
 
 #theorem([
-  Soit $(E, sca(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
+  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
   Alors $u$ est diagonalisable dans une base orthonormée de $E$.
 ])
 
@@ -990,7 +990,7 @@
 ])
 
 #corollary([
-  Soit $(E, sca(dot, dot))$ un espace euclidien, $Q$ une forme quadratique définie positive sur $E$ et $lambda_1 <= ... <= lambda_n$ ses valeurs propres ordonnées. Alors
+  Soit $(E, dotproduct(dot, dot))$ un espace euclidien, $Q$ une forme quadratique définie positive sur $E$ et $lambda_1 <= ... <= lambda_n$ ses valeurs propres ordonnées. Alors
   $ forall x in E, lambda_1||x||^2 <= Q(x) <= lambda_n||x||^2 $
   et ces inégalités sont optimales.
 ])

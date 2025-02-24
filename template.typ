@@ -42,42 +42,10 @@
   features: ("ss01",),
   box($cal(it)$),
 )
-#let gen(..generators) = $angle.l #generators.pos().join(", ") angle.r$
-#let qt(numerator, denominator) = $#numerator slash #denominator$
-#let qtr(numerator, denominator) = $#denominator thin backslash thin #numerator$
-#let fun(f, E, F, x: none, fx: none) = (
-  if x == none or fx == none {
-    $#f : #E -> #F$
-  } else {
-    $#f : #E -> #F, #x |-> #fx$
-  }
-)
-#let pgcd = "pgcd"
-#let ppcm = "ppcm"
-#let ord = "ord"
-#let sign = "sign"
-#let supp = "supp"
-#let Vect = "Vect"
-#let Sp = "Sp"
-#let act = rotate(180deg, $arrow.cw$)
-#let GL = "GL"
-#let transpose(M) = $#M^upright(T)$
+
 #let ind(E) = $bb(1)_#E$
-#let sca(x, y) = $angle.l #x, #y angle.r$
-#let seq(name, index: "n", start: none) = (
-  if start == none {
-    $(#name _#index)_(#index in NN)$
-  } else {
-    $(#name _#index)_(#index >= #start)$
-  }
-)
 #let borel(U) = $cal(B)(#U)$
 #let underbraced(body, text) = $attach(limits(underbrace(#body)), b: #text)$
-// TODO
-// #let partial(f, x) = (
-//   $(partial #f)/(partial #x)$
-// )
-
 
 #let maths(
   title: none,

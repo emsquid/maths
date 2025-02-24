@@ -2,29 +2,29 @@
 
 #show: maths.with(title: "Calcul différentiel 2", color: "#718355")
 
-= Inversion locale et fonctions implicites
+= Calcul différentiel
 
-== Théorème d'inversion locale
+== Inversion locale et fonctions implicites
 
 #definition([
-  Soit $k in NN without {0} union {+oo}$, $U$ et $V$ deux ouverts de $RR^n$, et $func(f, U, V)$ une application. On dit que $f$ est un _$C^k$-difféomorphisme_ de $U$ sur $V$ si
+  Soit $k in NN without {0} union {+oo}$, $U$ et $V$ deux ouverts de $RR^n$, et $func(f, U, V)$ une application. On dit que $f$ est un _$C^k$-difféomorphisme_ de $U$ sur $V$ si :
   + $f$ est bijective de $U$ sur $V$,
   + $f$ est de classe $C^k$ sur $U$,
   + $f^(-1)$ est de classe $C^k$ sur $V$.
 ])
 
 #remark([
-  Soit $func(f, U, V)$ un $C^k$-difféomorphisme, alors
+  Soit $func(f, U, V)$ un $C^k$-difféomorphisme, $x in U$ et $y in V$. Alors
   $
-    forall x in U, f^(-1)(f(x)) &= x \
-    forall y in V, f(f^(-1)(y)) &= y
+    &f^(-1)(f(x)) = x \
+    &f(f^(-1)(y)) = y
   $
   de plus en appliquant le théorème de composition des différentielles
   $
-    dif f^(-1)(f(x)) compose dif f(x) &= id_(RR^n) \
-    dif f(f^(-1)(x)) compose dif f^(-1)(x) &= id_(RR^n)
+    &(dd(f^(-1), f(x))) compose (dd(f, x)) = id \
+    &(dd(f, f^(-1)(y))) compose (dd(f^(-1), y)) = id \
   $
-  donc $dif f(x)$ est inversible avec $dif f(x)^(-1) = dif f^(-1)(f(x))$.
+  donc $dd(f, x)$ est inversible avec $(dd(f, x))^(-1) = dd(f^(-1), f(x))$.
 ])
 
 #examples([
@@ -45,35 +45,35 @@
     + $f$ est de classe $C^(oo)$ sur $U$ car polynômiale,
     + $f^(-1)$ est de classe $C^(oo)$ sur $V$ car $(s, t) |-> s^2 - 4t$ et $sqrt(dot)$ sont $C^(oo)$ sur $V$.
   + On considère $func(f, RR, RR, x, x^3)$, alors $f$ est de classe $C^oo$ sur $RR$ et bijective. Mais son inverse $func(f^(-1), RR, RR, y, root(3, y))$, n'est pas dérivable en $0$ donc $f$ n'est pas un $C^(oo)$-difféomorphisme.
+
 ])
+
+=== Théorème d'inversion locale
 
 #theorem(
   title: "Théorème d'inversion locale",
   [
-    Soit $U$ un ouvert non-vide de $RR^n$ et $func(f, U, RR^n)$ une application de classe $C^k$.
-    On suppose qu'il existe $x_0 in U$ tel que $dif f(x_0)$ soit inversible.
-    Alors il existe un voisinage ouvert $U'$ de $x_0$ et un voisinage ouvert $V'$ de $f(x_0)$ tels que $func(f, U', V')$ est un $C^k$-difféomorphisme.
+    Soit $U$ un ouvert non-vide de $RR^n$, $a$ un point de $U$ et $func(f, U, RR^n)$ une application de classe $C^k$.
+    Si $dd(f, a)$ est inversible, alors il existe un voisinage ouvert $V$ de $a$ et un voisinage ouvert $W$ de $f(a)$ tels que $func(f, V, W)$ est un $C^k$-difféomorphisme.
   ],
 ) <thm-inversion-locale>
 
 #theorem(
   title: "Théorème d'inversion globale",
   [
-    Soit $U$ un ouvert non-vide de $RR^n$ et $func(f, U, RR^n)$ une application.
-    On suppose que
-    + $f$ est de classe $C^k$ sur $U$,
+    Soit $U$ un ouvert non-vide de $RR^n$ et $func(f, U, RR^n)$ une application de classe $C^k$.
+    Si :
     + $f$ est injective sur $U$,
-    + $forall x in U, dif f(x)$ est inversible.
+    + $forall x in U, dd(f, x)$ est inversible.
     Alors $f(U)$ est un ouvert de $RR^n$ et $func(f, U, f(U))$ est un $C^k$-difféomorphisme.
   ],
 ) <thm-inversion-globale>
 
 #proof([
-  Soit $x_0$ in $U$, alors d'après le théorème d'inversion locale il existe un voisinage ouvert $U_x_0$ de $x_0$ et un voisinage ouvert $V_f(x_0)$ de $f(x_0)$ tels que $func(f, U_x_0, V_f(x_0))$ est un $C^k$-difféomorphisme.
-  En particulier $V_f(x_0) = f(U_x_0)$, et on a
-  $ f(U) = union.big_(x in U) V_f(x) $
-  est un ouvert de $RR^n$ comme union d'ouverts. De plus puisque $f$ est injective sur $U$, on en déduit que $f$ est bijective de $U$ sur $f(U)$. \
-  Soit $y_0 in f(U)$, alors il existe un unique $x_0 in U$ tel que $y_0 = f(x_0)$, et d'après le théorème d'inversion locale $func(f, U_x_0, V_y_0)$ est un $C^k$-difféomorphisme, on en déduit que $f^(-1)$ est de classe $C^k$ sur $V_y_0$. Donc $f^(-1)$ est $C^k$ sur $f(U)$.
+  Soit $x in U$, alors d'après le théorème d'inversion locale il existe un voisinage ouvert $V_x$ de $x$ et un voisinage ouvert $W_f(x)$ de $f(x)$ tels que $func(f, V_x, W_f(x))$ est un $C^k$-difféomorphisme.
+  En particulier $W_f(x) = f(V_x)$, et on en déduit que
+  $ f(U) = union.big_(x in U) W_f(x) $
+  est un ouvert de $RR^n$ comme union d'ouverts. De plus puisque $f$ est injective sur $U$, on en déduit que $f$ est bijective de $U$ sur $f(U)$. Enfin $f$ et $f^(-1)$ sont respectivement de classe $C^k$ sur $U$ et $f(U)$. Donc $func(f, U, f(U))$ est un $C^k$-difféomorphisme.
 ])
 
 #examples([
@@ -82,24 +82,24 @@
     + On pose $U := ]0, +oo[ times ]-pi, pi[$, qui est un ouvert de $RR^2$ sur lequel $f$ est injective.
     + Soit $(r, theta) in U$, alors
       $
-        J_f (r, theta) =
+        Jac(f)(r, theta) =
         mat(
-          (partial f_1)/(partial r), (partial f_1)/(partial theta);
-          (partial f_2)/(partial r), (partial f_2)/(partial theta);
+          pdv(f_1, r), pdv(f_1, theta);
+          pdv(f_2, r), pdv(f_2, theta);
         ) =
         mat(
           cos(theta), -r sin(theta);
           sin(theta), r cos(theta)
         )
       $
-      et $det(J_f (r, theta)) = r cos^2 (theta) + r sin^2 (theta) = r > 0$, donc $dif f_((r, theta))$ est inversible.
+      et $det(Jac(f)(r, theta)) = r cos^2 (theta) + r sin^2 (theta) = r > 0$, donc $dd(f, (r, theta))$ est inversible.
     Donc d'après le @thm-inversion-globale $func(f, U, f(U))$ est un $C^(oo)$-difféomorphisme.
   + On considère $func(f, RR^3, RR^3, (r, theta, phi), (f_1, f_2, f_3) = (r cos(theta) cos(phi), r sin(theta) cos(phi), r sin(phi)))$.
     + $f$ est de classe $C^(oo)$ sur $RR^3$ puisque $cos$ et $sin$ sont de classes $C^(oo)$.
     + On pose $U := ]0, +oo[ times ]-pi, pi[ times ]-pi/2, pi/2[$, qui est un ouvert de $RR^3$ sur lequel $f$ est injective.
     + Soit $(r, theta, phi) in U$, alors
       $
-        J_f (r, theta, phi) = mat(
+        Jac(f)(r, theta, phi) = mat(
           cos(theta)cos(phi), -r sin(theta)cos(phi), -r cos(theta)sin(phi);
           sin(theta)cos(phi), r cos(theta)cos(phi), -r sin(theta) sin(phi);
           sin(phi), 0, r cos(phi)
@@ -107,17 +107,17 @@
       $
       et le déterminant de cette matrice est
       $
-        det(J_f (r, theta, phi)) &= &&sin(phi)(r^2 sin^2 (theta) cos(phi)sin(phi) + r^2 cos^2 (theta)cos(phi)sin(phi)) \
+        det(Jac(f)(r, theta, phi)) &= &&sin(phi)(r^2 sin^2 (theta) cos(phi)sin(phi) + r^2 cos^2 (theta)cos(phi)sin(phi)) \
         & &&+ r cos(phi)(r cos^2 (theta) cos^2 (phi) + sin^2 (theta) cos^2 (phi)) \
         &= &&sin^2 (phi) r^2 cos(phi) + cos^2 (phi) r^2 cos(phi) = r^2 cos(phi) != 0
       $
-      donc $dif f_(r, theta, phi)$ est inversible.
+      donc $dd(f, (r, theta, phi))$ est inversible.
     Donc d'après le @thm-inversion-globale $func(f, U, f(U))$ est un $C^(oo)$-difféomorphisme.
   + On pose $U := R^2 without {(0, 0)}$ et on considère $func(f, U, RR^2, (x, y), (x^2 - y^2, 2x y))$, alors
     1. $f$ est de classe $C^oo$ sur $U$ puisque $f$ est polynômiale.
     3. Soit $(x, y) in U$, alors
-      $ J_f (x, y) = mat(2x, -2y; 2y, 2x) $
-      et $det(J_f (x, y)) = 4(x^2 + y^2) > 0$ sur $U$, donc $dif f_(x, y)$ est inversible.
+      $ Jac(f) (x, y) = mat(2x, -2y; 2y, 2x) $
+      et $det(Jac(f) (x, y)) = 4(x^2 + y^2) > 0$ sur $U$, donc $dd(f, (x, y))$ est inversible.
 
     Donc d'après le @thm-inversion-locale $func(f, U, RR^2)$ est un $C^oo$-difféomorphisme local en tout point de $U$.
     Mais $f(-1, -1) = f(1, 1)$, donc $func(f, U, RR^2)$ n'est pas $C^oo$-difféomorphisme global.
@@ -136,27 +136,41 @@
     Donc d'après le @thm-inversion-globale $func(f, U', f(U'))$ est un $C^oo$-difféomorphisme.
 ])
 
-== Théorème des fonctions implicites
+=== Théorème des fonctions implicites
 
 #theorem(
   title: "Théorème des fonctions implicites",
   [
-    Soit $U$ un ouvert de $RR^n times RR^p$, $(a, b) in U$ et $func(f = (f_1, ..., f_p), U, RR^p)$ une application de classe $C^k$.
-    On suppose que $f(a, b) = 0$ et que la matrice jacobienne de $f$ par rapport à la deuxième variable en $(a, b)$ est inversible. Alors il existe un voisinage ouvert $V$ de $a$, un voisinage ouvert $W$ de $b$ avec $V times W subset U$ et une application $func(phi, V, W)$ qui est $C^oo$ avec $phi(a) = b$, tels que
-    $ cases((x, y) in V times W, f(x, y) = 0) <==> cases(x in V, y = phi(x)) $
-    de plus pour tout $x in V, dif phi(x) = -(dif_y f(x, phi(x)))^(-1) compose dif_x f(x, phi(x))$.
+    Soit $U$ un ouvert de $RR^p times RR^q$, $(a, b)$ un point de $U$ et $func(f = (f_1, ..., f_q), U, RR^q)$ une application de classe $C^k$.
+    Si $f(a, b) = 0$ et la différentielle de $f$ par rapport à la deuxième variable en $(a, b)$ est inversible.
+    Alors il existe un voisinage ouvert $V$ de $a$, un voisinage ouvert $W$ de $b$, avec $V times W subset U$, et une application $func(phi, V, W)$ de classe $C^oo$ qui vérifie $b = phi(a)$, tels que :
+    $ cases((x, y) in V times W, f(x, y) = 0) <==> cases(x in V, y = phi(x)). $
+    De plus pour tout $x in V, dv(phi, x)(x) = -(dv(f, y)(x, phi(x)))^(-1) compose dv(f, x)(x, phi(x))$.
   ],
 ) <thm-fonctions-implicites>
+
+#proof([
+  On considère l'application
+  $ func(g, U, RR^p times RR^q, (x, y), (x, f(x, y))). $
+  Alors la matrice jacobienne de $g$ en $(a, b)$ est
+  $
+    Jac(g)(a, b) = mat(I_p, 0_q; dot, dv(f, y)(a, b))
+  $
+  et son déterminant $det(Jac(g)(a, b))$ est non nul par hypothèse. \
+  Donc d'après le @thm-inversion-locale il existe un voisinage ouvert $U_1$ de $(a, b)$ et un voisinage ouvert $U_2$ de $g(a, b) = (a, f(a, b))$ tels que $func(g, U_1, U_2)$ est un $C^k$-difféomorphisme. \
+  En particulier il existe $func(psi, U_2, RR^q)$ telle que pour tout $(x, y) in U_2$ on a $g^(-1)(x, y) = (x, psi(x, y))$. \
+  On prend $V times W subset U_1$ et on pose $func(phi, V, W, x, psi(x, 0))$, alors l'équivalence du théorème est bien vérifiée et il suffit de dériver pour obtenir l'égalité.
+])
 
 #examples([
   + On considère $func(f, RR^2, RR, (x, y), x^2+y^2-1)$ et $SS^1 := {(x, y) in RR^2 | f(x, y) = 0}$. Les dérivées partielles de $f$ sont
     $
-      (partial f) / (partial x) (x, y) &= 2x "et"
-      (partial f) / (partial y) (x, y) &= 2y.
+      pdv(f, x)(x, y) &= 2x "et"
+      pdv(f, y)(x, y) &= 2y.
     $
     On remarque que pour $(x, y) in RR^2$ vérifiant
     $
-      cases((x, y) in SS^1, (partial f)/(partial y) (x, y) != 0)
+      cases((x, y) in SS^1, pdv(f, y)(x, y) != 0)
       &<==> cases((x, y) in SS^1, y != 0)
     $
     on a $(x, y) in SS^1 without {(1, 0), (-1, 0)}$. On peut donc appliquer le @thm-fonctions-implicites, au voisinage $V$ de $x$, $SS^1$ est le graphe d'une application $func(phi, V, RR)$.
@@ -166,10 +180,10 @@
     $ forall x in V, 2x + 2phi(x)phi'(x) = 0 $
     et donc $phi'(x) = -x/phi(x)$.
   + On considère $func(f, RR^3, RR, (x, y, z), x^2 + y^2 + z^2 - 1)$, $SS^2 := {(x, y, z) in RR^3 | f(x, y, z) = 0}$. Les dérivées partielles de $f$ sont
-    $ forall a in {x, y, z}, (partial f) / (partial a) (x, y, z) = 2a. $
+    $ forall a in {x, y, z}, pdv(f, a) (x, y, z) = 2a. $
     On remarque que pour $(x, y, z) in RR^3$ vérifiant
     $
-      cases((x, y, z) in SS^2, (partial f)/(partial z) (x, y, z) != 0)
+      cases((x, y, z) in SS^2, pdv(f, z)(x, y, z) != 0)
       &<==> cases((x, y, z) in SS^2, z != 0) \
       &<==> cases((x, y, z) in SS^2, (x, y, z) != (a, b, 0) "où" (a, b) in SS^1)
     $
@@ -177,24 +191,24 @@
     $ forall (x, y) in V, x^2 + y^2 + phi(x, y)^2 - 1 = 0 $
     en dérivant par rapport à $x$ on trouve
     $
-      forall (x, y) in V, 2x + 2 (partial f) / (partial x) (x, y) phi(x, y) = 0
+      forall (x, y) in V, 2x + 2 pdv(f, x)(x, y) phi(x, y) = 0
     $
-    donc $(partial f)/(partial x) (x, y) = -x/phi(x, y)$, et en dérivant par rapport à $y$ on trouve
+    donc $pdv(f, x)(x, y) = -x/phi(x, y)$, et en dérivant par rapport à $y$ on trouve
     $
-      forall (x, y) in V, 2y + 2 (partial f) / (partial y) (x, y) phi(x, y) = 0
+      forall (x, y) in V, 2y + 2 pdv(f, y)(x, y) phi(x, y) = 0
     $
-    donc $(partial f)/(partial y) (x, y) = -y/phi(x, y)$.
+    donc $pdv(f, y)(x, y) = -y/phi(x, y)$.
 ])
 
 #pagebreak()
 
-= Sous-variétés de $RR^n$
+== Sous-variétés de $RR^n$
 
-== Sous-variétés
+=== Sous-variétés
 
 #definition([
   Soit $X$ une partie de $RR^n$.
-  On dit que $X$ est une _sous-variété de $RR^n$ de classe $C^k$ et de dimension $d in NN$_, si pour tout $x in X$ il existe un voisinage ouvert $V$ de $x$ dans $RR^n$ et un $C^k$-difféomorphisme $phi$ d'un ouvert $U$ de $RR^n$ dans $V$, tels que
+  On dit que $X$ est une _sous-variété de $RR^n$ de classe $C^k$ et de dimension $d in NN$_ si pour tout $x in X$, il existe un voisinage ouvert $U$ dans $RR^n$, un voisinage ouvert $V$ de $x$ et un $C^k$-difféomorphisme $func(phi, U, V)$ tels que :
   $ V sect X = phi(U sect (RR^d times {0})). $
   On appelle _codimension_ de $X$ l'entier $n - d$.
 ])
@@ -216,40 +230,46 @@
 ])
 
 #definition([
-  Soit $U$ un ouvert de $RR^n$ et $func(f, U, RR^p)$ une application de classe $C^k$.
-  On dit que $f$ est une _submersion_ en $x_0 in U$ si $dif_x_0 f$ est surjective.
+  Soit $U$ un ouvert de $RR^n$, $a in U$ et $func(f, U, RR^p)$ une application de classe $C^k$.
+  On dit que $f$ est une _immersion_ en $a$ si $dd(f, a)$ est injective.
+])
+
+#definition([
+  Soit $U$ un ouvert de $RR^n$, $a in U$ et $func(f, U, RR^p)$ une application de classe $C^k$.
+  On dit que $f$ est une _submersion_ en $a$ si $dd(f, a)$ est surjective.
 ])
 
 #theorem([
-  Soit $X$ une partie de $RR^n$.
-  Alors $X$ est une sous-variété de $RR^n$ classe $C^k$ et de dimension $d in {0, ..., n}$ si et seulement si pour tout $a in X$, il existe un voisinage ouvert $V$ de $a$ dans $RR^n$ et une submersion en $a$ $func(f, V, RR^(n-d))$ de classe $C^k$ vérifiant $V sect X = f^(-1)(f(a))$.
+  Soit $X$ une partie de $RR^n$. Alors les conditions suivantes sont équivalentes :
+  + (_redressement_) $X$ est une sous-variété de $RR^n$ classe $C^k$ et de dimension $d in {0, ..., n}$.
+  + (_implicite_) Pour tout $a in X$, il existe un voisinage ouvert $U$ de $a$ dans $RR^n$ et $func(f, U, RR^(n-d))$ une submersion en $a$ de classe $C^k$ tels que $U sect X = f^(-1)(f(a))$.
 ])
 
 #proof([
   #linebreak()
-  $arrow.r.double$ : Supposons que $X$ est une sous-variété de $RR^n$ de classe $C^k$ et de dimension $d$.
-  Soit $a in X$, alors il existe un voisinage ouvert $V$ de $a$ et un $C^k$-difféomorphisme $phi$ d'un ouvert $U$ de $RR^n$ dans $V$, tels que
+  $(1) arrow.r.double (2)$ : Supposons que $X$ est une sous-variété de $RR^n$ de classe $C^k$ et de dimension $d$. \
+  Soit $a in X$, alors il existe un voisinage ouvert $U$ dans $RR^n$, un voisinage ouvert $V$ de $a$ et un $C^k$-difféomorphisme $func(phi, U, V)$ tels que
   $ V sect X = phi(U sect (RR^d times {0})). $
   On écrit $phi^(-1) = (g_1, ..., g_d, f_1, ..., f_(n - d))$, alors
   $ V sect X = {x in V | f_1 (x) = ... = f_(n-d)(x) = 0}. $
-  On pose $f := (f_1, ..., f_(n-d))$, puisque $phi$ est un difféomorphisme on en déduit que $dif_a f$ est surjective, donc $f$ est une submersion en $a$.
+  On pose $f := (f_1, ..., f_(n-d))$, puisque $phi$ est un difféomorphisme on en déduit que $dd(f, a)$ est surjective, donc $f$ est une submersion en $a$ de classe $C^k$.
 
-  $arrow.l.double$ : Supposons que les hypothèses soient vérifiées.
-  Sans perte de généralité on suppose que $f(a) = 0$ et que $det("Jac"_f (a)) != 0$.
+  $(2) arrow.r.double (1)$ : Supposons que les hypothèses soient vérifiées.
+  Sans perte de généralité, on suppose que $f(a) = 0$ et que $det(Jac(f)(a)) != 0$.
   On pose $func(psi, V, RR^n)$ définie par
   $
     psi(x_1, ..., x_n) = (x_1 - a_1, ..., x_d - a_d, f_1 (x_(d+1)), ..., f_(n-d)(x_n))
   $
-  alors $det("Jac"_psi (a)) = det("Jac"_f (a)) != 0$, quitte à restreindre $V$, $psi$ est un $C^k$-difféomorphisme de $V$ sur $U := psi(V)$. En prenant $phi := psi^(-1)$, on a bien
+  alors $det(Jac(psi)(a)) = det(Jac(f)(a)) != 0$, quitte à restreindre $V$, $psi$ est un $C^k$-difféomorphisme de $V$ sur $U := psi(V)$. En prenant $phi := psi^(-1)$, on a bien
   $ V sect X = phi(U sect (RR^d times {0})). $
 ])
 
 #example([
   On considère le cercle $SS^2$ décrit par $func(f, RR^3, RR, (x, y, z), x^2 + y^2 + z^2)$.
-  Alors $f$ est de classe $C^k$ sur $RR^3$ et $det("Jac"_f) != 0$ sur $SS^2$, donc $f$ est une submersion en tout point de $SS^2$. On en déduit que $SS^2$ est une sous-variété de $RR$ de classe $C^k$ et de dimension $3 - 1 = 2$.
+  Alors $f$ est de classe $C^k$ sur $RR^3$ et $det("Jac"_f) != 0$ sur $SS^2$, donc $f$ est une submersion en tout point de $SS^2$. On en déduit que $SS^2$ est une sous-variété de $RR^3$ de classe $C^k$ et de dimension $3 - 1 = 2$.
 ])
 
-== Espace tangent à une sous-variété
+=== Espace tangent à une sous-variété
 
 #definition([
   Soit $X$ une sous-variété de $RR^n$ de classe $C^k$ et de dimension $d$, $a in X$ un point et $v$ un vecteur de $RR^n$.
@@ -271,44 +291,44 @@
 #theorem([
   Soit $X$ une sous-variété de $RR^n$ classe $C^k$ et de dimension $d$ et $a in X$ un point.
   Alors l'espace tangent $T_a X$ est un espace vectoriel de dimension $d$ et on a les caractérisations :
-  + S'il existe un voisinage ouvert $V$ de $a$ et un $C^k$-difféomorphisme $phi$ d'un ouvert $U$ de $RR^n$ dans $V$ vérifiant $V sect X = phi(U sect (RR^d times {0}))$, alors $T_a X = dif_(phi^(-1)(a)) phi (RR^d times {0})$.
-  + S'il existe un voisinage ouvert $V$ de $a$ et une submersion en $a$ $func(f, V, RR^(n-d))$ de classe $C^k$ vérifiant $V sect X = f^(-1)(f(a))$, alors $T_a X = ker(dif_a f)$.
+  + S'il existe un voisinage ouvert $U$ de $RR^n$, un voisinage ouvert $V$ de $a$ et un $C^k$-difféomorphisme $func(phi, U, V)$ vérifiant $V sect X = phi(U sect (RR^d times {0}))$, alors $T_a X = dd(phi, phi^(-1)(a)) (RR^d times {0})$.
+  + S'il existe un voisinage ouvert $V$ de $a$ et une submersion en $a$ $func(f, V, RR^(n-d))$ de classe $C^k$ vérifiant $V sect X = f^(-1)(f(a))$, alors $T_a X = ker(dd(f, a))$.
 ])
 
 #proof([
-  + Supposons sans perte de généralité que $phi^(-1)(a) = 0$. \
+  + Supposons sans perte de généralité que $phi^(-1)(a) = 0$.
     Soit $v in T_a X$, alors il existe $epsilon > 0$ et une courbe $func(gamma, bracket.r -epsilon\, epsilon bracket.l, V sect X)$ de classe $C^k$ vérifiant $gamma(0) = a$ et $gamma'(0) = v$.
     On pose $delta := phi^(-1)(gamma)$, alors on a $im(delta) subset U sect (RR^d times {0})$, $delta(0) = 0$ et
-    $ delta'(t) = dif_(gamma(t)) phi^(-1)(gamma'(t)) $
-    d'où $ delta'(0) = dif_(a) phi^(-1) (v)$ et $v = dif_(phi^(-1)(a)) phi (delta'(0))$, donc $T_a X subset dif_(phi^(-1)(a)) phi (RR^d times {0})$. \
-    Réciproquement on montre de la même manière que $dif_(phi^(-1)(a)) phi (RR^d times {0}) subset T_a X$.
-    Donc $T_a X = dif_(phi^(-1)(a)) phi (RR^d times {0})$, on en déduit que $T_a X$ est un espace vectoriel de dimension $d$.
+    $ delta'(t) = dd(phi^(-1), gamma(t))(gamma'(t)) $
+    d'où $ delta'(0) = dd(phi^(-1), a)(v)$ et $v = dd(phi^(-1), a) phi (delta'(0))$, donc $T_a X subset dd(phi^(-1), a) phi (RR^d times {0})$. \
+    Réciproquement, on montre de la même manière que $dd(phi^(-1), a) phi (RR^d times {0}) subset T_a X$. \
+    Donc $T_a X = dd(phi^(-1), a) phi (RR^d times {0})$, on en déduit que $T_a X$ est un espace vectoriel de dimension $d$.
   + Soit $v in T_a X$, alors il existe $epsilon > 0$ et une courbe $func(gamma, bracket.r -epsilon\, epsilon bracket.l, V sect X)$ de classe $C^k$ vérifiant $gamma(0) = a$ et $gamma'(0) = v$. Soit $t in ]-epsilon, epsilon[$, alors
     $
       gamma(t) in V sect X => (f compose gamma)(t) = f(a) => (f compose gamma)'(t) = 0
     $
-    or $(f compose gamma)(t) = dif_gamma(t) f (gamma'(t))$ et $dif_a f (v) = 0$, donc $T_a X subset ker(dif _a f)$. L'égalité des dimensions entraine l'égalité des espaces.
+    or $(f compose gamma)(t) = dd(f, gamma(t))(gamma'(t))$ et $dd(f, a)(v) = 0$, donc $T_a X subset ker(dd(f, a))$. L'égalité des dimensions entraine l'égalité des espaces.
 ])
 
 #remark([
-  S'il existe un voisinage ouvert $V$ de $a$ et une submersion en $a$ $func(f, V, RR^(n-d))$ de classe $C^k$ vérifiant $V sect X = f^(-1)(f(a))$, alors $T_a X = span(gradient_f_1 (a), ..., gradient_f_(n-d) (a))^perp$
+  S'il existe un voisinage ouvert $V$ de $a$ et une submersion en $a$ $func(f, V, RR^(n-d))$ de classe $C^k$ vérifiant $V sect X = f^(-1)(f(a))$, alors $T_a X = span(gradient_f_1 (a), ..., gradient_f_(n-d) (a))^perp$.
 ])
 
-#pagebreak()
+=== Extrema liés
 
-= Extrema liés
-
-// FIXME
 #theorem(
   title: "Théorèmes des extrema liés",
   [
-    Soit $X$ une sous-variété de $RR^n$ de classe $C^k$ et de dimension $d$, $U$ un ouvert de $RR^n$ et $func(f, U, RR)$ une fonction de classe $C^k$. Alors s'il existe une submersion $func(g, U, RR^(n-d))$ de classe $C^k$ et $a in RR^(n-d)$ tels que $X = g^(-1)(a)$, et si $f|_X$ admet un extremum local en $x_0 in X$, il existe des uniques $lambda_1, ..., lambda_(n-d) in RR$, appelés _multiplicateurs de Lagrange_, tels que $gradient_f (x_0) = sum_(i=1)^(n-d) lambda_i gradient_g_i (x_0)$.
+    Soit $X$ une sous-variété de $RR^n$ de classe $C^k$ et de dimension $d$, $a in X$ un point, $U$ un ouvert de $RR^n$ et $func(f, U, RR)$ une fonction de classe $C^k$. \
+    Si $f$ restreinte à $X$ admet un extremum local en $a$ et s'il existe une submersion $func(g, U, RR^(n-d))$ de classe $C^k$ telle que, en notant $g = (g_1, ..., g_(n-d))$, on ait
+    $ X = {x in U | g_(1)(x) = ... = g_(n-d)(x) = 0}. $
+    Alors il existe des uniques $lambda_1, ..., lambda_(n-d) in RR$ tels que
+    $
+      gradient_f (a) = lambda_1 gradient_g_1 (a) + dots.c + lambda_(n-d) gradient_g_(n-d) (a).
+    $
+    Ces réels sont appellés les _multiplicateurs de Lagrange_.
   ],
 )
-
-#proof([
-  // TODO
-])
 
 #example([
   On cherche les extrema de la fonction $func(f, RR^2, RR, (x, y), x+y)$, que l'on restreint à l'ensemble $M := {(x, y) in RR^2 | x^4 + y^4 = 1}$. \
@@ -323,6 +343,8 @@
   On a $f(m_1) = -f(m_2) = 2/root(4, 2) $, donc $f$ atteint son minimum en $m_2$ et son maximum en $m_1$.
 ])
 
+#pagebreak()
+
 = Équations différentielles
 
 == Résultats fondamentaux
@@ -331,15 +353,15 @@
 
 #definition([
   Soit $U$ un ouvert de $RR times RR^n$ et $func(f, U, RR^n)$ une fonction continue.
-  On appelle _équation différentielle d'ordre 1 dans $RR^n$_ une équation de la forme suivante :
+  On appelle _équation différentielle d'ordre 1 dans $RR^n$_, notée $(E)$, une équation de la forme suivante :
   $ y' = f(t, y) $
-  on dit que $t$ est la variable de temps et que $y$ est la variable d'état.
+  on dit que $t$ est la _variable de temps_ et que $y$ est la _variable d'état_.
 ])
 
 #definition([
   Soit $(E)$ une équation différentielle d'ordre 1.
   On appelle _solution_ de $(E)$ un couple de la forme $(I, y)$ où $I$ est un intervalle de $RR$ et $func(y, I, RR^n)$ est une fonction dérivable sur $I$ vérifiant :
-  + $forall t in I, (t, y(t)) in I$,
+  + $forall t in I, (t, y(t)) in U$,
   + $forall t in I, y'(t) = f(t, y(t))$.
 ])
 
@@ -353,11 +375,9 @@
   + L'équation donnée par $y' = (y + 1)/(t ln(t))$ est une équation différentielle d'ordre 1 sur $RR$. Le couple $(]0, 1[, t |-> -1 + ln(t))$ est une solution de cette équation.
 ])
 
-=== Problème de Cauchy
-
 #definition([
   Soit $(E)$ une équation différentielle et $(t_0, y_0) in RR times RR^n$.
-  On appelle _problème de Cauchy_ avec donnée $(t_0, y_0)$ l'équation $(E)$ à laquelle on impose la condition $y(t_0) = y_0$. On dit que la condition $y(t_0) = y_0$ est la condition initiale (ou de Cauchy).
+  On appelle _problème de Cauchy_ avec donnée $(t_0, y_0)$ le système composé des équations $(E)$ et $y(t_0) = y_0$. On dit que l'équation $y(t_0) = y_0$ est la _condition initiale_ (ou de Cauchy).
 ])
 
 #example([

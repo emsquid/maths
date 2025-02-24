@@ -5,7 +5,7 @@
 = Groupes
 
 #definition[
-  Soit $G$ un ensemble et $fun(star, G times G, G)$ une loi de composition interne. On dit que le couple $(G, star)$ forme un _groupe_ s'il vérifie les propriétes suivantes
+  Soit $G$ un ensemble et $func(star, G times G, G)$ une loi de composition interne. On dit que le couple $(G, star)$ forme un _groupe_ s'il vérifie les propriétes suivantes
   + la loi $star$ est associative, $forall x, y, z in G, (x star y) star z = x star (y star z)$,
   + il existe un neutre $e_G in G$, $forall x in G, x star e_G = e_G star x = x$,
   + existence d'un inverse, $forall x in G, exists x^(-1) in G, x star x^(-1) = x^(-1) star x = e_G$.
@@ -177,28 +177,28 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 == Générateurs
 
 #definition[
-  Soit $(G, star)$ un groupe et $S$ un sous-ensemble non-vide de $G$. On appelle _sous groupe engendré par $S$_, noté $gen(S)$, le plus petit sous-groupe de $G$ contenant $S$.
+  Soit $(G, star)$ un groupe et $S$ un sous-ensemble non-vide de $G$. On appelle _sous groupe engendré par $S$_, noté $gensubgroup(S)$, le plus petit sous-groupe de $G$ contenant $S$.
 ]
 
 #notation[
-  Si $S = {x_1, ..., x_n}$, on note $gen(x_1, ..., x_n) := gen(S)$.
+  Si $S = {x_1, ..., x_n}$, on note $gensubgroup(x_1, ..., x_n) := gensubgroup(S)$.
 ]
 
 #proposition[
   Soit $(G, star)$ un groupe et $S$ un sous-ensemble non-vide de $G$. Alors
-  $ gen(S) = attach(limits(sect.big_(H < G)), b: S subset H) H $
+  $ gensubgroup(S) = attach(limits(sect.big_(H < G)), b: S subset H) H $
   ou encore
-  $gen(S) = {x_1 star ... star x_n | n in NN without {0}, forall i in {1, ..., n}, x_i in S "ou" x_i^(-1) in S}$.
+  $gensubgroup(S) = {x_1 star ... star x_n | n in NN without {0}, forall i in {1, ..., n}, x_i in S "ou" x_i^(-1) in S}$.
 ]
 
 #proof[
   Notons $F := {H < G | S subset H}$ et $H_S := sect.big_(H in F) H$. Puisque $G in F$, l'intersection est non-vide, et d'après la @prop-sect-sg, $H_S$ est un sous-groupe de $G$. De plus $H_S$ contient évidemment $S$. Enfin si $H_0$ est un sous-groupe de $G$ contenant $S$, on a $H_0 in F$, donc $H_0 subset H_S$. Donc $H_S$ est bien le plus petit sous-groupe de $G$ contenant $S$.
 
-  Notons $K_S := {x_1 star ... star x_n | n in NN without {0}, forall i in {1, ..., n}, x_i in S "ou" x_i^(-1) in S}$. On remarque que $K_S$ est stable par multiplication, par inverse et contient le neutre de $G$, donc d'après la @prop-sg-condense, $K_S$ est un sous-groupe de $G$. De plus $G_S$ contient $S$, donc $gen(S) subset G_S$. Réciproquement, puisque $gen(S)$ est un groupe, on en déduit que $forall x in K_S, x in gen(S)$, donc $K_S subset gen(S)$. Par double inclusion $gen(S) = K_S$.
+  Notons $K_S := {x_1 star ... star x_n | n in NN without {0}, forall i in {1, ..., n}, x_i in S "ou" x_i^(-1) in S}$. On remarque que $K_S$ est stable par multiplication, par inverse et contient le neutre de $G$, donc d'après la @prop-sg-condense, $K_S$ est un sous-groupe de $G$. De plus $G_S$ contient $S$, donc $gensubgroup(S) subset G_S$. Réciproquement, puisque $gensubgroup(S)$ est un groupe, on en déduit que $forall x in K_S, x in gensubgroup(S)$, donc $K_S subset gensubgroup(S)$. Par double inclusion $gensubgroup(S) = K_S$.
 ]
 
 #definition[
-  Soit $(G, star)$ un groupe et $S$ un sous-ensemble de $G$. Si $G = gen(S)$, on dit que $G$ est _engendré_ par $S$ et on appelle $S$ un _système de générateurs_ pour $G$.
+  Soit $(G, star)$ un groupe et $S$ un sous-ensemble de $G$. Si $G = gensubgroup(S)$, on dit que $G$ est _engendré_ par $S$ et on appelle $S$ un _système de générateurs_ pour $G$.
   - Si $S$ est fini, on dit que $G$ est _finiment engendré_.
   - Si $S$ ne contient qu'un élément, on dit que $G$ est _monogène_, si de plus $G$ est fini, on dit que $G$ est _cyclique_.
 ]
@@ -206,25 +206,25 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 #example[
   + Soit $(G, star)$ un groupe, $G$ a au moins un système de générateur $S := G$.
   + On considère le groupe $(ZZ, +)$, il est engendré par $NN$, et par ${1}$, donc il est monogène.
-  + On considère le groupe $(qt(ZZ, n ZZ), +)$, il est engendré par ${overline(1)}$ et est fini, donc il est cyclique.
+  + On considère le groupe $(lquotient(ZZ, n ZZ), +)$, il est engendré par ${overline(1)}$ et est fini, donc il est cyclique.
 ]
 
 #proposition[
   On considère le groupe $(ZZ, +)$, alors
-  + $forall n in ZZ, gen(n) = n ZZ$,
+  + $forall n in ZZ, gensubgroup(n) = n ZZ$,
   + soit $H$ est un sous-groupe de $(ZZ, +)$, alors il existe $n in ZZ$ tel que $H = n ZZ$,
-  + soit $a, b in ZZ$ avec $b != 0$, alors $b$ divise $a$ si et seulement si $gen(a) subset gen(b)$,
-  + soit $a, b in ZZ without {0}$, alors $gen(a, b) = "pgcd"(a, b) ZZ$ et $gen(a) sect gen(b) = "ppcm"(a, b) ZZ$.
+  + soit $a, b in ZZ$ avec $b != 0$, alors $b$ divise $a$ si et seulement si $gensubgroup(a) subset gensubgroup(b)$,
+  + soit $a, b in ZZ without {0}$, alors $gensubgroup(a, b) = gcd(a, b) ZZ$ et $gensubgroup(a) sect gensubgroup(b) = lcm(a, b) ZZ$.
 ]
 
 #proof[
-  + Soit $n in ZZ$, alors $gen(n) = {k dot n | k in ZZ} = n ZZ$.
+  + Soit $n in ZZ$, alors $gensubgroup(n) = {k dot n | k in ZZ} = n ZZ$.
   +
     - Si $H = {0}$, alors $H = 0 ZZ$.
     - Sinon, $H without {0}$ est non-vide, on prend $n$ le plus petit entier strictement positif de $H$. \
       Puisque $n in H$, on a $n ZZ subset H$. Réciproquement, soit $m in H$, par division euclidienne il existe $q, r in ZZ$ tels que $m = n q + r$ et $0 <= r < n$, puisque $r = m - n q in H$, on a nécessairement $r = 0$, d'où $m in n ZZ$, donc $H subset n ZZ$.
       Donc $H = n ZZ$.
-  + On sait que $b$ divise $a$ si et seulement il existe $q in ZZ$ tel que $a = b q$ si et seulement $a in gen(b)$ si et seulement si $gen(a) subset gen(b)$.
+  + On sait que $b$ divise $a$ si et seulement il existe $q in ZZ$ tel que $a = b q$ si et seulement $a in gensubgroup(b)$ si et seulement si $gensubgroup(a) subset gensubgroup(b)$.
   + _TODO_ : Voir TD.
 ]
 
@@ -242,10 +242,10 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #proof[
   - Si $"ord"(x) = +oo$, supposons par l'absurde qu'il existe $d in NN without {0}$ tel que $x^d = e$. \
-    Alors $gen(x) = {e, x, ..., x^(d-1)}$ est fini, d'où une contradiction.
+    Alors $gensubgroup(x) = {e, x, ..., x^(d-1)}$ est fini, d'où une contradiction.
   - Sinon $"ord"(x) in NN without {0}$. \
-    Puisque $gen(x)$ est fini, il existe $m, n in NN without {0}$ tels que $n < m$ et $x^m = x^n$, alors $x^(m - n) = e$, donc l'ensemble ${d in NN without {0} | x^d = e}$ est non-vide.
-    Posons $ d := inf({d in NN without {0} | x^d = e})$, puisque $x^d = e$, on obtient $gen(x) = {e, x, ..., x^(d - 1)}$, donc $"ord"(x) = |{e, x, ..., x^(d - 1)}| = d$.
+    Puisque $gensubgroup(x)$ est fini, il existe $m, n in NN without {0}$ tels que $n < m$ et $x^m = x^n$, alors $x^(m - n) = e$, donc l'ensemble ${d in NN without {0} | x^d = e}$ est non-vide.
+    Posons $ d := inf({d in NN without {0} | x^d = e})$, puisque $x^d = e$, on obtient $gensubgroup(x) = {e, x, ..., x^(d - 1)}$, donc $"ord"(x) = |{e, x, ..., x^(d - 1)}| = d$.
   - Soit $n in ZZ$ tel que $x^n = e$. Par division euclidienne il existe $q, r in ZZ$ tels que $n = "ord"(x)q + r$ et $0 <= r < d$, alors $x^r = x^(n - "ord"(x)q) = x^n star x^"ord"(x)^(-q) = e$, par définition de $"ord"(x)$ on a nécessairement $r = 0$, donc $"ord"(x)$ divise $n$.
 ]
 
@@ -256,14 +256,14 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 == Définitions
 
 #definition[
-  Soit $(G, star)$ et $(H, dot)$ deux groupes. Une application $fun(phi, G, H)$ est un _morphisme de groupes_ si elle vérifie
+  Soit $(G, star)$ et $(H, dot)$ deux groupes. Une application $func(phi, G, H)$ est un _morphisme de groupes_ si elle vérifie
   $ forall x, y in G, phi(x star y) = phi(x) dot phi(y). $
   - Si $H = G$, on dit que $phi$ est un _endomorphisme_.
   - Si $phi$ est une bijection, on dit que $phi$ est un _isomorphisme_, et $G$ et $H$ sont _isomorphes_, noté $G tilde.eq H$.
 ]
 
 #proposition[
-  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $fun(phi, G, H)$ un morphisme de groupes.
+  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $func(phi, G, H)$ un morphisme de groupes.
   + le neutre est envoyé sur le neutre, $phi(e_G) = e_H$,
   + l'inverse est envoyé sur l'inverse, $forall x in G, phi(x^(-1)) = phi(x)^(-1)$.
 ]
@@ -274,7 +274,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ]
 
 #proposition[
-  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $fun(phi, G, H)$ un isomorphisme. Alors son inverse, noté $phi^(-1)$, est un isomorphisme.
+  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $func(phi, G, H)$ un isomorphisme. Alors son inverse, noté $phi^(-1)$, est un isomorphisme.
 ]
 
 #proof[
@@ -286,7 +286,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ]
 
 #proposition[
-  Soit $(G, star)$, $(H, dot)$ et $(K, square.tiny.filled)$ trois groupes, et $fun(phi, G, H)$ et $fun(psi, H, K)$ deux morphismes de groupes. Alors $psi compose phi$ est un morphisme de groupes.
+  Soit $(G, star)$, $(H, dot)$ et $(K, square.tiny.filled)$ trois groupes, et $func(phi, G, H)$ et $func(psi, H, K)$ deux morphismes de groupes. Alors $psi compose phi$ est un morphisme de groupes.
 ]
 
 #proof[
@@ -305,11 +305,11 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
   + $G$ et $H$ ont le même ordre,
   + $G$ est abélien si et seulement si $H$ est abélien,
   + $G$ est monogène si et seulement si $H$ est monogène,
-  + $forall fun(phi, G, H)$ isomorphisme, $forall x in G, "ord"(x) = "ord"(phi(x))$.
+  + $forall func(phi, G, H)$ isomorphisme, $forall x in G, "ord"(x) = "ord"(phi(x))$.
 ]
 
 #proof[
-  Soit $fun(phi, G, H)$ un isomorphisme.
+  Soit $func(phi, G, H)$ un isomorphisme.
   + $G$ et $H$ sont en bijection, donc $|G| = |H|$.
   + $arrow.r.double$ : Supposons que $G$ est abélien. Soit $x, y in H$, puisque $phi$ est un isomorphisme
     $
@@ -319,8 +319,8 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
     $
     donc $H$ est abélien. \
     $arrow.l.double$ : On montre la réciproque de la même manière.
-  + $arrow.r.double$ : Supposons que $G$ est monogène. Alors il existe $x in G$ tel que $G = gen(x)$, ainsi
-    $ H = phi(G) = phi(gen(x)) = gen(phi(x)) $
+  + $arrow.r.double$ : Supposons que $G$ est monogène. Alors il existe $x in G$ tel que $G = gensubgroup(x)$, ainsi
+    $ H = phi(G) = phi(gensubgroup(x)) = gensubgroup(phi(x)) $
     donc $H$ est monogène. \
     $arrow.r.double$ : On montre la réciproque de la même manière.
   + Soit $x in G$, alors $forall d in NN without {0}, x^d = e_G <=> phi(x)^d = e_H$, donc $"ord"(x) = "ord"(phi(x))$.
@@ -329,13 +329,13 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 == Image et noyau
 
 #definition[
-  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $fun(phi, G, H)$ un morphisme de groupes.
+  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $func(phi, G, H)$ un morphisme de groupes.
   - On appelle _image_ de $phi$ l'ensemble $im(phi) := phi(G)$.
   - On appelle _noyau_ de $phi$ l'ensemble $ker(phi) := phi^(-1)(e_H)$.
 ]
 
 #proposition[
-  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $fun(phi, G, H)$ un morphisme de groupes. Alors $im(phi)$ est un sous-groupe de $H$ et $ker(phi)$ est un sous-groupe de $G$. Plus généralement si $G'$ est un sous groupe de $G$ et $H'$ un sous-groupe de $H$, alors $phi(G')$ est un sous-groupe de $H$ et $phi^(-1)(H')$ est un sous-groupe de $G$.
+  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $func(phi, G, H)$ un morphisme de groupes. Alors $im(phi)$ est un sous-groupe de $H$ et $ker(phi)$ est un sous-groupe de $G$. Plus généralement si $G'$ est un sous groupe de $G$ et $H'$ un sous-groupe de $H$, alors $phi(G')$ est un sous-groupe de $H$ et $phi^(-1)(H')$ est un sous-groupe de $G$.
 ]
 
 #proof[
@@ -359,7 +359,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ]
 
 #proposition[
-  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $fun(phi, G, H)$ un morphisme de groupes.
+  Soit $(G, star)$ et $(H, dot)$ deux groupes, et $func(phi, G, H)$ un morphisme de groupes.
   - $phi$ est surjectif si et seulement si $im(phi) = H$.
   - $phi$ est injectif si et seulement si $ker(phi) = {e_G}$.
 ]
@@ -544,7 +544,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ]
 
 #theorem[
-  L'application $fun("sign", (S_n, compose), ({-1, 1}, dot))$ est un morphisme de groupes.
+  L'application $func("sign", (S_n, compose), ({-1, 1}, dot))$ est un morphisme de groupes.
 ]
 
 #proof[
@@ -647,9 +647,9 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
     $overline(x) := {y in E | x tilde y}$.
   - Soit $x in E$. On appelle _représentant_ de $x$ tout élément de $overline(x)$.
   - On appelle _espace quotient_ de E modulo $tilde$ l'ensemble
-    $qt(E, tilde) := {overline(x) | x in E}$.
-  - On appelle _projection canonique_ de $E$ sur $qt(E, tilde)$ l'application
-    $fun(pi, E, qt(E, tilde), x:x, fx:overline(x))$.
+    $lquotient(E, tilde) := {overline(x) | x in E}$.
+  - On appelle _projection canonique_ de $E$ sur $lquotient(E, tilde)$ l'application
+    $func(pi, E, lquotient(E, tilde), x, overline(x))$.
 ]
 
 #example[
@@ -659,7 +659,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
       x + n k | k in ZZ
     }
   $
-  on notera $qt(ZZ, n ZZ)$ pour $qt(ZZ, R_n)$.
+  on notera $lquotient(ZZ, n ZZ)$ pour $lquotient(ZZ, R_n)$.
 ]
 
 #definition[
@@ -696,18 +696,18 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #definition[
   Soit $E$ un ensemble et $tilde$ une relation d'équivalence sur $E$. On appelle _système de représentants_ pour $tilde$ un sous-ensemble $F$ de $E$ tel que
-  $ forall alpha in qt(E, tilde), exists! x in F, x in alpha $
-  c'est-à-dire $fun(pi_(|F), F, qt(E, tilde))$ est bijective.
+  $ forall alpha in lquotient(E, tilde), exists! x in F, x in alpha $
+  c'est-à-dire $func(pi_(|F), F, lquotient(E, tilde))$ est bijective.
 ]
 
 #definition[
-  Soit $E$ et $F$ deux ensembles, et $fun(f, E, F)$ une fonction. On dit que $f$ est _bien définie_ si
+  Soit $E$ et $F$ deux ensembles, et $func(f, E, F)$ une fonction. On dit que $f$ est _bien définie_ si
   $ forall x, y in E, x = y => f(x) = f(y) $
 ]
 
 #proposition[
   Soit $E$ et $F$ deux ensembles, et $tilde$ une relation d'équivalence.
-  Soit $fun(f, E, F)$ une application, $fun(pi, E, qt(E, tilde))$ la projection canonique. Alors il existe $fun(overline(f), qt(E, tilde), F)$ bien définie telle que $overline(f) compose pi = f$ si et seulement si
+  Soit $func(f, E, F)$ une application, $func(pi, E, lquotient(E, tilde))$ la projection canonique. Alors il existe $func(overline(f), lquotient(E, tilde), F)$ bien définie telle que $overline(f) compose pi = f$ si et seulement si
   $ forall x, y in E, x tilde y => f(x) = f(y). $
 ]
 
@@ -716,8 +716,8 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
   $arrow.r.double$ : Supposons que $overline(f)$ soit bien définie et que $overline(f) compose pi = f$. Soit $x, y in E$ tels que $x tilde y$, alors $pi(x) = pi(y)$, d'où $overline(f)(pi(x)) = overline(f)(pi(y))$, donc $f(x) = f(y)$.
 
   $arrow.l.double$ : Supposons que $forall x, y in E, x tilde y => f(x) = f(y)$. \
-  Soit $alpha in qt(E, tilde)$, on pose $x_alpha in E$ un représentant de $alpha$, on définit $overline(f)(alpha) = f(x_alpha)$.
-  Soit $beta in qt(E, tilde)$, si $beta = alpha$, alors $x_beta tilde x_alpha$, d'où $f(x_beta) = f(x_alpha)$, donc $overline(f)(beta) = overline(f)(alpha)$, c'est-à-dire $overline(f)$ est bien définie.
+  Soit $alpha in lquotient(E, tilde)$, on pose $x_alpha in E$ un représentant de $alpha$, on définit $overline(f)(alpha) = f(x_alpha)$.
+  Soit $beta in lquotient(E, tilde)$, si $beta = alpha$, alors $x_beta tilde x_alpha$, d'où $f(x_beta) = f(x_alpha)$, donc $overline(f)(beta) = overline(f)(alpha)$, c'est-à-dire $overline(f)$ est bien définie.
 ]
 
 == Classes modulo un sous-groupe
@@ -745,23 +745,23 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ]
 
 #notation[
-  Soit $(G, star)$ un groupe et $H$ un sous-groupe de $G$. Alors on note les espaces quotients $qt(G, H) := qt(G, attach(tilde, br: H))$ et $qtr(G, H) := qt(G, attach(tilde, bl: H))$.
+  Soit $(G, star)$ un groupe et $H$ un sous-groupe de $G$. Alors on note les espaces quotients $lquotient(G, H) := lquotient(G, attach(tilde, br: H))$ et $rquotient(G, H) := lquotient(G, attach(tilde, bl: H))$.
 ]
 
 
 #proposition[
-  Soit $(G, star)$ un groupe et $H$ un sous-groupe de $G$. Alors les ensembles $qt(G, H)$ et $qtr(G, H)$ sont isomorphes. En particulier si $G$ est fini, on a $|qt(G, H)| = |qtr(G, H)|$.
+  Soit $(G, star)$ un groupe et $H$ un sous-groupe de $G$. Alors les ensembles $lquotient(G, H)$ et $rquotient(G, H)$ sont isomorphes. En particulier si $G$ est fini, on a $|lquotient(G, H)| = |rquotient(G, H)|$.
 ]
 
 #proof[
-  On considère le morphisme $fun(phi, qt(G, H), qtr(G, H), x:x H, fx: H x^(-1))$, il est bien définie et admet pour inverse $fun(psi, qtr(G, H), qt(G, H), x: H x, fx: x^(-1) H)$, donc c'est un isomorphisme.
+  On considère le morphisme $func(phi, lquotient(G, H), rquotient(G, H), x H, H x^(-1))$, il est bien définie et admet pour inverse $func(psi, rquotient(G, H), lquotient(G, H), H x, x^(-1) H)$, donc c'est un isomorphisme.
 ]
 
 == Théorème du nombre de classes et théorème de Lagrange
 
 #definition[
   Soit $(G, star)$ un groupe et $H$ un sous-groupe de $G$. On appelle _indice_ de $H$ dans $G$
-  $ [G:H] := |qt(G, H)|. $
+  $ [G:H] := |lquotient(G, H)|. $
 ]
 
 #theorem(title: "Théorème du nombre de classes")[
@@ -795,17 +795,17 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 #theorem[
   Soit $(G, star)$ un groupe et $H$ un sous-groupe de $G$. Alors les énoncés suivants sont équivalents
   + $H$ est distingué.
-  + Il existe un morphisme $fun(phi, G, G)$ tel que $H = ker(phi)$.
-  + $qt(G, H)$ a une structure de groupes telle que la projection canonique $fun(pi, G, qt(G, H))$ est un morphisme de groupes.
+  + Il existe un morphisme $func(phi, G, G)$ tel que $H = ker(phi)$.
+  + $lquotient(G, H)$ a une structure de groupes telle que la projection canonique $func(pi, G, lquotient(G, H))$ est un morphisme de groupes.
 ]
 
 #proof[
   #linebreak()
   $1. => 3.$ : Supposons que $H$ est distingué. \
-  On considère l'application $fun(dot, qt(G, H) times qt(G, H), qt(G, H), x:(x H, y H), fx: x y H)$, alors elle est bien définie et $(qt(G, H), dot)$ forme un groupe.
+  On considère l'application $func(dot, lquotient(G, H) times lquotient(G, H), lquotient(G, H), (x H, y H), x y H)$, alors elle est bien définie et $(lquotient(G, H), dot)$ forme un groupe.
 
-  $3. => 2.$ : Supposons que $qt(G, H)$ a une structure de groupe. \
-  Alors la projection canonique $fun(pi, G, qt(G, H))$ est un morphisme de groupes et $ker(pi) = H$.
+  $3. => 2.$ : Supposons que $lquotient(G, H)$ a une structure de groupe. \
+  Alors la projection canonique $func(pi, G, lquotient(G, H))$ est un morphisme de groupes et $ker(pi) = H$.
 
   $2. => 1.$ : Supposons qu'il existe un tel morphisme $phi$. \
   Soit $h in H$ et $g in G$, alors
@@ -816,11 +816,11 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ]
 
 #corollary[
-  Soit $(G, star)$ un groupe et $H$ un sous-groupe de $G$. Si $G$ est abélien, alors $qt(G, H)$ a une structure de groupes.
+  Soit $(G, star)$ un groupe et $H$ un sous-groupe de $G$. Si $G$ est abélien, alors $lquotient(G, H)$ a une structure de groupes.
 ]
 
 #theorem(title: "Propriété d'universalité du groupe quotient")[
-  Soit $(G, star)$ un groupe et $H$ un sous-groupe distingué de $G$. Soit $(K, dot)$ un groupe, $fun(pi, G, qt(G, H))$ la projection canonique et $fun(phi, G, K)$ un morphisme de groupes. Alors il existe un morphisme $fun(overline(phi), qt(G, H), K)$ tel que $overline(phi) compose pi = phi$, si et seulement si $H subset ker(phi)$. Dans ce cas $im(overline(phi)) = im(phi)$ et $ker(overline(phi)) = ker(pi(phi))$.
+  Soit $(G, star)$ un groupe et $H$ un sous-groupe distingué de $G$. Soit $(K, dot)$ un groupe, $func(pi, G, lquotient(G, H))$ la projection canonique et $func(phi, G, K)$ un morphisme de groupes. Alors il existe un morphisme $func(overline(phi), lquotient(G, H), K)$ tel que $overline(phi) compose pi = phi$, si et seulement si $H subset ker(phi)$. Dans ce cas $im(overline(phi)) = im(phi)$ et $ker(overline(phi)) = ker(pi(phi))$.
 ] <thm-prop-univ-groupes>
 
 #proof[
@@ -833,50 +833,50 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ]
 
 #corollary(title: "Théorème d'isomorphisme")[
-  Soit $(G, star)$ et $(K, dot)$ deux groupes, et $fun(phi, G, K)$ un morphisme de groupes. Alors il existe un isomorphisme $fun(overline(phi), qt(G, ker(phi)), im(phi))$.
+  Soit $(G, star)$ et $(K, dot)$ deux groupes, et $func(phi, G, K)$ un morphisme de groupes. Alors il existe un isomorphisme $func(overline(phi), lquotient(G, ker(phi)), im(phi))$.
 ] <thm-iso>
 
 #proof[
-  On pose $H := ker(phi)$, alors par le @thm-prop-univ-groupes, il existe $fun(overline(phi), qt(G, ker(phi)), im(phi))$ telle que $overline(phi) compose pi = phi$.
+  On pose $H := ker(phi)$, alors par le @thm-prop-univ-groupes, il existe $func(overline(phi), lquotient(G, ker(phi)), im(phi))$ telle que $overline(phi) compose pi = phi$.
   Puisque $ker(overline(phi)) = pi(ker(phi)) = pi(H) = {e}$, $overline(phi)$ est injectif, et par définition $overline(phi)$ est surjectif. Donc $overline(phi)$ est un isomorphisme.
 ]
 
 #proposition[
-  Soit $(G, star)$ un groupe. Alors si $(G, star)$ est monogène, il existe $n in NN$ tel qu'il est isomorphe à $(ZZ, +)$ ou à $(qt(ZZ, n ZZ), +)$.
+  Soit $(G, star)$ un groupe. Alors si $(G, star)$ est monogène, il existe $n in NN$ tel qu'il est isomorphe à $(ZZ, +)$ ou à $(lquotient(ZZ, n ZZ), +)$.
 ]
 
 #proof[
-  Soit $x in G$ un générateur et $fun(phi, ZZ, G, x:m, fx:x^m)$. \
-  Alors $phi$ est un morphisme de groupes et $im(phi) = gen(x) = G$, donc $phi$ est surjectif. Soit $d := "ord"(x)$
-  - si $d = +oo$, alors $phi$ est injectif, et par le @thm-iso, $qt(ZZ, ker(phi)) tilde.eq im(phi)$, c'est-à-dire $ZZ tilde.eq G$,
-  - sinon $ker(phi) = d ZZ$, et par le @thm-iso, $qt(ZZ, ker(phi)) tilde.eq im(phi)$, c'est-à-dire $qt(ZZ, d ZZ) tilde.eq G$.
+  Soit $x in G$ un générateur et $func(phi, ZZ, G, m, x^m)$. \
+  Alors $phi$ est un morphisme de groupes et $im(phi) = gensubgroup(x) = G$, donc $phi$ est surjectif. Soit $d := "ord"(x)$
+  - si $d = +oo$, alors $phi$ est injectif, et par le @thm-iso, $lquotient(ZZ, ker(phi)) tilde.eq im(phi)$, c'est-à-dire $ZZ tilde.eq G$,
+  - sinon $ker(phi) = d ZZ$, et par le @thm-iso, $lquotient(ZZ, ker(phi)) tilde.eq im(phi)$, c'est-à-dire $lquotient(ZZ, d ZZ) tilde.eq G$.
 ]
 
 #proposition[
-  Soit $(G, star)$ un groupe et $x, y in G$ tels que $x star y = y star x$. Notons $a := "ord"(x)$ et $b := "ord"(y)$, alors $"ord"(x star y)$ divise $"ppcm"(a, b)$. De plus si $gen(x) sect gen(y) = {e}$, on a $"ord"(x star y) = "ppcm"(a, b)$
+  Soit $(G, star)$ un groupe et $x, y in G$ tels que $x star y = y star x$. Notons $a := "ord"(x)$ et $b := "ord"(y)$, alors $"ord"(x star y)$ divise $lcm(a, b)$. De plus si $gensubgroup(x) sect gensubgroup(y) = {e}$, on a $"ord"(x star y) = lcm(a, b)$
 ]
 
 #proof[
-  Posons $m := "ppcm"(a, b)$ et $d := "pgcd"(a, b)$. \
+  Posons $m := lcm(a, b)$ et $d := gcd(a, b)$. \
   Alors il existe $a', b' in ZZ$ tels que $a = d a'$ et $b = d b'$, d'où $m = d a' b'$. Alors
   $ (x star y)^m = x^m star y^m = (x^(d a'))^(b') star (y^(d b'))^(a') = e $
 
-  donc $"ord"(x star y)$ divise $"ppcm"(a, b)$.
+  donc $"ord"(x star y)$ divise $lcm(a, b)$.
 ]
 
 #proposition[
-  Soit $n, m in ZZ$. Alors $qt(ZZ, n ZZ) times qt(ZZ, m ZZ)$ est isomorphe à $ qt(ZZ, n m ZZ)$ si et seulement si $"pgcd"(n, m) = 1$.
+  Soit $n, m in ZZ$. Alors $lquotient(ZZ, n ZZ) times lquotient(ZZ, m ZZ)$ est isomorphe à $ lquotient(ZZ, n m ZZ)$ si et seulement si $gcd(n, m) = 1$.
 ]
 
 #proof[
   Soit $x in ZZ$.
   Notons $overline(x) "et" [x]$ les classes respectives de $x$ modulo $n "et" m$. \
-  $arrow.r.double$ : Supposons que $qt(ZZ, n ZZ) times qt(ZZ, m ZZ)$ est isomorphe à $qt(ZZ, n m ZZ) med$. Alors $qt(ZZ, n ZZ) times qt(ZZ, m ZZ)$ est cyclique. \
-  Soit $(a, b)$ un générateur de $qt(ZZ, n ZZ) times qt(ZZ, m ZZ)$, c'est-à-dire $"ord"((a, b)) = n m$, alors
-  $ "ppcm"("ord"(a), "ord"(b)) dot (a, b) = (overline(0), [0]) $
-  donc $n m|"ppcm"("ord"(a), "ord"(b))$, on en déduit $n m|"ppcm"(n, m)$, d'où $"pcgd"(n, m) = 1$.
+  $arrow.r.double$ : Supposons que $lquotient(ZZ, n ZZ) times lquotient(ZZ, m ZZ)$ est isomorphe à $lquotient(ZZ, n m ZZ) med$. Alors $lquotient(ZZ, n ZZ) times lquotient(ZZ, m ZZ)$ est cyclique. \
+  Soit $(a, b)$ un générateur de $lquotient(ZZ, n ZZ) times lquotient(ZZ, m ZZ)$, c'est-à-dire $"ord"((a, b)) = n m$, alors
+  $ lcm("ord"(a), "ord"(b)) dot (a, b) = (overline(0), [0]) $
+  donc $n m|lcm("ord"(a), "ord"(b))$, on en déduit $n m|lcm(n, m)$, d'où $"pcgd"(n, m) = 1$.
 
-  $arrow.l.double$ : Supposons que $"pgcd"(n, m) = 1$. Posons $fun(phi, ZZ, qt(ZZ, n ZZ)times qt(ZZ, m ZZ), x:x, fx:(overline(x), [x]))$. \
+  $arrow.l.double$ : Supposons que $gcd(n, m) = 1$. Posons $func(phi, ZZ, lquotient(ZZ, n ZZ)times lquotient(ZZ, m ZZ), x, (overline(x), [x]))$. \
   Alors $phi$ est bien un morphisme, et on a
   $
     ker(phi) &= {k in ZZ | (overline(k), [k]) = (overline(0), [0])} \
@@ -884,7 +884,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
     &= {k in ZZ | n m|k} = n m ZZ
   $
 
-  d'après le @thm-prop-univ-groupes, il existe un morphisme $fun(overline(phi), qt(ZZ, n m ZZ), qt(ZZ, n ZZ) times qt(ZZ, m ZZ))$ injectif. Enfin puisque $|qt(ZZ, n m ZZ)| = |qt(ZZ, n ZZ) times qt(ZZ, m ZZ)|$, on en déduit que $overline(phi)$ est un isomorphisme.
+  d'après le @thm-prop-univ-groupes, il existe un morphisme $func(overline(phi), lquotient(ZZ, n m ZZ), lquotient(ZZ, n ZZ) times lquotient(ZZ, m ZZ))$ injectif. Enfin puisque $|lquotient(ZZ, n m ZZ)| = |lquotient(ZZ, n ZZ) times lquotient(ZZ, m ZZ)|$, on en déduit que $overline(phi)$ est un isomorphisme.
 ]
 
 #pagebreak()
@@ -894,14 +894,14 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 == Définitions
 
 #definition[
-  Soit $(G, star)$ un groupe et $X$ un ensemble. On appelle _action_ de $G$ sur $X$ une application $fun(psi, G times X, X)$ qui vérifie les propriétés suivantes
+  Soit $(G, star)$ un groupe et $X$ un ensemble. On appelle _action_ de $G$ sur $X$ une application $func(psi, G times X, X)$ qui vérifie les propriétés suivantes
   + $forall x in X, psi(e, x) = x$,
   + $forall g, h in G, forall x in X, psi(g, psi(h, X)) = psi(g h, x)$.
   Dans ce cas, on notera $forall g in G, forall x in X, g star x := psi(g, x)$.
 ]
 
 #notation[
-  Soit $(G, star)$ un groupe et $X$ un ensemble. Si $G$ agit sur $X$, on note $G act X$.
+  Soit $(G, star)$ un groupe et $X$ un ensemble. Si $G$ agit sur $X$, on note $G acts X$.
 ]
 
 #definition([
@@ -946,7 +946,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ])
 
 #proposition([
-  Soit $(G, star)$ un groupe qui agit transitivement sur un ensemble $X$ et $x in X$. Alors l'application $fun(f_x, qt(G, G_x), X, x: g G_x, fx: g star x)$, est bien définie et est bijective.
+  Soit $(G, star)$ un groupe qui agit transitivement sur un ensemble $X$ et $x in X$. Alors l'application $func(f_x, lquotient(G, G_x), X, g G_x, g star x)$, est bien définie et est bijective.
 ])
 
 #proof([
@@ -983,18 +983,18 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ])
 
 #lemma([
-  Soit $(G, star)$ un groupe abélien d'ordre $n = a b$ tels que $pgcd(a, b) = 1$. Soit $k in NN$,
+  Soit $(G, star)$ un groupe abélien d'ordre $n = a b$ tels que $gcd(a, b) = 1$. Soit $k in NN$,
   $ G(k) := {x in G | x^k = e} $
   alors $G(k)$ est un sous-groupe de $G$ et $G$ est isomorphe à $G(a) times G(b)$.
 ]) <lem-comp-group>
 
 #proof([
-  Puisque $G$ est abélien, l'application $fun(phi_k, NN, G, x:x, fx:x^k)$ est un morphisme de groupes, donc $G(k) = ker(phi_k)$ est un sous-groupe de $G$.
+  Puisque $G$ est abélien, l'application $func(phi_k, NN, G, x, x^k)$ est un morphisme de groupes, donc $G(k) = ker(phi_k)$ est un sous-groupe de $G$.
 
-  Posons $fun(phi, G(a) times G(b), G, x: (x, y), fx:x star y)$, $G$ est abélien donc c'est un morphisme de groupes. Soit $x in G$, puisque $pgcd(a, b) = 1$, il existe $u, v in ZZ$ tels que $a u + b v = 1$, alors
+  Posons $func(phi, G(a) times G(b), G, (x, y), x star y)$, $G$ est abélien donc c'est un morphisme de groupes. Soit $x in G$, puisque $gcd(a, b) = 1$, il existe $u, v in ZZ$ tels que $a u + b v = 1$, alors
   $ x = x^(a u + b v) = x^(a u) star x^(b v) $
   or $(x^(b v))^a = (x^v)^n = e$ et $(x^(a u))^b = (x^u)^n = e$, d'où $x^(b v) in G(a)$ et $x^(a u) in G(b)$, on en déduit que $phi$ est surjectif puisque $x = phi(x^(b v), x^(a u))$. \
-  Soit $(x, y) in G(a) times G(b)$ tel que $phi(x, y) = e$, alors $x = y^(-1) in G(a) sect G(b)$, on en déduit $ord(x)|a$ et $ord(x)|b$, d'où $ord(x)|pgcd(a, b)=1$ et $x = y = e$, donc $phi$ est injectif. Donc $G$ est isomorphe à $G(a) times G(b)$
+  Soit $(x, y) in G(a) times G(b)$ tel que $phi(x, y) = e$, alors $x = y^(-1) in G(a) sect G(b)$, on en déduit $ord(x)|a$ et $ord(x)|b$, d'où $ord(x)|gcd(a, b)=1$ et $x = y = e$, donc $phi$ est injectif. Donc $G$ est isomorphe à $G(a) times G(b)$
 ])
 
 #definition([
@@ -1009,7 +1009,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #proof([
   Notons $G := {x_1, ..., x_n}$. \
-  Posons $fun(phi, H = gen(x_1) times ... times gen(x_n), G, x:(y_1, ..., y_n), fx: y_1...y_n)$, puisque $G$ est abélien $phi$ est un morphisme de groupes. Il est évidemment surjectif, alors d'après le @thm-iso, $G$ est isomorphe à $qt(H, ker(phi))$. De plus $|H| = product_(i = 1)^n p^(l_x_i) = p^(sum_(i=1)^n l_x_i)$, et $|G|$ divise $|qt(H, ker(phi))| dot |ker(phi)| = |H|$, donc $G$ est un $p$-groupe.
+  Posons $func(phi, H = gensubgroup(x_1) times ... times gensubgroup(x_n), G, (y_1, ..., y_n), y_1...y_n)$, puisque $G$ est abélien $phi$ est un morphisme de groupes. Il est évidemment surjectif, alors d'après le @thm-iso, $G$ est isomorphe à $lquotient(H, ker(phi))$. De plus $|H| = product_(i = 1)^n p^(l_x_i) = p^(sum_(i=1)^n l_x_i)$, et $|G|$ divise $|lquotient(H, ker(phi))| dot |ker(phi)| = |H|$, donc $G$ est un $p$-groupe.
 ])
 
 #theorem([
@@ -1023,26 +1023,26 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ])
 
 #example([
-  On considère $G := qt(ZZ, 2ZZ) times qt(ZZ, 5ZZ) times qt(ZZ, 5^2ZZ) times qt(ZZ, 7^3ZZ)$. Alors les composantes $p$-primaires de $G$ sont
+  On considère $G := lquotient(ZZ, 2ZZ) times lquotient(ZZ, 5ZZ) times lquotient(ZZ, 5^2ZZ) times lquotient(ZZ, 7^3ZZ)$. Alors les composantes $p$-primaires de $G$ sont
   $
-    G_2 &= qt(ZZ, 2ZZ) times {overline(0)} times {overline(0)} times {
+    G_2 &= lquotient(ZZ, 2ZZ) times {overline(0)} times {overline(0)} times {
       overline(0)
     } \
-    G_5 &= {overline(0)} times qt(ZZ, 5ZZ) times qt(ZZ, 5^2ZZ) times {
+    G_5 &= {overline(0)} times lquotient(ZZ, 5ZZ) times lquotient(ZZ, 5^2ZZ) times {
       overline(0)
     } \
     G_7 &= {overline(0)} times {overline(0)} times {
       overline(0)
-    } times qt(ZZ, 7^3ZZ).
+    } times lquotient(ZZ, 7^3ZZ).
   $
-  On considère $H := qt(ZZ, 6ZZ) times qt(ZZ, 60ZZ)$. On a $|H| = 6 dot 60 = (2 dot 3)(2^2 dot 3 dot 5)$, alors les composantes $p$-primaires de $H$ sont
+  On considère $H := lquotient(ZZ, 6ZZ) times lquotient(ZZ, 60ZZ)$. On a $|H| = 6 dot 60 = (2 dot 3)(2^2 dot 3 dot 5)$, alors les composantes $p$-primaires de $H$ sont
   $
     H_2 &= {(overline(a), [b]) in H | 2^3 a in 6ZZ "et" 2^3 b in 60ZZ} \
     &= {(overline(a), [b]) in H | 2^2 a in 3ZZ "et" 2 b in 15ZZ} \
     &= {(overline(a), [b]) in H | a in 3ZZ "et" b in 15ZZ} \
-    &tilde.eq qt(ZZ, 2ZZ) times qt(ZZ, 4ZZ) \
-    H_3 &tilde.eq qt(ZZ, 3ZZ) times qt(ZZ, 3ZZ) \
-    H_5 &tilde.eq {overline(0)} times qt(ZZ, 5ZZ).
+    &tilde.eq lquotient(ZZ, 2ZZ) times lquotient(ZZ, 4ZZ) \
+    H_3 &tilde.eq lquotient(ZZ, 3ZZ) times lquotient(ZZ, 3ZZ) \
+    H_5 &tilde.eq {overline(0)} times lquotient(ZZ, 5ZZ).
   $
 ])
 
@@ -1050,7 +1050,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #theorem([
   Soit $p$ un nombre premier et $(G, star)$ un $p$-groupe abélien.
-  Alors il existe $n_1, ..., n_k in NN$, uniquement déterminés par $G$, tels que $G$ est isomorphe à $ (qt(ZZ, p^k ZZ))^(n_k) times ... times (qt(ZZ, p ZZ))^(n_1). $
+  Alors il existe $n_1, ..., n_k in NN$, uniquement déterminés par $G$, tels que $G$ est isomorphe à $ (lquotient(ZZ, p^k ZZ))^(n_k) times ... times (lquotient(ZZ, p ZZ))^(n_1). $
 ])
 
 #proof([
@@ -1064,15 +1064,15 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 #corollary([
   Soit $(G, star)$ un groupe abélien fini.
   Alors il existe $n_1, ..., n_k in NN$, uniquement déterminés par $G$, tels que $n_1|...|n_k$ et $G$ est isomorphe à
-  $ qt(ZZ, n_1 ZZ) times ... times qt(ZZ, n_k ZZ). $
+  $ lquotient(ZZ, n_1 ZZ) times ... times lquotient(ZZ, n_k ZZ). $
 ])
 
 #example([
   Considérons le groupe
   $
-    G = qt(ZZ, 4ZZ) times (
-      qt(ZZ, 8ZZ)
-    )^2 times qt(ZZ, 3ZZ) times qt(ZZ, 9ZZ) times (qt(ZZ, 5ZZ))^2
+    G = lquotient(ZZ, 4ZZ) times (
+      lquotient(ZZ, 8ZZ)
+    )^2 times lquotient(ZZ, 3ZZ) times lquotient(ZZ, 9ZZ) times (lquotient(ZZ, 5ZZ))^2
   $
   dans lequel 3 est le nombre maximal de facteurs dans la décomposition d'un $p$-groupe ($p = 2$). On fait donc un tableau avec 3 colonnes
   #align(
@@ -1088,7 +1088,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
     ),
   )
   et on en déduit que
-  $ G tilde.eq qt(ZZ, 4ZZ) times qt(ZZ, 120ZZ) times qt(ZZ, 360ZZ). $
+  $ G tilde.eq lquotient(ZZ, 4ZZ) times lquotient(ZZ, 120ZZ) times lquotient(ZZ, 360ZZ). $
 ])
 
 == Facteurs invariants d'un groupe

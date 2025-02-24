@@ -5,7 +5,7 @@
 = Intégrale de Lebesgue et intégrale de Riemann
 
 #theorem([
-  Soit $a, b in overline(RR)$ et $fun(f, lr(\]a, b\[), RR)$ une fonction. Alors $f$ est *Lebesgue-intégrable* si et seulement si $f$ est *localement Riemann-intégrable* et que son intégrale impropre est *absolument convergente* sur $lr(\]a, b\[)$. Dans ce cas
+  Soit $a, b in overline(RR)$ et $func(f, lr(\]a, b\[), RR)$ une fonction. Alors $f$ est *Lebesgue-intégrable* si et seulement si $f$ est *localement Riemann-intégrable* et que son intégrale impropre est *absolument convergente* sur $lr(\]a, b\[)$. Dans ce cas
   $ integral_lr(\]a, b\[) f(x) dif lambda(x) = integral_a^b f(x) dif x. $ 
 ])
 
@@ -58,7 +58,7 @@
 == Continuité et dérivabilité sous le signe intégral
 
 #theorem([
-  Soit $fun(f, E times RR, overline(RR))$ une fonction et $y_0$ in $RR$. S'il existe une fonction $g$ *intégrable* telle que
+  Soit $func(f, E times RR, overline(RR))$ une fonction et $y_0$ in $RR$. S'il existe une fonction $g$ *intégrable* telle que
   + pour tout $y in RR, x |-> f(x, y)$ est *mesurable*,
   + pour $mu$-presque tout $x in E, y |-> f(x, y)$ est *continue en $y_0$*,
   + pour $mu$-presque tout $x in E$ et pour tout $y in RR, |f(x, y)| <= g(x)$,
@@ -66,7 +66,7 @@
 ])
 
 #theorem([
-  Soit $I$ un intervalle de $RR$, $fun(f, E times I, RR)$ une fonction. S'il existe une fonction $g$ *intégrable* telle que
+  Soit $I$ un intervalle de $RR$, $func(f, E times I, RR)$ une fonction. S'il existe une fonction $g$ *intégrable* telle que
   + pour tout $y in RR, y |-> f(x, y)$ est *intégrable*,
   + pour $mu$-presque tout $x in E, y |-> f(x, y)$ est *dérivable sur $I$*,
   + pour $mu$-presque tout $x in E$ et pour tout $y in RR, |partial_y f(x, y)| <= g(x)$,
@@ -77,14 +77,14 @@
 == Fubini
 
 #theorem([
-  Soit $mu$ et $nu$ deux mesures *$sigma$-finies*, et $fun(f, E times F, overline(RR)_+)$ une fonction *mesurable positive*. Alors
+  Soit $mu$ et $nu$ deux mesures *$sigma$-finies*, et $func(f, E times F, overline(RR)_+)$ une fonction *mesurable positive*. Alors
   + Les fonctions $x |-> integral_F f(x, y) dif nu(y)$ et $y |-> integral_E f(x, y) dif mu(x)$ sont *mesurables*,
   + on a l'égalité
     $ integral_(E times F) f(x, y) dif (mu times.circle nu)(x, y) = integral_E integral_F f(x, y) dif nu(y) dif mu(x) = integral_F integral_E f(x, y) dif mu(x) dif nu(y). $
 ])
 
 #theorem([
-  Soit $mu$ et $nu$ deux mesures *$sigma$-finies*, et $fun(f, E times F, RR)$ une fonction *intégrable*.
+  Soit $mu$ et $nu$ deux mesures *$sigma$-finies*, et $func(f, E times F, RR)$ une fonction *intégrable*.
   + pour $mu$-presque tout $x in E$, $y |-> f(x, y)$ et pour $mu$-presque tout $y in F$, $x |-> f(x, y)$ sont *intégrables*,
   + Les fonctions $x |-> integral_F f(x, y) dif nu(y)$ et $y |-> integral_E f(x, y) dif mu(x)$ sont *intégrables*,
   + on a l'égalité

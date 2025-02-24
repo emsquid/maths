@@ -23,7 +23,7 @@
 
 #definition([
   Soit $Omega$ un ensemble, $cal(F)$ une tribu sur $Omega$ et $PP$ une mesure de probabilité sur $(Omega, cal(F))$.
-  On appelle _espace probabilisé_ le triplet $(Omega, cal(F), PP)$, on dit que $Omega$ est l'univers et que $cal(F)$ sont les événements.
+  On appelle _espace probabilisé_ le triplet $(Omega, cal(F), PP)$, on dit que $Omega$ est _l'univers_ et que $cal(F)$ sont _les événements_.
 ])
 
 #remark([
@@ -32,8 +32,8 @@
 
 #definition([
   Soit $sequence(A)$ une suite d'événements sur $(Omega, cal(F), PP)$. On dit que $sequence(A)$ est un _système complet_ si elle vérifie :
-  + les $A_n$ sont disjoints deux à deux,
-  + la probabilité de l'union des $A_n$ est 1.
+  + les $A_n$ sont disjoints deux à deux : $forall i, j in NN, i != j => A_i != A_j$,
+  + la probabilité de l'union des $A_n$ est 1 : $PP(union.big_(n in NN) A_n) = 1$.
 ])
 
 #proposition([
@@ -296,7 +296,6 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
     => A^c sect B^c in cal(C)
     => A union B = (A^c sect B^c)^c in cal(C)
   $
-  // FIXME attach
   on a donc pour tout $N in NN$, $union.big_(n=0)^N A_n in cal(C)$, et par union croissante
   $
     union.big_(n in NN) A_n = union.big_(N in NN) underbraced(union.big_(n=0)^N A_n, "croissante") in cal(C)
@@ -320,10 +319,8 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 ])
 
 #corollary([
-  Soit $mu$ et $nu$ deux mesures de probabilités sur $(Omega, cal(F))$. S'il existe une famillesequence: (ind: "n") de parties $cal(A)$ stable par intersection finie sur laquelle $mu$ et $nu$ coïncident, alors elles coïncident sur $sigma(cal(A))$.
+  Soit $mu$ et $nu$ deux mesures de probabilités sur $(Omega, cal(F))$. S'il existe une famille de parties $cal(A)$ stable par intersection finie sur laquelle $mu$ et $nu$ coïncident, alors elles coïncident sur $sigma(cal(A))$.
 ])
-
-#pagebreak()
 
 == Variables et vecteurs aléatoires
 
@@ -361,7 +358,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 
 #proposition([
   Soit $(Omega, cal(F), PP)$ un espace probabilisé et $func(X, Omega, RR^d)$ un vecteur aléatoire.
-  Alors l'application $func(PP_X, borel(RR^d), RR_+,  A,  PP(X^(-1)(A)))$ est une mesure de probabilité sur $RR^d$.
+  Alors l'application $func(PP_X, borel(RR^d), RR_+,  A, PP(X in A) = PP(X^(-1)(A)))$ est une mesure de probabilité sur $RR^d$.
 ]) <prop-loi>
 
 #definition([
@@ -401,7 +398,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 == Fonction de répartition
 
 #definition([
-  Soit $mu$ une mesure de probabilité sur $(RR, borel(RR))$. On appelle _fonction de répartition_, notée $F_mu$, la fonction $func(F_mu, RR, RR_+,  t,  mu(]-oo, t]))$.
+  Soit $PP$ une mesure de probabilité sur $(RR, borel(RR))$. On appelle _fonction de répartition_, notée $F_PP$, la fonction $func(F_PP, RR, RR_+,  t,  PP(]-oo, t]))$.
 ])
 
 #definition([
@@ -587,20 +584,24 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
     + Si $X$ est intégrable, alors on a
       $ forall epsilon > 0, PP(abs(X - EE[X]) > epsilon) <= V(X) / epsilon^2. $
   ],
-)linebreak()
-+ Soit $epsilon > 0$, on remarque que l'on a toujours l'inégalité
-  $ epsilon ind({X >= epsilon}) <= X $
-  par passage à l'espérance on trouve
-  $ epsilon EE[ind({X >= epsilon})] <= EE[X] $
-  ce qui donne bien l'inégalité de Markov.
-+ On applique l'inégalité de Markov à $(X - EE[X])^2$.
-])(
-title: "Inégalité de Jensen",
-[
-Soit $(Omega, cal(F), PP)$ un espace probabilisable, $func(X, Omega, RR)$ une variable aléatoire intégrable et $func(phi, RR, RR)$ une fonction convexe bornée inférieurement.
-Alors
-$ phi(EE[X]) <= EE[phi(X)]. $
-],
+)
+
+#proof([
+  + Soit $epsilon > 0$, on remarque que l'on a toujours l'inégalité
+    $ epsilon ind({X >= epsilon}) <= X $
+    par passage à l'espérance on trouve
+    $ epsilon EE[ind({X >= epsilon})] <= EE[X] $
+    ce qui donne bien l'inégalité de Markov.
+  + On applique l'inégalité de Markov à $(X - EE[X])^2$.
+])
+
+#proposition(
+  title: "Inégalité de Jensen",
+  [
+    Soit $(Omega, cal(F), PP)$ un espace probabilisable, $func(X, Omega, RR)$ une variable aléatoire intégrable et $func(phi, RR, RR)$ une fonction convexe bornée inférieurement.
+    Alors
+    $ phi(EE[X]) <= EE[phi(X)]. $
+  ],
 )
 
 #theorem(
@@ -693,8 +694,6 @@ $ phi(EE[X]) <= EE[phi(X)]. $
 
 #proposition([
   Soit $(Omega, cal(F), PP)$ un espace probabilisable.
-  #set-maths()
-
   + Soit $func(X, Omega, RR^p)$ et $func(Y, Omega, RR^q)$ deux vecteurs aléatoires indépendants. Alors pour toutes fonction boréliennes $f$ et $g$, $f(X)$ et $g(Y)$ sont indépendants.
   + Soit $func(X_1\, ...\, X_m, Omega, RR^(d_i))$ des vecteurs aléatoires indépendants. Alors pour tout $1 <= n < m$, $(X_1, ..., X_n)$ et $(X_(n+1), ..., X_m)$ sont indépendants.
 ])
