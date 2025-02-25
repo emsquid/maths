@@ -4,7 +4,7 @@
 
 = Calcul différentiel
 
-== Inversion locale et fonctions implicites
+== Inversion et fonctions implicites
 
 #definition([
   Soit $k in NN without {0} union {+oo}$, $U$ et $V$ deux ouverts de $RR^n$, et $func(f, U, V)$ une application. On dit que $f$ est un _$C^k$-difféomorphisme_ de $U$ sur $V$ si :
@@ -48,23 +48,23 @@
 
 ])
 
-=== Théorème d'inversion locale
+=== Théorèmes d'inversion locale et globale
 
 #theorem(
   title: "Théorème d'inversion locale",
   [
-    Soit $U$ un ouvert non-vide de $RR^n$, $a$ un point de $U$ et $func(f, U, RR^n)$ une application de classe $C^k$.
-    Si $dd(f, a)$ est inversible, alors il existe un voisinage ouvert $V$ de $a$ et un voisinage ouvert $W$ de $f(a)$ tels que $func(f, V, W)$ est un $C^k$-difféomorphisme.
+    Soit $U$ un ouvert de $RR^n$, $func(f, U, RR^n)$ une application de classe $C^k$ et $a$ un point de $U$.
+    Si $dd(f, a)$ est un isomorphisme, alors il existe un voisinage ouvert $V$ de $a$ et un voisinage ouvert $W$ de $f(a)$ tels que $func(f, V, W)$ est un $C^k$-difféomorphisme.
   ],
 ) <thm-inversion-locale>
 
 #theorem(
   title: "Théorème d'inversion globale",
   [
-    Soit $U$ un ouvert non-vide de $RR^n$ et $func(f, U, RR^n)$ une application de classe $C^k$.
+    Soit $U$ un ouvert de $RR^n$ et $func(f, U, RR^n)$ une application de classe $C^k$.
     Si :
     + $f$ est injective sur $U$,
-    + $forall x in U, dd(f, x)$ est inversible.
+    + $forall x in U, dd(f, x)$ est un isomorphisme.
     Alors $f(U)$ est un ouvert de $RR^n$ et $func(f, U, f(U))$ est un $C^k$-difféomorphisme.
   ],
 ) <thm-inversion-globale>
@@ -73,7 +73,7 @@
   Soit $x in U$, alors d'après le théorème d'inversion locale il existe un voisinage ouvert $V_x$ de $x$ et un voisinage ouvert $W_f(x)$ de $f(x)$ tels que $func(f, V_x, W_f(x))$ est un $C^k$-difféomorphisme.
   En particulier $W_f(x) = f(V_x)$, et on en déduit que
   $ f(U) = union.big_(x in U) W_f(x) $
-  est un ouvert de $RR^n$ comme union d'ouverts. De plus puisque $f$ est injective sur $U$, on en déduit que $f$ est bijective de $U$ sur $f(U)$. Enfin $f$ et $f^(-1)$ sont respectivement de classe $C^k$ sur $U$ et $f(U)$. Donc $func(f, U, f(U))$ est un $C^k$-difféomorphisme.
+  est un ouvert de $RR^n$ comme union d'ouverts. De plus puisque $f$ est injective sur $U$, on en déduit que $f$ est bijective de $U$ sur $f(U)$. Enfin puisque la régularité est une notion locale $f$ et $f^(-1)$ sont respectivement de classe $C^k$ sur $U$ et $f(U)$. Donc $func(f, U, f(U))$ est un $C^k$-difféomorphisme.
 ])
 
 #examples([
@@ -142,7 +142,9 @@
   title: "Théorème des fonctions implicites",
   [
     Soit $U$ un ouvert de $RR^p times RR^q$, $(a, b)$ un point de $U$ et $func(f = (f_1, ..., f_q), U, RR^q)$ une application de classe $C^k$.
-    Si $f(a, b) = 0$ et la différentielle de $f$ par rapport à la deuxième variable en $(a, b)$ est inversible.
+    Si :
+    + $f(a, b) = 0$,
+    + la jacobienne de $f$ par rapport à la deuxième variable en $(a, b)$ est inversible.
     Alors il existe un voisinage ouvert $V$ de $a$, un voisinage ouvert $W$ de $b$, avec $V times W subset U$, et une application $func(phi, V, W)$ de classe $C^oo$ qui vérifie $b = phi(a)$, tels que :
     $ cases((x, y) in V times W, f(x, y) = 0) <==> cases(x in V, y = phi(x)). $
     De plus pour tout $x in V, dv(phi, x)(x) = -(dv(f, y)(x, phi(x)))^(-1) compose dv(f, x)(x, phi(x))$.

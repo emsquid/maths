@@ -14,16 +14,14 @@
   + $cal(F)$ est non-vide : $emptyset in cal(F)$,
   + la stabilité par passage au complémentaire : $forall A in cal(F), A^c in cal(F)$,
   + la stabilité par union dénombrable : $forall sequence(A) in cal(F)^NN, union.big_(n>=1) A_n in cal(F)$.
+  On dit que le couple $(Omega, cal(F))$ est un _espace probabilisable_ où $Omega$ est _l'univers_ et $cal(F)$ sont _les événements_.
 ])
 
 #definition([
-  Soit $Omega$ un ensemble et $cal(F)$ une tribu sur $Omega$.
-  On appelle _mesure de probabilité_ une mesure $func(PP, cal(F), RR_+)$ vérifiant $PP(Omega) = 1$.
-])
+  Soit $(Omega, cal(F))$ un espace probabilisable.
+  On appelle _mesure de probabilité_ sur $(Omega, cal(F))$ une mesure $func(PP, cal(F), RR_+)$ vérifiant $PP(Omega) = 1$.
 
-#definition([
-  Soit $Omega$ un ensemble, $cal(F)$ une tribu sur $Omega$ et $PP$ une mesure de probabilité sur $(Omega, cal(F))$.
-  On appelle _espace probabilisé_ le triplet $(Omega, cal(F), PP)$, on dit que $Omega$ est _l'univers_ et que $cal(F)$ sont _les événements_.
+  On dit que le triplet $(Omega, cal(F), PP)$ est un _espace probabilisé_.
 ])
 
 #remark([
