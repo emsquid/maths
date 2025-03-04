@@ -211,7 +211,7 @@
 #definition([
   Soit $X$ une partie de $RR^n$.
   On dit que $X$ est une _sous-variété de $RR^n$ de classe $C^k$ et de dimension $d in NN$_ si pour tout $x in X$, il existe un voisinage ouvert $U$ dans $RR^n$, un voisinage ouvert $V$ de $x$ et un $C^k$-difféomorphisme $func(phi, U, V)$ tels que :
-  $ V sect X = phi(U sect (RR^d times {0})). $
+  $ V inter X = phi(U inter (RR^d times {0})). $
   On appelle _codimension_ de $X$ l'entier $n - d$.
 ])
 
@@ -224,9 +224,9 @@
   + Un ouvert de $RR^n$ est une sous-variété de dimension $n$.
   + On considère le cercle $SS^1$, on pose $U' := ]0, +oo[ times ]-pi, pi[$, $V = RR^2 without {]-oo, 0] times {0}}$, ainsi que $func(psi, U', V, (r, theta), r (cos(theta), sin(theta)))$ qui est un difféomorphisme de classe $C^oo$. On a
     $
-      V sect SS^1 &= SS^1 without {(-1, 0)} \
+      V inter SS^1 &= SS^1 without {(-1, 0)} \
       &= psi({1} times bracket.r -pi, pi bracket.l) \
-      &= psi(U' sect ({1} times RR))
+      &= psi(U' inter ({1} times RR))
     $
     on prend alors $U: ]-pi, pi[ times ]0, +oo[$ et $func(phi, U, V, (theta, r), psi(r+1, theta))$, donc $SS^1$ est bien une sous-variété de $RR^2$ de classe $C^oo$ et de dimension 1.
 ])
@@ -244,16 +244,16 @@
 #theorem([
   Soit $X$ une partie de $RR^n$. Alors les conditions suivantes sont équivalentes :
   + (_redressement_) $X$ est une sous-variété de $RR^n$ classe $C^k$ et de dimension $d in {0, ..., n}$.
-  + (_implicite_) Pour tout $a in X$, il existe un voisinage ouvert $U$ de $a$ dans $RR^n$ et $func(f, U, RR^(n-d))$ une submersion en $a$ de classe $C^k$ tels que $U sect X = f^(-1)(f(a))$.
+  + (_implicite_) Pour tout $a in X$, il existe un voisinage ouvert $U$ de $a$ dans $RR^n$ et $func(f, U, RR^(n-d))$ une submersion en $a$ de classe $C^k$ tels que $U inter X = f^(-1)(f(a))$.
 ])
 
 #proof([
   #linebreak()
   $(1) arrow.r.double (2)$ : Supposons que $X$ est une sous-variété de $RR^n$ de classe $C^k$ et de dimension $d$. \
   Soit $a in X$, alors il existe un voisinage ouvert $U$ dans $RR^n$, un voisinage ouvert $V$ de $a$ et un $C^k$-difféomorphisme $func(phi, U, V)$ tels que
-  $ V sect X = phi(U sect (RR^d times {0})). $
+  $ V inter X = phi(U inter (RR^d times {0})). $
   On écrit $phi^(-1) = (g_1, ..., g_d, f_1, ..., f_(n - d))$, alors
-  $ V sect X = {x in V | f_1 (x) = ... = f_(n-d)(x) = 0}. $
+  $ V inter X = {x in V | f_1 (x) = ... = f_(n-d)(x) = 0}. $
   On pose $f := (f_1, ..., f_(n-d))$, puisque $phi$ est un difféomorphisme on en déduit que $dd(f, a)$ est surjective, donc $f$ est une submersion en $a$ de classe $C^k$.
 
   $(2) arrow.r.double (1)$ : Supposons que les hypothèses soient vérifiées.
@@ -263,7 +263,7 @@
     psi(x_1, ..., x_n) = (x_1 - a_1, ..., x_d - a_d, f_1 (x_(d+1)), ..., f_(n-d)(x_n))
   $
   alors $det(Jac(psi)(a)) = det(Jac(f)(a)) != 0$, quitte à restreindre $V$, $psi$ est un $C^k$-difféomorphisme de $V$ sur $U := psi(V)$. En prenant $phi := psi^(-1)$, on a bien
-  $ V sect X = phi(U sect (RR^d times {0})). $
+  $ V inter X = phi(U inter (RR^d times {0})). $
 ])
 
 #example([
@@ -293,27 +293,27 @@
 #theorem([
   Soit $X$ une sous-variété de $RR^n$ classe $C^k$ et de dimension $d$ et $a in X$ un point.
   Alors l'espace tangent $T_a X$ est un espace vectoriel de dimension $d$ et on a les caractérisations :
-  + S'il existe un voisinage ouvert $U$ de $RR^n$, un voisinage ouvert $V$ de $a$ et un $C^k$-difféomorphisme $func(phi, U, V)$ vérifiant $V sect X = phi(U sect (RR^d times {0}))$, alors $T_a X = dd(phi, phi^(-1)(a)) (RR^d times {0})$.
-  + S'il existe un voisinage ouvert $V$ de $a$ et une submersion en $a$ $func(f, V, RR^(n-d))$ de classe $C^k$ vérifiant $V sect X = f^(-1)(f(a))$, alors $T_a X = ker(dd(f, a))$.
+  + S'il existe un voisinage ouvert $U$ de $RR^n$, un voisinage ouvert $V$ de $a$ et un $C^k$-difféomorphisme $func(phi, U, V)$ vérifiant $V inter X = phi(U inter (RR^d times {0}))$, alors $T_a X = dd(phi, phi^(-1)(a)) (RR^d times {0})$.
+  + S'il existe un voisinage ouvert $V$ de $a$ et une submersion en $a$ $func(f, V, RR^(n-d))$ de classe $C^k$ vérifiant $V inter X = f^(-1)(f(a))$, alors $T_a X = ker(dd(f, a))$.
 ])
 
 #proof([
   + Supposons sans perte de généralité que $phi^(-1)(a) = 0$.
-    Soit $v in T_a X$, alors il existe $epsilon > 0$ et une courbe $func(gamma, bracket.r -epsilon\, epsilon bracket.l, V sect X)$ de classe $C^k$ vérifiant $gamma(0) = a$ et $gamma'(0) = v$.
-    On pose $delta := phi^(-1)(gamma)$, alors on a $im(delta) subset U sect (RR^d times {0})$, $delta(0) = 0$ et
+    Soit $v in T_a X$, alors il existe $epsilon > 0$ et une courbe $func(gamma, bracket.r -epsilon\, epsilon bracket.l, V inter X)$ de classe $C^k$ vérifiant $gamma(0) = a$ et $gamma'(0) = v$.
+    On pose $delta := phi^(-1)(gamma)$, alors on a $im(delta) subset U inter (RR^d times {0})$, $delta(0) = 0$ et
     $ delta'(t) = dd(phi^(-1), gamma(t))(gamma'(t)) $
     d'où $ delta'(0) = dd(phi^(-1), a)(v)$ et $v = dd(phi^(-1), a) phi (delta'(0))$, donc $T_a X subset dd(phi^(-1), a) phi (RR^d times {0})$. \
     Réciproquement, on montre de la même manière que $dd(phi^(-1), a) phi (RR^d times {0}) subset T_a X$. \
     Donc $T_a X = dd(phi^(-1), a) phi (RR^d times {0})$, on en déduit que $T_a X$ est un espace vectoriel de dimension $d$.
-  + Soit $v in T_a X$, alors il existe $epsilon > 0$ et une courbe $func(gamma, bracket.r -epsilon\, epsilon bracket.l, V sect X)$ de classe $C^k$ vérifiant $gamma(0) = a$ et $gamma'(0) = v$. Soit $t in ]-epsilon, epsilon[$, alors
+  + Soit $v in T_a X$, alors il existe $epsilon > 0$ et une courbe $func(gamma, bracket.r -epsilon\, epsilon bracket.l, V inter X)$ de classe $C^k$ vérifiant $gamma(0) = a$ et $gamma'(0) = v$. Soit $t in ]-epsilon, epsilon[$, alors
     $
-      gamma(t) in V sect X => (f compose gamma)(t) = f(a) => (f compose gamma)'(t) = 0
+      gamma(t) in V inter X => (f compose gamma)(t) = f(a) => (f compose gamma)'(t) = 0
     $
     or $(f compose gamma)(t) = dd(f, gamma(t))(gamma'(t))$ et $dd(f, a)(v) = 0$, donc $T_a X subset ker(dd(f, a))$. L'égalité des dimensions entraine l'égalité des espaces.
 ])
 
 #remark([
-  S'il existe un voisinage ouvert $V$ de $a$ et une submersion en $a$ $func(f, V, RR^(n-d))$ de classe $C^k$ vérifiant $V sect X = f^(-1)(f(a))$, alors $T_a X = span(gradient_f_1 (a), ..., gradient_f_(n-d) (a))^perp$.
+  S'il existe un voisinage ouvert $V$ de $a$ et une submersion en $a$ $func(f, V, RR^(n-d))$ de classe $C^k$ vérifiant $V inter X = f^(-1)(f(a))$, alors $T_a X = span(gradient_f_1 (a), ..., gradient_f_(n-d) (a))^perp$.
 ])
 
 === Extrema liés

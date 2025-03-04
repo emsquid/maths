@@ -1,7 +1,7 @@
-#import "@preview/great-theorems:0.1.1": *
-#import "@preview/rich-counters:0.2.2": *
 #import "@preview/fletcher:0.5.2": *
-#import "@preview/outrageous:0.3.0"
+#import "@preview/great-theorems:0.1.2": *
+#import "@preview/outrageous:0.4.0"
+#import "@preview/rich-counters:0.2.2": *
 #import "@local/mathematica:0.1.0": *
 
 // Counter and blocks definitions
@@ -59,7 +59,7 @@
   set document(title: title, author: authors)
 
   // String for authors
-  authors = if type(authors) == "string" {
+  authors = if type(authors) == str {
     authors
   } else {
     authors.join(" -- ")
@@ -112,10 +112,11 @@
   show outline.entry: it => {
     outrageous.show-entry(
       it,
-      font: (auto, none),
+      font: (auto,),
       font-weight: ("bold", auto),
-      body-transform: (level, body) => text(rgb(color), body),
-      fill: (none, align(right, outrageous.repeat(gap: 5pt)[$dot$])),
+      fill: (none, align(right, outrageous.repeat(text(black, $dot$), gap: 5pt))),
+      body-transform: (level, prefix, body) => text(rgb(color), body),
+      page-transform: (level, page) => text(black, page),
     )
   }
 
@@ -144,13 +145,15 @@
       }
       #v(0pt)
       #if date {
-        text(size: 13pt)[#lower(datetime.today().display("[day] [month repr:long] [year]"))]
+        text(size: 13pt)[#lower(
+            datetime.today().display("[day] [month repr:long] [year]"),
+          )]
       }
     ],
   )
 
   // Contents
-  outline(indent: auto)
+  outline()
   pagebreak()
 
   body

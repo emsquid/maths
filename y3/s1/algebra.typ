@@ -21,7 +21,7 @@
 ])
 
 #proposition([
-  Soit $E$ un $KK$-espace vectoriel, et $F$ et $G$ deux sous-espaces vectoriels de $E$. Alors $F sect G$ est un sous-espace vectoriel.
+  Soit $E$ un $KK$-espace vectoriel, et $F$ et $G$ deux sous-espaces vectoriels de $E$. Alors $F inter G$ est un sous-espace vectoriel.
 ])
 
 #definition([
@@ -53,7 +53,7 @@
 ])
 
 #remark([
-  Soit $E$ un $KK$-espace vectoriel, et $F$ et $G$ deux sous-espaces vectoriels de $E$. Alors $F$ et $G$ sont en somme directe si $F sect G = {0}$.
+  Soit $E$ un $KK$-espace vectoriel, et $F$ et $G$ deux sous-espaces vectoriels de $E$. Alors $F$ et $G$ sont en somme directe si $F inter G = {0}$.
 ])
 
 == Famille libre, famille génératrice et bases
@@ -103,7 +103,7 @@
 
 #theorem([
   Soit $E$ un $KK$-espace vectoriel, et $F$ et $G$ deux sous-espaces vectoriels de $E$. Alors
-  $ dim(F) + dim(G) = dim(F + G) + dim(F sect G). $
+  $ dim(F) + dim(G) = dim(F + G) + dim(F inter G). $
 ])
 
 #notation([
@@ -842,7 +842,7 @@
 
 #remark([
   Soit $A in O_n (RR)$ une matrice orthogonale. Alors on remarque que $det(A) = plus.minus 1$, on appelle _groupe spécial orthogonal_, le sous-groupe
-  $ S O_n (RR) := O_n (RR) sect "det"^(-1)(1). $
+  $ S O_n (RR) := O_n (RR) inter "det"^(-1)(1). $
 ])
 
 #definition([
@@ -863,7 +863,7 @@
 #remark([
   Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $f in cal(L)(E)$ un endomorphisme orthogonal.
   Alors on remarque que $det(f) = plus.minus 1$, on appelle _groupe spécial orthogonal_ le sous-groupe
-  $ S O(E) := O(E) sect "det"^(-1)(1). $
+  $ S O(E) := O(E) inter "det"^(-1)(1). $
 ])
 
 == Polynômes orthogonaux
@@ -898,7 +898,7 @@
 ])
 
 #proof([
-  $P_n$ et $Q_n$ appartiennent à la même droite $RR_n [X] sect RR_n [X]^perp$.
+  $P_n$ et $Q_n$ appartiennent à la même droite $RR_n [X] inter RR_n [X]^perp$.
 ])
 
 #definition([

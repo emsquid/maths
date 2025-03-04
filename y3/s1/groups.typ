@@ -164,14 +164,14 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ]
 
 #proposition[
-  Soit $(G, star)$ un groupe et $H_1, H_2$ deux sous-groupes de $G$. Alors $H_1 sect H_2$ est un sous-groupe de $G$.
+  Soit $(G, star)$ un groupe et $H_1, H_2$ deux sous-groupes de $G$. Alors $H_1 inter H_2$ est un sous-groupe de $G$.
 ] <prop-sect-sg>
 
 
 #proof[
-  + $e in H_1$ et $e in H_2$, donc $e in H_1 sect H_2$,
-  + soit $x, y in H_1 sect H_2$, alors $x, y in H_1$, puisque $H_1$ est un sous-groupe de $G$ on a $x star y^(-1) in H_1$, de la même manière on a $x star y^(-1) in H_2$, donc $x star y^(-1) in H_1 sect H_2$.
-  Donc d'après la @prop-sg-condense, $H_1 sect H_2$ est un sous-groupe de $G$.
+  + $e in H_1$ et $e in H_2$, donc $e in H_1 inter H_2$,
+  + soit $x, y in H_1 inter H_2$, alors $x, y in H_1$, puisque $H_1$ est un sous-groupe de $G$ on a $x star y^(-1) in H_1$, de la même manière on a $x star y^(-1) in H_2$, donc $x star y^(-1) in H_1 inter H_2$.
+  Donc d'après la @prop-sg-condense, $H_1 inter H_2$ est un sous-groupe de $G$.
 ]
 
 == Générateurs
@@ -186,13 +186,13 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #proposition[
   Soit $(G, star)$ un groupe et $S$ un sous-ensemble non-vide de $G$. Alors
-  $ gensubgroup(S) = attach(limits(sect.big_(H < G)), b: S subset H) H $
+  $ gensubgroup(S) = attach(limits(inter.big_(H < G)), b: S subset H) H $
   ou encore
   $gensubgroup(S) = {x_1 star ... star x_n | n in NN without {0}, forall i in {1, ..., n}, x_i in S "ou" x_i^(-1) in S}$.
 ]
 
 #proof[
-  Notons $F := {H < G | S subset H}$ et $H_S := sect.big_(H in F) H$. Puisque $G in F$, l'intersection est non-vide, et d'après la @prop-sect-sg, $H_S$ est un sous-groupe de $G$. De plus $H_S$ contient évidemment $S$. Enfin si $H_0$ est un sous-groupe de $G$ contenant $S$, on a $H_0 in F$, donc $H_0 subset H_S$. Donc $H_S$ est bien le plus petit sous-groupe de $G$ contenant $S$.
+  Notons $F := {H < G | S subset H}$ et $H_S := inter.big_(H in F) H$. Puisque $G in F$, l'intersection est non-vide, et d'après la @prop-sect-sg, $H_S$ est un sous-groupe de $G$. De plus $H_S$ contient évidemment $S$. Enfin si $H_0$ est un sous-groupe de $G$ contenant $S$, on a $H_0 in F$, donc $H_0 subset H_S$. Donc $H_S$ est bien le plus petit sous-groupe de $G$ contenant $S$.
 
   Notons $K_S := {x_1 star ... star x_n | n in NN without {0}, forall i in {1, ..., n}, x_i in S "ou" x_i^(-1) in S}$. On remarque que $K_S$ est stable par multiplication, par inverse et contient le neutre de $G$, donc d'après la @prop-sg-condense, $K_S$ est un sous-groupe de $G$. De plus $G_S$ contient $S$, donc $gensubgroup(S) subset G_S$. Réciproquement, puisque $gensubgroup(S)$ est un groupe, on en déduit que $forall x in K_S, x in gensubgroup(S)$, donc $K_S subset gensubgroup(S)$. Par double inclusion $gensubgroup(S) = K_S$.
 ]
@@ -214,7 +214,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
   + $forall n in ZZ, gensubgroup(n) = n ZZ$,
   + soit $H$ est un sous-groupe de $(ZZ, +)$, alors il existe $n in ZZ$ tel que $H = n ZZ$,
   + soit $a, b in ZZ$ avec $b != 0$, alors $b$ divise $a$ si et seulement si $gensubgroup(a) subset gensubgroup(b)$,
-  + soit $a, b in ZZ without {0}$, alors $gensubgroup(a, b) = gcd(a, b) ZZ$ et $gensubgroup(a) sect gensubgroup(b) = lcm(a, b) ZZ$.
+  + soit $a, b in ZZ without {0}$, alors $gensubgroup(a, b) = gcd(a, b) ZZ$ et $gensubgroup(a) inter gensubgroup(b) = lcm(a, b) ZZ$.
 ]
 
 #proof[
@@ -607,8 +607,8 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
   #linebreak()
   $arrow.r.double$ : Supposons que $sigma$ est paire. Alors $sigma$ est la composition d'un nombre pair de transpositions. On considère la permutation $(a, b) compose (c, d) in S_n$,
   - si ${a, b} = {c, d}$, alors $(a, b) compose (c, d) = id$,
-  - si ${a, b} sect {c, d} = {b} = {c}$, alors $(a, b) compose (c, d) = (a, b, d)$,
-  - si ${a, b} sect {c, d} = emptyset$, alors $(a, b) compose (c, d) = (a, b, c) compose (b, c, d)$,
+  - si ${a, b} inter {c, d} = {b} = {c}$, alors $(a, b) compose (c, d) = (a, b, d)$,
+  - si ${a, b} inter {c, d} = emptyset$, alors $(a, b) compose (c, d) = (a, b, c) compose (b, c, d)$,
   donc $(a, b) compose (b, c)$ est un produit de $3$-cycles. \
   $arrow.l.double$ : Supposons que $sigma$ est une composition de $3$-cycles. Alors $"sign"(sigma) = 1$, donc $sigma$ est paire.
 ]
@@ -664,7 +664,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 
 #definition[
   Soit $E$ un ensemble. On appelle _partition_ de $E$ une famille $(E_i)_(i in I)$ de sous-ensembles de $E$ qui vérifie les propriétés suivantes
-  + les sous-ensembles sont deux à deux disjoints, $forall i, j in I, i != j => E_i sect E_j = emptyset$,
+  + les sous-ensembles sont deux à deux disjoints, $forall i, j in I, i != j => E_i inter E_j = emptyset$,
   + l'union des sous-ensembles forme $E$, $union.sq.big_(i in I) E_i := union.big_(i in I) E_i = E$.
 ]
 
@@ -685,12 +685,12 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
   + $(a) => (b)$ : Supposons que $overline(x) = overline(y)$, alors $x in overline(x)$, donc $x in overline(y)$. \
     $(b) => (c)$ : Supposons que $x in overline(y)$, alors $y in overline(y)$, donc $x tilde y$. \
     $(c) => (a)$ : Supposons que $x tilde y$. Soit $z in overline(x)$, alors $z tilde x$, et par transitivité $z tilde y$, donc $z in overline(y)$. Réciproquement si $z in overline(y)$, alors $z in overline(x)$, donc $overline(x) = overline(y)$.
-  + Soit $x, y in E$. Si $overline(x) sect overline(y) != emptyset$, il existe $z in overline(x) sect overline(y)$ tel que $z tilde x$ et $z tilde y$, donc $x tilde y$ et $overline(x) = overline(y)$. \
+  + Soit $x, y in E$. Si $overline(x) inter overline(y) != emptyset$, il existe $z in overline(x) inter overline(y)$ tel que $z tilde x$ et $z tilde y$, donc $x tilde y$ et $overline(x) = overline(y)$. \
     Soit $x in E$, alors $x in overline(x) subset union.sq.big_(x in E) overline(x)$, donc $E = union.sq.big_(x in E) overline(x)$.
   +
     + Soit $x in E$, alors il existe $i in I$ tel que $x in E_i$, donc $x R x$.
     + Soit $x, y in E$, alors si $x R y$, il existe $i in I$ tel que $x, y in E_i$, donc $y R x$.
-    + Soit $x, y in E$, alors si $x R y$ et $y R z$, il existe $i, j in I$ tels que $x, y in E_i$ et $y, z in E_j$, mais puisque $(E_i)_(i in I)$, alors $y in E_i sect E_j$, puisqu'il s'agit d'une partition on a $i = j$, donc $x R z$.
+    + Soit $x, y in E$, alors si $x R y$ et $y R z$, il existe $i, j in I$ tels que $x, y in E_i$ et $y, z in E_j$, mais puisque $(E_i)_(i in I)$, alors $y in E_i inter E_j$, puisqu'il s'agit d'une partition on a $i = j$, donc $x R z$.
     Donc $R$ est une relation d'équivalence.
 ]
 
@@ -853,7 +853,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
 ]
 
 #proposition[
-  Soit $(G, star)$ un groupe et $x, y in G$ tels que $x star y = y star x$. Notons $a := "ord"(x)$ et $b := "ord"(y)$, alors $"ord"(x star y)$ divise $lcm(a, b)$. De plus si $gensubgroup(x) sect gensubgroup(y) = {e}$, on a $"ord"(x star y) = lcm(a, b)$
+  Soit $(G, star)$ un groupe et $x, y in G$ tels que $x star y = y star x$. Notons $a := "ord"(x)$ et $b := "ord"(y)$, alors $"ord"(x star y)$ divise $lcm(a, b)$. De plus si $gensubgroup(x) inter gensubgroup(y) = {e}$, on a $"ord"(x star y) = lcm(a, b)$
 ]
 
 #proof[
@@ -994,7 +994,7 @@ où chaque ligne et chaque colonne contient tous les éléments de $G$.
   Posons $func(phi, G(a) times G(b), G, (x, y), x star y)$, $G$ est abélien donc c'est un morphisme de groupes. Soit $x in G$, puisque $gcd(a, b) = 1$, il existe $u, v in ZZ$ tels que $a u + b v = 1$, alors
   $ x = x^(a u + b v) = x^(a u) star x^(b v) $
   or $(x^(b v))^a = (x^v)^n = e$ et $(x^(a u))^b = (x^u)^n = e$, d'où $x^(b v) in G(a)$ et $x^(a u) in G(b)$, on en déduit que $phi$ est surjectif puisque $x = phi(x^(b v), x^(a u))$. \
-  Soit $(x, y) in G(a) times G(b)$ tel que $phi(x, y) = e$, alors $x = y^(-1) in G(a) sect G(b)$, on en déduit $ord(x)|a$ et $ord(x)|b$, d'où $ord(x)|gcd(a, b)=1$ et $x = y = e$, donc $phi$ est injectif. Donc $G$ est isomorphe à $G(a) times G(b)$
+  Soit $(x, y) in G(a) times G(b)$ tel que $phi(x, y) = e$, alors $x = y^(-1) in G(a) inter G(b)$, on en déduit $ord(x)|a$ et $ord(x)|b$, d'où $ord(x)|gcd(a, b)=1$ et $x = y = e$, donc $phi$ est injectif. Donc $G$ est isomorphe à $G(a) times G(b)$
 ])
 
 #definition([

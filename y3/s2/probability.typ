@@ -37,15 +37,15 @@
 #proposition([
   Soit $sequence(A)$ un système complet sur $(Omega, cal(F), PP)$.
   Alors on a
-  $ forall B in cal(F), PP(B) = sum_(n=1)^(+oo) PP(B sect A_n). $
+  $ forall B in cal(F), PP(B) = sum_(n=1)^(+oo) PP(B inter A_n). $
 ])
 
 #proof([
-  On pose $C := union.big_(n>=1) A_n$, puisque $PP(C) = 1$, on a $PP(C^c) = 0$ d'où $PP(B sect C^c) = 0$. Soit $B in cal(F)$, on en déduit
+  On pose $C := union.big_(n>=1) A_n$, puisque $PP(C) = 1$, on a $PP(C^c) = 0$ d'où $PP(B inter C^c) = 0$. Soit $B in cal(F)$, on en déduit
   $
-    PP(B) = PP(B sect C) + underbraced(PP(B sect C^c), = 0)
-    = PP(union.big_(n>=1) B sect A_n)
-    = sum_(n=1)^(+oo) PP(B sect A_n).
+    PP(B) = PP(B inter C) + underbraced(PP(B inter C^c), = 0)
+    = PP(union.big_(n>=1) B inter A_n)
+    = sum_(n=1)^(+oo) PP(B inter A_n).
   $
 ])
 
@@ -65,7 +65,7 @@
     + Soit $sequence(A)$ une suite croissante d'événements. Alors on a
       $ lim_(n->+oo) PP(A_n) = PP(union.big_(n>=1) A_n). $
     + Soit $sequence(A)$ une suite décroissante d'événements. Alors on a
-      $ lim_(n->+oo) PP(A_n) = PP(sect.big_(n>=1) A_n). $
+      $ lim_(n->+oo) PP(A_n) = PP(inter.big_(n>=1) A_n). $
   ],
 )
 
@@ -84,10 +84,10 @@
 #definition([
   Soit $sequence(A)$ une suite d'événements de $(Omega, cal(F), PP)$.
   - On appelle _limite supérieure_ de la suite $sequence(A)$ la valeur
-    $ limsup_(n->+oo) A_n := sect.big_(n>=1) union.big_(k>=n) A_k $
+    $ limsup_(n->+oo) A_n := inter.big_(n>=1) union.big_(k>=n) A_k $
     intuitivement on considère les éléments qui appartiennent à une infinité d'événements.
   - On appelle _limite inférieure_ de la suite $sequence(A)$ la valeur
-    $ limsup_(n->+oo) A_n := union.big_(n>=1) sect.big_(k>=n) A_k. $
+    $ limsup_(n->+oo) A_n := union.big_(n>=1) inter.big_(k>=n) A_k. $
 ])
 
 #corollary([
@@ -95,7 +95,7 @@
   Alors on a
   $
     PP(limsup_(n->+oo) A_n) &= lim_(m->+oo) lim_(n->+oo) PP(union.big_(k = m)^n A_k) \
-    PP(liminf_(n->+oo) A_n) &= lim_(m->+oo) lim_(n->+oo) PP(sect.big_(k = m)^n A_k)
+    PP(liminf_(n->+oo) A_n) &= lim_(m->+oo) lim_(n->+oo) PP(inter.big_(k = m)^n A_k)
   $
 ])
 
@@ -281,7 +281,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 #lemma([
   Soit $cal(C)$ une classe monotone.
   Alors $cal(C)$ est une tribu si et seulement si elle est stable par intersection finie, c'est-à-dire :
-  $ forall A_1, ..., A_n in cal(C), sect.big_(k=1)^n A_n in cal(C). $
+  $ forall A_1, ..., A_n in cal(C), inter.big_(k=1)^n A_n in cal(C). $
 ]) <lem-classe-tribu>
 
 #proof([
@@ -291,8 +291,8 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
   Soit $sequence(A)$ une suite d'éléments de $cal(C)$. Puisque $cal(C)$ est stable par passage au complémentaire, $cal(C)$ est aussi stable par union finie, en effet
   $
     A, B, in cal(C) => A^c, B^c in cal(C)
-    => A^c sect B^c in cal(C)
-    => A union B = (A^c sect B^c)^c in cal(C)
+    => A^c inter B^c in cal(C)
+    => A union B = (A^c inter B^c)^c in cal(C)
   $
   on a donc pour tout $N in NN$, $union.big_(n=0)^N A_n in cal(C)$, et par union croissante
   $
@@ -313,7 +313,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 ) <thm-classe-monotone>
 
 #proof([
-  Soit $A in cal(C)(cal(A))$, on pose $cal(C)_A := {B in cal(C)(cal(A)) | A sect B in cal(C)(cal(A))}$. Puisque $cal(C)_A$ est une classe monotone contenant $A$, on a $cal(C)_A = cal(C)(cal(A))$. Donc $cal(C)(cal(A))$ est stable par intersection finie. D'après le @lem-classe-tribu $cal(C)(cal(A))$ est une tribu.
+  Soit $A in cal(C)(cal(A))$, on pose $cal(C)_A := {B in cal(C)(cal(A)) | A inter B in cal(C)(cal(A))}$. Puisque $cal(C)_A$ est une classe monotone contenant $A$, on a $cal(C)_A = cal(C)(cal(A))$. Donc $cal(C)(cal(A))$ est stable par intersection finie. D'après le @lem-classe-tribu $cal(C)(cal(A))$ est une tribu.
 ])
 
 #corollary([
@@ -348,7 +348,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 ])
 
 #proof([
-  + On remarque que pour tout $t in RR$ on a $S^(-1)(]-oo, t]) = sect.big_(n in NN) X^(-1)(]-oo, t])$ et que l'on peut écrire de la même manière pour $I$.
+  + On remarque que pour tout $t in RR$ on a $S^(-1)(]-oo, t]) = inter.big_(n in NN) X^(-1)(]-oo, t])$ et que l'on peut écrire de la même manière pour $I$.
   + On remarque que $X = lim_(n->+oo) X_n = limsup_(n->+oo) X_n = inf_(m->+oo) (sup_(n >= m) X_n)$.
 ])
 
@@ -375,7 +375,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
   [
     On considère $(Omega, cal(F), PP)$ avec $Omega = RR$, $cal(F) = borel(RR)$ et $PP$ la mesure uniforme sur $[0, 1]$. On prend $X = ind([0, p])$ avec $p in [0, 1]$. Soit $A in borel(RR)$, alors
     $
-      PP_X (A) &= PP(X^(-1) (A)) = PP(X^(-1)(A sect {0})) + PP(X^(-1)(A sect {1})) \
+      PP_X (A) &= PP(X^(-1) (A)) = PP(X^(-1)(A inter {0})) + PP(X^(-1)(A inter {1})) \
       &= delta_0 (A) PP(X^(-1)(0)) + delta_1 (A) PP(X^(-1)(1)) = delta_0 (A) (1 - p) + delta_1 (A) p
     $
     donc $PP_X = delta_0 (1-p) + delta_1 p$.
@@ -707,15 +707,15 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 #proof([
   Soit $A in borel(RR^q)$ et $B in borel(RR^q)$ alors
   $
-    PP(X in A, Y in B) &= sum_(x in cal(V)_X sect A) sum_(y in cal(V)_Y sect B) P(X = x, Y = y) \
-    &= sum_(x in cal(V)_X sect A) sum_(y in cal(V)_Y sect B) f(x)g(y) \
-    &= sum_(x in cal(V)_X sect A) f(x) sum_(y in cal(V)_Y sect B) g(y)
+    PP(X in A, Y in B) &= sum_(x in cal(V)_X inter A) sum_(y in cal(V)_Y inter B) P(X = x, Y = y) \
+    &= sum_(x in cal(V)_X inter A) sum_(y in cal(V)_Y inter B) f(x)g(y) \
+    &= sum_(x in cal(V)_X inter A) f(x) sum_(y in cal(V)_Y inter B) g(y)
   $
-  en particulier si on pose $B := RR^q$ et $c := sum_(y in cal(V)_Y sect B) g(y)$, on trouve
-  $ PP_X (A) = PP(X in A, Y in RR^q) = c sum_(x in cal(V)_X sect A) f(x) $
-  d'où pour tout $x in cal(V)_X, PP_X ({x}) = c f(x)$. On fait la même chose avec $A := RR^p$ et $d := sum_(x in cal(V)_X sect A) f(x)$. Mais $PP(X in RR^p, Y in RR^q) = c times d = 1$, donc $d = 1/c$. Enfin
+  en particulier si on pose $B := RR^q$ et $c := sum_(y in cal(V)_Y inter B) g(y)$, on trouve
+  $ PP_X (A) = PP(X in A, Y in RR^q) = c sum_(x in cal(V)_X inter A) f(x) $
+  d'où pour tout $x in cal(V)_X, PP_X ({x}) = c f(x)$. On fait la même chose avec $A := RR^p$ et $d := sum_(x in cal(V)_X inter A) f(x)$. Mais $PP(X in RR^p, Y in RR^q) = c times d = 1$, donc $d = 1/c$. Enfin
   $
-    PP(X in a, Y in B) &= sum_(x in cal(V)_X sect A) PP(X = x) sum_(y in cal(V)_Y sect B) PP(Y = y) \
+    PP(X in a, Y in B) &= sum_(x in cal(V)_X inter A) PP(X = x) sum_(y in cal(V)_Y inter B) PP(Y = y) \
     &= PP(X in A)PP(X in B)
   $
   donc $X$ et $Y$ sont indépendants.
