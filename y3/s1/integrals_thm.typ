@@ -67,7 +67,7 @@
 
 #theorem([
   Soit $I$ un intervalle de $RR$, $func(f, E times I, RR)$ une fonction. S'il existe une fonction $g$ *intégrable* telle que
-  + pour tout $y in RR, y |-> f(x, y)$ est *intégrable*,
+  + pour tout $y in RR, x |-> f(x, y)$ est *intégrable*,
   + pour $mu$-presque tout $x in E, y |-> f(x, y)$ est *dérivable sur $I$*,
   + pour $mu$-presque tout $x in E$ et pour tout $y in RR, |partial_y f(x, y)| <= g(x)$,
   alors la fonction $F$ $: y |-> integral_E f(x, y) dif mu(x)$ est *définie* et *dérivable sur $I$* avec

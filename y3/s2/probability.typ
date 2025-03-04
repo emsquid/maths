@@ -70,7 +70,7 @@
 )
 
 #proof([
-  + Pour tout $n >= 1$, on pose $B_n := A_n without A_(n-1)$ avec $A_0 = emptyset$, tel que les $sequence(B)$ forme un système complet sur $union.big_(n>=1) A_n$, on en déduit alors
+  + Pour tout $n >= 1$, on pose $B_n := A_n without A_(n-1)$ avec $A_0 = emptyset$, tel que les $sequence(B)$ forment un système complet sur $union.big_(n>=1) A_n$, on en déduit alors
     $
       PP(union.big_(n>=1) A_n) = PP(union.big_(n>=1) B_n) &= sum_(n=1)^(+oo) PP(B_n) = sum_(n=1)^(+oo) PP(A_n) - PP(A_(n-1))
     $
