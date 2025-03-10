@@ -83,10 +83,83 @@
 
 #definition([
   Soit $X$ un espace topologique et $sigma$ un $n$-simplexe singulier sur $X$.
-  On appelle _bord de $sigma$_, noté $partial_n$, le $(n-1)$-simplexe singulier sur $X$ défini par :
+  On appelle _bord de $sigma$_, noté $partial_n sigma$, le $(n-1)$-simplexe singulier sur $X$ défini par :
   $
-    partial_n sigma := sum_(k=0)^n (-1)^k sigma_i
+    partial_n sigma := sum_(k=0)^n (-1)^k sigma|_[e_0, ..., e_(k-1), e_(k+1), ..., e_n].
   $
-  où $sigma_i := sigma|_[e_1, ..., e_(k-1), e_(k+1), ..., e_n]$. // TODO
+  On appelle _morphisme bord_ l'application $func(partial_n, C_n (X), C_(n-1)(X))$ induite.
+])
 
+#proposition([
+  Soit $X$ un espace topologique. Alors $partial_n compose partial_(n+1) = 0$.
+])
+
+#proof([
+  Soit $sigma$ un $(n+1)$-simplexe singulier sur $X$. Alors
+  $
+    (partial_n compose partial_(n+1))(sigma)
+    &= &&partial_(n)(sum_(k=0)^(n+1) (-1)^k sigma|_[e_0, ..., e_(k-1), e_(k+1), ..., e_(n+1)]) \
+    &= &&sum_(k=0)^(n+1) (-1)^k partial_(n)(sigma|_[e_0, ..., e_(k-1), e_(k+1), ..., e_(n+1)]) \
+    &= &&sum_(0 <= k < l <= n) (-1)^(k + l) sigma|_[e_0, ..., e_(k-1), e_(k+1), ..., e_(l-1), e_(l+1), ..., e_(n+1)] \
+    & &&+ sum_(0 <= l < k <= n) (-1)^(k + l - 1) sigma|_[e_0, ..., e_(l-1), e_(l+1), ..., e_(k-1), e_(k+1), ..., e_(n+1)]) \
+    &= &&0.
+  $
+])
+
+== Complexe de chaines
+
+#definition([
+  Soit $sequence(C, n, ZZ)$ une suite de groupe abéliens munis de morphismes $func(partial_n, C_n, C_(n-1))$ allant de chaque espace vers le précédent tels que pour tout $k in ZZ$ on a $partial_k compose partial_(k+1) = 0$. On appelle _complexe de chaines_, noté $C_circle.filled.tiny$, la suite $(C_n, partial_n)_(n in ZZ)$.
+])
+
+#definition([
+  Soit $C_circle.filled.tiny$ un complexe de chaines et $k in ZZ$.
+  - On appelle _$n$-cycle_ un élément de $ker(partial_k)$.
+  - On appelle _$n$-bord_ un élément de $im(partial_(k+1))$.
+])
+
+#definition([
+  Soit $C_circle.filled.tiny$ un complexe de chaines et $k in ZZ$.
+  On appelle _$k$#super("e")-groupe d'homologie_, noté $upright(H)_k$, le quotient $upright(H)_k := lquotient(ker(partial_k), im(partial_(k+1)))$. On appelle _classes d'homologie_ les éléments de $upright(H)_k$.
+])
+
+#definition([
+  Soit $C_circle.filled.tiny$ un complexe de chaines et $k in ZZ$.
+  On dit que le complexe est _exact en $C_k$_ si $upright(H)_k$ est trivial (i.e. $upright(H)_k = {0}$).
+  - On dit que le complexe est _exact_ s'il est exact en tout $C_n$.
+  - On dit que le complexe est _acyclique_ s'il est exact en tout $C_n$ avec $n != 0$.
+])
+
+#definition([
+  Soit $X$ un espace topologique. On appelle _complexe de chaines singulier_ un complexe de chaines sur $X$.
+])
+
+== Morphisme de chaines
+
+#definition([
+  Soit $A_circle.filled.tiny$ et $B_circle.filled.tiny$ deux complexes de chaines, et $(func(f_n, A_n, B_n))_(n in ZZ)$ une suite de morphismes tels que pour tout $k in ZZ$ on a $partial_(B, k) compose f_k = f_(k-1) compose partial_(A, k)$.
+  On appelle _morphisme de chaines_, noté $func(f_circle.filled.tiny, A_circle.filled.tiny, B_circle.filled.tiny)$, la suite $(func(f_n, A_n, B_n))_(n in ZZ)$.
+])
+
+#proposition([
+  Soit $A_circle.filled.tiny$, $B_circle.filled.tiny$ et $C_circle.filled.tiny$ trois complexes de chaines, et $func(f_circle.filled.tiny, A_circle.filled.tiny, B_circle.filled.tiny)$ et $func(g_circle.filled.tiny, B_circle.filled.tiny, C_circle.filled.tiny)$ deux morphismes de chaines. Alors la composition $func(g_circle.filled.tiny compose f_circle.filled.tiny, A_circle.filled.tiny, C_circle.filled.tiny)$ est un morphisme de chaines.
+])
+
+#pagebreak()
+
+= Propriétés fondamentales de l'homologie singulière
+
+== Homologie d'un singleton
+
+#theorem([
+  Soit ${p}$ un espace singleton. Alors les groupes d'homologies de ${p}$ sont donnés par
+  $upright(H)_0 tilde.eq ZZ$ et pour tout $k in NN without {0}, upright(H)_k tilde.eq {0}$.
+])
+
+#proof([
+  Soit $k in NN$. Alors il existe un unique $k$-simplexe $func(sigma_k, Delta^k, {p})$ et il vérifie
+  $ partial_k sigma_k = cases(0 "si" k = 0 "ou" k "est impair", sigma_(k-1) "si" k != 0 "et" k "est pair") $
+  Si $k = 0$. Alors $H_0 = lquotient(gensubgroup(sigma_0), {0}) tilde.eq ZZ $. \
+  Si $k != 0 $ et $k$ est impair. Alors $H_k = lquotient(gensubgroup(sigma_k), gensubgroup(sigma_k)) tilde.eq {0}$. \
+  Si $k != 0 $ et $k$ est pair. Alors $H_k = lquotient({0}, {0}) tilde.eq {0}$. \
 ])
