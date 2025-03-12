@@ -378,7 +378,7 @@
 ])
 
 #definition([
-  Soit $(E)$ une équation différentielle et $(t_0, y_0) in RR times RR^n$.
+  Soit $(E)$ une équation différentielle d'ordre 1 et $(t_0, y_0) in RR times RR^n$.
   On appelle _problème de Cauchy_ avec donnée $(t_0, y_0)$ le système composé des équations $(E)$ et $y(t_0) = y_0$. On dit que l'équation $y(t_0) = y_0$ est la _condition initiale_ (ou de Cauchy).
 ])
 
@@ -393,7 +393,7 @@
 ])
 
 #remark([
-  Soit $(x_0, y_0) in RR times RR$. Alors $cal(D)_((x_0, y_0))$ a pour équation $y - y_0 = f(x_0, y_0)(x - y_0)$.
+  Soit $(x_0, y_0) in RR times RR$. Alors $cal(D)_((x_0, y_0))$ a pour équation $y - y_0 = f(x_0, y_0)(x - x_0)$.
 ])
 
 #examples([
@@ -403,3 +403,94 @@
     Soit $M := (x_0, y_0) in RR times RR$. Alors $cal(D)_M$ est la droite d'équation $y = y_0 + y_0 (x - x_0)$.
 
 ])
+
+#proposition([
+  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(I, y)$ une solution de cette équation.
+  Alors le graphe de $y$ est une courbe intégrale.
+])
+
+#proof([
+  Soit $M = (x_0, y_0)$ un point du graphe de $y$.
+  L'équation de la tangente au graphe en $M$ est donnée par
+  $ y - y_0 = y'(x_0)(x - x_0) = f(x_0, y_0)(x - x_0) $
+  on reconnait l'équation de $cal(D)_M$.
+])
+
+#definition([
+  Soit $U$ un ouvert de $RR times RR$, $y' = f(x, y)$ une équation différentielle d'ordre 1 et $m in RR$.
+  On appelle _isocline de pente $m$ associée à l'équation_, l'ensemble
+  $ Gamma_m := {(x, y) in U | f(x, y) = m}. $
+])
+
+=== Solutions maximales et solutions globales
+
+#definition([
+  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1, et $(I_1, y_1)$ et $(I_2, y_2)$ deux solutions de cette équation.
+  On dit que $(I_2, y_2)$ est un _prolongement de $y_1$_ si $I_1 subset I_2$ et $y_2|_I_1 = y_1$.
+])
+
+#definition([
+  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(I, y)$ une solution de cette équation.
+  On dit que $(I, y)$ est _maximale_ si elle n'admet pas de prolongement.
+])
+
+#example([
+  On considère l'équation différentielle d'ordre 1 donnée par $y' = y^2$.
+  Alors une solution maximale est $(lr(\]-oo\, 1\[), t |-> 1/(1-t))$.
+])
+
+#theorem([
+  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(I_1, y_1)$ une solution de cette équation.
+  Alors $(I_1, y_1)$ admet un prolongement $(I, y)$ maximal.
+])
+
+#proof([
+  On construit un prolongement maximal à droite en construisant par récurrence une suite croissante de prolongement, et on construit de la même manière un prolongement maximal à gauche.
+])
+
+#definition([
+  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(I, y)$ une solution de cette équation.
+  On suppose que $U$ s'écrit $U = J times K$ où $J$ est un ouvert de $RR$ et $K$ un ouvert de $RR^n$.
+  Alors on dit que $(I, y)$ est _globale_ si $I = J$.
+])
+
+#proposition([
+  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(I, y)$ une solution de cette équation.
+  Si $(I, y)$ est une solution globale, alors $(I, y)$ est une solution maximale.
+])
+
+#proposition([
+  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(I, y)$ une solution de cette équation.
+  Si $f$ est de classe $C^k$, alors $y$ est de classe $C^(k+1)$.
+])
+
+=== Equations intégrales et cylindre de sécurité
+
+#lemma([
+  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $func(y, I, RR^n)$ une fonction.
+  Alors $(I, y)$ est une solution du problème de Cauchy de condition initiale $(t_0, y_0)$ si et seulement si :
+  + $y$ est continue et $forall t in I, (t, y(t)) in U$,
+  + $forall t in I, y(t) = y_0 + rintegral(f(x, y(x)), t_0, t, x)$.
+])
+
+#proof([
+  #linebreak()
+  $arrow.r.double$ : On suppose que $(I, y)$ est solution de l'équation. Puisque $y$ est dérivable, $y$ est continue. De plus pour tout $t in I$, on a $(t, y(t)) in U$ et $ y'(t) = f(t, y(t))$, on intègre sur $]t_0, t[$ et on trouve
+  $ y(t) - y(t_0) = rintegral(f(x, y(x)), t_0, t, x) $
+  d'où $y(t) = y_0 + rintegral(f(x, y(x)), t_0, t, x)$.
+
+  $arrow.l.double$ : On suppose que $(I, y)$ vérifie les hypothèses. D'après le théorème fondamentale de l'analyse $y$ est dérivable et pour tout $t in I$, on a $y'(t) = f(t, y(t))$. De plus on a bien $y(t_0) = y_0$.
+])
+
+#proposition([
+  Soit $U$ un ouvert de $RR times RR^n$. Alors il existe un cylindre $C$ dans $U$ de la forme
+  $ C := [t - T, t + T] times B(y, r). $
+])
+
+// #definition([
+//   Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $C$ un cylindre dans $U$.
+//   On dit que $C$ est un _cylindre de sécurité_ si pour toute fonction $func(y, [t - T, t + T], B(y, r))$, la fonction $func(Phi(y), [t - T, t + T], overline(B(y, r)))$ définie par
+//   $ Phi(y)()$
+// ])
+
+

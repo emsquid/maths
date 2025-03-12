@@ -43,8 +43,6 @@
   box($cal(it)$),
 )
 
-#let ind(E) = $bb(1)_#E$
-#let borel(U) = $cal(B)(#U)$
 #let underbraced(body, text) = $attach(limits(underbrace(#body)), b: #text)$
 
 #let maths(
