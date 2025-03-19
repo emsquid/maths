@@ -842,18 +842,111 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
   On peut caractériser la convergence en loi par la fonction de répartition.
 ])
 
-#theorem(title: "Théoreme de Portemanteau", [
-  Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $M$ un espace métrique, $sequence(func(X_n, Omega, M))$ une suite de vecteurs aléatoires et $func(X, Omega, M)$ un vecteur aléatoire.
-  Alors les énoncés suivants sont équivalents :
-  + $sequence(X_n)$ converge en loi vers $X$.
-  + Pour toute fonction $func(f, M, RR)$ uniformément continue et bornée, on a
-    $ #E [f(X_n)] -->_(n->+oo) #E [f(X)]. $  
-  + Pour tout fermé $F in M$, on a
-    $ limsup_(n->+oo) Pr(X_n in F) <= Pr(X in F). $
-  + Pour tout ouvert $O in M$, on a
-    $ liminf_(n->+oo) Pr(X_n in O) >= Pr(X in O). $
-  + Pour tout $A in M$ tel que $Pr(X in boundary(A)) = 0$, on a
-    $ lim_(n->+oo) Pr(X_n in A) = Pr(X in A). $
+#theorem(
+  title: "Théoreme de Portemanteau",
+  [
+    Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $M$ un espace métrique, $sequence(func(X_n, Omega, M))$ une suite de vecteurs aléatoires et $func(X, Omega, M)$ un vecteur aléatoire.
+    Alors les énoncés suivants sont équivalents :
+    + $sequence(X_n)$ converge en loi vers $X$.
+    + Pour toute fonction $func(f, M, RR)$ uniformément continue et bornée, on a
+      $ #E [f(X_n)] -->_(n->+oo) #E [f(X)]. $
+    + Pour tout fermé $F in M$, on a
+      $ limsup_(n->+oo) Pr(X_n in F) <= Pr(X in F). $
+    + Pour tout ouvert $O in M$, on a
+      $ liminf_(n->+oo) Pr(X_n in O) >= Pr(X in O). $
+    + Pour tout $A in M$ tel que $Pr(X in boundary(A)) = 0$, on a
+      $ lim_(n->+oo) Pr(X_n in A) = Pr(X in A). $
+  ],
+) <thm-portemanteau>
 
+#proof([
+  #linebreak()
+  $(1) => (2)$ : Soit $func(f, M, RR)$ une fonction uniformément continue et bornée.
+  Alors en particulier $f$ est continue et bornée et on a bien
+  $ #E [f(X_n)] -->_(n->+oo) #E [f(X)]. $
+
+  $(2) => (3)$ : Soit $F in M$ un fermé.
+  On pose la fonction $func(f, RR, [0, 1])$ définie par :
+  $
+    forall x in RR, f(x) = cases(1 "si" x <= 0, 1 - x "si" 0 < x < 1, 0 "si" x >= 1)
+  $
+  Pour tout $k >= 1$, on pose $F_k := {x in M | d(x, F) <= 1/k}$ et $func(f_k, M, [0, 1], x, f(k d(x, F)))$ qui vaut :
+  $ forall x in M, f_(k)(x) = cases(1 - k d(x, F) "si" x in F_k, 0 "sinon") $
+  On remarque que pour tout $x in M$, on a
+  $ indicator(F)(x) <= f_(k)(x) <= indicator(F_k)(x) $
+  par passage à l'espérance et à la limite, on obtient
+  $ limsup_(n -> +oo) Pr(X_n in F) <= limsup_(n->+oo) #E [f_(k)(X_n)] $
+  puisque $f_k$ est uniformément continue et bornée, on a
+  $ limsup_(n -> +oo) Pr(X_n in F) <= #E [f_(k)(X)] <= Pr(X in F_k) $
+  puisque la suite $sequence(F_k, ind: k, dom: NN without {0})$ est décroissante et que les $F_k$ sont fermés, par passage à la limite et continuité de la mesure, on a
+  $ limsup_(n -> +oo) Pr(X_n in F) <= Pr(X in F). $
+
+  $(3) => (4)$ : Passage au complémentaire.
+
+  $(3) + (4) => (5)$ : $limsup_(n->+oo) Pr(X_n in A) = liminf_(n->+oo) Pr(X_n in A) = Pr(X in A)$.
+
+  $(5) => (1)$ : Soit $func(f, M, RR)$ une fonction continue et bornée.
+  Alors
+  $
+    #E [f(X_n)] = lintegral(Pr(f(X_n) > x), RR, x) = lintegral(Pr(X_n in f^(-1)(\]x\, +oo\[)), RR, x)
+  $
+  et par passage à la limite, on a
+  $
+    #E [f(X)] = lintegral(Pr(f(X) > x), RR, x) = lintegral(Pr(X in f^(-1)(\]x\, +oo\[)), RR, x)
+  $
+  mais puisque $f$ est continue, on a $boundary(f^(-1)(\]x\, +oo\[)) = f^(-1)({x})$ et on a
+  $
+    sum_(x in RR) Pr(X in boundary(f^(-1)(\]x\, +oo\[))) = sum_(x in RR) Pr(X in f^(-1)(x)) < +oo
+  $
+  donc ${x in RR | Pr(X in boundary(f^(-1)(\]x\, +oo\[))) > 0}$ est dénombrable et on a
+  $ lim_(n->+oo) Pr(X_n in f^(-1)(\]x\, +oo\[)) = Pr(X in f^(-1)(\]x\, +oo\[)) $
+  enfin par convergence dominée $#E [f(X_n)] = #E [f(X)]$.
 ])
 
+#lemma([
+  Soit $(Omega, cal(F))$ un espace probabilisable, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires qui converge en loi vers une constante $a in RR^d$. Alors
+  $ forall epsilon > 0, lim_(n->+oo) Pr(X_n in B(a, epsilon)) = 1. $
+])
+
+#proof([
+  Soit $epsilon > 0$. Puisque $B(a, epsilon)$ est ouvert, d'après la propriété (4) du @thm-portemanteau on a
+  $ liminf_(n -> +oo) Pr(X_n in B(a, epsilon)) >= Pr(a in B(a, epsilon)) = 1. $
+])
+
+#lemma([
+  Soit $(Omega, cal(F))$ un espace probabilisable, $sequence(func(X_n, Omega, RR^d))$ et $sequence(func(Y_n, Omega, RR^d))$ deux suites de vecteurs aléatoires qui convergent en loi respectivement vers un vecteur aléatoire #box($func(X, Omega, RR^d)$) et une constante $a in RR^d$.
+  Alors la suite $sequence((X_n, a))$ converge en loi vers $(X, a)$.
+])
+
+== Convergence en probabilité
+#definition([
+  Soit $(Omega, cal(F))$ un espace probabilisable, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires et $func(X, Omega, RR^d)$ un vecteur aléatoire.
+  On dit que la suite $sequence(X_n)$ _converge en probabilité_ vers $X$ si pour tout $epsilon > 0$, elle vérifie :
+  $ lim_(n->+oo) Pr(abs(X_n - X) > epsilon) = 0. $
+])
+
+#proposition([
+  Soit $(Omega, cal(F))$ un espace probabilisable, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires, $func(X, Omega, RR^d)$ et $func(Y, Omega, RR^d)$ deux vecteurs aléatoires.
+  Si $sequence(X_n)$ converge vers $X$ et $Y$ en probabilité, alors $X = Y$ presque sûrement.
+])
+
+=== Stabilité de la convergence en probabilité
+
+#definition([
+  Soit $(Omega, cal(F))$ un espace probabilisable et $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires. On dit que $sequence(X_n)$ est _tendue_ si pour tout $epsilon > 0$, il existe un compact $K in RR$ tel que :
+  $ forall n in NN, Pr(X_n in K) >= 1 - epsilon. $
+])
+
+#lemma([
+  Soit $(Omega, cal(F))$ un espace probabilisable, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires et $func(X, Omega, RR^d)$ un vecteur aléatoire.
+  Si $sequence(X_n)$ converge vers $X$ en loi et $X$ est presque sûrement fini, alors $sequence(X_n)$ est tendue.
+])
+
+#proposition([
+  Soit $(Omega, cal(F))$ un espace probabilisable, $sequence(func(X_n, Omega, RR^d))$ et $sequence(func(Y_n, Omega, RR^d))$ deux suites de vecteurs aléatoires qui convergent en probabilité respectivement vers deux vecteurs aléatoires #box($func(X, Omega, RR^d)$) et #box($func(Y, Omega, RR^d)$).
+  Alors pour toute fonction $func(f, RR^2, RR)$ continue, on a que $sequence(f(X_n, Y_n))$ converge vers $f(X, Y)$ en probabilité. En particulier :
+  + Pour tout $a, b in RR$, on a que $sequence(a X_n + b Y_n)$ converge vers $a X + b Y$ en probabilité.
+  + Pour toute fonction $func(f, RR, RR)$ continue, on a que $sequence(f(X_n))$ converge vers $f(X)$ en probabilité.
+  + $sequence(X_n Y_n)$ converge vers $X Y$ en probabilité.
+  
+])
