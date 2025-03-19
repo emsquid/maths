@@ -482,15 +482,62 @@
   $arrow.l.double$ : On suppose que $(I, y)$ vérifie les hypothèses. D'après le théorème fondamentale de l'analyse $y$ est dérivable et pour tout $t in I$, on a $y'(t) = f(t, y(t))$. De plus on a bien $y(t_0) = y_0$.
 ])
 
-#proposition([
-  Soit $U$ un ouvert de $RR times RR^n$. Alors il existe un cylindre $C$ dans $U$ de la forme
-  $ C := [t - T, t + T] times B(y, r). $
+#definition([
+  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1, $(t_0, y_0)$ un point de $U$ et $C = [t_0 - T, t_0 + T] times B(y_0, r)$ un cylindre dans $U$.
+  On dit que $C$ est un _cylindre de sécurité_ si toute solution $(I, y)$ du problème de Cauchy de condition initiale $(t_0, y_0)$ avec $I subset [t_0 - T, t_0 + T]$ reste contenue dans $overline(B)(y_0, r)$.
 ])
 
-// #definition([
-//   Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $C$ un cylindre dans $U$.
-//   On dit que $C$ est un _cylindre de sécurité_ si pour toute fonction $func(y, [t - T, t + T], B(y, r))$, la fonction $func(Phi(y), [t - T, t + T], overline(B(y, r)))$ définie par
-//   $ Phi(y)()$
-// ])
+#proposition([
+  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(t_0, y_0)$ un point de $U$.
+  Alors il existe $T > 0$ tel que $C = [t_0 - T, t_0 + T] times B(y_0, r)$ soit un cylindre de sécurité.
+])
 
+#proof([
+  On prend un cylindre $C_0 = [t_0 - T_0, t_0 + T_0] times B(y_0, r_0) subset U$. Puisque $C_0$ est fermé et borné dans $RR^n$, $C_0$ est compact dans $RR^n$. Puisque $f$ est continue sur $C_0$, elle est bornée sur $C_0$.
+  Posons $M := max_((t, y) in C_0) norm(f(t, y))$. On suppose que $f equiv.not 0$ sur $C_0$, alors on pose $T := min(T_0, r_0 / M)$ et le cylindre $C := [t_0 - T, t_0 + T] times B(y_0, r_0)$.
+  Soit $(I, y)$ une solution du problème de Cauchy de condition initiale $(t_0, y_0)$ avec $I subset [t_0 - T, t_0 + T]$. Alors pour tout $t in I$, on a
+  $
+    norm(y(t) - y_0) = norm(rintegral(f(x, y(x)), t_0, t, x)) <= rintegral(norm(f(x, y(x))), t_0, t, x) <= M norm(t-t_0) <= r_0
+  $
+  c'est-à-dire $y(t) in overline(B)(y_0, r_0)$. Donc $C$ est un cylindre de sécurité.
+])
 
+=== Théorème de Cauchy-Péano-Arzéla
+
+#theorem([
+  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1, $(t_0, y_0)$ un point de $U$ et $C = [t_0 - T, t_0 + T] times B(y_0, r)$ un cylindre de sécurité. // avec T <= min(T_0, r_0/M)
+  Alors il existe une solution $(I, y)$ du problème de Cauchy de condition initiale $(t_0, y_0)$telle que $y(I) subset B(y_0, r)$
+])
+
+#corollary([
+  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(t_0, y_0)$ un point de $U$.
+  Alors il existe une solution $(I, y)$ maximale, de plus $I$ est ouvert.
+])
+
+=== Théorème de Cauchy-Lipschitz
+
+#definition([
+  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1.  
+  On dit que $f$ est _localement lipschitzienne_ par rapport à la variable $y$ si pour tout point $(t_0, y_0)$ dans $U$, il existe un cylindre $C = [t_0 - T, t_0 + T] times B(y_0, r)$ dans $U$ et une constante $k >= 0$ tels que $f$ soit $k$-lipschitzienne par rapport à la variable $y$ sur $C$ :
+  $ forall (t, y_1), (t_, y_2) in C, norm(f(t, y_1) - f(t, y_2)) <= k abs(y_1 - y_2). $
+])
+
+#remark([
+  On considère $f = (f_1, ..., f_n)$.
+  Si $f$ admet des dérivées partielles par rapport à la variable $y$ continues sur $U$.
+  Alors en appliquant le théorème des accroissements finis on obtient que $f$ est localement lipschitzienne par rapport à la variable $y$.
+  Cela est vrai en particulier si $f$ est $C^1$.
+])
+
+#lemma([
+  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1, $(t_0, y_0)$ un point de $U$ et $C_0 = [t_0 - T_0, t_0 + T_0] times B(y_0, r_0)$ un cylindre sur lequel $f$ est $k$-lipschitzienne par rapport à la variable $y$. 
+  Posons $M := sup_((t, y) in C_0) norm(f(t, y))$, $T := min(T_0, r_0 / M)$ et $C := [t_0 - T, t_0 + T] times B(y_0, r_0)$.
+  Alors pour tout couple $(I_1, y_1), (I_2, y_2)$ de solutions du problème de Cauchy de condition initiale $(t_0, y_0)$, on a
+  $ forall t in [t_0 - T, t_0 + T], y_1 (t) = y_2 (t). $
+])
+
+#theorem([
+  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(t_0, y_0)$ un point de $U$.
+  Si $f$ est localement lipschitzienne par rapport à la variable $y$, alors pour tout cylindre de sécurité $C = [t_0 - T, t_0 + T] times B(y_0, r)$, le problème de Cauchy de condition initiale $(t_0, y_0)$ admet une unique solution sur $[t_0 - T, t_0 + T]$.
+  
+])
