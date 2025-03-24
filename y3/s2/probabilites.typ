@@ -948,5 +948,4 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
   + Pour tout $a, b in RR$, on a que $sequence(a X_n + b Y_n)$ converge vers $a X + b Y$ en probabilité.
   + Pour toute fonction $func(f, RR, RR)$ continue, on a que $sequence(f(X_n))$ converge vers $f(X)$ en probabilité.
   + $sequence(X_n Y_n)$ converge vers $X Y$ en probabilité.
-  
 ])

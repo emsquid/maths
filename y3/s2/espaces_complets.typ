@@ -134,6 +134,52 @@
 
 #proof([
   Notons $d$ la dimension de $E$ et $(e^1, ..., e^d)$ une base de $E$. Puisque $E$ est de dimension finie $norm(dot)$ est équivalente à $norm(dot, oo)$. Soit $sequence(x_n)$ une suite de Cauchy. Alors
-  $ forall epsilon > 0, exists N in NN, forall p, q in NN, p >= N "et" q >= N => forall i in {1, ..., d}, abs(u^i_p - u^i_q) <= epsilon $
+  $
+    forall epsilon > 0, exists N in NN, forall p, q in NN, p >= N "et" q >= N => forall i in {1, ..., d}, abs(u^i_p - u^i_q) <= epsilon
+  $
   on en déduit que pour tout $i in {1, ..., d}$, la suite $sequence(x^i_n)$ est de Cauchy dans $RR$ et converge vers une limite $x^i in RR$. Alors $sequence(x_n)$ converge vers une limite $x := (x^1, ..., x^d) in E$. Donc $E$ est un espace de Banach.
+])
+
+= Complétude des espaces de fonctions continues
+
+#proposition([
+  Soit $(E, norm(dot)_E)$ et $(F, norm(dot)_F)$ deux espaces vectoriels normés, $A$ un sous-ensemble de $E$ et $(C_b^0 (A, F), norm(dot)_oo)$ l'espace vectoriel normé des fonctions continues et bornées de $A$ dans $F$.
+  Si $F$ est un espace de Banach, alors $C_b^0 (A, F)$ est aussi un espace de Banach.
+])
+
+#proof([
+  Soit $sequence(f_n)$ une suite de Cauchy d'éléments de $C_b^0 (A, F)$.
+  Soit $epsilon>0$, alors puisque la suite $sequence(f_n)$ est de Cauchy, il existe $N in NN$ tel que
+  $
+    forall p, q in NN, p >= N "et" q >= N => forall a in A, norm(f_p (a) - f_q (a))_F <= epsilon
+  $
+  en particulier, pour tout $a in A$, la suite $sequence(f_n (a))$ est de Cauchy dans $F$.
+  Puisque $F$ est complet, la suite $sequence(f_n (a))$ converge vers $f(a) in F$.
+  Montrons que la fonction $f$ est continue et bornée.
+
+  On remarque en passant à la limite que l'on peut écrire
+  $ forall q in NN, q >= N => forall a in A, norm(f(a) - f_n (a)) <= epsilon $
+  donc la suite $sequence(f_n)$ converge uniformément vers $f$. Puisque les $f_n$ sont continues, la fonction $f$ est continue.
+
+  De la même manière en remarque que pour tout $a in A$, on a $norm(f(a) - f_N (a))_F <= 1$, par une inégalité triangulaire inversée, on obtient
+  $ norm(f(a))_F <= 1 + norm(f_N (a))_F $
+  donc la fonction $f$ est bornée.
+])
+
+= Théorème du point fixe de Banach-Picard
+
+#lemma([
+  Soit $(E, norm(dot))$ un espace de Banach et $sum_(n in NN) u_n$ une série à termes dans $E$.
+  Si $sum_(n in NN) u_n$ converge absolument, alors $sum_(n in NN) u_n$ converge simplement.
+])
+
+#proof([
+  Notons $sequence(U_n)$ la suite des sommes partielles de $sum_(n in NN) u_n$.
+  Soit $M, N in NN$ tels que #box($M >= N$), alors par une inégalité triangulaire, on obtient
+  $
+    norm(U_M - U_N) = norm(sum_(n=N+1)^M u_n) <= sum_(n=N+1)^M norm(u_n) = sum_(n=0)^M norm(u_n) - sum_(n=0)^(N) norm(u_n) -->_(M, N -> +oo) 0
+  $
+  donc la suite $sequence(U_n)$ est de Cauchy, puisque $E$ est un espace complet, la suite $sequence(U_n)$ converge.
+  Donc la série $sum_(n in NN) u_n$ converge simplement
+  // TODO
 ])
