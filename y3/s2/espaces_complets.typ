@@ -171,7 +171,7 @@
 #lemma([
   Soit $(E, norm(dot))$ un espace de Banach et $sum_(n in NN) u_n$ une série à termes dans $E$.
   Si $sum_(n in NN) u_n$ converge absolument, alors $sum_(n in NN) u_n$ converge simplement.
-])
+]) <lem-cv-abs-sim>
 
 #proof([
   Notons $sequence(U_n)$ la suite des sommes partielles de $sum_(n in NN) u_n$.
@@ -181,5 +181,55 @@
   $
   donc la suite $sequence(U_n)$ est de Cauchy, puisque $E$ est un espace complet, la suite $sequence(U_n)$ converge.
   Donc la série $sum_(n in NN) u_n$ converge simplement
-  // TODO
 ])
+
+#definition([
+  Soit $(E, norm(dot))$ un espace vectoriel normé, $F$ un sous-ensemble de $E$ et $func(f, F, F)$ une application.
+  On dit que $f$ est _contractante_ s'il existe $alpha in [0, 1[$ tel que :
+  $ forall x, y in F, norm(f(x) - f(y)) <= alpha norm(x - y). $
+])
+
+#theorem(
+  title: "Théorème du point fixe",
+  [
+    Soit $(E, norm(dot))$ un espace de Banach, $F$ un sous-ensemble fermé de $E$ et $func(f, F, F)$ une application contractante.
+    Alors $f$ admet une unique point fixe sur $F$.
+    De plus, la suite récurrente définie par :
+    $ cases(x_0 in F, forall n in NN\, x_(n+1) = f(x_n)) $
+    converge vers cette unique point fixe.
+  ],
+) <thm-point-fixe>
+
+#proof([
+  Puisque $f$ est contractante, il existe $alpha in [0, 1[$ tel que :
+  $ forall x, y in F, norm(f(x) - f(y)) <= alpha norm(x - y). $
+  Considérons la suite $sequence(x_n)$ et la série $sum_(n in NN) (x_(n+1) - x_n)$.
+  Soit $n in NN without {0}$, on remarque que :
+  $ norm(x_(n+1) - x_n) = norm(f(x_n) - f(x_(n-1))) $
+  puisque $f$ est contractante, on a :
+  $ norm(x_(n+1) - x_n) <= alpha norm(x_n - x_(n-1)) $
+  par récurrence directe, on obtient :
+  $ norm(x_(n+1) - x_n) <= alpha^n norm(x_1 - x_(0)) $
+  donc d'après le théorème de comparaison, la série $sum_(n in NN) (x_(n+1) - x_n)$ converge absolument.
+  Or comme $E$ est un espace de Banach, d'après le @lem-cv-abs-sim, la série $sum_(n in NN) (x_(n+1) - x_n)$ converge simplement.
+  En particulier la suite des sommes partielles :
+  $ S_n = sum_(k=0)^(n-1) (x_(k+1) - x_k) = x_n - x_0 $ 
+  converge vers un élément de $E$.
+  On en déduit que la suite $sequence(x_n)$ converge vers un élément de $E$.
+  Puisque la suite $sequence(x_n)$ est dans $F$, qui est fermé, elle converge vers un élément $l in F$.
+  Enfin puisque $f$ est contractante, elle est continue, par passage à la limite de l'égalité $x_(n+1) = f(x_n)$, on obtient $f(l) = l$.
+
+
+  Soit $l, m in F$ deux points fixes de $f$. Puisque $f$ est contractante, on a :
+  $ norm(l - m) = norm(f(l) - f(m)) <= alpha norm(l - m) $
+  d'où $norm(l - m) = 0$ et $l = m$.
+])
+
+#remark([
+  Le @thm-point-fixe possède de nombreuses applications :
+  - Le théorème de Cauchy-Lipschitz qui donne l'existence de solutions d'équations différentielles.
+  - Le théorème d'inversion locale.
+  - La résolution d'équations de dérivées partielles.
+])
+
+
