@@ -904,7 +904,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 ])
 
 #lemma([
-  Soit $(Omega, cal(F))$ un espace probabilisable, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires qui converge en loi vers une constante $a in RR^d$. Alors
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires qui converge en loi vers une constante $a in RR^d$. Alors
   $ forall epsilon > 0, lim_(n->+oo) Pr(X_n in B(a, epsilon)) = 1. $
 ])
 
@@ -920,32 +920,139 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 
 == Convergence en probabilité
 #definition([
-  Soit $(Omega, cal(F))$ un espace probabilisable, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires et $func(X, Omega, RR^d)$ un vecteur aléatoire.
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires et $func(X, Omega, RR^d)$ un vecteur aléatoire.
   On dit que la suite $sequence(X_n)$ _converge en probabilité_ vers $X$ si pour tout $epsilon > 0$, elle vérifie :
   $ lim_(n->+oo) Pr(abs(X_n - X) > epsilon) = 0. $
 ])
 
 #proposition([
-  Soit $(Omega, cal(F))$ un espace probabilisable, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires, $func(X, Omega, RR^d)$ et $func(Y, Omega, RR^d)$ deux vecteurs aléatoires.
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires, $func(X, Omega, RR^d)$ et $func(Y, Omega, RR^d)$ deux vecteurs aléatoires.
   Si $sequence(X_n)$ converge vers $X$ et $Y$ en probabilité, alors $X = Y$ presque sûrement.
 ])
 
 === Stabilité de la convergence en probabilité
 
 #definition([
-  Soit $(Omega, cal(F))$ un espace probabilisable et $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires. On dit que $sequence(X_n)$ est _tendue_ si pour tout $epsilon > 0$, il existe un compact $K in RR$ tel que :
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires. On dit que $sequence(X_n)$ est _tendue_ si pour tout $epsilon > 0$, il existe un compact $K in RR$ tel que :
   $ forall n in NN, Pr(X_n in K) >= 1 - epsilon. $
 ])
 
 #lemma([
-  Soit $(Omega, cal(F))$ un espace probabilisable, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires et $func(X, Omega, RR^d)$ un vecteur aléatoire.
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires et $func(X, Omega, RR^d)$ un vecteur aléatoire.
   Si $sequence(X_n)$ converge vers $X$ en loi et $X$ est presque sûrement fini, alors $sequence(X_n)$ est tendue.
 ])
 
 #proposition([
-  Soit $(Omega, cal(F))$ un espace probabilisable, $sequence(func(X_n, Omega, RR^d))$ et $sequence(func(Y_n, Omega, RR^d))$ deux suites de vecteurs aléatoires qui convergent en probabilité respectivement vers deux vecteurs aléatoires #box($func(X, Omega, RR^d)$) et #box($func(Y, Omega, RR^d)$).
-  Alors pour toute fonction $func(f, RR^2, RR)$ continue, on a que $sequence(f(X_n, Y_n))$ converge vers $f(X, Y)$ en probabilité. En particulier :
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $sequence(func(X_n, Omega, RR^d))$ et $sequence(func(Y_n, Omega, RR^d))$ deux suites de vecteurs aléatoires qui convergent en probabilité respectivement vers deux vecteurs aléatoires #box($func(X, Omega, RR^d)$) et #box($func(Y, Omega, RR^d)$).
+  Alors pour toute fonction $func(phi, RR^2, RR)$ continue, on a que $sequence(phi(X_n, Y_n))$ converge vers $phi(X, Y)$ en probabilité. En particulier :
   + Pour tout $a, b in RR$, on a que $sequence(a X_n + b Y_n)$ converge vers $a X + b Y$ en probabilité.
   + Pour toute fonction $func(f, RR, RR)$ continue, on a que $sequence(f(X_n))$ converge vers $f(X)$ en probabilité.
   + $sequence(X_n Y_n)$ converge vers $X Y$ en probabilité.
 ])
+
+#proposition([
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires et $func(X, Omega, RR^d)$ un vecteur aléatoire.
+  Si $X$ est presque sûrement fini :
+  - Si $sequence(X_n)$ converge en probabilité vers $X$, alors $sequence(X_n)$ converge en loi vers $X$.
+  - Si $sequence(X_n)$ converge en loi vers $X$ qui est constante, alors $sequence(X_n)$ converge en probabilité vers $X$.
+])
+
+#proof([
+  Soit $func(f, RR^d, RR)$ une fonction uniformément continue et bornée. Alors :
+  $
+    forall epsilon > 0, exists eta > 0, abs(#E [f(X_n) - f(X)]) &<= &&#E [abs(f(X_n) - f(X))] \
+      &= &&#E [abs(f(X_n) - f(X)) indicator({abs(X_n - X) <= eta})] \
+      & &&+ #E [abs(f(X_n) - f(X)) indicator({abs(X_n - X) > eta})] \
+      &<= &&epsilon + 2 norm(f, oo)Pr(abs(X_n - X) > eta)
+  $
+  par passage à la limite, on en déduit :
+  $ limsup_(n->+oo) abs(#E [f(X_n) - f(X)]) <= epsilon $
+  donc $sequence(X_n)$ converge en loi vers $X$.
+])
+
+== Convergence presque sûre
+
+#definition([
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires et $func(X, Omega, RR^d)$ un vecteur aléatoire.
+  On dit que la suite $sequence(X_n)$ converge _presque sûrement_ vers $X$ si elle vérifie :
+  $ Pr(lim_(n->+oo) X_n = X) = 1. $
+])
+
+#lemma([
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires.
+  Alors $sequence(X_n)$ converge presque sûrement vers $0$ si et seulement si :
+  $
+    forall epsilon > 0, Pr(limsup_(n->+oo) {abs(X_n) > epsilon}) = 0.
+  $
+])
+
+#corollary([
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires.
+  Alors $sequence(X_n)$ converge presque sûrement vers $0$ si l'une des deux conditions suivantes est vérifiée :
+
+  + $forall epsilon > 0, sum_(n=0)^(+oo) Pr(abs(X_n) > epsilon) < +oo$.
+
+  + $exists alpha > 0, sum_(n=0)^(+oo) #E [abs(X_n)^alpha] < +oo$.
+])
+
+#proof([
+  + Pour tout $epsilon > 0$, on peut écrire :
+    $
+      sum_(n=0)^(+oo) Pr(abs(X_n) > epsilon) = sum_(n=0)^(+oo) #E [indicator({abs(X_n) > epsilon})] < +oo
+    $
+    d'après le théorème de convergence monotone, on peut intervertir somme et intégrale :
+    $
+      sum_(n=0)^(+oo) Pr(abs(X_n) > epsilon) = #E [sum_(n=0)^(+oo) indicator({abs(X_n) > epsilon})] < +oo
+    $
+    en particulier, on a :
+    $
+      sum_(n=0)^(+oo) indicator({abs(X_n) > epsilon}) < +oo => indicator({abs(X_n) > epsilon}) -->_(n->+oo) 0 => Pr(limsup_(n->+oo) {abs(X_n) > epsilon}) = 0
+    $
+    donc $sequence(X_n)$ converge presque sûrement vers $0$.
+  + De la même manière on peut intervertir somme et intégrale.
+])
+
+#proposition([
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires et $func(X, Omega, RR^d)$ un vecteur aléatoire.
+  Si $sequence(X_n)$ converge presque sûrement vers $X$, alors $sequence(X_n)$ converge en probabilité vers $X$.
+])
+
+#proof([
+  Soit $epsilon > 0$. Alors puisque $sequence(X_n)$ converge presque sûrement vers $X$, on a:
+  $
+    lim_(n->+oo) Pr(abs(X_n - X) > epsilon) <= lim_(n->+oo) Pr(union.big_(k >= n) abs(X_k - X) > epsilon) = Pr(limsup_(n->+oo) {abs(X_n - X) > epsilon}) = 0
+  $
+  donc $sequence(X_n)$ converge en probabilité vers $X$.
+])
+
+#proposition([
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires et $func(X, Omega, RR^d)$ un vecteur aléatoire.
+  Si $sequence(X_n)$ converge en probabilité vers $X$, alors il existe une suite extraite de $sequence(X_n)$ qui converge presque sûrement vers $X$.
+])
+
+#proof([
+  Soit $k in NN$. Puisque $sequence(X_n)$ converge en probabilité, il existe $n_k in NN$ tel que :
+  $ Pr(abs(X_n_k - X) > 1/(k+1)) <= 1 / 2^k $
+  par passage à la somme, en s'assurant que la suite $sequence(n_k, ind:k)$ est strictement croissante, on a :
+  $
+    sum_(k = 0)^(+oo) Pr(abs(X_n_k - X) > 1/(k+1)) <= sum_(n=0)^(+oo) 1 / 2^k < +oo
+  $
+  donc $sequence(X_n_k, ind:k)$ converge presque sûrement vers $X$.
+])
+
+== Loi des grands nombres
+
+=== Loi faible des grands nombres
+
+#theorem([
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires indépendants et de même loi d'espérance $m$. Alors la suite des moyennes empiriques $sequence(overline(X)_n)$ converge vers $m$ dans $cal(L)^1$, c'est-à-dire :
+  $ lim_(n->+oo) #E [abs(overline(X)_n - m)] = 0 $
+  par conséquent $sequence(overline(X)_n)$ converge en probabilité vers $m$.
+])
+
+=== Loi forte des grands nombres
+
+#theorem([
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires indépendants et de même loi d'espérance $m$. Alors la suite des moyennes empiriques $sequence(overline(X)_n)$ converge presque sûrement vers $m$.
+])
+
