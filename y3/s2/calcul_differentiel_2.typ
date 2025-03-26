@@ -517,9 +517,11 @@
 === Théorème de Cauchy-Lipschitz
 
 #definition([
-  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1.  
+  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1.
   On dit que $f$ est _localement lipschitzienne_ par rapport à la variable $y$ si pour tout point $(t_0, y_0)$ dans $U$, il existe un cylindre $C = [t_0 - T, t_0 + T] times B(y_0, r)$ dans $U$ et une constante $k >= 0$ tels que $f$ soit $k$-lipschitzienne par rapport à la variable $y$ sur $C$ :
-  $ forall (t, y_1), (t_, y_2) in C, norm(f(t, y_1) - f(t, y_2)) <= k abs(y_1 - y_2). $
+  $
+    forall (t, y_1), (t_, y_2) in C, norm(f(t, y_1) - f(t, y_2)) <= k abs(y_1 - y_2).
+  $
 ])
 
 #remark([
@@ -530,14 +532,89 @@
 ])
 
 #lemma([
-  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1, $(t_0, y_0)$ un point de $U$ et $C_0 = [t_0 - T_0, t_0 + T_0] times B(y_0, r_0)$ un cylindre sur lequel $f$ est $k$-lipschitzienne par rapport à la variable $y$. 
+  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1, $(t_0, y_0)$ un point de $U$ et $C_0 = [t_0 - T_0, t_0 + T_0] times B(y_0, r_0)$ un cylindre sur lequel $f$ est $k$-lipschitzienne par rapport à la variable $y$.
   Posons $M := sup_((t, y) in C_0) norm(f(t, y))$, $T := min(T_0, r_0 / M)$ et $C := [t_0 - T, t_0 + T] times B(y_0, r_0)$.
   Alors pour tout couple $(I_1, y_1), (I_2, y_2)$ de solutions du problème de Cauchy de condition initiale $(t_0, y_0)$, on a
   $ forall t in [t_0 - T, t_0 + T], y_1 (t) = y_2 (t). $
 ])
 
+#theorem(
+  title: "Théorème de Cauchy-Lipschitz",
+  [
+    Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(t_0, y_0)$ un point de $U$.
+    Si $f$ est localement lipschitzienne par rapport à la variable $y$, alors pour tout cylindre de sécurité $C = [t_0 - T, t_0 + T] times B(y_0, r)$, le problème de Cauchy de condition initiale $(t_0, y_0)$ admet une unique solution sur $[t_0 - T, t_0 + T]$.
+  ],
+) <thm-cauchy-lipschitz>
+
 #theorem([
+  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1, $(I, y_1)$ et $(I, y_2)$ deux solutions de l'équation différentielle.
+  Si $f$ est localement lipschitzienne par rapport à la variable $y$ et s'il existe $t_0 in I$ tel que $y_1 (t_0) = y_2 (t_0)$, alors $y_1 = y_2$.
+])
+
+#proof([
+  On suppose que $I != {t_0}$. Posons $J := {t in I | y_1 (t) = y_2 (t)} = (y_1 - y_2)^(-1)({0})$. \
+  Puisque $y_1 - y_2$ est continue sur $I$, $J$ est fermé comme image réciproque d'un fermé par une application continue.
+  Soit $t in J$ (non-vide car $t_0 in J$), d'après le <thm-cauchy-lipschitz>, il existe $T > 0$ tel que $]t - T, t + T[ subset J$, donc $J$ est ouvert.
+  Donc $J$ est ouvert et fermé, par connexité $I = J$.
+])
+
+#corollary([
   Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(t_0, y_0)$ un point de $U$.
-  Si $f$ est localement lipschitzienne par rapport à la variable $y$, alors pour tout cylindre de sécurité $C = [t_0 - T, t_0 + T] times B(y_0, r)$, le problème de Cauchy de condition initiale $(t_0, y_0)$ admet une unique solution sur $[t_0 - T, t_0 + T]$.
-  
+  Si $f$ est localement lipschitzienne par rapport à la variable $y$, alors il existe une unique solution maximale du problème de Cauchy de condition initiale $(t_0, y_0)$.
+])
+
+=== Théorème des bouts
+
+#theorem([
+  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(\]c\, d\[, y)$ une solution maximale de l'équation différentielle.
+  Si $f$ est localement lipschitzienne par rapport à la variable $y$, alors pour tout compact $K subset U$, il existe un voisinage $V subset ]c, d[$ de $d$ tel que :
+  $ forall t in V, (t, y(t)) in.not K $
+  et un voisinage $W subset ]c, d[$ de $c$ tel que :
+  $ forall t in W, (t, y(t)) in.not K. $
+]) <thm-sortie-compact>
+
+#corollary(
+  title: "Théorème des bouts",
+  [
+    Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 sur $U := ]a, b[ times RR^n$ et $(\]c\, d\[, y)$ une solution maximale de l'équation différentielle.
+    si $c > a$, alors on a :
+    $ lim_(t -> c^+) norm(y(t)) = +oo $
+    et si $d < b$, alors on a :
+    $ lim_(t -> d^-) norm(y(t)) = +oo. $
+    En particulier si $y$ est bornée, alors $a = c$ et $d = b$.
+  ],
+) <thm-bouts>
+
+#proof([
+  Supposons que $d < b$. \
+  Soit $R > 0$, alors d'après le @thm-sortie-compact, il existe $eta > 0$ tel que :
+  $ forall t in ]d - eta, d[, norm(y(t)) > R $
+  donc $lim_(t -> d^-) norm(y(t)) = +oo$. De la même manière $lim_(t -> c^+) norm(y(t)) = +oo$.
+
+])
+
+#proposition([
+  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 sur $U := ]a, b[ times RR^n$ et $(\]c\, d\[, y)$ une solution maximale de l'équation différentielle.
+  Si $f$ est bornée, alors $y$ est une solution globale.
+])
+
+#proof([
+  Posons $M := sup_((t, y) in U) norm(f(t, y))$. \
+  Supposons par l'absurde que $d < b$.
+  Soit $t_0 in ]c, d[$. Alors pour tout $t in [t_0, d[$, on a :
+  $
+    norm(y(t)) &= norm(y(t_0) + rintegral(f(x, y(x)), t_0, t, x)) \
+    &<= norm(y(t_0)) + rintegral(norm(f(x, y(x))), t_0, t, x) \
+    &<= norm(y(t_0)) + M(t - t_0)
+  $
+  or d'après le @thm-bouts, on a $lim_(t -> d^-) norm(y(t)) = +oo$, d'où une contradiction, donc $d = b$. \
+  De la même manière $a = c$.
+])
+
+=== Equations différentielles linéaires du premier ordre
+
+#definition([
+  Soit $U$ un ouvert de $RR times RR^n$, $A = sequence(func(a_(i j), RR, RR), cond: 1 <= i\, j <= n)$ et $B = sequence(func(b_i, RR, RR), cond: 1 <= i <= n)$ deux matrices de fonctions continues.
+  On appelle _équation différentielle linéaire d'ordre 1_, notée $(L)$, une équation différentielle d'ordre 1 de la forme suivante :
+  $ y' = A(t)y + B(t). $
 ])
