@@ -213,7 +213,7 @@
   donc d'après le théorème de comparaison, la série $sum_(n in NN) (x_(n+1) - x_n)$ converge absolument.
   Or comme $E$ est un espace de Banach, d'après le @lem-cv-abs-sim, la série $sum_(n in NN) (x_(n+1) - x_n)$ converge simplement.
   En particulier la suite des sommes partielles :
-  $ S_n = sum_(k=0)^(n-1) (x_(k+1) - x_k) = x_n - x_0 $ 
+  $ S_n = sum_(k=0)^(n-1) (x_(k+1) - x_k) = x_n - x_0 $
   converge vers un élément de $E$.
   On en déduit que la suite $sequence(x_n)$ converge vers un élément de $E$.
   Puisque la suite $sequence(x_n)$ est dans $F$, qui est fermé, elle converge vers un élément $l in F$.
@@ -232,4 +232,66 @@
   - La résolution d'équations de dérivées partielles.
 ])
 
+== Applications
 
+#theorem([
+  Soit $(E, norm(dot)_E)$ et $(F, norm(dot)_F)$ deux espaces de Banach, $func(f, E, F)$ une application linéaire continue.
+  Si $f$ est bijective, alors $f^(-1)$ est une application linéaire continue.
+])
+
+#theorem([
+  Soit $(E, norm(dot)_E)$ et $(F, norm(dot)_F)$ deux espaces de Banach, $U$ un ouvert non-vide de $E$, $a$ un point de $U$ et $func(f, U, F)$ une application de classe $C^1$.
+  Si $dd(f, a)$ est bijective, alors il existe un voisinage ouvert $V$ de $a$ et un voisinage ouvert $W$ de $f(a)$ tels que $func(f, V, W)$ soit un $C^1$-difféomorphisme.
+])
+
+#proof([
+  On pose $M := norm(dd(f, a)^(-1)) > 0$.
+  Soit $x in U$ et $y in F$.
+  On considère l'équation $y = f(x)$ et on pose $func(phi, U, F, x, f(x) - f(a) - dd(f, a)(x - a))$, alors on a :
+  $ y - f(a) - dd(f, a)(x - a) = phi(x) $
+  puisque $dd(f, a)$ est bijective, on a :
+  $ x = a + dd(f, a)^(-1)(y - f(a) - phi(x)). $
+
+  On observe que $phi(a) = dd(phi, a) = 0$. Par continuité il existe $r_1 > 0$ tel que :
+  $ forall x in overline(B)(a, r_1), norm(dd(phi, x)) <= 1 / (2M) $
+  d'après le théorème des accroissements finis, on a :
+  $
+    forall x_1, x_2 in overline(B)(a, r_1), norm(phi(x_1) - phi(x_2)) <= 1 / (2M) norm(x_1 - x_2)
+  $
+  en particulier pour $x_2 = a$, on obtient :
+  $
+    forall x in overline(B)(a, r_1), norm(phi(x)) <= 1 / (2M) norm(x_1 - a) <= r_1 / (2M).
+  $
+  On pose $func(F_y, overline(B)(a, r_1), B(a, r_1), x, a + dd(f, a)^(-1)(y - f(a) - phi(x)))$. Soit $x in overline(B)(a, r_1)$, alors on a :
+  $
+    norm(F_y (x) - a) = norm(dd(f, a)^(-1)(y - f(a) - phi(x))) <= M norm(y - f(a) - phi(x))
+  $
+  on pose $r_2 := r_1 /(2M)$ et soit $y in B(f(a), r_2)$, alors on obtient :
+  $ norm(F_y (x) - a) < M (r_1 / M) = r_1 $
+  ainsi $F_y (x) in B(a, r_1)$.
+
+  Soit $x_1, x_2 in overline(B)(a, r_1)$, alors on a :
+  $
+    norm(F_y (x_1) - F_y (x_2)) &= norm(a + dd(f, a)^(-1)(y - f(a) - phi(x_1)) - (a + dd(f, a)^(-1)(y - f(a) - phi(x_2)))) \
+    &= norm(dd(f, a)^(-1)(phi(x_2) - phi(x_1))) \
+    &<= M norm(phi(x_2) - phi(x_1)) \
+    &<= M / (2M) norm(x_2 - x_1) = 1 / 2 norm(x_1 - x_2)
+  $
+  donc $F_y$ est contractante.
+
+  D'après le théorème du point fixe, $F_y$ admet un unique point fixe dans $B(a, r_1)$.
+  En particulier l'équation $y = f(x)$ admet une unique solution dans $B(a, r_1)$. \
+  On pose $W := B(f(a), r_2)$ et $V := B(a, r_1) inter f^(-1)(W)$ de sorte que $func(f, V, W)$ est bijective.
+
+  Soit $y_1, y_2 in W$, alors $f^(-1)$ vérifie :
+  $
+    f^(-1)(y_1) - f^(-1)(y_2) &= F_y_1 (f^(-1)(y_1)) - F_y_2 (f^(-1)(y_2)) \
+    &= dd(f, a)^(-1)(y_1 - y_2) - dd(f, a)^(-1)(phi(f^(-1)(y_1)) - phi(f^(-1)(y_2))) \
+  $
+  on en déduit :
+  $
+    norm(f^(-1)(y_1) - f^(-1)(y_2)) <= M norm(y_1 - y_2) + 1 / 2 norm(f^(-1)(y_1) - f^(-1)(y_2))
+  $
+  donc $f^(-1)$ est lipschitzienne, et en particulier continue.
+  On peut alors montrer que $f$ est un $C^1$-difféomorphisme.
+])
