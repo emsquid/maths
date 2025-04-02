@@ -469,7 +469,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 === Définition et formule de transfert
 
 #definition([
-  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X, Omega, RR_d)$ un vecteur aléatoire.
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X, Omega, RR^d)$ un vecteur aléatoire.
   On appelle _espérance_ de $X$, notée $EE[X]$, la valeur
   $
     EE[X] := integral_Omega X(omega) dif Pr(omega) = integral_(RR^d) x dif Pr_X (x).
@@ -485,7 +485,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 #theorem(
   title: "Formule de transfert",
   [
-    Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $func(X, Omega, RR_d)$ un vecteur aléatoire et $func(phi, RR^d, RR_+ union {+oo})$ une application mesurable. Alors
+    Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $func(X, Omega, RR^d)$ un vecteur aléatoire et $func(phi, RR^d, RR_+ union {+oo})$ une application mesurable. Alors
     $
       EE[phi(X)] = integral_Omega phi(X(omega)) dif Pr(omega) = integral_(RR^d) phi(x) dif Pr_X (x).
     $
@@ -500,7 +500,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 #proposition(
   title: "Cas discret",
   [
-    Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $func(X, Omega, RR_d)$ un vecteur aléatoire et $func(phi, RR^d, RR_+ union {+oo})$ une application mesurable. Alors
+    Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $func(X, Omega, RR^d)$ un vecteur aléatoire et $func(phi, RR^d, RR_+ union {+oo})$ une application mesurable. Alors
     $ EE[phi(X)] = sum_(omega in cal(V_X)) phi(omega) Pr(X = omega). $
   ],
 )
@@ -508,7 +508,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 #proposition(
   title: "Cas à densité",
   [
-    Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $func(X, Omega, RR_d)$ un vecteur aléatoire à densité $func(f, RR^d, RR_+)$ et $func(phi, RR^d, RR_+ union {+oo})$ une application mesurable. Alors
+    Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $func(X, Omega, RR^d)$ un vecteur aléatoire à densité $func(f, RR^d, RR_+)$ et $func(phi, RR^d, RR_+ union {+oo})$ une application mesurable. Alors
     $ EE[phi(X)] = integral_(RR^d) phi(x) f(x) dif lambda(x). $
   ],
 )
@@ -516,13 +516,13 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 === Variance
 
 #definition([
-  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X, Omega, RR_d)$ un vecteur aléatoire.
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X, Omega, RR^d)$ un vecteur aléatoire.
   On appelle _variance_ de $X$, notée $V(X)$, la valeur
   $ V(X) := EE[(X - EE[X])^2]. $
 ])
 
 #proposition([
-  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X, Omega, RR_d)$ un vecteur aléatoire.
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X, Omega, RR^d)$ un vecteur aléatoire.
   Alors la variance de $X$ vérifie les propriétés suivantes :
   + $V(X)$ ne dépend que de $X$.
   + $V(X) >= 0$, avec égalité si et seulement si $X$ est constante.
@@ -533,13 +533,13 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 === Covariance
 
 #definition([
-  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X\, Y, Omega, RR_d)$ deux vecteurs aléatoires.
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X\, Y, Omega, RR^d)$ deux vecteurs aléatoires.
   On appelle _covariance_ de $X$ et $X$, notée $"Cov"(X, Y)$, la valeur
   $ "Cov"(X, Y) := EE[(X - EE[X])(Y - EE[Y])]. $
 ])
 
 #proposition([
-  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X\, Y, Omega, RR_d)$ deux vecteurs aléatoires.
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X\, Y, Omega, RR^d)$ deux vecteurs aléatoires.
   Alors la covariance vérifie les propriétés suivantes :
   + $"Cov"$ est bilinéaire symetrique.
   + $"Cov"(X, X) = V(X)$.
@@ -551,23 +551,23 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 === Concentration
 
 #definition([
-  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X\, Y, Omega, RR_d)$ deux vecteurs aléatoires.
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X\, Y, Omega, RR^d)$ deux vecteurs aléatoires.
   Alors si $"Cov"(X, Y) = 0$ on dit que $X$ et $Y$ sont _non correlées_.
 ])
 
 #corollary([
-  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X\, Y, Omega, RR_d)$ deux vecteurs aléatoires.
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X\, Y, Omega, RR^d)$ deux vecteurs aléatoires.
   Alors si $X$ et $Y$ sont non-correlées, on a $V(X + Y) = V(X) + V(Y)$.
 ])
 
 #definition([
-  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X_1\, ...\, X_n, Omega, RR_d)$ des vecteurs aléatoires.
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X_1\, ...\, X_n, Omega, RR^d)$ des vecteurs aléatoires.
   On appelle _moyenne empirique_ de $X_1, ..., X_n$, notée $overline(X)_n$, le vecteur aléatoire
   $ overline(X)_n := 1 / n sum_(k=1)^n X_k. $
 ])
 
 #proposition([
-  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X_1\, ...\, X_n, Omega, RR_d)$ des vecteurs aléatoires. Alors l'espérance de $overline(X)_n$ est donnée par
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X_1\, ...\, X_n, Omega, RR^d)$ des vecteurs aléatoires. Alors l'espérance de $overline(X)_n$ est donnée par
   $ EE[overline(X)_n] = 1 / n sum_(k=1)^n EE[X_k] $
   et sa variance par
   $ V(overline(X)_n) = 1 / (n^2) sum_(k=1)^n V(X_k) $
@@ -578,9 +578,9 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
   [
     Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X, Omega, RR)$ une variable aléatoire.
     + Si $X >= 0$ presque sûrement, alors on a
-      $ forall epsilon > 0, Pr(X > epsilon) <= EE[X] / epsilon. $
+      $ forall epsilon > 0, Pr(X >= epsilon) <= EE[X] / epsilon. $
     + Si $X$ est intégrable, alors on a
-      $ forall epsilon > 0, Pr(abs(X - EE[X]) > epsilon) <= V(X) / epsilon^2. $
+      $ forall epsilon > 0, Pr(abs(X - EE[X]) >= epsilon) <= V(X) / epsilon^2. $
   ],
 )
 
@@ -620,7 +620,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 #proposition(
   title: "Méthode",
   [
-    Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X, Omega, RR_d)$ un vecteur aléatoire de densité $func(f, RR^d, RR_+)$.
+    Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X, Omega, RR^d)$ un vecteur aléatoire de densité $func(f, RR^d, RR_+)$.
     Alors pour toute fonction borélienne positive
     $ EE[h(X)] = integral_(RR^d) h(x) f(x) dif lambda(x) $
     en particulier pour tout $A in cal(F)$ en prenant $h := indicator(A)$ on trouve
@@ -821,6 +821,8 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
     Pr(union.big_(k = n)^m A_k) >= 1 - product_(k = n)^m e^(-Pr(A_k)) = 1 - e^(-sum_(k = n)^m Pr(A_k)) -->_(m->+oo) 1.
   $
 ])
+
+#pagebreak()
 
 = Convergence de suites de variables aléatoires
 
@@ -1045,14 +1047,48 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 === Loi faible des grands nombres
 
 #theorem([
-  Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires indépendants et de même loi d'espérance $m$. Alors la suite des moyennes empiriques $sequence(overline(X)_n)$ converge vers $m$ dans $cal(L)^1$, c'est-à-dire :
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires $cal(L)_1$ indépendants et de même loi d'espérance $m$.
+  Alors la suite des moyennes empiriques $sequence(overline(X)_n)$ converge vers $m$ dans $cal(L)^1$, c'est-à-dire :
   $ lim_(n->+oo) #E [abs(overline(X)_n - m)] = 0 $
-  par conséquent $sequence(overline(X)_n)$ converge en probabilité vers $m$.
+  en particulier $sequence(overline(X)_n)$ converge en probabilité vers $m$.
 ])
 
 === Loi forte des grands nombres
 
 #theorem([
-  Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires indépendants et de même loi d'espérance $m$. Alors la suite des moyennes empiriques $sequence(overline(X)_n)$ converge presque sûrement vers $m$.
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires $cal(L)_1$ indépendants et de même loi d'espérance $m$.
+  Alors la suite des moyennes empiriques $sequence(overline(X)_n)$ converge presque sûrement vers $m$.
 ])
 
+#pagebreak()
+
+= Fonction caractéristique
+
+== Propriétés élémentaires
+
+#definition([
+  Soit $Pr$ une mesure de probabilité sur $(RR^d, borel(RR^d))$.
+  On appelle _fonction caractéristique de $Pr$_ la fonction $func(hat(Pr), RR^d, CC)$ définie par :
+  $ forall t in RR^d, hat(Pr)(t) := lintegral(e^(i innerproduct(t, x)), RR^d, x, Pr) $
+])
+
+#proposition([
+  Soit $Pr$ une mesure de probabilité sur $(RR^d, borel(RR^d))$. Alors on a :
+  + $hat(Pr)(0) = 1$,
+  + $forall t in RR^d, abs(hat(Pr)(t)) <= 1$.
+])
+
+#proposition([
+  La mesure gaussienne sur $RR$ a pour fonction caractéristique $t |-> e^(-t^2/2)$.
+])
+
+#proof([
+  Notons $nu$ la mesure gaussienne de densité $x |-> 1/sqrt(2pi) e^(-x^2 / 2)$. Alors pour tout $t in RR$, on a :
+  $ hat(nu)(t) = 1/sqrt(2pi) rintegral(e^(i t x) e^(-x^2 / 2), -oo, +oo, x)
+    = 1/sqrt(2pi)(rintegral(cos(t x) e^(-x^2/2), -oo, +oo, x)
+      + i rintegral(sin(t x) e^(-x^2/2), -oo, +oo, x)) $
+  puisque $x |-> sin(t x) e^(-x^2/2)$ est impaire, on obtient :
+  $ hat(nu)(t) = 1/sqrt(2pi) rintegral(cos(t x) e^(-x^2/2), -oo, +oo, x) in RR $
+  en remarquant que $hat(nu)$ est solution de l'équation différentielle $y' + t y = 0$, on trouve :
+  $ hat(nu)(t) = e^(-t^2/2). $
+])

@@ -33,7 +33,15 @@
 #let example = exampleblock(blocktitle: "Exemple")
 #let examples = exampleblock(blocktitle: "Exemples")
 #let remark = courseblock(blocktitle: "Remarque")
-#let proof = proofblock(prefix: [_Démonstration_.])
+#let proof = proofblock(
+  prefix: [_Démonstration_.],
+  suffix: {
+    h(1fr)
+    sym.wj
+    sym.space.nobreak
+    $square$
+  },
+)
 
 #let exercise = exerciseblock(blocktitle: "Exercice")
 
@@ -112,7 +120,10 @@
       it,
       font: (auto,),
       font-weight: ("bold", auto),
-      fill: (none, align(right, outrageous.repeat(text(black, $dot$), gap: 5pt))),
+      fill: (
+        none,
+        align(right, outrageous.repeat(text(black, $dot$), gap: 5pt)),
+      ),
       body-transform: (level, prefix, body) => text(rgb(color), body),
       page-transform: (level, page) => text(black, page),
     )

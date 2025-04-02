@@ -554,7 +554,7 @@
 #proof([
   On suppose que $I != {t_0}$. Posons $J := {t in I | y_1 (t) = y_2 (t)} = (y_1 - y_2)^(-1)({0})$. \
   Puisque $y_1 - y_2$ est continue sur $I$, $J$ est fermé comme image réciproque d'un fermé par une application continue.
-  Soit $t in J$ (non-vide car $t_0 in J$), d'après le <thm-cauchy-lipschitz>, il existe $T > 0$ tel que $]t - T, t + T[ subset J$, donc $J$ est ouvert.
+  Soit $t in J$ (non-vide car $t_0 in J$), d'après le @thm-cauchy-lipschitz, il existe $T > 0$ tel que $]t - T, t + T[ subset J$, donc $J$ est ouvert.
   Donc $J$ est ouvert et fermé, par connexité $I = J$.
 ])
 
@@ -614,7 +614,57 @@
 === Equations différentielles linéaires du premier ordre
 
 #definition([
-  Soit $U$ un ouvert de $RR times RR^n$, $A = sequence(func(a_(i j), RR, RR), cond: 1 <= i\, j <= n)$ et $B = sequence(func(b_i, RR, RR), cond: 1 <= i <= n)$ deux matrices de fonctions continues.
+  Soit $I$ un intervalle de $RR$, $func(A, I, M_n (RR))$ et $func(A, I, M_n (RR))$ deux fonctions continues.
   On appelle _équation différentielle linéaire d'ordre 1_, notée $(L)$, une équation différentielle d'ordre 1 de la forme suivante :
   $ y' = A(t)y + B(t). $
+])
+
+#theorem([
+  Soit $y' = A(t)y + B(t)$ une équation différentielle linéaire d'ordre 1 et $(t_0, y_0)$ un point de $I times RR^n$.
+  Alors il existe une unique solution maximale du problème de Cauchy de condition initiale $(t_0, y_0)$, de plus cette solution est globale.
+])
+
+#definition([
+  Soit $y' = A(t)y + B(t)$ une équation différentielle linéaire d'ordre 1.
+  On dit que l'équation est _homogène_ si $B = 0$, c'est-à-dire :
+  $ y' = A(t)y $
+])
+
+#proposition([
+  Soit $y' = A(t)y$ une équation différentielle linéaire d'ordre 1 homogène.
+  Alors l'ensemble des solutions maximales de l'équation est un $RR$-espace vectoriel de dimension $n$.
+])
+
+#corollary([
+  Soit $y' = A(t)y + B(t)$ une équation différentielle linéaire d'ordre 1 et $(I, y_0)$ une solution globale de l'équation.
+  On note $S$ l'ensemble des solutions maximales de l'équation homogène $y' = A(t)y$.
+  Alors l'ensemble des solutions de l'équation est $y_0 + S$.
+])
+
+=== Equations différentielles d'ordre supérieur
+
+#definition([
+  Soit $U$ un ouvert de $RR times (RR^n)^p$ et $func(f, U, RR^n)$ une fonction continue.
+  On appelle _équation différentielle d'ordre $p$_, notée $(E_p)$, une équation de la forme suivante :
+  $ y^((p)) = f(t, y, y', ..., y^((p-1))). $
+])
+
+#definition([
+  Soit $(E_p)$ une équation différentielle d'ordre $p$.
+  On appelle _solution_ de $(E_p)$ un couple de la forme $(I, y)$ où $I$ est un intervalle de $RR$ et $func(y, I, RR^n)$ est une fonction $p$-fois dérivable sur $I$ vérifiant :
+  + $forall t in I, (t, y(t), y'(t), ..., y^((p-1))(t)) in U$,
+  + $forall t in I, y^((p)) = f(t, y(t), y'(t), ..., y^((p-1))(t))$.
+])
+
+#proposition([
+  Soit $(E_p)$ une équation différentielle d'ordre $p$ et $(I, y)$ une solution de $(E_p)$.
+  Si $f$ est de classe $C^k$, alors $y$ est de classe $C^(k + p)$.
+])
+
+#proposition([
+  Soit $(E_p)$ une équation différentielle d'ordre $p$.
+  On pose :
+  $ Y := vec(Y_0, Y_1, ..., Y_(p-1)) = vec(y, y', ..., y^((p-1))) $
+  Alors $(I, y)$ est une solution de $(E_p)$ si et seulement $(I, Y)$ est une solution de l'équation différentielle linéaire d'ordre 1 donnée par :
+  $ Y' = vec(Y_1, ..., Y_(p-1), f(t, Y)). $ 
 ])

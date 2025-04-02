@@ -161,5 +161,7 @@
   $ partial_k sigma_k = cases(0 "si" k = 0 "ou" k "est impair", sigma_(k-1) "si" k != 0 "et" k "est pair") $
   Si $k = 0$. Alors $H_0 = lquotient(gensubgroup(sigma_0), {0}) tilde.eq ZZ $. \
   Si $k != 0 $ et $k$ est impair. Alors $H_k = lquotient(gensubgroup(sigma_k), gensubgroup(sigma_k)) tilde.eq {0}$. \
-  Si $k != 0 $ et $k$ est pair. Alors $H_k = lquotient({0}, {0}) tilde.eq {0}$. \
+  Si $k != 0 $ et $k$ est pair. Alors $H_k = lquotient({0}, {0}) tilde.eq {0}$.
 ])
+
+
