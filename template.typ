@@ -24,6 +24,7 @@
   counter: exercisecounter,
 )
 
+#let axiom = courseblock(blocktitle: "Axiome")
 #let definition = courseblock(blocktitle: "Définition")
 #let notation = courseblock(blocktitle: "Notation")
 #let theorem = courseblock(blocktitle: "Théorème")
@@ -163,7 +164,6 @@
 
   // Contents
   outline()
-  pagebreak()
 
   body
 }

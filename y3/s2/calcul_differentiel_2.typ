@@ -349,9 +349,7 @@
 
 = Équations différentielles
 
-== Résultats fondamentaux
-
-=== Équations différentielles du premier ordre
+== Équations différentielles du premier ordre
 
 #definition([
   Soit $U$ un ouvert de $RR times RR^n$ et $func(f, U, RR^n)$ une fonction continue.
@@ -362,7 +360,7 @@
 
 #definition([
   Soit $(E)$ une équation différentielle d'ordre 1.
-  On appelle _solution_ de $(E)$ un couple de la forme $(I, y)$ où $I$ est un intervalle de $RR$ et $func(y, I, RR^n)$ est une fonction dérivable sur $I$ vérifiant :
+  On appelle _solution_ de $(E)$ sur un intervalle $I$ de $RR$ une fonction $func(y, I, RR^n)$ dérivable vérifiant :
   + $forall t in I, (t, y(t)) in U$,
   + $forall t in I, y'(t) = f(t, y(t))$.
 ])
@@ -372,9 +370,9 @@
 ])
 
 #examples([
-  + On considère l'équation différentielle d'ordre 1 donnée par $y' = y$. Le couple $(]1, 2[, t |-> e^t)$ est une solution de cette équation.
+  + On considère l'équation différentielle d'ordre 1 donnée par $y' = y$. La fonction $t |-> e^t$ est une solution de cette équation sur $]1, 2[$.
   + L'équation donnée par $y' = y^2 + t$ est une équation différentielle d'ordre 1 sur $RR$.
-  + L'équation donnée par $y' = (y + 1)/(t ln(t))$ est une équation différentielle d'ordre 1 sur $RR$. Le couple $(]0, 1[, t |-> -1 + ln(t))$ est une solution de cette équation.
+  + L'équation donnée par $y' = (y + 1)/(t ln(t))$ est une équation différentielle d'ordre 1 sur $RR$. La fonction $t |-> -1 + ln(t)$ est une solution de cette équation sur $]0, 1[$.
 ])
 
 #definition([
@@ -387,8 +385,8 @@
 ])
 
 #definition([
-  Soit $U$ un ouvert de $RR times RR$ et $y' = f(x, y)$ une équation différentielle d'ordre 1. Soit $M$ un point de $U$, on note $cal(D)_M$ la droite passant par $M$ et de coefficient directeur $f(M)$.
-  On appelle _champ des tangentes_ l'application $M |-> cal(D)_M$ associée à l'équation $y' = f(x, y)$.
+  Soit $(E)$ une équation différentielle d'ordre 1. Soit $M$ un point de $U$, on note $cal(D)_M$ la droite passant par $M$ et de coefficient directeur $f(M)$.
+  On appelle _champ des tangentes_ l'application $M |-> cal(D)_M$ associée à $(E)$.
   On appelle _courbe intégrale_ une courbe $cal(C)$ de $RR times RR$ qui a pour tangente en chaque point $M$ la droite $cal(D)_M$ du champ des tangentes.
 ])
 
@@ -405,119 +403,97 @@
 ])
 
 #proposition([
-  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(I, y)$ une solution de cette équation.
+  Soit $(E)$ une équation différentielle d'ordre 1 et $func(y, I, RR^n)$ une solution de $(E)$.
   Alors le graphe de $y$ est une courbe intégrale.
 ])
 
 #proof([
   Soit $M = (x_0, y_0)$ un point du graphe de $y$.
-  L'équation de la tangente au graphe en $M$ est donnée par
+  L'équation de la tangente au graphe en $M$ est donnée par :
   $ y - y_0 = y'(x_0)(x - x_0) = f(x_0, y_0)(x - x_0) $
   on reconnait l'équation de $cal(D)_M$.
 ])
 
 #definition([
-  Soit $U$ un ouvert de $RR times RR$, $y' = f(x, y)$ une équation différentielle d'ordre 1 et $m in RR$.
-  On appelle _isocline de pente $m$ associée à l'équation_, l'ensemble
+  Soit $(E)$ une équation différentielle d'ordre 1 et $m in RR$.
+  On appelle _isocline de pente $m$ associée à $(E)$_, l'ensemble :
   $ Gamma_m := {(x, y) in U | f(x, y) = m}. $
 ])
 
 === Solutions maximales et solutions globales
 
 #definition([
-  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1, et $(I_1, y_1)$ et $(I_2, y_2)$ deux solutions de cette équation.
-  On dit que $(I_2, y_2)$ est un _prolongement de $y_1$_ si $I_1 subset I_2$ et $y_2|_I_1 = y_1$.
+  Soit $(E)$ une équation différentielle d'ordre 1, et $func(y_1, I_1, RR^n)$ et $func(y_2, I_2, RR^n)$ deux solutions de $(E)$.
+  On dit que $y_2$ est un _prolongement de $y_1$_ si $I_1 subset I_2$ et $y_2|_I_1 = y_1$.
 ])
 
 #definition([
-  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(I, y)$ une solution de cette équation.
-  On dit que $(I, y)$ est _maximale_ si elle n'admet pas de prolongement.
+  Soit $(E)$ une équation différentielle d'ordre 1 et $func(y, I, RR^n)$ une solution de $(E)$.
+  On dit que $y$ est _maximale_ si elle n'admet pas de prolongement.
 ])
 
 #example([
   On considère l'équation différentielle d'ordre 1 donnée par $y' = y^2$.
-  Alors une solution maximale est $(lr(\]-oo\, 1\[), t |-> 1/(1-t))$.
+  Alors une solution maximale est $t |-> 1/(1-t)$ sur $]-oo, 1[$.
 ])
 
 #theorem([
-  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(I_1, y_1)$ une solution de cette équation.
-  Alors $(I_1, y_1)$ admet un prolongement $(I, y)$ maximal.
+  Soit $(E)$ une équation différentielle d'ordre 1 et $func(y, I, RR^n)$ une solution de $(E)$.
+  Alors $y$ admet un prolongement maximal.
 ])
 
-#proof([
-  On construit un prolongement maximal à droite en construisant par récurrence une suite croissante de prolongement, et on construit de la même manière un prolongement maximal à gauche.
-])
 
 #definition([
-  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(I, y)$ une solution de cette équation.
+  Soit $(E)$ une équation différentielle d'ordre 1 et $func(y, I, RR^n)$ une solution de $(E)$.
   On suppose que $U$ s'écrit $U = J times K$ où $J$ est un ouvert de $RR$ et $K$ un ouvert de $RR^n$.
-  Alors on dit que $(I, y)$ est _globale_ si $I = J$.
+  Alors on dit que $y$ est _globale_ si $I = J$.
 ])
 
 #proposition([
-  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(I, y)$ une solution de cette équation.
-  Si $(I, y)$ est une solution globale, alors $(I, y)$ est une solution maximale.
+  Soit $(E)$ une équation différentielle d'ordre 1 et $func(y, I, RR^n)$ une solution de $(E)$.
+  Si $y$ est une solution globale, alors $y$ est une solution maximale.
 ])
 
 #proposition([
-  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(I, y)$ une solution de cette équation.
+  Soit $(E)$ une équation différentielle d'ordre 1 et $func(y, I, RR^n)$ une solution de $(E)$.
   Si $f$ est de classe $C^k$, alors $y$ est de classe $C^(k+1)$.
 ])
 
 === Equations intégrales et cylindre de sécurité
 
 #lemma([
-  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $func(y, I, RR^n)$ une fonction.
-  Alors $(I, y)$ est une solution du problème de Cauchy de condition initiale $(t_0, y_0)$ si et seulement si :
+  Soit $(E)$ une équation différentielle d'ordre 1 et $func(y, I, RR^n)$ une fonction.
+  Alors $y$ est une solution du problème de Cauchy de condition initiale $(t_0, y_0)$ si et seulement si :
   + $y$ est continue et $forall t in I, (t, y(t)) in U$,
   + $forall t in I, y(t) = y_0 + rintegral(f(x, y(x)), t_0, t, x)$.
 ])
 
-#proof([
-  #linebreak()
-  $arrow.r.double$ : On suppose que $(I, y)$ est solution de l'équation. Puisque $y$ est dérivable, $y$ est continue. De plus pour tout $t in I$, on a $(t, y(t)) in U$ et $ y'(t) = f(t, y(t))$, on intègre sur $]t_0, t[$ et on trouve
-  $ y(t) - y(t_0) = rintegral(f(x, y(x)), t_0, t, x) $
-  d'où $y(t) = y_0 + rintegral(f(x, y(x)), t_0, t, x)$.
-
-  $arrow.l.double$ : On suppose que $(I, y)$ vérifie les hypothèses. D'après le théorème fondamentale de l'analyse $y$ est dérivable et pour tout $t in I$, on a $y'(t) = f(t, y(t))$. De plus on a bien $y(t_0) = y_0$.
-])
-
 #definition([
-  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1, $(t_0, y_0)$ un point de $U$ et $C = [t_0 - T, t_0 + T] times B(y_0, r)$ un cylindre dans $U$.
-  On dit que $C$ est un _cylindre de sécurité_ si toute solution $(I, y)$ du problème de Cauchy de condition initiale $(t_0, y_0)$ avec $I subset [t_0 - T, t_0 + T]$ reste contenue dans $overline(B)(y_0, r)$.
+  Soit $(E)$ une équation différentielle d'ordre 1, $(t_0, y_0)$ un point de $U$ et $C = [t_0 - T, t_0 + T] times B(y_0, r)$ un cylindre dans $U$.
+  On dit que $C$ est un _cylindre de sécurité_ si toute solution $func(y, I, RR^n)$ du problème de Cauchy de condition initiale $(t_0, y_0)$ avec $I subset [t_0 - T, t_0 + T]$ reste contenue dans $overline(B)(y_0, r)$.
 ])
 
 #proposition([
-  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(t_0, y_0)$ un point de $U$.
+  Soit $(E)$ une équation différentielle d'ordre 1 et $(t_0, y_0)$ un point de $U$.
   Alors il existe $T > 0$ tel que $C = [t_0 - T, t_0 + T] times B(y_0, r)$ soit un cylindre de sécurité.
-])
-
-#proof([
-  On prend un cylindre $C_0 = [t_0 - T_0, t_0 + T_0] times B(y_0, r_0) subset U$. Puisque $C_0$ est fermé et borné dans $RR^n$, $C_0$ est compact dans $RR^n$. Puisque $f$ est continue sur $C_0$, elle est bornée sur $C_0$.
-  Posons $M := max_((t, y) in C_0) norm(f(t, y))$. On suppose que $f equiv.not 0$ sur $C_0$, alors on pose $T := min(T_0, r_0 / M)$ et le cylindre $C := [t_0 - T, t_0 + T] times B(y_0, r_0)$.
-  Soit $(I, y)$ une solution du problème de Cauchy de condition initiale $(t_0, y_0)$ avec $I subset [t_0 - T, t_0 + T]$. Alors pour tout $t in I$, on a
-  $
-    norm(y(t) - y_0) = norm(rintegral(f(x, y(x)), t_0, t, x)) <= rintegral(norm(f(x, y(x))), t_0, t, x) <= M norm(t-t_0) <= r_0
-  $
-  c'est-à-dire $y(t) in overline(B)(y_0, r_0)$. Donc $C$ est un cylindre de sécurité.
 ])
 
 === Théorème de Cauchy-Péano-Arzéla
 
 #theorem([
-  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1, $(t_0, y_0)$ un point de $U$ et $C = [t_0 - T, t_0 + T] times B(y_0, r)$ un cylindre de sécurité. // avec T <= min(T_0, r_0/M)
-  Alors il existe une solution $(I, y)$ du problème de Cauchy de condition initiale $(t_0, y_0)$telle que $y(I) subset B(y_0, r)$
+  Soit $(E)$ une équation différentielle d'ordre 1, $(t_0, y_0)$ un point de $U$ et $C = [t_0 - T, t_0 + T] times B(y_0, r)$ un cylindre de sécurité. // avec T <= min(T_0, r_0/M)
+  Alors il existe une solution $func(y, I, RR^n)$ du problème de Cauchy de condition initiale $(t_0, y_0)$telle que $y(I) subset B(y_0, r)$
 ])
 
 #corollary([
-  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(t_0, y_0)$ un point de $U$.
-  Alors il existe une solution $(I, y)$ maximale, de plus $I$ est ouvert.
+  Soit $(E)$ une équation différentielle d'ordre 1 et $(t_0, y_0)$ un point de $U$.
+  Alors il existe une solution $func(y, I, RR^n)$ maximale et $I$ est ouvert.
 ])
 
 === Théorème de Cauchy-Lipschitz
 
 #definition([
-  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1.
+  Soit $(E)$ une équation différentielle d'ordre 1.
   On dit que $f$ est _localement lipschitzienne_ par rapport à la variable $y$ si pour tout point $(t_0, y_0)$ dans $U$, il existe un cylindre $C = [t_0 - T, t_0 + T] times B(y_0, r)$ dans $U$ et une constante $k >= 0$ tels que $f$ soit $k$-lipschitzienne par rapport à la variable $y$ sur $C$ :
   $
     forall (t, y_1), (t_, y_2) in C, norm(f(t, y_1) - f(t, y_2)) <= k abs(y_1 - y_2).
@@ -532,41 +508,34 @@
 ])
 
 #lemma([
-  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1, $(t_0, y_0)$ un point de $U$ et $C_0 = [t_0 - T_0, t_0 + T_0] times B(y_0, r_0)$ un cylindre sur lequel $f$ est $k$-lipschitzienne par rapport à la variable $y$.
-  Posons $M := sup_((t, y) in C_0) norm(f(t, y))$, $T := min(T_0, r_0 / M)$ et $C := [t_0 - T, t_0 + T] times B(y_0, r_0)$.
-  Alors pour tout couple $(I_1, y_1), (I_2, y_2)$ de solutions du problème de Cauchy de condition initiale $(t_0, y_0)$, on a
+  Soit $(E)$ une équation différentielle d'ordre 1, $(t_0, y_0)$ un point de $U$ et $C_0 = [t_0 - T_0, t_0 + T_0] times B(y_0, r_0)$ un cylindre sur lequel $f$ est $k$-lipschitzienne par rapport à la variable $y$.
+  Posons $M := sup_C_0 norm(f)$, $T := min(T_0, r_0 / M)$ et $C := [t_0 - T, t_0 + T] times B(y_0, r_0)$.
+  Alors pour tout couple $func(y_1, I_1, RR^n), func(y_2, I_2, RR^n)$ de solutions du problème de Cauchy de condition initiale $(t_0, y_0)$, on a
   $ forall t in [t_0 - T, t_0 + T], y_1 (t) = y_2 (t). $
 ])
 
 #theorem(
   title: "Théorème de Cauchy-Lipschitz",
   [
-    Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(t_0, y_0)$ un point de $U$.
+    Soit $(E)$ une équation différentielle d'ordre 1 et $(t_0, y_0)$ un point de $U$.
     Si $f$ est localement lipschitzienne par rapport à la variable $y$, alors pour tout cylindre de sécurité $C = [t_0 - T, t_0 + T] times B(y_0, r)$, le problème de Cauchy de condition initiale $(t_0, y_0)$ admet une unique solution sur $[t_0 - T, t_0 + T]$.
   ],
 ) <thm-cauchy-lipschitz>
 
 #theorem([
-  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1, $(I, y_1)$ et $(I, y_2)$ deux solutions de l'équation différentielle.
+  Soit $(E)$ une équation différentielle d'ordre 1, $func(y_1, I_1, RR^n)$ et $func(y_2, I_2, RR^n)$ deux solutions de $(E)$.
   Si $f$ est localement lipschitzienne par rapport à la variable $y$ et s'il existe $t_0 in I$ tel que $y_1 (t_0) = y_2 (t_0)$, alors $y_1 = y_2$.
 ])
 
-#proof([
-  On suppose que $I != {t_0}$. Posons $J := {t in I | y_1 (t) = y_2 (t)} = (y_1 - y_2)^(-1)({0})$. \
-  Puisque $y_1 - y_2$ est continue sur $I$, $J$ est fermé comme image réciproque d'un fermé par une application continue.
-  Soit $t in J$ (non-vide car $t_0 in J$), d'après le @thm-cauchy-lipschitz, il existe $T > 0$ tel que $]t - T, t + T[ subset J$, donc $J$ est ouvert.
-  Donc $J$ est ouvert et fermé, par connexité $I = J$.
-])
-
 #corollary([
-  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(t_0, y_0)$ un point de $U$.
+  Soit $(E)$ une équation différentielle d'ordre 1 et $(t_0, y_0)$ un point de $U$.
   Si $f$ est localement lipschitzienne par rapport à la variable $y$, alors il existe une unique solution maximale du problème de Cauchy de condition initiale $(t_0, y_0)$.
 ])
 
 === Théorème des bouts
 
 #theorem([
-  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 et $(\]c\, d\[, y)$ une solution maximale de l'équation différentielle.
+  Soit $(E)$ une équation différentielle d'ordre 1 et $func(y, \]c\, d\[, RR^n)$ une solution maximale de $(E)$.
   Si $f$ est localement lipschitzienne par rapport à la variable $y$, alors pour tout compact $K subset U$, il existe un voisinage $V subset ]c, d[$ de $d$ tel que :
   $ forall t in V, (t, y(t)) in.not K $
   et un voisinage $W subset ]c, d[$ de $c$ tel que :
@@ -576,8 +545,8 @@
 #corollary(
   title: "Théorème des bouts",
   [
-    Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 sur $U := ]a, b[ times RR^n$ et $(\]c\, d\[, y)$ une solution maximale de l'équation différentielle.
-    si $c > a$, alors on a :
+    Soit $(E)$ une équation différentielle d'ordre 1 sur $U := ]a, b[ times RR^n$ et $func(y, \]c\, d\[, RR^n)$ une solution maximale de $(E)$.
+    Si $c > a$, alors on a :
     $ lim_(t -> c^+) norm(y(t)) = +oo $
     et si $d < b$, alors on a :
     $ lim_(t -> d^-) norm(y(t)) = +oo. $
@@ -585,33 +554,12 @@
   ],
 ) <thm-bouts>
 
-#proof([
-  Supposons que $d < b$. \
-  Soit $R > 0$, alors d'après le @thm-sortie-compact, il existe $eta > 0$ tel que :
-  $ forall t in ]d - eta, d[, norm(y(t)) > R $
-  donc $lim_(t -> d^-) norm(y(t)) = +oo$. De la même manière $lim_(t -> c^+) norm(y(t)) = +oo$.
-
-])
-
 #proposition([
-  Soit $y' = f(x, y)$ une équation différentielle d'ordre 1 sur $U := ]a, b[ times RR^n$ et $(\]c\, d\[, y)$ une solution maximale de l'équation différentielle.
+  Soit $(E)$ une équation différentielle d'ordre 1 sur $U := ]a, b[ times RR^n$ et $func(y, \]c\, d\[, RR^n)$ une solution maximale de $(E)$.
   Si $f$ est bornée, alors $y$ est une solution globale.
 ])
 
-#proof([
-  Posons $M := sup_((t, y) in U) norm(f(t, y))$. \
-  Supposons par l'absurde que $d < b$.
-  Soit $t_0 in ]c, d[$. Alors pour tout $t in [t_0, d[$, on a :
-  $
-    norm(y(t)) &= norm(y(t_0) + rintegral(f(x, y(x)), t_0, t, x)) \
-    &<= norm(y(t_0)) + rintegral(norm(f(x, y(x))), t_0, t, x) \
-    &<= norm(y(t_0)) + M(t - t_0)
-  $
-  or d'après le @thm-bouts, on a $lim_(t -> d^-) norm(y(t)) = +oo$, d'où une contradiction, donc $d = b$. \
-  De la même manière $a = c$.
-])
-
-=== Equations différentielles linéaires du premier ordre
+== Equations différentielles linéaires du premier ordre
 
 #definition([
   Soit $I$ un intervalle de $RR$, $func(A, I, M_n (RR))$ et $func(A, I, M_n (RR))$ deux fonctions continues.
@@ -620,25 +568,24 @@
 ])
 
 #theorem([
-  Soit $y' = A(t)y + B(t)$ une équation différentielle linéaire d'ordre 1 et $(t_0, y_0)$ un point de $I times RR^n$.
+  Soit $(L)$ une équation différentielle linéaire d'ordre 1 et $(t_0, y_0)$ un point de $I times RR^n$.
   Alors il existe une unique solution maximale du problème de Cauchy de condition initiale $(t_0, y_0)$, de plus cette solution est globale.
 ])
 
 #definition([
-  Soit $y' = A(t)y + B(t)$ une équation différentielle linéaire d'ordre 1.
-  On dit que l'équation est _homogène_ si $B = 0$, c'est-à-dire :
-  $ y' = A(t)y $
+  Soit $(L)$ une équation différentielle linéaire d'ordre 1.
+  On dit que $(L)$ est _homogène_ si $B = 0$.
 ])
 
 #proposition([
-  Soit $y' = A(t)y$ une équation différentielle linéaire d'ordre 1 homogène.
+  Soit $(L)$ une équation différentielle linéaire d'ordre 1 homogène.
   Alors l'ensemble des solutions maximales de l'équation est un $RR$-espace vectoriel de dimension $n$.
 ])
 
 #corollary([
-  Soit $y' = A(t)y + B(t)$ une équation différentielle linéaire d'ordre 1 et $(I, y_0)$ une solution globale de l'équation.
-  On note $S$ l'ensemble des solutions maximales de l'équation homogène $y' = A(t)y$.
-  Alors l'ensemble des solutions de l'équation est $y_0 + S$.
+  Soit $(L)$ une équation différentielle linéaire d'ordre 1 et $func(y_0, I, RR^n)$ une solution globale de $(L)$.
+  On note $S$ l'ensemble des solutions maximales de l'équation homogène associée à $(L)$.
+  Alors l'ensemble des solutions de $(L)$ est $y_0 + S$.
 ])
 
 === Equations différentielles d'ordre supérieur
@@ -651,20 +598,20 @@
 
 #definition([
   Soit $(E_p)$ une équation différentielle d'ordre $p$.
-  On appelle _solution_ de $(E_p)$ un couple de la forme $(I, y)$ où $I$ est un intervalle de $RR$ et $func(y, I, RR^n)$ est une fonction $p$-fois dérivable sur $I$ vérifiant :
+  On appelle _solution_ de $(E_p)$ sur un intervalle $I$ de $RR$ une fonction $func(y, I, RR^n)$ $p$-fois dérivable vérifiant :
   + $forall t in I, (t, y(t), y'(t), ..., y^((p-1))(t)) in U$,
   + $forall t in I, y^((p)) = f(t, y(t), y'(t), ..., y^((p-1))(t))$.
 ])
 
 #proposition([
-  Soit $(E_p)$ une équation différentielle d'ordre $p$ et $(I, y)$ une solution de $(E_p)$.
+  Soit $(E_p)$ une équation différentielle d'ordre $p$ et $func(y, I, RR^n)$ une solution de $(E_p)$.
   Si $f$ est de classe $C^k$, alors $y$ est de classe $C^(k + p)$.
 ])
 
 #proposition([
-  Soit $(E_p)$ une équation différentielle d'ordre $p$.
-  On pose :
+  Soit $(E_p)$ une équation différentielle d'ordre $p$ et $func(y, I, RR^n)$ une fonction.
+  Posons :
   $ Y := vec(Y_0, Y_1, ..., Y_(p-1)) = vec(y, y', ..., y^((p-1))) $
-  Alors $(I, y)$ est une solution de $(E_p)$ si et seulement $(I, Y)$ est une solution de l'équation différentielle linéaire d'ordre 1 donnée par :
-  $ Y' = vec(Y_1, ..., Y_(p-1), f(t, Y)). $ 
+  Alors $y$ est une solution de $(E_p)$ si et seulement $Y$ est une solution de l'équation différentielle linéaire d'ordre 1 donnée par :
+  $ Y' = vec(Y_1, ..., Y_(p-1), f(t, Y)) $
 ])
