@@ -1047,7 +1047,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 === Loi faible des grands nombres
 
 #theorem([
-  Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires $cal(L)_1$ indépendants et de même loi d'espérance $m$.
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires $cal(L)^1$ indépendants et de même loi d'espérance $m$.
   Alors la suite des moyennes empiriques $sequence(overline(X)_n)$ converge vers $m$ dans $cal(L)^1$, c'est-à-dire :
   $ lim_(n->+oo) #E [abs(overline(X)_n - m)] = 0 $
   en particulier $sequence(overline(X)_n)$ converge en probabilité vers $m$.
@@ -1056,7 +1056,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 === Loi forte des grands nombres
 
 #theorem([
-  Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires $cal(L)_1$ indépendants et de même loi d'espérance $m$.
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires $cal(L)^1$ indépendants et de même loi d'espérance $m$.
   Alors la suite des moyennes empiriques $sequence(overline(X)_n)$ converge presque sûrement vers $m$.
 ])
 
@@ -1069,7 +1069,9 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 #definition([
   Soit $Pr$ une mesure de probabilité sur $(RR^d, borel(RR^d))$.
   On appelle _fonction caractéristique de $Pr$_ la fonction $func(hat(Pr), RR^d, CC)$ définie par :
-  $ forall t in RR^d, hat(Pr)(t) := lintegral(e^(i innerproduct(t, x)), RR^d, x, Pr) $
+  $
+    forall t in RR^d, hat(Pr)(t) := lintegral(e^(i innerproduct(t, x)), RR^d, x, Pr).
+  $
 ])
 
 #proposition([
@@ -1084,11 +1086,68 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 
 #proof([
   Notons $nu$ la mesure gaussienne de densité $x |-> 1/sqrt(2pi) e^(-x^2 / 2)$. Alors pour tout $t in RR$, on a :
-  $ hat(nu)(t) = 1/sqrt(2pi) rintegral(e^(i t x) e^(-x^2 / 2), -oo, +oo, x)
-    = 1/sqrt(2pi)(rintegral(cos(t x) e^(-x^2/2), -oo, +oo, x)
-      + i rintegral(sin(t x) e^(-x^2/2), -oo, +oo, x)) $
+  $
+    hat(nu)(t) = 1 / sqrt(2pi) rintegral(e^(i t x) e^(-x^2 / 2), -oo, +oo, x)
+    = 1 / sqrt(2pi)(rintegral(cos(t x) e^(-x^2/2), -oo, +oo, x)
+      + i rintegral(sin(t x) e^(-x^2/2), -oo, +oo, x))
+  $
   puisque $x |-> sin(t x) e^(-x^2/2)$ est impaire, on obtient :
-  $ hat(nu)(t) = 1/sqrt(2pi) rintegral(cos(t x) e^(-x^2/2), -oo, +oo, x) in RR $
-  en remarquant que $hat(nu)$ est solution de l'équation différentielle $y' + t y = 0$, on trouve :
-  $ hat(nu)(t) = e^(-t^2/2). $
+  $
+    hat(nu)(t) = 1 / sqrt(2pi) rintegral(cos(t x) e^(-x^2/2), -oo, +oo, x) in RR
+  $
+  en remarquant que $hat(nu)$ est réelle et solution de l'équation différentielle $y' + t y = 0$, on trouve :
+  $ hat(nu)(t) = e^(-t^2 / 2). $
+])
+
+== Application aux vecteurs aléatoires
+
+#definition([
+  Soit $X$ un vecteur aléatoire sur $(RR^d, borel(RR^d), Pr)$.
+  On appelle _fonction caractéristique associée à $X$_, notée $phi_X$, la fonction caractéristique de $Pr_X$, c'est-à-dire :
+  $
+    forall t in RR^d, phi_X (t) := lintegral(e^(i innerproduct(t, x)), RR^d, x, Pr_X) = #E [e^(i innerproduct(t, X))].
+  $
+])
+
+=== Somme de variables aléatoires indépendantes
+
+#proposition([
+  Soit $X_1, ..., X_n$ des vecteurs aléatoires indépendants sur $(RR^d, borel(RR^d), Pr)$.
+  Alors la fonction caractéristique de leur somme $S := X_1 + ... + X_n$ est donnée par :
+  $ forall t in RR^d, phi_S (t) := product_(k=1)^n phi_X_k (t). $
+])
+
+#proof([
+  Soit $t in RR^d$. Alors on a :
+  $
+    e^(i innerproduct(t, S)) = e^(i innerproduct(t, X_1) + ... + i innerproduct(t, X_n)) = product_(k=1)^n e^(i innerproduct(t, X_k))
+  $
+  par passage à l'espérance, on a donc :
+  $
+    phi_S (t) = #E [product_(k=1)^n e^(i innerproduct(t, X_k))] = product_(k=1)^n #E [e^i innerproduct(t, X_k)] = product_(k=1)^n phi_X_k (t)
+  $
+])
+
+=== Fonction caractéristique et moments
+
+#proposition([
+  Soit $X$ une variable aléatoire $cal(L)^p$.
+  Alors la fonction caractéristique de $X$ est $p$-fois dérivable sur $RR$ et pour tout $k in {0, ..., p}$, on a :
+  $ forall t in RR, phi_X^((k))(t) := i^k #E [X^k e^(i t X)] $
+  en particulier $phi_X^((k))(0) = i^k #E [X^k]$.
+])
+
+== Théorème d'injectivité
+
+#theorem([
+  Soit $mu$ et $nu$ deux mesures de probabilité sur $(RR^d, borel(RR^d))$.
+  Si pour tout $t in RR$, on a $hat(mu)(t) = hat(nu)(t)$, alors $mu = nu$.
+]) <thm-injectivite>
+
+== Théorème d'inversion
+
+#theorem([
+  Soit $mu$ une mesure de probabilité sur $(RR^d, borel(RR^d))$.
+  Si la fonction caractéristique de $mu$ est $cal(L)^1$, alors $mu$ admet une densité $f$ donnée par :
+  $ forall x in RR^d, f(x) := 1 / (2pi)^d lintegral(e^(-i innerproduct(t, x)) hat(mu)(t), RR^d, t). $
 ])
