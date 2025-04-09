@@ -65,46 +65,6 @@
 
 == Chaine singulière
 
-#definition([
-  Soit $X$ un espace topologique.
-  On appelle _$n$-simplexe singulier sur $X$_ une application continue $func(sigma, Delta^n, X)$.
-])
-
-#definition([
-  Soit $X$ un espace topologique, $a_0, ..., a_k$ des entiers et $sigma_0, ..., sigma_k$ des $n$-simplexes singuliers sur $X$.
-  On appelle _$n$-chaîne_ l'application $a_0 sigma_0 + dots.c + a_k sigma_k$.
-  On note $C_(n)(X)$ l'ensemble des $n$-chaînes.
-])
-
-#proposition([
-  Soit $X$ et $Y$ deux espaces topologiques, $sigma$ un $n$-simplexe singulier sur $X$ et #box($func(f, X, Y)$) une application continue.
-  Alors la composition $func(f compose sigma, Delta^n, Y)$ est un $n$-simplexe.
-])
-
-#definition([
-  Soit $X$ un espace topologique et $sigma$ un $n$-simplexe singulier sur $X$.
-  On appelle _bord de $sigma$_, noté $partial_n sigma$, le $(n-1)$-simplexe singulier sur $X$ défini par :
-  $
-    partial_n sigma := sum_(k=0)^n (-1)^k sigma|_[e_0, ..., e_(k-1), e_(k+1), ..., e_n].
-  $
-  On appelle _morphisme bord_ l'application $func(partial_n, C_n (X), C_(n-1)(X))$ induite.
-])
-
-#proposition([
-  Soit $X$ un espace topologique. Alors $partial_n compose partial_(n+1) = 0$.
-])
-
-#proof([
-  Soit $sigma$ un $(n+1)$-simplexe singulier sur $X$. Alors
-  $
-    (partial_n compose partial_(n+1))(sigma)
-    &= &&partial_(n)(sum_(k=0)^(n+1) (-1)^k sigma|_[e_0, ..., e_(k-1), e_(k+1), ..., e_(n+1)]) \
-    &= &&sum_(k=0)^(n+1) (-1)^k partial_(n)(sigma|_[e_0, ..., e_(k-1), e_(k+1), ..., e_(n+1)]) \
-    &= &&sum_(0 <= k < l <= n) (-1)^(k + l) sigma|_[e_0, ..., e_(k-1), e_(k+1), ..., e_(l-1), e_(l+1), ..., e_(n+1)] \
-    & &&+ sum_(0 <= l < k <= n) (-1)^(k + l - 1) sigma|_[e_0, ..., e_(l-1), e_(l+1), ..., e_(k-1), e_(k+1), ..., e_(n+1)]) \
-    &= &&0.
-  $
-])
 
 == Complexe de chaines
 

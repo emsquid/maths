@@ -25,6 +25,7 @@
 )
 
 #let axiom = courseblock(blocktitle: "Axiome")
+#let axioms = courseblock(blocktitle: "Axiomes")
 #let definition = courseblock(blocktitle: "Définition")
 #let notation = courseblock(blocktitle: "Notation")
 #let theorem = courseblock(blocktitle: "Théorème")

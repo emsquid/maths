@@ -2,6 +2,8 @@
 
 #show: maths.with(title: "Calcul différentiel 2", color: "#718355")
 
+#pagebreak()
+
 = Calcul différentiel
 
 == Inversion et fonctions implicites
@@ -459,7 +461,7 @@
   Si $f$ est de classe $C^k$, alors $y$ est de classe $C^(k+1)$.
 ])
 
-=== Equations intégrales et cylindre de sécurité
+=== Équations intégrales et cylindre de sécurité
 
 #lemma([
   Soit $(E)$ une équation différentielle d'ordre 1 et $func(y, I, RR^n)$ une fonction.
@@ -487,14 +489,14 @@
 
 #corollary([
   Soit $(E)$ une équation différentielle d'ordre 1 et $(t_0, y_0)$ un point de $U$.
-  Alors il existe une solution $func(y, I, RR^n)$ maximale et $I$ est ouvert.
+  Alors il existe une solution maximale $func(y, I, RR^n)$ du problème de Cauchy de condition initiale $(t_0, y_0)$ définie sur un ouvert $I$.
 ])
 
 === Théorème de Cauchy-Lipschitz
 
 #definition([
   Soit $(E)$ une équation différentielle d'ordre 1.
-  On dit que $f$ est _localement lipschitzienne_ par rapport à la variable $y$ si pour tout point $(t_0, y_0)$ dans $U$, il existe un cylindre $C = [t_0 - T, t_0 + T] times B(y_0, r)$ dans $U$ et une constante $k >= 0$ tels que $f$ soit $k$-lipschitzienne par rapport à la variable $y$ sur $C$ :
+  On dit que $f$ est _localement lipschitzienne_ par rapport à la deuxième variable si pour tout point $(t_0, y_0)$ dans $U$, il existe un cylindre $C = [t_0 - T, t_0 + T] times B(y_0, r)$ dans $U$ et une constante $k >= 0$ tels que $f$ soit $k$-lipschitzienne par rapport à la deuxième variable sur $C$ :
   $
     forall (t, y_1), (t_, y_2) in C, norm(f(t, y_1) - f(t, y_2)) <= k abs(y_1 - y_2).
   $
@@ -502,13 +504,13 @@
 
 #remark([
   On considère $f = (f_1, ..., f_n)$.
-  Si $f$ admet des dérivées partielles par rapport à la variable $y$ continues sur $U$.
-  Alors en appliquant le théorème des accroissements finis on obtient que $f$ est localement lipschitzienne par rapport à la variable $y$.
+  Si $f$ admet des dérivées partielles par rapport à la deuxième variable continues sur $U$.
+  Alors en appliquant le théorème des accroissements finis on obtient que $f$ est localement lipschitzienne par rapport à la deuxième variable.
   Cela est vrai en particulier si $f$ est $C^1$.
 ])
 
 #lemma([
-  Soit $(E)$ une équation différentielle d'ordre 1, $(t_0, y_0)$ un point de $U$ et $C_0 = [t_0 - T_0, t_0 + T_0] times B(y_0, r_0)$ un cylindre sur lequel $f$ est $k$-lipschitzienne par rapport à la variable $y$.
+  Soit $(E)$ une équation différentielle d'ordre 1, $(t_0, y_0)$ un point de $U$ et $C_0 = [t_0 - T_0, t_0 + T_0] times B(y_0, r_0)$ un cylindre sur lequel $f$ est $k$-lipschitzienne par rapport à la deuxième variable.
   Posons $M := sup_C_0 norm(f)$, $T := min(T_0, r_0 / M)$ et $C := [t_0 - T, t_0 + T] times B(y_0, r_0)$.
   Alors pour tout couple $func(y_1, I_1, RR^n), func(y_2, I_2, RR^n)$ de solutions du problème de Cauchy de condition initiale $(t_0, y_0)$, on a
   $ forall t in [t_0 - T, t_0 + T], y_1 (t) = y_2 (t). $
@@ -518,25 +520,25 @@
   title: "Théorème de Cauchy-Lipschitz",
   [
     Soit $(E)$ une équation différentielle d'ordre 1 et $(t_0, y_0)$ un point de $U$.
-    Si $f$ est localement lipschitzienne par rapport à la variable $y$, alors pour tout cylindre de sécurité $C = [t_0 - T, t_0 + T] times B(y_0, r)$, le problème de Cauchy de condition initiale $(t_0, y_0)$ admet une unique solution sur $[t_0 - T, t_0 + T]$.
+    Si $f$ est localement lipschitzienne par rapport à la deuxième variable, alors pour tout cylindre de sécurité $C = [t_0 - T, t_0 + T] times B(y_0, r)$, le problème de Cauchy de condition initiale $(t_0, y_0)$ admet une unique solution sur $[t_0 - T, t_0 + T]$.
   ],
 ) <thm-cauchy-lipschitz>
 
 #theorem([
   Soit $(E)$ une équation différentielle d'ordre 1, $func(y_1, I_1, RR^n)$ et $func(y_2, I_2, RR^n)$ deux solutions de $(E)$.
-  Si $f$ est localement lipschitzienne par rapport à la variable $y$ et s'il existe $t_0 in I$ tel que $y_1 (t_0) = y_2 (t_0)$, alors $y_1 = y_2$.
+  Si $f$ est localement lipschitzienne par rapport à la deuxième variable et s'il existe $t_0 in I$ tel que $y_1 (t_0) = y_2 (t_0)$, alors $y_1 = y_2$.
 ])
 
 #corollary([
   Soit $(E)$ une équation différentielle d'ordre 1 et $(t_0, y_0)$ un point de $U$.
-  Si $f$ est localement lipschitzienne par rapport à la variable $y$, alors il existe une unique solution maximale du problème de Cauchy de condition initiale $(t_0, y_0)$.
+  Si $f$ est localement lipschitzienne par rapport à la deuxième variable, alors il existe une unique solution maximale du problème de Cauchy de condition initiale $(t_0, y_0)$.
 ])
 
 === Théorème des bouts
 
 #theorem([
   Soit $(E)$ une équation différentielle d'ordre 1 et $func(y, \]c\, d\[, RR^n)$ une solution maximale de $(E)$.
-  Si $f$ est localement lipschitzienne par rapport à la variable $y$, alors pour tout compact $K subset U$, il existe un voisinage $V subset ]c, d[$ de $d$ tel que :
+  Si $f$ est localement lipschitzienne par rapport à la deuxième variable, alors pour tout compact $K subset U$, il existe un voisinage $V subset ]c, d[$ de $d$ tel que :
   $ forall t in V, (t, y(t)) in.not K $
   et un voisinage $W subset ]c, d[$ de $c$ tel que :
   $ forall t in W, (t, y(t)) in.not K. $
@@ -559,7 +561,7 @@
   Si $f$ est bornée, alors $y$ est une solution globale.
 ])
 
-== Equations différentielles linéaires du premier ordre
+== Équations différentielles linéaires du premier ordre
 
 #definition([
   Soit $I$ un intervalle de $RR$, $func(A, I, M_n (RR))$ et $func(A, I, M_n (RR))$ deux fonctions continues.
@@ -588,7 +590,7 @@
   Alors l'ensemble des solutions de $(L)$ est $y_0 + S$.
 ])
 
-=== Equations différentielles d'ordre supérieur
+== Équations différentielles d'ordre supérieur
 
 #definition([
   Soit $U$ un ouvert de $RR times (RR^n)^p$ et $func(f, U, RR^n)$ une fonction continue.
@@ -612,6 +614,159 @@
   Soit $(E_p)$ une équation différentielle d'ordre $p$ et $func(y, I, RR^n)$ une fonction.
   Posons :
   $ Y := vec(Y_0, Y_1, ..., Y_(p-1)) = vec(y, y', ..., y^((p-1))) $
-  Alors $y$ est une solution de $(E_p)$ si et seulement $Y$ est une solution de l'équation différentielle linéaire d'ordre 1 donnée par :
+  Alors $y$ est une solution de $(E_p)$ si et seulement $Y$ est une solution de $(E)$ l'équation différentielle d'ordre 1 donnée par :
   $ Y' = vec(Y_1, ..., Y_(p-1), f(t, Y)) $
+])
+
+#theorem([
+  Soit $(E_p)$ une équation différentielle d'ordre $p$ et $(t_0, y_0, ..., y_(p-1))$ un point de $U$.
+  Alors il existe une solution maximale $func(y, I, RR^n)$ du problème de Cauchy de condition initiale $(t_0, y_0, ..., y_(p-1))$ définie sur un ouvert $I$.
+])
+
+#theorem([
+  Soit $(E_p)$ une équation différentielle d'ordre $p$ et $(t_0, y_0, ..., y_(p-1))$ un point de $U$.
+  Si $f$ est localement lipschitzienne par rapport à la deuxième variable, alors il existe une unique solution maximale $func(y, I, RR^n)$ du problème de Cauchy de condition initiale $(t_0, y_0, ..., y_(p-1))$ définie sur un ouvert $I$.
+
+])
+
+== Solutions d'équations différentielles linéaires à coefficients constants
+
+#definition([
+  Soit $(L)$ une équation différentielle linéaire d'ordre 1.
+  On dit que $(L)$ est à _coefficients constants_ si $A in M_n (RR)$.
+])
+
+=== Solutions exponentielles d'équations homogènes
+
+#proposition([
+  Soit $(L)$ une équation différentielle linéaire d'ordre 1 homogène à coefficients constants.
+  Alors la fonction $func(y, I, RR^n, t, e^(lambda t) v)$ est solution de $(L)$ si et seulement si $lambda$ est une valeur propre de $A$ et $v$ est un vecteur propre de $A$ associé à $lambda$.
+])
+
+==== Cas diagonalisable
+
+#proposition([
+  Soit $(L)$ une équation différentielle linéaire d'ordre 1 homogène à coefficients constants.
+  Si $A$ est diagonalisable, il existe une base $(v_1, ..., v_n)$ de $RR^n$ de vecteurs propres de $A$ associées aux valeurs propres $(lambda_1, ..., lambda_n)$ de $A$.
+  Alors pour tout $i in {1, ..., n}$, la fonction #box($func(y_i, I, RR^n, t, e^(lambda_i t) v_i)$) est une solution de $(L)$, de plus ces solutions sont indépendantes.
+])
+
+#corollary([
+  Soit $(L)$ une équation différentielle linéaire d'ordre 1 homogène à coefficients constants.
+  Si $A$ est diagonalisable, il existe une base $(v_1, ..., v_n)$ de $RR^n$ de vecteurs propres de $A$ associées aux valeurs propres $(lambda_1, ..., lambda_n)$ de $A$.
+  Alors la solution générale de $(L)$ est donnée par :
+  $ func(y, I, RR^n, t, c_1 e^(lambda_1 t)) v_1 + ... + c_n e^(lambda_n t) v_n $
+  où $c_1, ..., c_n in RR$.
+])
+
+==== Cas général
+
+#theorem([
+  Soit $(L)$ une équation différentielle linéaire d'ordre 1 homogène à coefficients constants.
+  Alors la solution générale de $(L)$ est donnée par :
+  $ func(y, I, RR^n, t, e^(t A) v) $
+  où $v in RR^n$.
+])
+
+
+#theorem([
+  Soit $(L)$ une équation différentielle linéaire d'ordre 1 homogène à coefficients constants et $(t_0, v_0)$ un point de $U$.
+  Alors la solution du problème de Cauchy de condition initiale $(t_0, v_0)$ est donnée par :
+  $ func(y, I, RR^n, t, e^((t - t_0)A) v_0) $
+])
+
+=== Solutions exponentielles
+
+#theorem([
+  Soit $(L)$ une équation différentielle linéaire d'ordre 1 à coefficients constants.
+  Alors la solution générale de $(L)$ est donnée par :
+  $ func(y, I, RR^n, t, e^(t A) v + T(t)) $
+  où $v in RR^n$ et $func(T, I, RR^n)$ est une solution particulière de $(L)$.
+])
+
+#remark([
+  Soit $(L)$ une équation différentielle linéaire d'ordre 1 à coefficients constants.
+  Pour trouver une solution particulière, on applique la méthode de _variation de la constante_.\
+  Pour tout $t in I$, on pose :
+  $ T(t) = e^(t A) v(t) $
+  et on dérive pour obtenir :
+  $ T'(t) = e^(t A) A v(t) + e^(t A) v'(t) = A T(t) + e^(t A) v'(t) $
+  on cherche donc $e^(t A) v'(t) = B(t)$, c'est-à-dire $v'(t) = e^(-t A) B(t)$, et on intègre pour trouver :
+  $ v(t) = rintegral(e^(-x A) B(x), t_0, t, x) $
+  donc :
+  $ T(t) = e^(t A) rintegral(e^(-x A) B(x), t_0, t, x) $
+  est une solution particulière de $(L)$, qui vérifie le problème de Cauchy $T(t_0) = 0$.
+])
+
+#examples([
+  + On considère le système différentiel linéaire à coefficients constants $(S)$ donné par :
+    $ cases(x'=x+2y, y'=2x+y) $
+    On écrit le système sous la forme $Y' = A Y$, où :
+    $ Y := vec(x, y) quad "et" quad A := mat(1, 2; 2, 1) $
+    La matrice $A$ est diagonalisable car symétrique, avec comme polynôme caractéristique :
+    $ chi_A = (X+1)(X-3) $
+    donc ses valeurs propres sont $-1$ et $3$. Et ses espaces propres sont donnés par :
+    $ E_(-1) = span(vec(1, -1)) quad "et" quad E_3 = span(vec(1, 1)) $
+    Les solutions de $(S)$ sont donc de la forme :
+    $ Y(t) = a e^(-t) vec(1, -1) + b e^(3t) vec(1, 1) $
+    c'est-à-dire :
+    $ cases(x = a e^(-t) + b e^(3t), y = -a e^(-t) + b e^(3t)) $
+    où $a, b in RR$.
+  + On considère le système différentiel linéaire à coefficients constants $(S)$ donné par :
+    $ cases(x'=2x+y, y'=2y) $
+    On écrit le système sous la forme $Y' = A Y$, où :
+    $ Y := vec(x, y) quad "et" quad A := mat(2, 1; 0, 2) $
+    La matrice $A$ n'est pas diagonalisable. On écrit $A = 2I_2 + R$, où :
+    $ R:= mat(0, 1; 0, 0) $
+    en passant à l'exponentielle on trouve :
+    $ e^(t A) = e^(2t) e^(t R) $
+    mais $R^2 = 0$, d'où $e^(t R) = I_2 + t R$, et on obtient :
+    $ e^(t A) = mat(e^(2t), t e^(2t); 0, e^(2t)) $
+    Les solutions de $(S)$ sont donc de la forme :
+    $ Y(t) = e^(t A) vec(a, b) = vec(a e^(2t) + b t e^(2t), b e^(2t)) $
+    c'est-à-dire :
+    $ cases(x = a e^(2t) + b t e^(2t), y = b e^(2t)) $
+    où $a, b in RR$.
+  + On considère le système différentiel linéaire à coefficients constants $(S)$ donné par :
+    $ cases(x'=6x+3y-3t+4e^(3t), y'=-4x-y+4t-4e^(3t)) $
+    On écrit le système sous la forme $Y' = A Y + B(t)$, où :
+    $
+      Y := vec(x, y), quad A := mat(6, 3; -4, -1) quad "et" quad B(t) = vec(-3t + 4e^(3t), 4t - 4e^(3t))
+    $
+    On trouve que les solutions du système homogène associé à $(S)$ sont de la forme :
+    $ Y(t) = a e^(3t) vec(1, -1) + b e^(2t) vec(3, -4) $
+    c'est-à-dire :
+    $ cases(x = a e^(3t) + 3b e^(2t), y = -a e^(3t) - 4b e^(2t)) $
+    où $a, b in RR$. On cherche une solution particulière de $(S)$ en appliquant la méthode de variation de la constante :
+    $
+      cases(
+        x = alpha(t) e^(3t) + 3beta(t) e^(2t),
+        y = -alpha(t) e^(3t) - 4beta(t) e^(2t))
+    $
+    et on dérive pour obtenir :
+    $
+      cases(
+        x' = 3 alpha(t) e^(3t) + alpha'(t) e^(3t) + 6beta(t) e^(2t) + 3beta'(t) e^(2t),
+        y' = -3 alpha(t) e^(3t) - alpha'(t) e^(3t) - 8beta(t) e^(2t) - 4beta'(t) e^(2t),
+      )
+    $
+    on cherche donc :
+    $
+      cases(
+        alpha'(t) e^(3t) + 3beta'(t) e^(2t) = -3t + 4e^(3t),
+        -alpha'(t) e^(3t) - 4beta'(t) e^(2t) = 4t - 4e^(3t)
+      )
+    $
+    on voit que $alpha'(t) = 4$ et $beta'(t) = -t e^(-2t)$ conviennent, et on intègre pour obtenir $alpha(t) = 4t$ et :
+    $
+      beta(t) = rintegral(-x e^(-2x), -1/2, t, x) = [(1 / 2 x + 1 / 4)e^(-2x)]_(-1 / 2)^t = (1 / 2 t + 1 / 4) e^(-2t)
+    $
+    Les solutions de $(S)$ sont donc de la forme :
+    $
+      cases(
+        x = a e^(3t) + 3b e^(2t) + 4t e^(3t) + 3/2 t + 3/4,
+        y = -a e^(3t) - 4b e^(2t) - 4t e^(3t) -2t - 1
+      )
+    $
+    où $a, b in RR$.
 ])
