@@ -2,6 +2,8 @@
 
 #show: maths.with(title: "Algèbre linéaire et bilinéaire", color: "#718355")
 
+#pagebreak()
+
 = Rappels d'algèbre linéaire
 
 == Espaces vectoriels

@@ -2,6 +2,8 @@
 
 #show: maths.with(title: "Calcul intégral et applications", color: "#718355")
 
+#pagebreak()
+
 = Intégrale de Lebesgue et intégrale de Riemann
 
 #theorem([

@@ -2,6 +2,7 @@
 #import "@preview/great-theorems:0.1.2": *
 #import "@preview/outrageous:0.4.0"
 #import "@preview/rich-counters:0.2.2": *
+#import "@preview/ez-today:1.1.0": *
 #import "@local/mathematica:0.1.0": *
 
 // Counter and blocks definitions
@@ -156,9 +157,7 @@
       }
       #v(0pt)
       #if date {
-        text(size: 13pt)[#lower(
-            datetime.today().display("[day] [month repr:long] [year]"),
-          )]
+        text(size: 12pt)[#today(lang: "fr", format: "d M Y")]
       }
     ],
   )

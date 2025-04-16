@@ -2,7 +2,9 @@
 
 #show: maths.with(title: "Probabilités", color: "#718355")
 
-#set-maths(sequence: (ind: "n", dom: $NN$), Pr: $PP$)
+#set-maths(sequence: (ind: $n$, dom: $NN$), Pr: $PP$)
+
+#pagebreak()
 
 = Cadre général de la théorie des probabilités
 

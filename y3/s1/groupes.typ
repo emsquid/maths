@@ -2,6 +2,8 @@
 
 #show: maths.with(title: "Théorie des groupes", color: "#718355")
 
+#pagebreak()
+
 = Groupes
 
 #definition[
