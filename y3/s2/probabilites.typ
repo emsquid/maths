@@ -32,7 +32,7 @@
 
 #definition([
   Soit $sequence(A)$ une suite d'événements sur $(Omega, cal(F), Pr)$. On dit que $sequence(A)$ est un _système complet_ si elle vérifie :
-  + les $A_n$ sont disjoints deux à deux : $forall i, j in NN, i != j => A_i != A_j$,
+  + les $A_n$ sont disjoints deux à deux : $forall i, j in NN, i != j => A_i inter A_j = emptyset$,
   + la probabilité de l'union des $A_n$ est 1 : $Pr(union.big_(n in NN) A_n) = 1$.
 ])
 
@@ -43,7 +43,7 @@
 ])
 
 #proof([
-  On pose $C := union.big_(n>=1) A_n$, puisque $Pr(C) = 1$, on a $Pr(C^c) = 0$ d'où $Pr(B inter C^c) = 0$. Soit $B in cal(F)$, on en déduit
+  Soit $B in cal(F)$. On pose $C := union.big_(n>=1) A_n$, puisque $Pr(C) = 1$, on a $Pr(C^c) = 0$ d'où $Pr(B inter C^c) = 0$. On en déduit
   $
     Pr(B) = Pr(B inter C) + underbraced(Pr(B inter C^c), = 0)
     = Pr(union.big_(n>=1) B inter A_n)
@@ -65,9 +65,9 @@
   [
     Soit $(Omega, cal(F), Pr)$ un espace probabilisé.
     + Soit $sequence(A)$ une suite croissante d'événements. Alors on a
-      $ lim_(n->+oo) Pr(A_n) = Pr(union.big_(n>=1) A_n). $
+      $ lim_(n->+oo) Pr(A_n) = Pr(lim_(n->+oo) A_n) = Pr(union.big_(n>=1) A_n). $
     + Soit $sequence(A)$ une suite décroissante d'événements. Alors on a
-      $ lim_(n->+oo) Pr(A_n) = Pr(inter.big_(n>=1) A_n). $
+      $ lim_(n->+oo) Pr(A_n) = Pr(lim_(n->+oo) A_n) = Pr(inter.big_(n>=1) A_n). $
   ],
 )
 

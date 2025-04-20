@@ -470,6 +470,22 @@
   + $forall t in I, y(t) = y_0 + rintegral(f(x, y(x)), t_0, t, x)$.
 ])
 
+#proof([
+  #linebreak()
+  $arrow.r.double$ : Supposons que $y$ est solution du problème de Cauchy de condition initiale $(t_0, y_0)$. \
+  Alors $y$ est dérivable donc continue et $forall t in I, (t, y(t)) in U$.
+  Soit $t in I$, d'après le théorème fondamental de l'analyse en intégrant l'égalité $y' = f(t, y)$ on obtient :
+  $ y(t) - y(t_0) = rintegral(f(x, y(x)), t_0, t, x) $
+  puisque $y$ est solution du problème de Cauchy de condition initiale $(t_0, y_0)$, on a :
+  $ y(t) = y_0 + rintegral(f(x, y(x)), t_0, t, x). $
+
+  $arrow.l.double$ : Supposons les hypothèses de l'énoncé vérifiées. \
+  Puisque $f$ est continue, d'après le théorème fondamental de l'analyse $t |-> rintegral(f(x, y(x)), t_0, t, x)$ est dérivable, donc $y$ est dérivable et $forall t in I, (t, y(t)) in U$. Soit $t in I$, en dérivant on obtient :
+  $ y'(t) = f(t, y(t)) $
+  et $y(t_0) = y_0 + rintegral(f(x, y(x)), t_0, t_0, x) = y_0$.
+  Donc $y$ est solution du problème de Cauchy de condition initiale $(t_0, y_0)$
+])
+
 #definition([
   Soit $(E)$ une équation différentielle d'ordre 1, $(t_0, y_0)$ un point de $U$ et $C = [t_0 - T, t_0 + T] times B(y_0, r)$ un cylindre dans $U$.
   On dit que $C$ est un _cylindre de sécurité_ si toute solution $func(y, I, RR^n)$ du problème de Cauchy de condition initiale $(t_0, y_0)$ avec $I subset [t_0 - T, t_0 + T]$ reste contenue dans $overline(B)(y_0, r)$.
@@ -484,7 +500,7 @@
 
 #theorem([
   Soit $(E)$ une équation différentielle d'ordre 1, $(t_0, y_0)$ un point de $U$ et $C = [t_0 - T, t_0 + T] times B(y_0, r)$ un cylindre de sécurité. // avec T <= min(T_0, r_0/M)
-  Alors il existe une solution $func(y, I, RR^n)$ du problème de Cauchy de condition initiale $(t_0, y_0)$telle que $y(I) subset B(y_0, r)$
+  Alors il existe une solution $func(y, I, RR^n)$ du problème de Cauchy de condition initiale $(t_0, y_0)$ telle que $y(I) subset B(y_0, r)$
 ])
 
 #corollary([

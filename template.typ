@@ -1,52 +1,39 @@
 #import "@preview/fletcher:0.5.2": *
-#import "@preview/great-theorems:0.1.2": *
 #import "@preview/outrageous:0.4.0"
 #import "@preview/rich-counters:0.2.2": *
 #import "@preview/ez-today:1.1.0": *
+#import "@local/touvlo:0.1.0": *
 #import "@local/mathematica:0.1.0": *
 
 // Counter and blocks definitions
-#let coursecounter = rich-counter(identifier: "maths", inherited_levels: 1)
-#let courseblock = mathblock.with(
-  breakable: false,
-  counter: coursecounter,
-)
-#let exampleblock = mathblock.with(
-  breakable: true,
-  counter: coursecounter,
+#let mathscounter = rich-counter(identifier: "maths", inherited_levels: 1)
+#let mathsbrick = brick.with(counter: mathscounter)
+#let examplebrick = mathsbrick.with(
   bodyfmt: body => {
     set enum(numbering: "1.a.i.A.")
     body
   },
 )
 #let exercisecounter = rich-counter(identifier: "ex", inherited_levels: 0)
-#let exerciseblock = mathblock.with(
-  breakable: false,
-  counter: exercisecounter,
+#let exercisebrick = brick.with(counter: exercisecounter)
+
+#let axiom = mathsbrick("Axiome")
+#let axioms = mathsbrick("Axiomes")
+#let definition = mathsbrick("Définition")
+#let notation = mathsbrick("Notation")
+#let theorem = mathsbrick("Théorème")
+#let lemma = mathsbrick("Lemme")
+#let corollary = mathsbrick("Corollaire")
+#let proposition = mathsbrick("Proposition")
+#let remark = mathsbrick("Remarque")
+#let example = examplebrick("Exemple")
+#let examples = examplebrick("Exemples")
+#let proof = proofbrick(
+  [_Démonstration_.],
+  of => [_Démonstration de #of._],
 )
 
-#let axiom = courseblock(blocktitle: "Axiome")
-#let axioms = courseblock(blocktitle: "Axiomes")
-#let definition = courseblock(blocktitle: "Définition")
-#let notation = courseblock(blocktitle: "Notation")
-#let theorem = courseblock(blocktitle: "Théorème")
-#let lemma = courseblock(blocktitle: "Lemme")
-#let corollary = courseblock(blocktitle: "Corollaire")
-#let proposition = courseblock(blocktitle: "Proposition")
-#let example = exampleblock(blocktitle: "Exemple")
-#let examples = exampleblock(blocktitle: "Exemples")
-#let remark = courseblock(blocktitle: "Remarque")
-#let proof = proofblock(
-  prefix: [_Démonstration_.],
-  suffix: {
-    h(1fr)
-    sym.wj
-    sym.space.nobreak
-    $square$
-  },
-)
-
-#let exercise = exerciseblock(blocktitle: "Exercice")
+#let exercise = exercisebrick("Exercice")
 
 // Maths shortcuts
 #let scr(it) = text(
@@ -143,8 +130,26 @@
   // Link colors
   show link: it => text(rgb(color), it)
 
+  // List/enum references
+  show ref: it => {
+    if (it.element != none and it.element.func() == enum.item) {
+      let supplement = if it.citation.supplement != none {
+        it.citation.supplement
+      } else {
+        context numbering(enum.numbering, it.element.number)
+      }
+
+      link(it.element.location(), supplement)
+    } else if (it.element != none and it.element.func() == list.item) {
+      let supplement = it.citation.supplement
+      link(it.element.location(), supplement)
+    } else {
+      it
+    }
+  }
+
   // Maths
-  show: great-theorems-init
+  show: touvlo-init
 
   // Title
   align(
