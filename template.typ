@@ -143,6 +143,9 @@
     } else if (it.element != none and it.element.func() == list.item) {
       let supplement = it.citation.supplement
       link(it.element.location(), supplement)
+    } else if (it.element != none and it.element.func() == text) {
+      let supplement = it.citation.supplement
+      link(it.element.location(), supplement)
     } else {
       it
     }

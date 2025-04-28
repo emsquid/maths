@@ -379,7 +379,7 @@
 
 #definition([
   Soit $(E)$ une équation différentielle d'ordre 1 et $(t_0, y_0) in RR times RR^n$.
-  On appelle _problème de Cauchy_ avec donnée $(t_0, y_0)$ le système composé des équations $(E)$ et $y(t_0) = y_0$. On dit que l'équation $y(t_0) = y_0$ est la _condition initiale_ (ou de Cauchy).
+  On appelle _problème de Cauchy de condition initiale $y(t_0) = y_0$_ le système composé des équations $(E)$ et $y(t_0) = y_0$.
 ])
 
 #example([
@@ -442,8 +442,11 @@
 #theorem([
   Soit $(E)$ une équation différentielle d'ordre 1 et $func(y, I, RR^n)$ une solution de $(E)$.
   Alors $y$ admet un prolongement maximal.
-])
+]) <thm-prolongement>
 
+#proof([
+  On prolonge successivement $y$ à gauche et à droite en créant par récurrence des prolongements successifs et en passant à la limite.
+])
 
 #definition([
   Soit $(E)$ une équation différentielle d'ordre 1 et $func(y, I, RR^n)$ une solution de $(E)$.
@@ -461,58 +464,89 @@
   Si $f$ est de classe $C^k$, alors $y$ est de classe $C^(k+1)$.
 ])
 
+#proof([
+  Soit $n in {0, ..., k-1}$. On pose $P(n)$ : $y$ est de classe $C^n$. \
+  Pour $n=0$, par définition $y$ est dérivable, donc $y$ est continue. \
+  Pour $n in {0, ..., k}$, on suppose que $P(n)$ est vérifiée, $y$ est de classe $C^n$, alors $y' = f(x, y)$ est de classe $C^n$ par composition de fonctions de classe $C^n$, donc $y$ est de classe $C^(n+1)$. \
+  D'après $P(k+1)$, $y$ est de classe $C^(k+1)$.
+])
+
 === Équations intégrales et cylindre de sécurité
 
 #lemma([
   Soit $(E)$ une équation différentielle d'ordre 1 et $func(y, I, RR^n)$ une fonction.
-  Alors $y$ est une solution du problème de Cauchy de condition initiale $(t_0, y_0)$ si et seulement si :
+  Alors $y$ est une solution du problème de Cauchy de condition initiale $y(t_0) = y_0$ si et seulement si :
   + $y$ est continue et $forall t in I, (t, y(t)) in U$,
   + $forall t in I, y(t) = y_0 + rintegral(f(x, y(x)), t_0, t, x)$.
 ])
 
 #proof([
   #linebreak()
-  $arrow.r.double$ : Supposons que $y$ est solution du problème de Cauchy de condition initiale $(t_0, y_0)$. \
+  $arrow.r.double$ : Supposons que $y$ est solution du problème de Cauchy de condition initiale $y(t_0) = y_0$. \
   Alors $y$ est dérivable donc continue et $forall t in I, (t, y(t)) in U$.
   Soit $t in I$, d'après le théorème fondamental de l'analyse en intégrant l'égalité $y' = f(t, y)$ on obtient :
   $ y(t) - y(t_0) = rintegral(f(x, y(x)), t_0, t, x) $
-  puisque $y$ est solution du problème de Cauchy de condition initiale $(t_0, y_0)$, on a :
+  puisque $y$ est solution du problème de Cauchy de condition initiale $y(t_0) = y_0$, on a :
   $ y(t) = y_0 + rintegral(f(x, y(x)), t_0, t, x). $
 
   $arrow.l.double$ : Supposons les hypothèses de l'énoncé vérifiées. \
   Puisque $f$ est continue, d'après le théorème fondamental de l'analyse $t |-> rintegral(f(x, y(x)), t_0, t, x)$ est dérivable, donc $y$ est dérivable et $forall t in I, (t, y(t)) in U$. Soit $t in I$, en dérivant on obtient :
   $ y'(t) = f(t, y(t)) $
   et $y(t_0) = y_0 + rintegral(f(x, y(x)), t_0, t_0, x) = y_0$.
-  Donc $y$ est solution du problème de Cauchy de condition initiale $(t_0, y_0)$
+  Donc $y$ est solution du problème de Cauchy de condition initiale $y(t_0) = y_0$
 ])
 
 #definition([
   Soit $(E)$ une équation différentielle d'ordre 1, $(t_0, y_0)$ un point de $U$ et $C = [t_0 - T, t_0 + T] times B(y_0, r)$ un cylindre dans $U$.
-  On dit que $C$ est un _cylindre de sécurité_ si toute solution $func(y, I, RR^n)$ du problème de Cauchy de condition initiale $(t_0, y_0)$ avec $I subset [t_0 - T, t_0 + T]$ reste contenue dans $overline(B)(y_0, r)$.
+  On dit que $C$ est un _cylindre de sécurité_ si toute solution $func(y, I, RR^n)$ du problème de Cauchy de condition initiale $y(t_0) = y_0$ avec $I subset [t_0 - T, t_0 + T]$ reste contenue dans $overline(B)(y_0, r)$.
 ])
 
 #proposition([
   Soit $(E)$ une équation différentielle d'ordre 1 et $(t_0, y_0)$ un point de $U$.
   Alors il existe $T > 0$ tel que $C = [t_0 - T, t_0 + T] times B(y_0, r)$ soit un cylindre de sécurité.
+]) <prop-cylindre-securite>
+
+#proof([
+  Considérons un cylindre $C_0 := [t_0 - T_0, t_0 + T_0] times B(y_0, r_0)$ dans $U$.
+  Alors $C_0$ est fermé et borné, donc $C_0$ est compact.
+  Puisque $f$ est $C^0$ sur $C_0$, on a que $f$ est bornée sur $C_0$, on note $M := max_((t, y) in C_0) norm(f(t, y)) in RR$.
+
+  On suppose que $f$ n'est pas identiquement nulle sur $C_0$, donc $M > 0$.
+  Et on pose $T := min(T_0, r_0 / M)$, $r := r_0$ et $C := [t_0 - T, t_0 + T] times overline(B)(y_0, r)$.
+
+  Soit $func(y, I, overline(B)(y_0, r))$ une solution du problème de Cauchy de condition initiale $y(t_0) = y_0$ avec $I subset [t_0 - T, t_0 + T]$. Alors pour tout $t in I$, on a :
+  $
+    norm(y(t) - y_0) = norm(rintegral(f(x, y(x)), t_0, t, x)) <= rintegral(norm(f(x, y(x))), t_0, t, x) <= M abs(t - t_0) <= r
+  $
+  Donc $C$ est un cylindre de sécurité pour $(E)$.
 ])
 
 === Théorème de Cauchy-Péano-Arzéla
 
-#theorem([
-  Soit $(E)$ une équation différentielle d'ordre 1, $(t_0, y_0)$ un point de $U$ et $C = [t_0 - T, t_0 + T] times B(y_0, r)$ un cylindre de sécurité. // avec T <= min(T_0, r_0/M)
-  Alors il existe une solution $func(y, I, RR^n)$ du problème de Cauchy de condition initiale $(t_0, y_0)$ telle que $y(I) subset B(y_0, r)$
-])
+#theorem(
+  title: "Théorème de Cauchy-Péano-Arzéla",
+  [
+    Soit $(E)$ une équation différentielle d'ordre 1, $(t_0, y_0)$ un point de $U$ et $C = [t_0 - T, t_0 + T] times B(y_0, r)$ un cylindre de sécurité.
+    Alors il existe une solution $func(y, [t_0 - T, t_0 + T], overline(B)(y_0, r))$ du problème de Cauchy de condition initiale $y(t_0) = y_0$.
+  ],
+) <thm-cauchy-peano-arzela>
 
 #corollary([
   Soit $(E)$ une équation différentielle d'ordre 1 et $(t_0, y_0)$ un point de $U$.
-  Alors il existe une solution maximale $func(y, I, RR^n)$ du problème de Cauchy de condition initiale $(t_0, y_0)$ définie sur un ouvert $I$.
+  Alors il existe une solution maximale $func(y, I, RR^n)$ du problème de Cauchy de condition initiale $y(t_0) = y_0$, de plus $I$ est ouvert.
+]) <cor-existence>
+
+#proof([
+  D'après la @prop-cylindre-securite il existe un cylindre de sécurité $C := [t_0-T, t_0+T] times overline(B)(y_0, r)$, d'après le @thm-cauchy-peano-arzela il existe une solution $func(z, [t_0 - T, t_0 + T], overline(B)(y_0, r))$ du problème de Cauchy de condition initiale $y(t_0) = y_0$, enfin d'après le @thm-prolongement la solution $z$ se prolonge en une solution maximale $func(y, I, RR^n)$.
+
+  De plus $I$ est ouvert, sinon on pourrait prolonger $y$ en l'une de ses extrémités en appliquant de nouveau le @thm-cauchy-peano-arzela.
 ])
 
 === Théorème de Cauchy-Lipschitz
 
 #definition([
   Soit $(E)$ une équation différentielle d'ordre 1.
-  On dit que $f$ est _localement lipschitzienne_ par rapport à la deuxième variable si pour tout point $(t_0, y_0)$ dans $U$, il existe un cylindre $C = [t_0 - T, t_0 + T] times B(y_0, r)$ dans $U$ et une constante $k >= 0$ tels que $f$ soit $k$-lipschitzienne par rapport à la deuxième variable sur $C$ :
+  On dit que $f$ est _localement lipschitzienne_ par rapport à la deuxième variable si pour tout point $y(t_0) = y_0$ dans $U$, il existe un cylindre $C = [t_0 - T, t_0 + T] times B(y_0, r)$ dans $U$ et une constante $k >= 0$ tels que $f$ soit $k$-lipschitzienne par rapport à la deuxième variable sur $C$ :
   $
     forall (t, y_1), (t_, y_2) in C, norm(f(t, y_1) - f(t, y_2)) <= k abs(y_1 - y_2).
   $
@@ -526,28 +560,58 @@
 ])
 
 #lemma([
-  Soit $(E)$ une équation différentielle d'ordre 1, $(t_0, y_0)$ un point de $U$ et $C_0 = [t_0 - T_0, t_0 + T_0] times B(y_0, r_0)$ un cylindre sur lequel $f$ est $k$-lipschitzienne par rapport à la deuxième variable.
-  Posons $M := sup_C_0 norm(f)$, $T := min(T_0, r_0 / M)$ et $C := [t_0 - T, t_0 + T] times B(y_0, r_0)$.
-  Alors pour tout couple $func(y_1, I_1, RR^n), func(y_2, I_2, RR^n)$ de solutions du problème de Cauchy de condition initiale $(t_0, y_0)$, on a
+  Soit $(E)$ une équation différentielle d'ordre 1, $(t_0, y_0)$ un point de $U$ et $C_0 = [t_0 - T, t_0 + T] times B(y_0, r)$ un cylindre de sécurité sur lequel $f$ est $k$-lipschitzienne par rapport à la deuxième variable.
+  Alors pour tout couple $func(y_1, I_1, RR^n), func(y_2, I_2, RR^n)$ de solutions du problème de Cauchy de condition initiale $y(t_0) = y_0$, on a
   $ forall t in [t_0 - T, t_0 + T], y_1 (t) = y_2 (t). $
+]) <lem-unicite>
+
+#proof([
+  On suppose que $t_0 = 0$ et on se restreint à $[0, T]$. Pour tout $t in [0, T]$, on pose :
+  $ v(t) := rintegral(norm(y_(1)(u) - y_(2)(u)), 0, t, u) $
+  puisque $f$ est $k$-lipschitzienne par rapport à la deuxième variable, on a :
+  $
+    norm(y'_(1)(t) - y'_(2)(t)) = norm(f(t, y_(1)(t)) - f(t, y_(2)(t))) <= k norm(y_(1)(t) - y_(2)(t))
+  $
+  puisque $y_(1)(0) = y_(2)(0) = y_0$, on a :
+  $ y_(1)(t) - y_(2)(t) = rintegral(y'_(1)(u) - y'_(2)(u), 0, t, u) $
+  on en déduit $v'(t) <= k v(t)$, en particulier :
+  $ (v'(t) - k v(t)) e^(-k t) <= 0 $
+  en intégrant cette inégalité entre $0$ et $t$, on obtient :
+  $ v(t)e^(-k t) <= 0 $
+  donc $v(t) <= 0$ et $v(t) = 0$, d'où $y_(1)(t) = y_(2)(t)$.
 ])
 
 #theorem(
   title: "Théorème de Cauchy-Lipschitz",
   [
     Soit $(E)$ une équation différentielle d'ordre 1 et $(t_0, y_0)$ un point de $U$.
-    Si $f$ est localement lipschitzienne par rapport à la deuxième variable, alors pour tout cylindre de sécurité $C = [t_0 - T, t_0 + T] times B(y_0, r)$, le problème de Cauchy de condition initiale $(t_0, y_0)$ admet une unique solution sur $[t_0 - T, t_0 + T]$.
+    Si $f$ est localement lipschitzienne par rapport à la deuxième variable, alors pour tout cylindre de sécurité $C = [t_0 - T, t_0 + T] times B(y_0, r)$, le problème de Cauchy de condition initiale $y(t_0) = y_0$ admet une unique solution sur $[t_0 - T, t_0 + T]$.
   ],
 ) <thm-cauchy-lipschitz>
 
+#proof([
+  Soit $func(y_1\, y_2, [t_0 - T, t_0 + T], overline(B)(y_0, r))$ deux solutions du problème de Cauchy de condition initiale $y(t_0) = y_0$. Alors d'après le @lem-unicite, on a $y_1 = y_2$.
+])
+
 #theorem([
-  Soit $(E)$ une équation différentielle d'ordre 1, $func(y_1, I_1, RR^n)$ et $func(y_2, I_2, RR^n)$ deux solutions de $(E)$.
+  Soit $(E)$ une équation différentielle d'ordre 1, $func(y_1, I, RR^n)$ et $func(y_2, I, RR^n)$ deux solutions de $(E)$.
   Si $f$ est localement lipschitzienne par rapport à la deuxième variable et s'il existe $t_0 in I$ tel que $y_1 (t_0) = y_2 (t_0)$, alors $y_1 = y_2$.
+]) <cor-unicite>
+
+#proof([
+  On pose $J := (y_1 - y_2)^(-1)(0)$.
+  Puisque $y_1$ et $y_2$ sont continues, $J$ est un fermé de $I$.
+  Soit $s_0 in J$, alors d'après le @thm-cauchy-lipschitz, il existe $S$ tel que $y_1$ et $y_2$ coïncident sur l'intervalle $[s_0 - S, s_0 + S]$, donc $J$ est un ouvert de $I$. \
+  Puisque $t_0 in J$, $J$ est non-vide, de plus $I$ est connexe. Donc puisque $J$ est ouvert et fermé, $J = I$.
 ])
 
 #corollary([
   Soit $(E)$ une équation différentielle d'ordre 1 et $(t_0, y_0)$ un point de $U$.
-  Si $f$ est localement lipschitzienne par rapport à la deuxième variable, alors il existe une unique solution maximale du problème de Cauchy de condition initiale $(t_0, y_0)$.
+  Si $f$ est localement lipschitzienne par rapport à la deuxième variable, alors il existe une unique solution maximale du problème de Cauchy de condition initiale $y(t_0) = y_0$.
+])
+
+#proof([
+  Le @cor-existence donne l'existence d'une solution maximale du problème de Cauchy de condition initiale $y(t_0) = y_0$ et le @cor-unicite donne l'unicité de cette solution.
 ])
 
 === Théorème des bouts
@@ -587,7 +651,7 @@
 
 #theorem([
   Soit $(L)$ une équation différentielle linéaire d'ordre 1 et $(t_0, y_0)$ un point de $I times RR^n$.
-  Alors il existe une unique solution maximale du problème de Cauchy de condition initiale $(t_0, y_0)$, de plus cette solution est globale.
+  Alors il existe une unique solution maximale du problème de Cauchy de condition initiale $y(t_0) = y_0$, de plus cette solution est globale.
 ])
 
 #definition([
@@ -636,13 +700,12 @@
 
 #theorem([
   Soit $(E_p)$ une équation différentielle d'ordre $p$ et $(t_0, y_0, ..., y_(p-1))$ un point de $U$.
-  Alors il existe une solution maximale $func(y, I, RR^n)$ du problème de Cauchy de condition initiale $(t_0, y_0, ..., y_(p-1))$ définie sur un ouvert $I$.
+  Alors il existe une solution maximale $func(y, I, RR^n)$ du problème de Cauchy de condition initiale $y(t_0) = (y_0, ..., y_(p-1))$ définie sur un ouvert $I$.
 ])
 
 #theorem([
   Soit $(E_p)$ une équation différentielle d'ordre $p$ et $(t_0, y_0, ..., y_(p-1))$ un point de $U$.
-  Si $f$ est localement lipschitzienne par rapport à la deuxième variable, alors il existe une unique solution maximale $func(y, I, RR^n)$ du problème de Cauchy de condition initiale $(t_0, y_0, ..., y_(p-1))$ définie sur un ouvert $I$.
-
+  Si $f$ est localement lipschitzienne par rapport à la deuxième variable, alors il existe une unique solution maximale $func(y, I, RR^n)$ du problème de Cauchy de condition initiale $y(t_0) = (y_0, ..., y_(p-1))$ définie sur un ouvert $I$.
 ])
 
 == Solutions d'équations différentielles linéaires à coefficients constants
@@ -687,7 +750,7 @@
 
 #theorem([
   Soit $(L)$ une équation différentielle linéaire d'ordre 1 homogène à coefficients constants et $(t_0, v_0)$ un point de $U$.
-  Alors la solution du problème de Cauchy de condition initiale $(t_0, v_0)$ est donnée par :
+  Alors la solution du problème de Cauchy de condition initiale $y(t_0) = v_0$ est donnée par :
   $ func(y, I, RR^n, t, e^((t - t_0)A) v_0) $
 ])
 

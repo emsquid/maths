@@ -38,18 +38,14 @@
 #definition([
   Soit $E$ un $KK$-espace vectoriel et $x_1, ..., x_n in E$. On appelle _sous-espace vectoriel engendré par $x_1, ..., x_n$_, l'ensemble des combinaisons linéaires de $x_1, ..., x_n$, noté
   $
-    span(x_1, ..., x_n) := {
-      a_1 dot x_1 + ... + a_n dot x_n | a_1, ..., a_n in KK
-    }.
+    span(x_1, ..., x_n) := { a_1 dot x_1 + ... + a_n dot x_n | a_1, ..., a_n in KK }.
   $
 ])
 
 #definition([
   Soit $E$ un $KK$-espace vectoriel et $(E_k)_(1 <= k <= n)$ une famille de sous-espaces vectoriels de $E$. On dit qu'ils sont en _somme directe_ si
   $
-    forall (
-      x_1, ..., x_n
-    ) in E_1 times ... times E_n, sum_(k = 1)^n x_k = 0 => forall 1 <= k <= n, x_k = 0
+    forall ( x_1, ..., x_n ) in E_1 times ... times E_n, sum_(k = 1)^n x_k = 0 => forall 1 <= k <= n, x_k = 0
   $
   dans ce cas, on notera $E_1 plus.circle ... plus.circle E_n := E_1 + ... + E_n$.
 ])
@@ -123,9 +119,7 @@
 #definition([
   Soit $E$ et $F$ deux $KK$-espaces vectoriels, et $func(u, E, F)$ une application. On dit que $u$ est _linéaire_, si elle vérifie
   $
-    forall a, b in KK, forall x, y in E, u(a dot x + b dot y) = a dot u(
-      x
-    ) + b dot u(y).
+    forall a, b in KK, forall x, y in E, u(a dot x + b dot y) = a dot u( x ) + b dot u(y).
   $
   Si $E = F$, on dit que $u$ est un _endomorphisme_.
 ])
@@ -190,9 +184,7 @@
 #definition([
   Soit $M$ une matrice carrée de taille $n$. On appelle _déterminant_ de $M$, le nombre
   $
-    det(M) := sum_(sigma in S_n) "sign"(
-      sigma
-    ) m_(1, sigma(1)) ... m_(n, sigma(n)).
+    det(M) := sum_(sigma in S_n) "sign"( sigma ) m_(1, sigma(1)) ... m_(n, sigma(n)).
   $
 ])
 
@@ -453,9 +445,7 @@
   Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u in cal(L)(E)$ un endomorphisme.
   Alors il existe un unique $r in NN$ tel que
   $
-    {
-      0
-    } = ker(u^0) subset.neq ker(u) subset.neq ... subset.neq ker(u^r) = ker(u^(r+1)) = ...
+    { 0 } = ker(u^0) subset.neq ker(u) subset.neq ... subset.neq ker(u^r) = ker(u^(r+1)) = ...
   $
 ]) <prop-indice>
 
@@ -482,9 +472,7 @@
 #definition([
   Soit $lambda in KK$ et $k in NN$. On appelle _bloc de Jordan_ la matrice de la forme
   $
-    J_(k)(
-      lambda
-    ) := mat(
+    J_(k)( lambda ) := mat(
       lambda, 1, 0, dots.c, 0;
       0, lambda, dots.down, dots.down, dots.v;
       dots.v, dots.down, dots.down, dots.down, 0;
@@ -509,9 +497,7 @@
     Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u in cal(L)(E)$ un endomorphisme nilpotent.
     Alors il existe une base $cal(E)$ de $E$ et des entiers $k_1, ..., k_r in NN$ tels que
     $
-      [
-        u
-      ]_cal(E) = mat(
+      [ u ]_cal(E) = mat(
       J_(k_1)(0), 0, dots.c, 0;
       0, J_(k_2)(0), dots.down, dots.v;
       dots.v, dots.down, dots.down, 0;
@@ -527,9 +513,7 @@
     Soit $E$ un $KK$-espace vectoriel de dimension $n$ et $u in cal(L)(E)$ un endomorphisme de polynôme caractéristique simplement scindé.
     Alors il existe une base $cal(E)$ de $E$, des nombres $lambda_1, ..., lambda_r in KK$ et $k_1, ..., k_r in NN$ tels que
     $
-      [
-        u
-      ]_cal(E) = mat(
+      [ u ]_cal(E) = mat(
       J_(k_1)(lambda_1), 0, dots.c, 0;
       0, J_(k_2)(lambda_2), dots.down, dots.v;
       dots.v, dots.down, dots.down, 0;
@@ -559,20 +543,14 @@
 #proposition([
   Soit $E$ un $KK$-espace vectoriel, $cal(E) = (e_1, ..., e_n)$ une base de $E$ et $func(Phi, E times E, E)$ une forme bilinéaire. Alors par bilinéarité
   $
-    forall x = (x_1, ..., x_n), y = (
-      y_1, ..., y_n
-    ) in E, Phi(x, y) = sum_(1 <= i, j <= n) x_i y_j Phi(e_i, e_j) = transpose([x]_cal(E)) [
-      Phi
-    ]_cal(E) [y]_cal(E).
+    forall x = (x_1, ..., x_n), y = ( y_1, ..., y_n ) in E, Phi(x, y) = sum_(1 <= i, j <= n) x_i y_j Phi(e_i, e_j) = transpose([x]_cal(E)) [ Phi ]_cal(E) [y]_cal(E).
   $
 ])
 
 #proposition([
   Soit $E$ un $KK$-espace vectoriel, $cal(E)$ et $cal(F)$ deux bases de $E$, et $func(Phi, E times E, E)$ une forme bilinéaire. Alors
   $
-    [Phi]_(cal(F)) = transpose(cal(P)_(cal(E))^cal(F)) [
-      Phi
-    ]_cal(E) cal(P)_cal(E)^(cal(F)).
+    [Phi]_(cal(F)) = transpose(cal(P)_(cal(E))^cal(F)) [ Phi ]_cal(E) cal(P)_cal(E)^(cal(F)).
   $
 ])
 
@@ -581,9 +559,7 @@
 #definition([
   Soit $E$ un $KK$-espace vectoriel de dimension $n$. On appelle _dual_ de $E$, noté $E^*$, l'ensemble des formes linéaires sur $E$. Si $cal(E) = (e_1, ..., e_n)$ est une base de $E$, on appelle _base duale_, la famille $cal(E)^* = (e_1^*, ..., e_n^*)$ telle que
   $
-    forall i, j in {1, ..., n}, e_i^* (
-      e_j
-    ) := delta_(i, j) = cases(1 "si" i = j, 0 "sinon").
+    forall i, j in {1, ..., n}, e_i^* ( e_j ) := delta_(i, j) = cases(1 "si" i = j, 0 "sinon").
   $
 ])
 
@@ -621,9 +597,7 @@
   [
     Soit $E$ un $KK$-espace vectoriel, $func(Phi, E times E, KK)$ une forme bilinéaire et $func(Q, E, KK)$ la forme quadratique associée à $Phi$. Alors
     $
-      forall (x, y) in E times E, Phi(x, y) = 1 / 2(
-        Q(x + y) - Q(x) - Q(y)
-      ) = 1 / 4(Q(x + y) - Q(x - y)).
+      forall (x, y) in E times E, Phi(x, y) = 1 / 2( Q(x + y) - Q(x) - Q(y) ) = 1 / 4(Q(x + y) - Q(x - y)).
     $
   ],
 ) <prop-form-polar>
@@ -825,7 +799,9 @@
   - Pour $k > 1$, supposons qu'il existe une famille orthonormée $(f_1, ..., f_(k-1))$ telle que
     $ span(e_1, ..., e_(k-1)) = span(f_1, ..., f_(k-1)) $
     alors on pose $f'_k := e_k - sum_(i=1)^(k-1) dotproduct(e_k, f_i) f_i$. Soit $j in {1, ..., k-1}$, alors
-    $ dotproduct(f'_k, f_j) &= dotproduct(e_k - sum_(i=1)^(k-1) dotproduct(e_k, f_i) f_i, f_j) $
+    $
+      dotproduct(f'_k, f_j) &= dotproduct(e_k - sum_(i=1)^(k-1) dotproduct(e_k, f_i) f_i, f_j)
+    $
     et par bilinéarité du produit scalaire
     $
       dotproduct(f'_k, f_j) &= dotproduct(e_k, f_j) - sum_(i=1)^(k-1) dotproduct(e_k, f_i) dotproduct(f_i, f_j) \
@@ -949,9 +925,7 @@
 #proof([
   Soit $x, y in E$. Alors
   $
-    dotproduct(x, u^*(y)) = theta_id (u^*(y))(x) = (theta_id compose u^*)(y)(
-      x
-    ) = theta_u (y)(x) = dotproduct(u(x), y).
+    dotproduct(x, u^*(y)) = theta_id (u^*(y))(x) = (theta_id compose u^*)(y)( x ) = theta_u (y)(x) = dotproduct(u(x), y).
   $
 ])
 

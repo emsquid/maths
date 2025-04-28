@@ -19,19 +19,17 @@
 
 #definition([
   Une _théorie de l'homologie_ sur la catégorie des paires d'espaces topologiques $sans("Top")_2$ dans la catégorie des groupes abéliens $sans("Ab")$ est une suite de foncteurs $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie de transformations naturelles $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A) := H_(n-1)(A, emptyset)))$ vérifiant les axomes suivants pour toutes paires d'espaces topologiques $(X, A), (Y, B)$ et $n in ZZ$ :
-  - _Homotopie_ : Soit $func(f_0 \, f_1, (X, A), (Y, B))$ deux applications homotopes.
-    Alors les applications induites en homologie $func(f_(0*)\, f_(1*), H_(n)(X, A), H_(n)(Y, B))$ sont égales.
-  <axiome-homotopie>
-  - _Excision_ : Soit $U$ un sous-ensemble de $A$ tel que l'adhérence de $U$ est contenue dans l'intérieur de $A$.
-    On note $func(i, (X without U, A without U), (X, A))$ l'inclusion canonique.
-    Alors l'application induite en homologie $func(i_*, H_(n)(X without U, A without U), H_(n)(X, A))$ est un isomorphisme.
-  - _Dimension_ : Soit $P$ l'espace constitué d'un unique point.
+  - _Dimension <axiome-dimension>_ : Soit $P$ l'espace constitué d'un unique point.
     Alors le groupe $H_(n)(P)$ est non-trivial si et seulement si $n = 0$.
-  - _Exactitude_ : La suite :
+  - _Exactitude <axiome-exactitude>_ : La suite suivante est exacte :
     $
       ... -> H_(n+1)(X, A) ->^(partial_(n+1)) H_(n)(A) ->^(i_A) H_(n)(X) ->^(i_X) H_(n)(X, A) ->^(partial_n) H_(n-1)(A) -> ...
     $
-    est exacte.
+  - _Homotopie <axiome-homotopie>_ : Soit $func(f_0 \, f_1, (X, A), (Y, B))$ deux applications homotopes.
+    Alors les applications induites en homologie $func(f_(0*)\, f_(1*), H_(n)(X, A), H_(n)(Y, B))$ sont égales.
+  - _Excision <axiome-excision>_ : Soit $U$ un sous-ensemble de $A$ tel que l'adhérence de $U$ est contenue dans l'intérieur de $A$.
+    On note $func(i, (X without U, A without U), (X, A))$ l'inclusion canonique.
+    Alors l'application induite en homologie $func(i_*, H_(n)(X without U, A without U), H_(n)(X, A))$ est un isomorphisme.
 ]) <def-theorie-homologie>
 
 == Homologie singulière
@@ -223,6 +221,24 @@
   Alors l'application induite $f_*$ est un morphisme de chaînes.
 ])
 
+#definition([
+  Soit $C_(cdot)(X, A)$ un complexe de chaînes singulières.
+  On appelle _morphisme connectant_, noté $func(partial_n, H_(n)(X, A), H_(n-1)(A))$, la transformation naturelle induite par le morphisme de bord.
+])
+
 #theorem([
-  La suite des $n$#super("e")-groupe d'homologie singulière des paires d'espaces topologiques $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie des morphismes de bords $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A, emptyset)))$ est une @def-theorie-homologie[théorie de l'homologie].
+  La suite des $n$#super("e")-groupe d'homologie singulière des paires d'espaces topologiques $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie des morphismes connectants $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A)))$ est une théorie de l'homogie vérifiant les @def-theorie-homologie[axiomes d'Eilenberg-Steenrod].
+])
+
+#proof([
+  - @axiome-dimension[Dimension] : Il existe un unique $n$-simplexe singulier $func(sigma_n, Delta^n, P)$, alors on a :
+    $
+      partial_n sigma_n = cases(0 &"si" n = 0 "ou" n "est impair", sigma_(n-1) &"si" n != 0 "et" n "est pair")
+    $
+    Si $n = 0$, alors $H_0 = lquotient(gensubgroup(sigma_0), {0}) tilde.eq ZZ $. \
+    Si $n != 0 $ et $n$ est impair, alors $H_n = lquotient(gensubgroup(sigma_n), gensubgroup(sigma_n)) tilde.eq {0}$. \
+    Si $n != 0 $ et $n$ est pair, alors $H_n = lquotient({0}, {0}) tilde.eq {0}$.
+  - @axiome-exactitude[Exactitude] :
+  - @axiome-homotopie[Homotopie] :
+  - @axiome-excision[Excision] :
 ])
