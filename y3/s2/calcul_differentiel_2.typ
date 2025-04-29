@@ -633,7 +633,7 @@
   title: "Théorème des bouts",
   [
     Soit $(E)$ une équation différentielle d'ordre 1 sur $U := ]a, b[ times RR^n$ et $func(y, \]c\, d\[, RR^n)$ une solution maximale de $(E)$.
-    Si $c > a$, alors on a :
+    Si $f$ est localement lipschitzienne par rapport à la deuxième variable, si $c > a$, alors on a :
     $ lim_(t -> c^+) norm(y(t)) = +oo $
     et si $d < b$, alors on a :
     $ lim_(t -> d^-) norm(y(t)) = +oo. $
@@ -650,7 +650,7 @@
 
 #corollary([
   Soit $(E)$ une équation différentielle d'ordre 1 sur $U := ]a, b[ times RR^n$ et $func(y, \]c\, d\[, RR^n)$ une solution maximale de $(E)$.
-  Si $f$ est bornée, alors $y$ est une solution globale.
+  Si $f$ est localement lipschitzienne par rapport à la deuxième variable et bornée, alors $y$ est une solution globale.
 ])
 
 #proof([
