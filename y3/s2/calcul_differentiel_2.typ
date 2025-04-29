@@ -245,8 +245,8 @@
 
 #theorem([
   Soit $X$ une partie de $RR^n$. Alors les conditions suivantes sont équivalentes :
-  + (_redressement_) $X$ est une sous-variété de $RR^n$ classe $C^k$ et de dimension $d in {0, ..., n}$.
-  + (_implicite_) Pour tout $a in X$, il existe un voisinage ouvert $U$ de $a$ dans $RR^n$ et $func(f, U, RR^(n-d))$ une submersion en $a$ de classe $C^k$ tels que $U inter X = f^(-1)(f(a))$.
+  + _Redressement_ : $X$ est une sous-variété de $RR^n$ classe $C^k$ et de dimension $d in {0, ..., n}$.
+  + _Implicite_ : Pour tout $a in X$, il existe un voisinage ouvert $U$ de $a$ dans $RR^n$ et $func(f, U, RR^(n-d))$ une submersion en $a$ de classe $C^k$ tels que $U inter X = f^(-1)(f(a))$.
 ])
 
 #proof([
@@ -462,7 +462,7 @@
 #proposition([
   Soit $(E)$ une équation différentielle d'ordre 1 et $func(y, I, RR^n)$ une solution de $(E)$.
   Si $f$ est de classe $C^k$, alors $y$ est de classe $C^(k+1)$.
-])
+]) <prop-classe-ck>
 
 #proof([
   Soit $n in {0, ..., k-1}$. On pose $P(n)$ : $y$ est de classe $C^n$. \
@@ -490,7 +490,7 @@
   $ y(t) = y_0 + rintegral(f(x, y(x)), t_0, t, x). $
 
   $arrow.l.double$ : Supposons les hypothèses de l'énoncé vérifiées. \
-  Puisque $f$ est continue, d'après le théorème fondamental de l'analyse $t |-> rintegral(f(x, y(x)), t_0, t, x)$ est dérivable, donc $y$ est dérivable et $forall t in I, (t, y(t)) in U$. Soit $t in I$, en dérivant on obtient :
+  Puisque $y$ et $f$ sont continues, d'après le théorème fondamental de l'analyse $t |-> rintegral(f(x, y(x)), t_0, t, x)$ est dérivable, donc $y$ est dérivable et $forall t in I, (t, y(t)) in U$. Soit $t in I$, en dérivant on obtient :
   $ y'(t) = f(t, y(t)) $
   et $y(t_0) = y_0 + rintegral(f(x, y(x)), t_0, t_0, x) = y_0$.
   Donc $y$ est solution du problème de Cauchy de condition initiale $y(t_0) = y_0$
@@ -509,7 +509,7 @@
 #proof([
   Considérons un cylindre $C_0 := [t_0 - T_0, t_0 + T_0] times B(y_0, r_0)$ dans $U$.
   Alors $C_0$ est fermé et borné, donc $C_0$ est compact.
-  Puisque $f$ est $C^0$ sur $C_0$, on a que $f$ est bornée sur $C_0$, on note $M := max_((t, y) in C_0) norm(f(t, y)) in RR$.
+  Puisque $f$ est $C^0$ sur $C_0$, on obtient que $f$ est bornée sur $C_0$, on note $M := max_((t, y) in C_0) norm(f(t, y)) in RR$.
 
   On suppose que $f$ n'est pas identiquement nulle sur $C_0$, donc $M > 0$.
   Et on pose $T := min(T_0, r_0 / M)$, $r := r_0$ et $C := [t_0 - T, t_0 + T] times overline(B)(y_0, r)$.
@@ -539,7 +539,12 @@
 #proof([
   D'après la @prop-cylindre-securite il existe un cylindre de sécurité $C := [t_0-T, t_0+T] times overline(B)(y_0, r)$, d'après le @thm-cauchy-peano-arzela il existe une solution $func(z, [t_0 - T, t_0 + T], overline(B)(y_0, r))$ du problème de Cauchy de condition initiale $y(t_0) = y_0$, enfin d'après le @thm-prolongement la solution $z$ se prolonge en une solution maximale $func(y, I, RR^n)$.
 
-  De plus $I$ est ouvert, sinon on pourrait prolonger $y$ en l'une de ses extrémités en appliquant de nouveau le @thm-cauchy-peano-arzela.
+  De plus $I$ est ouvert, sinon on pourrait prolonger $y$ en l'une de ses extrémités en y appliquant de nouveau la @prop-cylindre-securite et le @thm-cauchy-peano-arzela.
+])
+
+#example([
+  On considère l'équation différentielle d'ordre 1 $y' = 3abs(y)^(2/3)$,
+  alors le problème de Cauchy de condition initiale $y(0) = 0$ admet au moins deux solutions maximales $t |-> 0$ et $t |-> t^3$, en particulier ces solutions sont globales.
 ])
 
 === Théorème de Cauchy-Lipschitz
@@ -567,13 +572,13 @@
 
 #proof([
   On suppose que $t_0 = 0$ et on se restreint à $[0, T]$. Pour tout $t in [0, T]$, on pose :
-  $ v(t) := rintegral(norm(y_(1)(u) - y_(2)(u)), 0, t, u) $
+  $ v(t) := rintegral(norm(y_(1)(x) - y_(2)(x)), 0, t, x) $
   puisque $f$ est $k$-lipschitzienne par rapport à la deuxième variable, on a :
   $
     norm(y'_(1)(t) - y'_(2)(t)) = norm(f(t, y_(1)(t)) - f(t, y_(2)(t))) <= k norm(y_(1)(t) - y_(2)(t))
   $
   puisque $y_(1)(0) = y_(2)(0) = y_0$, on a :
-  $ y_(1)(t) - y_(2)(t) = rintegral(y'_(1)(u) - y'_(2)(u), 0, t, u) $
+  $ y_(1)(t) - y_(2)(t) = rintegral(y'_(1)(x) - y'_(2)(x), 0, t, x) $
   on en déduit $v'(t) <= k v(t)$, en particulier :
   $ (v'(t) - k v(t)) e^(-k t) <= 0 $
   en intégrant cette inégalité entre $0$ et $t$, on obtient :
@@ -608,7 +613,7 @@
 #corollary([
   Soit $(E)$ une équation différentielle d'ordre 1 et $(t_0, y_0)$ un point de $U$.
   Si $f$ est localement lipschitzienne par rapport à la deuxième variable, alors il existe une unique solution maximale du problème de Cauchy de condition initiale $y(t_0) = y_0$.
-])
+]) <cor-existence-unicite>
 
 #proof([
   Le @cor-existence donne l'existence d'une solution maximale du problème de Cauchy de condition initiale $y(t_0) = y_0$ et le @cor-unicite donne l'unicité de cette solution.
@@ -618,9 +623,9 @@
 
 #theorem([
   Soit $(E)$ une équation différentielle d'ordre 1 et $func(y, \]c\, d\[, RR^n)$ une solution maximale de $(E)$.
-  Si $f$ est localement lipschitzienne par rapport à la deuxième variable, alors pour tout compact $K subset U$, il existe un voisinage $V subset ]c, d[$ de $d$ tel que :
+  Si $f$ est localement lipschitzienne par rapport à la deuxième variable, alors pour tout compact $K subset U$, il existe un voisinage $V subset ]c, d[$ de $c$ tel que :
   $ forall t in V, (t, y(t)) in.not K $
-  et un voisinage $W subset ]c, d[$ de $c$ tel que :
+  et un voisinage $W subset ]c, d[$ de $d$ tel que :
   $ forall t in W, (t, y(t)) in.not K. $
 ]) <thm-sortie-compact>
 
@@ -634,11 +639,32 @@
     $ lim_(t -> d^-) norm(y(t)) = +oo. $
     En particulier si $y$ est bornée, alors $a = c$ et $d = b$.
   ],
-) <thm-bouts>
+) <thm-des-bouts>
 
-#proposition([
+#proof([
+  Supposons sans perte de généralité que $c > a$.
+  Pour tout $r > 0$, la boule fermée $overline(B)(0, r)$ est compacte, donc d'après le @thm-sortie-compact, il existe un voisinage $V subset ]c, d[$ de $c$ tel que :
+  $ forall t in V, (t, y(t)) in.not overline(B)(0, r) $
+  Donc $lim_(t -> c^+) norm(y(t)) = +oo$.
+])
+
+#corollary([
   Soit $(E)$ une équation différentielle d'ordre 1 sur $U := ]a, b[ times RR^n$ et $func(y, \]c\, d\[, RR^n)$ une solution maximale de $(E)$.
   Si $f$ est bornée, alors $y$ est une solution globale.
+])
+
+#proof([
+  On pose $M := sup_((t, y) in U) norm(f(t, y))$.
+  Supposons par l'absurde que $c > a$, donc $c > +oo$.
+  Soit $t_0 in ]c, d[$. Pour tout $t in ]c, t_0[$, on a :
+  $
+    norm(y(t)) &= norm(y(t_0) + rintegral(f(x, y(x)), t_0, t, x)) \
+    &<= norm(y(t_0)) + rintegral(norm(f(x, y(x))), t_0, t, x) \
+    &<= norm(y(t_0)) + M norm(t - t_0) <= norm(y(t_0)) + M norm(c - t_0) in RR
+  $
+  Or d'après le @thm-des-bouts, on a $lim_(t -> c^+) norm(y(t)) = +oo$, d'où une contradiction, donc $c = a$.
+  De la même manière on a $d = b$.
+  Donc $y$ est une solution globale.
 ])
 
 == Équations différentielles linéaires du premier ordre
@@ -654,6 +680,13 @@
   Alors il existe une unique solution maximale du problème de Cauchy de condition initiale $y(t_0) = y_0$, de plus cette solution est globale.
 ])
 
+#proof([
+  On pose $func(f, I times RR^n, M_(n)(RR), (t, y), A(t)y + B(t))$.
+  Alors la fonction $f$ est linéaire et continue, donc $f$ est lipschitzienne, d'après le @cor-existence-unicite il existe une unique solution maximale $func(y, J, RR^n)$ du problème de Cauchy de condition initiale $y(t_0) = y_0$.
+
+  On peut montrer que $y$ est bornée (#link("https://www.bibmath.net/dico/index.php?action=affiche&quoi=./g/gronwall.html")[Lemme de Grönwall]), donc d'après le @thm-des-bouts $Y$ est une solution globale.
+])
+
 #definition([
   Soit $(L)$ une équation différentielle linéaire d'ordre 1.
   On dit que $(L)$ est _homogène_ si $B = 0$.
@@ -664,10 +697,23 @@
   Alors l'ensemble des solutions maximales de l'équation est un $RR$-espace vectoriel de dimension $n$.
 ])
 
+#proof([
+  On note $S subset C^(0)(I, RR^n)$ l'ensemble des solutions maximales de $(L)$.
+  - D'après le @thm-cauchy-peano-arzela $S$ est non-vide.
+  - Soit $y_1, y_2 in S$ et $lambda_1, lambda_2 in RR$, alors $lambda_1 y_1 + lambda_2 y_2 in S$.
+  Donc $S$ est un $RR$-espace vectoriel.
+  Soit $t_0 in I$, on pose $func(phi_t_0, S, RR^n, y, y(t_0))$. L'application $phi_t_0$ est linéaire, d'après le @thm-cauchy-peano-arzela elle est surjective et d'après le @thm-cauchy-lipschitz elle est injective.
+  Donc $phi_t_0$ est un isomorphisme et $dim(S) = dim(RR^n) = n$.
+])
+
 #corollary([
   Soit $(L)$ une équation différentielle linéaire d'ordre 1 et $func(y_0, I, RR^n)$ une solution globale de $(L)$.
   On note $S$ l'ensemble des solutions maximales de l'équation homogène associée à $(L)$.
   Alors l'ensemble des solutions de $(L)$ est $y_0 + S$.
+])
+
+#proof([
+  Soit $func(y_1, I, RR^n)$ une solution globale de $(L)$, alors $y_1 - y_0$ est solution de l'équation homogène associée à $(L)$ donc $y_1 - y_0 in S$, d'où $y_1 in y_0 + S$.
 ])
 
 == Équations différentielles d'ordre supérieur
@@ -690,6 +736,10 @@
   Si $f$ est de classe $C^k$, alors $y$ est de classe $C^(k + p)$.
 ])
 
+#proof([
+  Voir @prop-classe-ck.
+])
+
 #proposition([
   Soit $(E_p)$ une équation différentielle d'ordre $p$ et $func(y, I, RR^n)$ une fonction.
   Posons :
@@ -698,12 +748,24 @@
   $ Y' = vec(Y_1, ..., Y_(p-1), f(t, Y)) $
 ])
 
-#theorem([
+#proof([
+  #linebreak()
+  $arrow.r.double$ : Supposons que $y$ est solution de $(E_p)$.
+  On a alors :
+  $ Y' = vec(y', y'', ..., y^((p))) = vec(Y_1, ..., Y_(p-1), f(t, Y)) $
+  Donc $Y$ est solution de $(E)$.
+
+  $arrow.l.double$ : Supposons que $Y$ est solution de $(E)$.
+  Alors $Y$ est dérivable, donc pour tout $i in {0, ..., p-1}$, la fonction $y^((i))$ est dérivable. En particulier la fonction $y$ est $p$-fois dérivable, avec $y^(p) = f(t, Y)$.
+  Donc $y$ est solution de $(E_p)$.
+])
+
+#corollary([
   Soit $(E_p)$ une équation différentielle d'ordre $p$ et $(t_0, y_0, ..., y_(p-1))$ un point de $U$.
   Alors il existe une solution maximale $func(y, I, RR^n)$ du problème de Cauchy de condition initiale $y(t_0) = (y_0, ..., y_(p-1))$ définie sur un ouvert $I$.
 ])
 
-#theorem([
+#corollary([
   Soit $(E_p)$ une équation différentielle d'ordre $p$ et $(t_0, y_0, ..., y_(p-1))$ un point de $U$.
   Si $f$ est localement lipschitzienne par rapport à la deuxième variable, alors il existe une unique solution maximale $func(y, I, RR^n)$ du problème de Cauchy de condition initiale $y(t_0) = (y_0, ..., y_(p-1))$ définie sur un ouvert $I$.
 ])
@@ -720,6 +782,10 @@
 #proposition([
   Soit $(L)$ une équation différentielle linéaire d'ordre 1 homogène à coefficients constants.
   Alors la fonction $func(y, I, RR^n, t, e^(lambda t) v)$ est solution de $(L)$ si et seulement si $lambda$ est une valeur propre de $A$ et $v$ est un vecteur propre de $A$ associé à $lambda$.
+]) <prop-solution-homogene>
+
+#proof([
+  Pour tout $t in I$, on a $y'(t) = lambda e^(lambda t) v$, donc $y$ est solution de $(L)$ si et seulement si $lambda e^(lambda t) v = A e^(lambda t) v$, si et seulement si $lambda v = A v$, si et seulement si $lambda$ est une valeur propre de $A$ et $v$ est un vecteur propre de $A$ associé à $lambda$.
 ])
 
 ==== Cas diagonalisable
@@ -728,6 +794,14 @@
   Soit $(L)$ une équation différentielle linéaire d'ordre 1 homogène à coefficients constants.
   Si $A$ est diagonalisable, il existe une base $(v_1, ..., v_n)$ de $RR^n$ de vecteurs propres de $A$ associées aux valeurs propres $(lambda_1, ..., lambda_n)$ de $A$.
   Alors pour tout $i in {1, ..., n}$, la fonction #box($func(y_i, I, RR^n, t, e^(lambda_i t) v_i)$) est une solution de $(L)$, de plus ces solutions sont indépendantes.
+])
+
+#proof([
+  Pour tout $i in {1, ..., n}$, d'après la @prop-solution-homogene la fonction $y_i$ est solution de $(L)$.
+  Soit $alpha_1, ..., alpha_n in RR$ tels que $alpha_1 y_1 + ... + alpha_n y_n = 0$. Alors on a :
+  $ forall t in I, sum_(k = 0)^n alpha_k e^(lambda_k t) v_k = 0 $
+  puisque $(v_1, ..., v_n)$ est une base de $RR^n$, on a donc $alpha_1 = ... = alpha_n = 0$.
+  Donc les solutions sont indépendantes.
 ])
 
 #corollary([
@@ -747,8 +821,13 @@
   où $v in RR^n$.
 ])
 
+#proof([
+  Pour tout $t in I$, on a $y'(t) = A e^(t A) v = A y(t)$, donc $y$ est solution de $(L)$. \
+  Notons $v_(1)(t), ..., v_(n)(t)$ les colonnes de $e^(t A)$, la fonction associée à chacune de ces colonnes est solution de $(L)$. De plus $det(e^(t A)) = e^(tr(t A)) != 0$, donc $(v_(1)(t), ..., v_(n)(t))$ forme une base de $RR^n$, on en déduit que $(v_1, ..., v_n)$ forme une base de l'espace des solutions de $(L)$.
+])
 
-#theorem([
+
+#corollary([
   Soit $(L)$ une équation différentielle linéaire d'ordre 1 homogène à coefficients constants et $(t_0, v_0)$ un point de $U$.
   Alors la solution du problème de Cauchy de condition initiale $y(t_0) = v_0$ est donnée par :
   $ func(y, I, RR^n, t, e^((t - t_0)A) v_0) $
