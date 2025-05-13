@@ -1,4 +1,4 @@
-#import "@preview/fletcher:0.5.2": *
+#import "@preview/commute:0.3.0": *
 #import "@preview/outrageous:0.4.0"
 #import "@preview/rich-counters:0.2.2": *
 #import "@preview/ez-today:1.1.0": *
@@ -28,10 +28,7 @@
 #let remark = mathsbrick("Remarque")
 #let example = examplebrick("Exemple")
 #let examples = examplebrick("Exemples")
-#let proof = proofbrick(
-  [_Démonstration_.],
-  of => [_Démonstration de #of._],
-)
+#let proof = proofbrick("Démonstration")
 
 #let exercise = exercisebrick("Exercice")
 
@@ -94,6 +91,11 @@
   )
 
   show math.equation: set text(font: "STIX Two Math")
+  show math.equation.where(block: true): set block(above: 10pt, below: 10pt)
+  // Center maths block in list
+  show math.equation.where(block: true): it => {
+    block(width: 100%, inset: 0em, [#align(center)[#it]])
+  }
 
   // Heading options
   set heading(numbering: "1.")
@@ -119,10 +121,6 @@
     )
   }
 
-  // Center maths block in list
-  show math.equation.where(block: true): it => {
-    block(width: 100%, inset: 0em, [#align(center)[#it]])
-  }
 
   // // Unbreakable math equation
   // show math.equation.where(block: false): box

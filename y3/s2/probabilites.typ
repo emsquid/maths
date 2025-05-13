@@ -15,7 +15,7 @@
   On appelle _tribu_ sur $Omega$ une famille $cal(F)$ de parties de $Omega$ vérifiant :
   + $cal(F)$ est non-vide : $emptyset in cal(F)$,
   + la stabilité par passage au complémentaire : $forall A in cal(F), A^c in cal(F)$,
-  + la stabilité par union dénombrable : $forall sequence(A) in cal(F)^NN, union.big_(n>=1) A_n in cal(F)$.
+  + la stabilité par union dénombrable : $forall sequence(A_n) in cal(F)^NN, union.big_(n>=1) A_n in cal(F)$.
   On dit que le couple $(Omega, cal(F))$ est un _espace probabilisable_ où $Omega$ est _l'univers_ et $cal(F)$ sont _les événements_.
 ])
 
@@ -31,13 +31,13 @@
 ])
 
 #definition([
-  Soit $sequence(A)$ une suite d'événements sur $(Omega, cal(F), Pr)$. On dit que $sequence(A)$ est un _système complet_ si elle vérifie :
+  Soit $sequence(A_n)$ une suite d'événements sur $(Omega, cal(F), Pr)$. On dit que $sequence(A_n)$ est un _système complet_ si elle vérifie :
   + les $A_n$ sont disjoints deux à deux : $forall i, j in NN, i != j => A_i inter A_j = emptyset$,
   + la probabilité de l'union des $A_n$ est 1 : $Pr(union.big_(n in NN) A_n) = 1$.
 ])
 
 #proposition([
-  Soit $sequence(A)$ un système complet sur $(Omega, cal(F), Pr)$.
+  Soit $sequence(A_n)$ un système complet sur $(Omega, cal(F), Pr)$.
   Alors on a
   $ forall B in cal(F), Pr(B) = sum_(n=1)^(+oo) Pr(B inter A_n). $
 ])
@@ -52,7 +52,7 @@
 ])
 
 #corollary([
-  Soit $sequence(A)$ un système complet sur $(Omega, cal(F), Pr)$.
+  Soit $sequence(A_n)$ un système complet sur $(Omega, cal(F), Pr)$.
   Alors pour tout $B in cal(F)$on a
 
   + $Pr(B) = sum_(n=1)^(+oo) Pr(A_n)P(B|A_n)$,
@@ -64,15 +64,19 @@
   title: "Continuité de la mesure de probabilité",
   [
     Soit $(Omega, cal(F), Pr)$ un espace probabilisé.
-    + Soit $sequence(A)$ une suite croissante d'événements. Alors on a
-      $ lim_(n->+oo) Pr(A_n) = Pr(lim_(n->+oo) A_n) = Pr(union.big_(n>=1) A_n). $
-    + Soit $sequence(A)$ une suite décroissante d'événements. Alors on a
-      $ lim_(n->+oo) Pr(A_n) = Pr(lim_(n->+oo) A_n) = Pr(inter.big_(n>=1) A_n). $
+    + Soit $sequence(A_n)$ une suite croissante d'événements. Alors on a
+      $
+        lim_(n->+oo) Pr(A_n) = Pr(lim_(n->+oo) A_n) = Pr(union.big_(n>=1) A_n).
+      $
+    + Soit $sequence(A_n)$ une suite décroissante d'événements. Alors on a
+      $
+        lim_(n->+oo) Pr(A_n) = Pr(lim_(n->+oo) A_n) = Pr(inter.big_(n>=1) A_n).
+      $
   ],
 )
 
 #proof([
-  + Pour tout $n >= 1$, on pose $B_n := A_n without A_(n-1)$ avec $A_0 = emptyset$, tel que les $sequence(B)$ forment un système complet sur $union.big_(n>=1) A_n$, on en déduit alors
+  + Pour tout $n >= 1$, on pose $B_n := A_n without A_(n-1)$ avec $A_0 = emptyset$, tel que les $sequence(B_n)$ forment un système complet sur $union.big_(n>=1) A_n$, on en déduit alors
     $
       Pr(union.big_(n>=1) A_n) = Pr(union.big_(n>=1) B_n) &= sum_(n=1)^(+oo) Pr(B_n) = sum_(n=1)^(+oo) Pr(A_n) - Pr(A_(n-1))
     $
@@ -84,16 +88,16 @@
 ])
 
 #definition([
-  Soit $sequence(A)$ une suite d'événements de $(Omega, cal(F), Pr)$.
-  - On appelle _limite supérieure_ de la suite $sequence(A)$ la valeur
+  Soit $sequence(A_n)$ une suite d'événements de $(Omega, cal(F), Pr)$.
+  - On appelle _limite supérieure_ de la suite $sequence(A_n)$ la valeur
     $ limsup_(n->+oo) A_n := inter.big_(n>=1) union.big_(k>=n) A_k $
     intuitivement on considère les éléments qui appartiennent à une infinité d'événements.
-  - On appelle _limite inférieure_ de la suite $sequence(A)$ la valeur
-    $ limsup_(n->+oo) A_n := union.big_(n>=1) inter.big_(k>=n) A_k. $
+  - On appelle _limite inférieure_ de la suite $sequence(A_n)$ la valeur
+    $ liminf_(n->+oo) A_n := union.big_(n>=1) inter.big_(k>=n) A_k. $
 ])
 
 #corollary([
-  Soit $sequence(A)$ une suite d'événements de $(Omega, cal(F), Pr)$.
+  Soit $sequence(A_n)$ une suite d'événements de $(Omega, cal(F), Pr)$.
   Alors on a
   $
     Pr(limsup_(n->+oo) A_n) &= lim_(m->+oo) lim_(n->+oo) Pr(union.big_(k = m)^n A_k) \
@@ -102,7 +106,7 @@
 ])
 
 #proposition([
-  Soit $sequence(A)$ une suite d'événements de $(Omega, cal(F), Pr)$.
+  Soit $sequence(A_n)$ une suite d'événements de $(Omega, cal(F), Pr)$.
   Alors on a $ Pr(union.big_(n>=1) A_n) <= sum_(n=1)^(+oo) A_n. $
 ])
 
@@ -199,7 +203,7 @@ Se référer au cours de _Probabilités_ de deuxième année.
 ])
 
 #proof([
-  On a bien $forall A in borel(RR), mu_f (A) >= 0$. De plus $mu_f (RR) = 1$. Soit $sequence(A)$ une suite d'éléments de $borel(RR)$ deux à deux disjoints. On pose $A := union.big_(n>=1) A_n$, alors $indicator(A) = sum_(n=1)^(+oo) indicator(A_n)$ et
+  On a bien $forall A in borel(RR), mu_f (A) >= 0$. De plus $mu_f (RR) = 1$. Soit $sequence(A_n)$ une suite d'éléments de $borel(RR)$ deux à deux disjoints. On pose $A := union.big_(n>=1) A_n$, alors $indicator(A) = sum_(n=1)^(+oo) indicator(A_n)$ et
   $
     mu_f (A) = integral_A f(x) dif lambda(x) = integral_RR indicator(A) (x) f(x) dif lambda(x) = integral_RR sum_(n=1)^(+oo) indicator(A_n) (x) f(x) dif lambda(x)
   $
@@ -259,7 +263,9 @@ Se référer au cours de _Probabilités_ de deuxième année.
 #example(
   title: "Loi normale",
   [
-    La fonction $func(f, RR, RR, x,  1/sqrt(2pi) e^(-x^2/2))$ est une densité de probabilité. On note la probabilité associée $cal(N)(0, 1)$.
+    Soit $m in RR$ et $sigma > 0$.
+    La fonction $func(f, RR, RR, x,  1/(sigma sqrt(2pi)) e^(-1/2 ((x-m)/sigma)^2))$ est une densité de probabilité. On note la probabilité associée $cal(N)(m, sigma^2)$.
+    On appelle _loi normale centrée réduite_ la probabilité $cal(N)(0, 1)$.
   ],
 )
 
@@ -273,7 +279,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
   Soit $cal(C)$ une famille de parties d'un ensemble $Omega$. On dit que $cal(C)$ est une _classe monotone_ si elle vérifie :
   + $Omega in cal(C)$,
   + $forall A, B in cal(C), A subset B => B without A in cal(C)$,
-  + $forall sequence(A) in cal(C)^NN "croissante", union.big_(n in NN) A_n in cal(C)$.
+  + $forall sequence(A_n) in cal(C)^NN "croissante", union.big_(n in NN) A_n in cal(C)$.
 ])
 
 #remark([
@@ -290,7 +296,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
   #linebreak()
   $arrow.r.double$ : Si $cal(C)$ est une tribu elle est stable par intersection finie. \
   $arrow.l.double$ : Supposons que $cal(C)$ est stable par intersection finie.
-  Soit $sequence(A)$ une suite d'éléments de $cal(C)$. Puisque $cal(C)$ est stable par passage au complémentaire, $cal(C)$ est aussi stable par union finie, en effet
+  Soit $sequence(A_n)$ une suite d'éléments de $cal(C)$. Puisque $cal(C)$ est stable par passage au complémentaire, $cal(C)$ est aussi stable par union finie, en effet
   $
     A, B, in cal(C) => A^c, B^c in cal(C)
     => A^c inter B^c in cal(C)
@@ -358,7 +364,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 
 #proposition([
   Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X, Omega, RR^d)$ un vecteur aléatoire.
-  Alors l'application $func(Pr_X, borel(RR^d), RR_+,  A, Pr(X in A) = Pr(X^(-1)(A)))$ est une mesure de probabilité sur $RR^d$.
+  Alors l'application $func(Pr_X, borel(RR^d), RR_+,  A, Pr(X in A) := Pr(X^(-1)(A)))$ est une mesure de probabilité sur $RR^d$.
 ]) <prop-loi>
 
 #definition([
@@ -471,38 +477,27 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 === Définition et formule de transfert
 
 #definition([
-  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X, Omega, RR^d)$ un vecteur aléatoire.
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X, Omega, RR^d)$ un vecteur aléatoire $cal(L)^1$.
   On appelle _espérance_ de $X$, notée $EE[X]$, la valeur
   $
     EE[X] := integral_Omega X(omega) dif Pr(omega) = integral_(RR^d) x dif Pr_X (x).
   $
 ])
 
-#remark([
-  Pour que l'intégrale précédente ait du sens dans $RR$ on a besoin que :
-  - $X >= 0$ presque sûrement,
-  - $X$ soit intégrable sur $(Omega, cal(F), Pr)$.
-])
-
 #theorem(
   title: "Formule de transfert",
   [
-    Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $func(X, Omega, RR^d)$ un vecteur aléatoire et $func(phi, RR^d, RR_+ union {+oo})$ une application mesurable. Alors
+    Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $func(X, Omega, RR^d)$ un vecteur aléatoire et $func(phi, RR^d, RR_+ union {+oo})$ une application mesurable. Si $phi(X)$ est $cal(L)^1$, alors
     $
       EE[phi(X)] = integral_Omega phi(X(omega)) dif Pr(omega) = integral_(RR^d) phi(x) dif Pr_X (x).
     $
   ],
 )
 
-#remark([
-  Pour que l'intégrale précédente ait du sens on a besoin que :
-  - $phi(X)$ soit intégrable sur $(Omega, cal(F), Pr)$, c'est-à-dire que $phi$ soit intégrable sur $(RR^d, borel(RR^d), Pr_X)$.
-])
-
 #proposition(
   title: "Cas discret",
   [
-    Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $func(X, Omega, RR^d)$ un vecteur aléatoire et $func(phi, RR^d, RR_+ union {+oo})$ une application mesurable. Alors
+    Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $func(X, Omega, RR^d)$ un vecteur aléatoire $cal(L)^1$ discret et $func(phi, RR^d, RR_+ union {+oo})$ une application mesurable. Alors
     $ EE[phi(X)] = sum_(omega in cal(V_X)) phi(omega) Pr(X = omega). $
   ],
 )
@@ -510,7 +505,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 #proposition(
   title: "Cas à densité",
   [
-    Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $func(X, Omega, RR^d)$ un vecteur aléatoire à densité $func(f, RR^d, RR_+)$ et $func(phi, RR^d, RR_+ union {+oo})$ une application mesurable. Alors
+    Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $func(X, Omega, RR^d)$ un vecteur aléatoire $cal(L)^1$ à densité $func(f, RR^d, RR_+)$ et $func(phi, RR^d, RR_+ union {+oo})$ une application mesurable. Alors
     $ EE[phi(X)] = integral_(RR^d) phi(x) f(x) dif lambda(x). $
   ],
 )
@@ -518,7 +513,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 === Variance
 
 #definition([
-  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X, Omega, RR^d)$ un vecteur aléatoire.
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X, Omega, RR^d)$ un vecteur aléatoire $cal(L)^2$.
   On appelle _variance_ de $X$, notée $V(X)$, la valeur
   $ V(X) := EE[(X - EE[X])^2]. $
 ])
@@ -536,7 +531,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 
 #definition([
   Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X\, Y, Omega, RR^d)$ deux vecteurs aléatoires.
-  On appelle _covariance_ de $X$ et $X$, notée $"Cov"(X, Y)$, la valeur
+  On appelle _covariance_ de $X$ et $Y$, notée $"Cov"(X, Y)$, la valeur
   $ "Cov"(X, Y) := EE[(X - EE[X])(Y - EE[Y])]. $
 ])
 
@@ -554,12 +549,12 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 
 #definition([
   Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X\, Y, Omega, RR^d)$ deux vecteurs aléatoires.
-  Alors si $"Cov"(X, Y) = 0$ on dit que $X$ et $Y$ sont _non correlées_.
+  On dit que $X$ et $Y$ sont _non-correlés_ si $"Cov"(X, Y) = 0$.
 ])
 
 #corollary([
   Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X\, Y, Omega, RR^d)$ deux vecteurs aléatoires.
-  Alors si $X$ et $Y$ sont non-correlées, on a $V(X + Y) = V(X) + V(Y)$.
+  Alors si $X$ et $Y$ sont non-correlés, on a $V(X + Y) = V(X) + V(Y)$.
 ])
 
 #definition([
@@ -569,7 +564,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 ])
 
 #proposition([
-  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X_1\, ...\, X_n, Omega, RR^d)$ des vecteurs aléatoires. Alors l'espérance de $overline(X)_n$ est donnée par
+  Soit $(Omega, cal(F), Pr)$ un espace probabilisé et $func(X_1\, ...\, X_n, Omega, RR^d)$ des vecteurs aléatoires non-correlés. Alors l'espérance de $overline(X)_n$ est donnée par
   $ EE[overline(X)_n] = 1 / n sum_(k=1)^n EE[X_k] $
   et sa variance par
   $ V(overline(X)_n) = 1 / (n^2) sum_(k=1)^n V(X_k) $
@@ -727,11 +722,11 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 
 #proposition([
   Soit $(Omega, cal(F), Pr)$ un espace probabilisé, et $func(X, Omega, RR^p)$ et $func(Y, Omega, RR^q)$ deux vecteurs aléatoires à densités respectives $f_X$ et $f_Y$.
-  + Si $X$ et $Y$ sont indépendantes. Alors le vecteur $(X, Y)$ admet une densité $f$ vérifiant :
+  + Si $X$ et $Y$ sont indépendants. Alors le vecteur $(X, Y)$ admet une densité $f$ vérifiant :
     $ forall (x, y) in RR^p times RR^q, f(x, y) = f_X (x) f_Y (y) $
   + Si $(X, Y)$ admet une densité $f$ de la forme :
     $ forall (x, y) in RR^p times RR^q, f(x, y) = g(x) h(y) $
-    où $g$ et $h$ sont boréliennes. Alors $X$ et $Y$ sont indépendantes et il existe $c > 0$ tel que
+    où $g$ et $h$ sont boréliennes. Alors $X$ et $Y$ sont indépendants et il existe $c > 0$ tel que
     $ f_X = c g "et" f_Y = c h. $
 ])
 
@@ -838,7 +833,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 
 #theorem([
   Soit $(Omega, cal(F))$ un espace probabilisable, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires et $func(X, Omega, RR^d)$ un vecteur aléatoire.
-  Alors la suite $sequence(X_n)$ converge en loi vers $X$ si et seulement si pour tout $t in RR$ tels que $lim_(x -> t^-) F_X (x) = F_X (t)$, on a
+  Alors la suite $sequence(X_n)$ converge en loi vers $X$ si et seulement si pour tout $t in RR$, si $F_X$ est continue en $t$, on a
   $ F_X_n (t) -->_(n->+oo) F_X (t). $
 ])
 
@@ -847,7 +842,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 ])
 
 #theorem(
-  title: "Théoreme de Portemanteau",
+  title: "Théorème de Portemanteau",
   [
     Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $M$ un espace métrique, $sequence(func(X_n, Omega, M))$ une suite de vecteurs aléatoires et $func(X, Omega, M)$ un vecteur aléatoire.
     Alors les énoncés suivants sont équivalents :
@@ -1151,5 +1146,15 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
 #theorem([
   Soit $mu$ une mesure de probabilité sur $(RR^d, borel(RR^d))$.
   Si la fonction caractéristique de $mu$ est $cal(L)^1$, alors $mu$ admet une densité $f$ donnée par :
-  $ forall x in RR^d, f(x) := 1 / (2pi)^d lintegral(e^(-i innerproduct(t, x)) hat(mu)(t), RR^d, t). $
+  $
+    forall x in RR^d, f(x) := 1 / (2pi)^d lintegral(e^(-i innerproduct(t, x)) hat(mu)(t), RR^d, t).
+  $
 ])
+
+#theorem(
+  title: "Théorème de Paul Lévy",
+  [
+    Soit $(Omega, cal(F), Pr)$ un espace probabilisé, $sequence(func(X_n, Omega, RR^d))$ une suite de vecteurs aléatoires et $func(X, Omega, RR^d)$ un vecteur aléatoire.
+    Alors $(X_n)$ converge en loi vers $X$ si et seulement si $phi_X_n -->_(n->+oo) phi_X$.
+  ],
+)

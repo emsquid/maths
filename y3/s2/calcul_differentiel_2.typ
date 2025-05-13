@@ -684,7 +684,7 @@
   On pose $func(f, I times RR^n, M_(n)(RR), (t, y), A(t)y + B(t))$.
   Alors la fonction $f$ est linéaire et continue, donc $f$ est lipschitzienne, d'après le @cor-existence-unicite il existe une unique solution maximale $func(y, J, RR^n)$ du problème de Cauchy de condition initiale $y(t_0) = y_0$.
 
-  On peut montrer que $y$ est bornée (#link("https://www.bibmath.net/dico/index.php?action=affiche&quoi=./g/gronwall.html")[Lemme de Grönwall]), donc d'après le @thm-des-bouts $Y$ est une solution globale.
+  On peut montrer que $y$ est bornée (#link("https://www.bibmath.net/dico/index.php?action=affiche&quoi=./g/gronwall.html")[Lemme de Grönwall]), donc d'après le @thm-des-bouts $y$ est une solution globale.
 ])
 
 #definition([
