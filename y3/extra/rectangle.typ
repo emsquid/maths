@@ -245,7 +245,7 @@ La majorité des énoncés suivants sont issus de la source @algtop.
   Soit $X$ un espace topologique et $n in NN$.
   On appelle _morphisme de bord_, noté $dif_n$, le morphisme de groupes induit:
   $
-    func(dif_n, C_n (X), C_(n-1)(X), sum_(k=0)^m lambda_k sigma_k, sum_(k=0)^m lambda_k d_n sigma_k).
+    func(dif_n, C_n (X), C_(n-1)(X), sum_(k=0)^m lambda_k sigma_k, sum_(k=0)^m lambda_k dif_n sigma_k).
   $
 ])
 
@@ -261,13 +261,13 @@ La majorité des énoncés suivants sont issus de la source @algtop.
   $
     dif_n f_(*)(sigma) &= sum_(k=0)^n (-1)^k ((f compose sigma) compose gensubgroup(e_0, ..., overshell(e_k), ..., e_n)) \
     &= sum_(k=0)^n (-1)^k (f compose (sigma compose gensubgroup(e_0, ..., overshell(e_k), ..., e_n)))\
-    &= f_*(d_n sigma).
+    &= f_*(dif_n sigma).
   $
 ])
 
 #proposition([
   Soit $X$ un espace topologique. Alors pour tout $n in NN$, on a $dif_n compose dif_(n+1) = 0$.
-])
+]) <prop-compose-bord>
 
 #proof([
   Soit $n in NN$.
@@ -305,7 +305,7 @@ La majorité des énoncés suivants sont issus de la source @algtop.
 
 #remark([
   Soit $C_(cdot)(X)$ un complexe de chaînes singulières et $n in ZZ$.
-  Puisque $d_n compose d_(n+1) = 0$, on a $B_(n)(X) = im(d_(n+1)) subset ker(d_n) = Z_(n)(X)$.
+  Puisque $dif_n compose d_(n+1) = 0$, on a $B_(n)(X) = im(d_(n+1)) subset ker(dif_n) = Z_(n)(X)$.
 ])
 
 #remark([
@@ -315,7 +315,7 @@ La majorité des énoncés suivants sont issus de la source @algtop.
 
 #definition([
   Soit $C_(cdot)(X)$ un complexe de chaînes singulières et $n in ZZ$.
-  - On dit que $C_(cdot)(X)$ est _exact en $C_(n)(X)$_ si $H_(n)(X)$ est trivial, c'est-à-dire, $im(d_(n+1)) = ker(d_n)$.
+  - On dit que $C_(cdot)(X)$ est _exact en $C_(n)(X)$_ si $H_(n)(X)$ est trivial, c'est-à-dire, $im(d_(n+1)) = ker(dif_n)$.
   - On dit que $C_(cdot)(X)$ est _exact_ s'il est exact en tout $sequence(C_(n)(X))$.
   - On dit que $C_(cdot)(X)$ est _acyclique_ s'il est exact en tout $sequence(C_(n)(X))$ avec $n != 0$.
 ])
@@ -340,7 +340,7 @@ La majorité des énoncés suivants sont issus de la source @algtop.
 #proof([
   Soit $n in ZZ$. \
   Soit $sigma in Z_(n)(X)$. Alors on a
-  $d_n phi_(n)(sigma) = phi_(n-1)(d_n sigma) = phi_(n-1)(0) = 0$,
+  $dif_n phi_(n)(sigma) = phi_(n-1)(dif_n sigma) = phi_(n-1)(0) = 0$,
   donc $phi_(n)(sigma) in Z_(n)(Y)$. \
   Soit $beta in B_(n)(X)$. Alors il existe $sigma in C_(n+1)(X)$ tel que $beta = d_(n+1) sigma$, et on a :
   $ phi_(n)(beta) = phi_(n)(d_(n+1) sigma) = d_(n+1) phi_(n+1)(sigma) $
@@ -393,20 +393,20 @@ La majorité des énoncés suivants sont issus de la source @algtop.
 
 #proposition([
   Soit $(X, A)$ une paire d'espaces topologiques.
-  Alors pour tout $n in ZZ$, $d_n$ induit un morphisme $overline(d)_n$ de $lquotient(C_(n)(X), C_(n)(A))$ dans $lquotient(C_(n-1)(X), C_(n-1)(A))$ tel que $overline(d)_n compose overline(d)_(n+1) = 0$.
+  Alors pour tout $n in ZZ$, $dif_n$ induit un morphisme $overline(dif)_n$ de $lquotient(C_(n)(X), C_(n)(A))$ dans $lquotient(C_(n-1)(X), C_(n-1)(A))$ tel que $overline(dif)_n compose overline(dif)_(n+1) = 0$.
 ])
 
 #proof([
-  Soit $n in ZZ$. 
+  Soit $n in ZZ$.
   Alors on a $C_(n)(A) subset C_(n)(X)$, on peut donc former le quotient $lquotient(C_(n)(X), C_(n)(A))$.
 
-  On pose $func(delta_n := overline(d_n), C_(n)(X), lquotient(C_(n-1)(X), C_(n-1)(A)))$, alors $C_(n)(A) subset ker(delta_n)$ et d'après la propriété universelle du groupe quotient $delta_n$ induit bien un morphisme $overline(d)_n$ de $lquotient(C_(n)(X), C_(n)(A))$ dans $lquotient(C_(n-1)(X), C_(n-1)(A))$.
-  Enfin puisque $d_n compose d_(n+1) = 0$, on a $overline(d)_n compose overline(d)_(n+1) = 0$.
+  On pose $func(delta_n := overline(dif_n), C_(n)(X), lquotient(C_(n-1)(X), C_(n-1)(A)))$, alors $C_(n)(A) subset ker(delta_n)$ et d'après la propriété universelle du groupe quotient $delta_n$ induit bien un morphisme $overline(dif)_n$ de $lquotient(C_(n)(X), C_(n)(A))$ dans $lquotient(C_(n-1)(X), C_(n-1)(A))$.
+  Enfin puisque $dif_n compose d_(n+1) = 0$, on a $overline(dif)_n compose overline(dif)_(n+1) = 0$.
 ])
 
 #remark([
   Soit $(X, A)$ une paire d'espaces topologiques.
-  La suite $sequence(lquotient(C_(n)(X), C_(n)(A)))$ munie des morphismes de bords induits $sequence(func(overline(d)_n, lquotient(C_(n)(X), C_(n)(A)), lquotient(C_(n-1)(X), C_(n-1)(A))))$ forme un complexe de chaînes singulières.
+  La suite $sequence(lquotient(C_(n)(X), C_(n)(A)))$ munie des morphismes de bords induits $sequence(func(overline(dif)_n, lquotient(C_(n)(X), C_(n)(A)), lquotient(C_(n-1)(X), C_(n-1)(A))))$ forme un complexe de chaînes singulières.
 ])
 
 #definition([
@@ -415,7 +415,7 @@ La majorité des énoncés suivants sont issus de la source @algtop.
 ])
 
 #remark([
-  Dans le cas de la paire d'espaces topologiques $(X, emptyset)$, on trouve $C_(cdot)(X, emptyset) = C_(cdot)(X)$ et $H_(cdot)(X, emptyset) = H_(cdot)(X)$.
+  Dans le cas de la paire d'espaces topologiques $(X, emptyset)$, on trouve $C_(cdot)(X, emptyset) tilde.eq C_(cdot)(X)$ et $H_(cdot)(X, emptyset) tilde.eq H_(cdot)(X)$.
 ])
 
 #definition([
@@ -432,7 +432,7 @@ La majorité des énoncés suivants sont issus de la source @algtop.
   Pour tout $n in ZZ$,
   on pose $func(phi_n := overline(f_*), C_(n)(X), C_(n)(Y, B))$, alors puisque $f(A) subset B$, on en déduit $f_* (C_(n)(A)) subset ker(phi_n)$ et d'après la propriété universelle du groupe quotient $phi_n$ induit un morphisme $overline(phi_n)$ de $C_(n)(X, A)$ dans $C_(n)(Y, B)$.
 
-  Soit $n in ZZ$. Alors d'après la @prop-continue-commute puisque $d_n f_* = f_* d_n$, on a $overline(d_n phi_n) = overline(phi_(n-1) d_n)$.
+  Soit $n in ZZ$. Alors d'après la @prop-continue-commute puisque $dif_n f_* = f_* dif_n$, on a $overline(dif_n phi_n) = overline(phi_(n-1) dif_n)$.
   Donc $phi_n$ est bien un morphisme de chaînes.
 ])
 
@@ -442,7 +442,7 @@ La majorité des énoncés suivants sont issus de la source @algtop.
 ])
 
 #theorem([
-  La suite des $n$#super("e") groupe d'homologie singulière des paires d'espaces topologiques $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ est un foncteur.
+  Pour tout $n in ZZ$, le $n$#super("e") groupe d'homologie singulière des paires d'espaces topologiques $func(H_n, sans("Top")_2, sans("Ab"))$ est un foncteur.
 ])
 
 #proof([
@@ -462,14 +462,70 @@ La majorité des énoncés suivants sont issus de la source @algtop.
   Donc $H_(n)$ est un foncteur.
 ])
 
-// #definition([
-//   Soit $C_(cdot)(X, A)$ un complexe de chaînes singulières.
-//   On appelle _morphisme connectant_, noté $func(partial_n, H_(n)(X, A), H_(n-1)(A))$, la transformation naturelle induite par le morphisme de bord.
-// ])
+#proposition([
+  Soit $C_(cdot)(X, A)$ un complexe de chaînes singulières.
+  Alors pour tout $n in ZZ$, les groupes $H_(n)(X, A)$ et $lquotient(dif_(n)^(-1)(C_(n-1)(A)), (dif_(n+1)(C_(n+1)(X)) + C_(n)(A)))$ sont isomorphes.
+]) <prop-iso-homologie-paire>
+
+#proof([
+  Soit $n in ZZ$. \
+  Soit $tau in dif_(n+1)(C_(n+1)(X)) + C_(n)(A)$, il existe $sigma_1 in C_(n+1)(X)$ et $sigma_2 in C_(n)(A)$ tels que $tau = dif_(n+1) sigma_1 + sigma_2$.
+  Alors d'après la @prop-compose-bord on a :
+  $
+    dif_(n) tau = dif_(n)(dif_(n+1) sigma_1 + sigma_2) = (dif_(n) compose dif_(n+1)) sigma_1 + dif_(n) sigma_2 = dif_(n) sigma_2
+  $
+  donc $tau in dif_(n)^(-1)(C_(n-1)(A))$, on peut donc former le quotient $lquotient(dif_(n)^(-1)(C_(n-1)(A)), (dif_(n+1)(C_(n+1)(X)) + C_(n)(A)))$.
+
+  On pose $func(phi, dif_(n)^(-1)(C_(n-1)(A)), H_(n)(X, A), sigma, overline(sigma))$, qui est bien un morphisme de groupes.
+  - Soit $eta in H_(n)(X, A)$, il existe $zeta in Z_(n)(X, A)$ et $z in C_(n)(X)$ tels que $eta = overline(zeta)$ et $zeta = overline(z)$. \
+    Puisque $overline(dif_(n) z) = overline(dif)_(n) zeta = 0 in C_(n)(X, A)$, il existe $sigma in C_(n-1)(A)$ tel que $dif_n z = sigma$, d'où $z in dif_(n)^(-1)(C_(n-1)(A))$.
+    Donc $phi(z) = eta$ et $phi$ est surjectif.
+  - Soit $sigma in ker(phi)$.
+    Puisque $overline(tau) = 0 in H_(n)(X, A)$, il existe $b in B_(n)(X, A)$ tel que $overline(tau) = overline(b)$.
+    C'est-à-dire qu'il existe $c in C_(n+1)(X, A)$ et $sigma in C_(n+1)(X)$ tels que $b = overline(dif)_(n+1) c$ et $c = overline(sigma)$. \
+    On peut écrire $overline(tau) = overline(dif)_(n+1) overline(sigma) = overline(d_(n+1) sigma) in C_(n)(X, A)$, donc $tau in dif_(n+1)(C_(n+1)(X)) + C_(n)(A)$.
+
+    Soit $tau in dif_(n+1)(C_(n+1)(X)) + C_(n)(A)$, il existe $sigma_1 in C_(n+1)(X)$ et $sigma_2 in C_(n)(A)$ tels que $tau = dif_(n+1) sigma_1 + sigma_2$.
+    Alors $overline(tau) = overline(dif_(n+1) sigma_1) = overline(dif)_(n+1) overline(sigma) in C_(n)(X, A) $, d'où $overline(tau) in B_(n)(X, A)$ et $overline(tau) = 0 in H_(n)(X, A)$, donc $tau in ker(phi)$.
+  D'après le premier théorème d'isomorphisme $phi$ induit un isomorphisme entre les groupes
+  $H_(n)(X, A)$ et $lquotient(dif_(n)^(-1)(C_(n-1)(A)), (dif_(n+1)(C_(n+1)(X)) + C_(n)(A)))$.
+])
+
+#proposition([
+  Soit $C_(cdot)(X, A)$ un complexe de chaînes singulières.
+  Alors pour tout $n in ZZ$, $dif_n$ induit un morphisme $partial_n$ de $H_(n)(X, A)$ dans $H_(n-1)(A)$.
+])
+
+#proof([
+  Soit $n in ZZ$.
+  D'après la @prop-iso-homologie-paire il existe un isomorphisme :
+  $
+    func(phi, lquotient(dif_(n)^(-1)(C_(n-1)(A)), (dif_(n+1)(C_(n+1)(X)) + C_(n)(A))), H_(n)(X, A)).
+  $
+  Pour tout $eta in H_(n)(X, A)$, il existe $tau in dif_(n)^(-1)(C_(n-1)(A))$ tel que $eta = phi(overline(tau))$.
+  Alors d'après la @prop-compose-bord on a $dif_(n-1) dif_n tau = 0$, donc $dif_n tau in Z_(n-1)(A)$.
+  On pose $partial_(n)(eta) := overline(dif_(n) tau) in H_(n-1)(A)$.
+
+  Supposons que $eta = 0$, c'est-à-dire $tau in dif_(n+1)(C_(n+1)(X)) + C_(n)(A)$, alors $dif_n tau in B_(n)(A)$, d'où $partial_(n)(eta) = 0$.
+  Donc $partial_n$ est un morphisme bien défini.
+])
 
 #theorem([
-  La suite des $n$#super("e") groupe d'homologie singulière des paires d'espaces topologiques $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie des morphismes ? (à définir) $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A)))$ est une théorie de l'homogie vérifiant les @def-theorie-homologie[axiomes d'Eilenberg-Steenrod].
+  Soit $C_(cdot)(X, A)$ et $C_(cdot)(Y, B)$ deux complexes de chaînes singulières, $func(phi_cdot, C_(cdot)(X), C_(cdot)(Y))$ un morphisme de chaînes.
+  Pour tout $n in ZZ$, le morphisme $partial_n$ est une transformation naturelle, c'est-à-dire :
+  $ partial_n phi_n = phi_(n-1) partial_n. $
 ])
+
+#proof([
+  Soit $n in ZZ$.
+  Puisque $partial_n$ est induit par $dif_n$, d'après la @prop-compose-bord on a bien :
+  $ partial_n phi_n = phi_(n-1) partial_n. $
+])
+
+#theorem([
+  La suite des $n$#super("e") groupe d'homologie singulière des paires d'espaces topologiques $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie des morphismes $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A)))$ est une théorie de l'homogie vérifiant les @def-theorie-homologie[axiomes d'Eilenberg-Steenrod].
+])
+
 
 #proof(
   of: [de @axiome-dimension[l'axiome de dimension]],
@@ -522,4 +578,4 @@ La majorité des énoncés suivants sont issus de la source @algtop.
   TODO.
 ])
 
-#bibliography("biblio.yml")
+#bibliography("biblio.yml", full: true)
