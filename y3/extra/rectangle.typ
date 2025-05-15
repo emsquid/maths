@@ -16,7 +16,9 @@
 #total-characters
 #pagebreak()
 
-= Bases de théorie des catégories
+= Quelques catégories
+
+== Catégories
 
 #definition([
   Une _catégorie_ $cal(C)$ est la donnée de :
@@ -35,14 +37,74 @@
     $ id_Y compose f = f = f compose id_X. $
 ])
 
-#examples([
-  - La catégorie $sans("Top")_2$, les objets sont les paires d'espaces topologiques et les morphismes sont les applications continues.
-  - La catégorie $sans("Ab")$, les objets sont les groupes abéliens et les morphismes sont les morphismes de groupes.
+#example([
+  La catégorie des groupes abéliens $sans("Ab")$ :
+  - Les objets de $sans("Ab")$ sont les groupes abéliens.
+  - Les morphismes de $sans("Ab")$ sont les morphismes de groupes.
 ])
 
 #definition([
+  Un _groupe gradué_ est un groupe $G$ muni d'une famille de sous-groupes $sequence(G_i, ind: i, dom: I)$ telle que $G = plus.circle.big_(i in I) G_i$.
+  Pour tout $i in I$, un élément non-nul de $G_i$ est dit _homogène de degré $i$_.
+])
+
+#definition([
+  Soit $G := sequence(G_i, ind:i, dom:I)$ et $F := sequence(F_i, ind: i, dom: I)$ deux groupes gradués.
+  Un _morphisme de groupes gradués_ est un morphisme de groupes $func(phi, G, F)$ tel que pour tout $i in I$, on a $phi(G_i) subset F_i$.
+])
+
+#example([
+  La catégorie des groupes abéliens gradués $sans("GrAb")$ :
+  - Les objets de $sans("GrAb")$ sont les groupes abéliens gradués.
+  - Les morphismes de $sans("GrAb")$ sont les morphismes de groupes gradués.
+])
+
+#example([
+  La catégorie des espaces topologiques $sans("Top")$ :
+  - Les objets de $sans("Top")$ sont les espaces topologiques.
+  - Les morphismes de $sans("Top")$ sont les applications continues.
+])
+
+#definition([
+  Une paire d'espaces topologiques est un espace topologique $X$ muni d'un sous-ensemble $A$ de $X$.
+  On le note $(X, A)$.
+])
+
+#definition([
+  Soit $(X, A)$ et $(Y, B)$ deux paires d'espaces topologiques.
+  Un _morphisme de paires_ est une application continue $func(f, X, Y)$ telle que $f(A) subset B$.
+  On le note $func(f, (X, A), (Y, B))$.
+])
+
+#example([
+  La catégorie des paires d'espaces topologiques $sans("Top")_2$ :
+  - Les objets de $sans("Top")_2$ sont les paires d'espaces topologiques.
+  - Les morphismes de $sans("Top")_2$ sont les morphismes de paires.
+])
+
+#example([
+  Soit $(X, <=)$ un ensemble partiellement ordonné. On définit la catégorie $cal(C)(X, <=)$ :
+  - Les objets de $cal(C)(X, <=)$ sont les éléments de $X$.
+  - Pour tout $x, y in X$, si $x <= y$, on a un morphisme $func(f_(x, y), x, y)$.
+  - Pour tout $x, y, z in X$, si $x <= y$ et $y <= z$, on a bien $x <= z$ et une composition $f_(y, z) compose f_(x, y) = f_(x, z)$.
+  - Pour tout $x in X$, on a bien $x <= x$ et un morphisme identité $f_(x, x)$.
+])
+
+#definition([
+  Soit $cal(C)$ une catégorie.
+  La _catégorie opposée (ou duale) de $cal(C)$_, notée $cal(C)^sans("op")$, est la catégorie dont les objets sont les objets $cal(C)$ et dont les morphismes sont les morphismes de $cal(C)$ dont le domaine et le codomaine sont inversés.
+])
+
+#example([
+  Soit $(X, <=)$ un ensemble partiellement ordonné.
+  Alors on a $cal(C)(X, <=)^sans("op") = cal(C)(X, prec.eq)$ où pour tout $x, y in X$, on a $x prec.eq y$ si et seulement si $y <= x$.
+])
+
+== Foncteurs
+
+#definition([
   Soit $cal(C)$ et $cal(D)$ deux catégories.
-  Un _foncteur_ $func(F, cal(C), cal(D))$ est la donnée :
+  Un _foncteur covariant $F$ de $cal(C)$ vers $cal(D)$_ est la donnée :
   - Pour tout objet $X in ob(cal(C))$, d'un objet $F(X) in ob(cal(D))$.
   - Pour tout objets $X, Y in ob(C)$ et morphisme $func(f, X, Y)$, d'un morphisme $func(F(f), F(X), F(Y))$.
   Vérifiant les propriétés suivantes pour tout objets $X, Y, Z in ob(cal(C))$ :
@@ -51,22 +113,41 @@
   - _Identité_ : On a : $ F(id_X) = id_F(X). $
 ])
 
+#example([
+  Soit $cal(C)$ et $cal(D)$ deux catégories. On définit le foncteur covariant constant $func(C, cal(C), cal(D))$ :
+  - On prend $D in cal(D)$, pour tout objet $X in ob(cal(C))$, on a $C(X) := D$.
+  - Pour tout objets $X, Y in ob(cal(C))$ et morphisme $func(f, X, Y)$, on a $C(f) := id_D$.
+])
 
 #example([
-  - Pour toute catégorie $cal(C)$, l'identité $func(id_cal(C), cal(C), cal(C))$ est un foncteur.
+  Soit $cal(C)$ une catégorie. On définit le foncteur covariant identité $func(id_cal(C), cal(C), cal(C))$ :
+  - Pour tout objet $X in ob(cal(C))$, on a $id_cal(C)(X) := X$.
+  - Pour tout objets $X, Y in ob(cal(C))$ et morphisme $func(f, X, Y)$, on a $id_cal(C)(f) := f$.
 ])
 
 #definition([
-  Soit $cal(C)$ et $cal(D)$ deux catégories, $func(F, cal(C), cal(D))$ et $func(G, cal(C), cal(D))$ deux foncteurs.
-  Une _transformation naturelle_ $partial$ est la donnée pour tout objet $X in ob(cal(C))$, d'un morphisme $func(partial_X, F(X), G(X))$,
-  vérifiant la propriété suivante pour tout objet $Y in ob(cal(C))$ et pour tout morphisme $func(f, X, Y)$, on a :
-  $ partial_Y compose F(f) = G(f) compose partial_X. $
+  Soit $cal(C)$ et $cal(D)$ deux catégories. Un _foncteur contravariant_ est un foncteur covariant de la catégorie opposée $cal(C)^sans("op")$ vers $cal(D)$.
 ])
 
-#remark([
-  Cette dernière égalité revient à ce que le diagramme suivant soit commutatif :
+#example([
+  Soit $KK$ un corps et $sans("Vect")$ la catégorie des $KK$-espaces vectoriels.
+  On définit un foncteur contravariant $func(F, sans("Vect")^sans("op"), sans("Vect"))$ :
+  - Pour tout $KK$-espace vectoriel $E in sans("Vect")$, on a $F(E) := E^*$.
+  - Pour tout $KK$-espaces vectoriels $E, F in sans("Vect")$ et application linéaire $func(u, E, F)$, on a :
+    $ func(F(u) := transpose(u), F^*, E^*). $
+])
+
+== Transformations naturelles
+
+#definition([
+  Soit $cal(C)$ et $cal(D)$ deux catégories, $func(F, cal(C), cal(D))$ et $func(G, cal(C), cal(D))$ deux foncteurs covariants.
+  Une _transformation naturelle $partial$ de $F$ vers $G$_ est la donnée pour tout objet $X in ob(cal(C))$, d'un morphisme $func(partial_X, F(X), G(X))$,
+  vérifiant la propriété suivante pour tout objet $Y in ob(cal(C))$ et pour tout morphisme $func(f, X, Y)$, on a :
+  $ partial_Y compose F(f) = G(f) compose partial_X $
+  c'est-à-dire que le diagramme suivant est commutatif :
   #align(center)[#commutative-diagram(
-      node-padding: (60pt, 50pt),
+      node-padding: (80pt, 60pt),
+      padding: 10pt,
       node((0, 0), $F(X)$),
       node((0, 1), $F(Y)$),
       node((1, 0), $G(X)$),
@@ -80,8 +161,6 @@
 #pagebreak()
 
 = Homologie singulière
-
-La majorité des énoncés suivants sont issus de la source @algtop.
 
 #definition([
   Une _théorie de l'homologie_ sur la catégorie des paires d'espaces topologiques $sans("Top")_2$ dans la catégorie des groupes abéliens $sans("Ab")$ est une suite de foncteurs $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie de transformations naturelles $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A) := H_(n-1)(A, emptyset)))$ vérifiant les _axiomes d'Eilenberg-Steenrod_ pour toutes paires d'espaces topologiques $(X, A), (Y, B)$ et $n in ZZ$ :
@@ -182,7 +261,6 @@ La majorité des énoncés suivants sont issus de la source @algtop.
 #definition([
   Soit $E$ un $RR$-espace vectoriel, $F$ une famille libre de $n+1$ éléments de $E$ et $G$ une famille non-vide d'éléments de $F$.
   On dit que $[G]$ est une _face_ de $[F]$.
-  // Si $G$ contient $n$ éléments, on dit que $[G]$ est une _face_ de $[F]$.
 ])
 
 == Chaînes
@@ -243,7 +321,7 @@ La majorité des énoncés suivants sont issus de la source @algtop.
 
 #definition([
   Soit $X$ un espace topologique et $n in NN$.
-  On appelle _morphisme de bord_, noté $dif_n$, le morphisme de groupes induit:
+  On appelle _morphisme de bord_, noté $dif_n$, le morphisme de groupes induit :
   $
     func(dif_n, C_n (X), C_(n-1)(X), sum_(k=0)^m lambda_k sigma_k, sum_(k=0)^m lambda_k dif_n sigma_k).
   $
@@ -266,7 +344,7 @@ La majorité des énoncés suivants sont issus de la source @algtop.
 ])
 
 #proposition([
-  Soit $X$ un espace topologique. Alors pour tout $n in NN$, on a $dif_n compose dif_(n+1) = 0$.
+  Soit $X$ un espace topologique. Alors pour tout $n in NN$, on a $dif_n dif_(n+1) = 0$.
 ]) <prop-compose-bord>
 
 #proof([
@@ -278,7 +356,7 @@ La majorité des énoncés suivants sont issus de la source @algtop.
   $
   donc en appliquant $dif_n$, on obtient :
   $
-    (dif_n compose dif_(n+1))(sigma)
+    (dif_n dif_(n+1))(sigma)
     &= &&dif_(n)(sum_(k=0)^(n+1) (-1)^k (sigma compose gensubgroup(e_0, ..., overshell(e_k), ..., e_n))) \
     &= &&sum_(k=0)^(n+1) (-1)^k dif_(n)(sigma compose gensubgroup(e_0, ..., overshell(e_k), ..., e_n))) \
     &= &&sum_(0 <= k < l <= n + 1) (-1)^(k + l) (sigma compose gensubgroup(e_0, ..., overshell(e_k), ..., overshell(e_l), ..., e_n)) \
@@ -386,14 +464,10 @@ La majorité des énoncés suivants sont issus de la source @algtop.
 
 == Paires d'espaces topologiques
 
-#definition([
-  Soit $X$ un espace topologique et $A$ un sous-ensemble de $X$.
-  On appelle _paire d'espaces topologiques_ le couple $(X, A)$.
-])
 
 #proposition([
   Soit $(X, A)$ une paire d'espaces topologiques.
-  Alors pour tout $n in ZZ$, $dif_n$ induit un morphisme $overline(dif)_n$ de $lquotient(C_(n)(X), C_(n)(A))$ dans $lquotient(C_(n-1)(X), C_(n-1)(A))$ tel que $overline(dif)_n compose overline(dif)_(n+1) = 0$.
+  Alors pour tout $n in ZZ$, $dif_n$ induit un morphisme $overline(dif)_n$ de $lquotient(C_(n)(X), C_(n)(A))$ dans $lquotient(C_(n-1)(X), C_(n-1)(A))$ tel que $overline(dif)_n overline(dif)_(n+1) = 0$.
 ])
 
 #proof([
@@ -401,7 +475,7 @@ La majorité des énoncés suivants sont issus de la source @algtop.
   Alors on a $C_(n)(A) subset C_(n)(X)$, on peut donc former le quotient $lquotient(C_(n)(X), C_(n)(A))$.
 
   On pose $func(delta_n := overline(dif_n), C_(n)(X), lquotient(C_(n-1)(X), C_(n-1)(A)))$, alors $C_(n)(A) subset ker(delta_n)$ et d'après la propriété universelle du groupe quotient $delta_n$ induit bien un morphisme $overline(dif)_n$ de $lquotient(C_(n)(X), C_(n)(A))$ dans $lquotient(C_(n-1)(X), C_(n-1)(A))$.
-  Enfin puisque $dif_n compose d_(n+1) = 0$, on a $overline(dif)_n compose overline(dif)_(n+1) = 0$.
+  Enfin puisque $dif_n dif_(n+1) = 0$, on a $overline(dif)_n overline(dif)_(n+1) = overline(dif_n dif_(n+1)) = 0$.
 ])
 
 #remark([
@@ -418,10 +492,6 @@ La majorité des énoncés suivants sont issus de la source @algtop.
   Dans le cas de la paire d'espaces topologiques $(X, emptyset)$, on trouve $C_(cdot)(X, emptyset) tilde.eq C_(cdot)(X)$ et $H_(cdot)(X, emptyset) tilde.eq H_(cdot)(X)$.
 ])
 
-#definition([
-  Soit $(X, A)$ et $(Y, B)$ deux paires d'espaces topologiques, et $func(f, X, Y)$ une application continue.
-  On dit que $f$ est un _morphisme de paires_, noté $func(f, (X, A), (Y, B))$, si $f(A)$ est contenue dans $B$.
-])
 
 #proposition([
   Soit $C_(cdot)(X, A)$ et $C_(cdot)(Y, B)$ deux complexes de chaînes singulières, et $func(f, (X, A), (Y, B))$ un morphisme de paires.
@@ -472,7 +542,7 @@ La majorité des énoncés suivants sont issus de la source @algtop.
   Soit $tau in dif_(n+1)(C_(n+1)(X)) + C_(n)(A)$, il existe $sigma_1 in C_(n+1)(X)$ et $sigma_2 in C_(n)(A)$ tels que $tau = dif_(n+1) sigma_1 + sigma_2$.
   Alors d'après la @prop-compose-bord on a :
   $
-    dif_(n) tau = dif_(n)(dif_(n+1) sigma_1 + sigma_2) = (dif_(n) compose dif_(n+1)) sigma_1 + dif_(n) sigma_2 = dif_(n) sigma_2
+    dif_(n) tau = dif_(n)(dif_(n+1) sigma_1 + sigma_2) = (dif_(n) dif_(n+1)) sigma_1 + dif_(n) sigma_2 = dif_(n) sigma_2
   $
   donc $tau in dif_(n)^(-1)(C_(n-1)(A))$, on peut donc former le quotient $lquotient(dif_(n)^(-1)(C_(n-1)(A)), (dif_(n+1)(C_(n+1)(X)) + C_(n)(A)))$.
 
@@ -500,32 +570,33 @@ La majorité des énoncés suivants sont issus de la source @algtop.
   Soit $n in ZZ$.
   D'après la @prop-iso-homologie-paire il existe un isomorphisme :
   $
-    func(phi, lquotient(dif_(n)^(-1)(C_(n-1)(A)), (dif_(n+1)(C_(n+1)(X)) + C_(n)(A))), H_(n)(X, A)).
+    func(psi, H_(n)(X, A), lquotient(dif_(n)^(-1)(C_(n-1)(A)), (dif_(n+1)(C_(n+1)(X)) + C_(n)(A)))).
   $
-  Pour tout $eta in H_(n)(X, A)$, il existe $tau in dif_(n)^(-1)(C_(n-1)(A))$ tel que $eta = phi(overline(tau))$.
+  Pour tout $eta in H_(n)(X, A)$, il existe $tau in dif_(n)^(-1)(C_(n-1)(A))$ tel que $overline(tau) = psi(eta)$.
   Alors d'après la @prop-compose-bord on a $dif_(n-1) dif_n tau = 0$, donc $dif_n tau in Z_(n-1)(A)$.
-  On pose $partial_(n)(eta) := overline(dif_(n) tau) in H_(n-1)(A)$.
+  On pose $partial_(n) eta := overline(dif_(n) tau) in H_(n-1)(A)$.
 
-  Supposons que $eta = 0$, c'est-à-dire $tau in dif_(n+1)(C_(n+1)(X)) + C_(n)(A)$, alors $dif_n tau in B_(n)(A)$, d'où $partial_(n)(eta) = 0$.
+  Supposons que $eta = 0$, c'est-à-dire $tau in dif_(n+1)(C_(n+1)(X)) + C_(n)(A)$, alors $dif_n tau in B_(n)(A)$, d'où $partial_(n) eta = 0$.
   Donc $partial_n$ est un morphisme bien défini.
 ])
 
 #theorem([
-  Soit $C_(cdot)(X, A)$ et $C_(cdot)(Y, B)$ deux complexes de chaînes singulières, $func(phi_cdot, C_(cdot)(X), C_(cdot)(Y))$ un morphisme de chaînes.
-  Pour tout $n in ZZ$, le morphisme $partial_n$ est une transformation naturelle, c'est-à-dire :
-  $ partial_n phi_n = phi_(n-1) partial_n. $
+  Soit $C_(cdot)(X, A)$ et $C_(cdot)(Y, B)$ deux complexes de chaînes singulières. Alors pour tout $n in ZZ$, le morphisme $partial_n$ est une transformation naturelle, c'est-à-dire, pour tout morphisme de paires $func(f, (X, A), (Y, B))$, on a :
+  $ partial_n H_(n)(f) = H_(n-1)(f) partial_n. $
 ])
 
 #proof([
   Soit $n in ZZ$.
-  Puisque $partial_n$ est induit par $dif_n$, d'après la @prop-compose-bord on a bien :
-  $ partial_n phi_n = phi_(n-1) partial_n. $
+  Puisque $partial_n$ est induit par $dif_n$, d'après la @prop-continue-commute on a bien :
+  $
+    partial_n H_(n)(f) = overline(dif_n f_*) = overline(f_* dif_n) = H_(n-1)(f) partial_n.
+  $
+  Donc $partial_n$ est bien une transformation naturelle. TODO.
 ])
 
 #theorem([
   La suite des $n$#super("e") groupe d'homologie singulière des paires d'espaces topologiques $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie des morphismes $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A)))$ est une théorie de l'homogie vérifiant les @def-theorie-homologie[axiomes d'Eilenberg-Steenrod].
 ])
-
 
 #proof(
   of: [de @axiome-dimension[l'axiome de dimension]],
@@ -541,11 +612,16 @@ La majorité des énoncés suivants sont issus de la source @algtop.
   ],
 )
 
-
 #proof(
   of: [de @axiome-exactitude[l'axiome d'exactitude]],
   [
-    TODO.
+    Soit $n in ZZ$.
+    - Soit $alpha in ker(H_(n)(i))$, il existe $tau in C_(n)(A)$ tel que $alpha = overline(tau)$. \
+      Puisque $alpha in ker(H_(n)(i))$, on a $tau in B_(n)(X)$, il existe $sigma in C_(n+1)(X)$ tel que $tau = d_(n+1) sigma$. \
+      Puisque $overline(d)_(n+1) overline(sigma) = overline(d_(n+1) sigma) = overline(tau) = 0 in C_(n)(X, A)$, on a $overline(sigma) in Z_(n)(X, A)$. \
+      Alors d'après la définition de $partial_(n+1)$, on a $partial_(n+1)(overline(sigma)) = alpha$.
+    - TODO.
+    - TODO.
   ],
 )
 
