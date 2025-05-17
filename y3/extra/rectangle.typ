@@ -16,7 +16,7 @@
 #total-characters
 #pagebreak()
 
-= Quelques catégories
+= Bases de théorie des catégories
 
 == Catégories
 
@@ -38,46 +38,38 @@
 ])
 
 #example([
-  La catégorie des groupes abéliens $sans("Ab")$ :
+  La catégorie $sans("Ab")$ des groupes abéliens :
   - Les objets de $sans("Ab")$ sont les groupes abéliens.
   - Les morphismes de $sans("Ab")$ sont les morphismes de groupes.
 ])
 
-#definition([
+#example([
   Un _groupe gradué_ est un groupe $G$ muni d'une famille de sous-groupes $sequence(G_i, ind: i, dom: I)$ telle que $G = plus.circle.big_(i in I) G_i$.
   Pour tout $i in I$, un élément non-nul de $G_i$ est dit _homogène de degré $i$_.
-])
 
-#definition([
-  Soit $G := sequence(G_i, ind:i, dom:I)$ et $F := sequence(F_i, ind: i, dom: I)$ deux groupes gradués.
-  Un _morphisme de groupes gradués_ est un morphisme de groupes $func(phi, G, F)$ tel que pour tout $i in I$, on a $phi(G_i) subset F_i$.
-])
+  Soit $G := sequence(G_i, ind:i, dom:I)$ et $H := sequence(H_i, ind: i, dom: I)$ deux groupes gradués.
+  Un _morphisme de groupes gradués_ est un morphisme de groupes $func(phi, G, H)$ tel que pour tout $i in I$, on a $phi(G_i) subset H_i$.
 
-#example([
-  La catégorie des groupes abéliens gradués $sans("GrAb")$ :
-  - Les objets de $sans("GrAb")$ sont les groupes abéliens gradués.
-  - Les morphismes de $sans("GrAb")$ sont les morphismes de groupes gradués.
+  On définit ainsi la catégorie $sans("GrAb")$ des groupes abéliens gradués :
+  - Les objets de $sans("GrAb")$ sont les groupes abéliens gradués. \
+  - Les morphismes de $sans("GrAb")$ sont les morphismes de groupes gradués. \
 ])
 
 #example([
-  La catégorie des espaces topologiques $sans("Top")$ :
+  La catégorie $sans("Top")$ des espaces topologiques :
   - Les objets de $sans("Top")$ sont les espaces topologiques.
   - Les morphismes de $sans("Top")$ sont les applications continues.
 ])
 
-#definition([
-  Une paire d'espaces topologiques est un espace topologique $X$ muni d'un sous-ensemble $A$ de $X$.
-  On le note $(X, A)$.
-])
+#example([
+  Une paire d'espaces topologiques est un espace topologique $X$ muni d'une partie $A$ de lui-même.
+  On la note $(X, A)$.
 
-#definition([
   Soit $(X, A)$ et $(Y, B)$ deux paires d'espaces topologiques.
   Un _morphisme de paires_ est une application continue $func(f, X, Y)$ telle que $f(A) subset B$.
   On le note $func(f, (X, A), (Y, B))$.
-])
 
-#example([
-  La catégorie des paires d'espaces topologiques $sans("Top")_2$ :
+  On définit ainsi catégorie $sans("Top")_2$ des paires d'espaces topologiques :
   - Les objets de $sans("Top")_2$ sont les paires d'espaces topologiques.
   - Les morphismes de $sans("Top")_2$ sont les morphismes de paires.
 ])
@@ -104,7 +96,7 @@
 
 #definition([
   Soit $cal(C)$ et $cal(D)$ deux catégories.
-  Un _foncteur covariant $F$ de $cal(C)$ vers $cal(D)$_ est la donnée :
+  Un _foncteur (covariant) $F$ de $cal(C)$ vers $cal(D)$_ est la donnée :
   - Pour tout objet $X in ob(cal(C))$, d'un objet $F(X) in ob(cal(D))$.
   - Pour tout objets $X, Y in ob(C)$ et morphisme $func(f, X, Y)$, d'un morphisme $func(F(f), F(X), F(Y))$.
   Vérifiant les propriétés suivantes pour tout objets $X, Y, Z in ob(cal(C))$ :
@@ -158,24 +150,138 @@
       arr((0, 1), (1, 1), $partial_Y$),
     )]
 ])
+
+#pagebreak()
+
+= Catégorie $sans("Comp")$ des complexes de chaînes
+
+== Complexes de chaînes
+
+#definition([
+  On appelle _complexe de chaînes_, noté $C_cdot$, une suite de groupes abéliens $sequence(C_(n))$ munie de morphismes de groupes $sequence(func(dif_n, C_(n), C_(n-1)))$ tels que pour tout $n in ZZ$, on a $dif_n dif_(n+1) = 0$.
+])
+
+#definition([
+  Soit $C_cdot$ un complexe de chaînes et $n in ZZ$.
+  - On appelle _$n$-cycle_ un élément de $Z_(n)(C_cdot) := ker(dif_n)$.
+  - On appelle _$n$-bord_ un élément de $B_(n)(C_cdot) := im(dif_(n+1))$.
+])
+
+#proposition([
+  Soit $C_cdot$ un complexe de chaînes.
+  Alors pour tout $n in ZZ$, on a $B_(n)(C_cdot) subset Z_(n)(C_cdot)$.
+])
+
+#proof([
+  Soit $n in ZZ$. Alors $dif_n dif_(n+1) = 0$, donc $B_(n)(C_cdot) = im(dif_(n+1)) subset ker(dif_n) = Z_(n)(C_cdot)$.
+])
+
+#definition([
+  Soit $C_cdot$ un complexe de chaînes et $n in ZZ$.
+  - On appelle _$n$#super("e") groupe d'homologie_ le groupe quotient $H_(n)(C_cdot) := lquotient(Z_(n)(C_cdot), B_(n)(C_cdot))$.
+  - On appelle _homologie_ la suite des groupes $H_(cdot)(C_cdot) := sequence(H_(n)(C_cdot))$.
+])
+
+#definition([
+  Soit $C_cdot$ un complexe de chaînes et $n in ZZ$.
+  - On dit que $C_cdot$ est _exact en $C_(n)$_ si $H_(n)(C_cdot)$ est trivial, c'est-à-dire, $im(dif_(n+1)) = ker(dif_n)$.
+  - On dit que $C_cdot$ est _exact_ si pour tout $n in ZZ$, il est exact en $C_(n)$.
+  - On dit que $C_cdot$ est _acyclique_ si pour tout $n in ZZ without {0}$, il est exact en $C_(n)$.
+])
+
+== Morphismes de chaînes
+
+#definition([
+  Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes.
+  On appelle _morphisme de chaînes_, noté $func(phi_cdot, C_cdot, D_cdot)$, une suite de morphismes de groupes $sequence(func(phi_n, C_(n), D_(n)))$ telle que pour tout $n in ZZ$, on a $dif_n phi_n = phi_(n-1) dif_n$.
+])
+
+#proposition([
+  Soit $C_cdot$, $D_cdot$ et $E_cdot$ trois complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ et $func(psi_cdot, D_cdot, E_cdot)$ deux morphismes de chaînes.
+  Alors la composition $func(psi_cdot compose phi_cdot, C_cdot, E_cdot)$ est un morphisme de chaînes.
+]) <prop-comp-composition>
+
+#proof([
+  Soit $n in ZZ$. Alors on a :
+  $
+    dif_n (psi_n compose phi_n) = psi_(n-1) dif_n phi_n = (psi_(n-1) compose phi_(n-1)) dif_n.
+  $
+  Donc $sequence(psi_n compose phi_n)$ est bien un morphisme de chaînes.
+])
+
+#proposition([
+  Soit $C_cdot$ un complexe de chaînes.
+  Alors le morphisme identité $func(id_C_cdot, C_cdot, C_cdot)$ est un morphisme de chaînes.
+]) <prop-comp-identite>
+
+#proof([
+  Soit $n in ZZ$. Alors on a :
+  $
+    dif_n id_n = dif_n = id_(n-1) dif_n.
+  $
+  Donc $sequence(id_C_n)$ est bien un morphisme de chaînes.
+])
+
+#proposition([
+  Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de chaînes.
+  Alors pour tout $n in ZZ$, $phi_n$ induit un morphisme de groupes de $H_(n)(C_cdot)$ dans $H_(n)(D_cdot)$.
+])
+
+#proof([
+  Soit $n in ZZ$. \
+  Soit $z in Z_(n)(C_cdot)$. Alors on a
+  $dif_n phi_(n)(z) = phi_(n-1)(dif_n z) = phi_(n-1)(0) = 0$,
+  donc $phi_(n)(z) in Z_(n)(D_cdot)$. \
+  Soit $b in B_(n)(C_cdot)$. Alors il existe $c in C_(n+1)$ tel que $b = dif_(n+1) c$, et on a :
+  $ phi_(n)(b) = phi_(n)(dif_(n+1) c) = dif_(n+1) phi_(n+1)(c) $
+  donc $phi_(n)(b) in B_(n)(D_cdot)$.
+
+  On considère $func(overline(phi_n), Z_(n)(C_cdot), H_(n)(D_cdot))$, alors $B_(n)(C_cdot) subset ker(overline(phi_n))$ et d'après la propriété universelle du groupe quotient le morphisme $overline(phi_n)$ induit bien un morphisme de $H_(n)(C_cdot)$ dans $H_(n)(D_cdot)$.
+])
+
+#definition([
+  Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de chaînes.
+  Pour tout $n in ZZ$, on note $func(H_(n)(phi), H_(n)(C_cdot), H_(n)(D_cdot))$ le morphisme de groupes induit par $phi_n$.
+])
+
+== La catégorie $sans("Comp")$
+
+#definition([
+  On appelle $sans("Comp")$ la catégorie des complexes de chaînes :
+  - Les objets de $sans("Comp")$ sont les complexes de chaînes.
+  - Les morphismes de $sans("Comp")$ sont les morphismes de chaînes.
+  - La composition de $sans("Comp")$ découle de la @prop-comp-composition.
+  - Le morphisme identité de $sans("Comp")$ découle de @prop-comp-identite.
+])
+
+#theorem([
+  Pour tout $n in ZZ$, le $n$#super("e") groupe d'homologie $H_n$ est un foncteur de $sans("Comp")$ vers $sans("Ab")$.
+]) <thm-foncteur-comp-ab>
+
+#proof([
+  Soit $n in ZZ$.
+  - Soit $C_cdot in ob(sans("Comp"))$ un complexe de chaînes.
+    Alors le $n$#super("e") groupe d'homologie $H_(n)(C_cdot)$ est bien un groupe abélien.
+  - Soit $C_cdot, D_cdot in ob(sans("Comp"))$ deux complexes de chaînes et $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de chaînes.
+    Alors le morphisme induit $func(H_(n)(phi), H_(n)(C_cdot), H_(n)(D_cdot))$ est bien un morphisme de groupes.
+  La propriété de composition découle de la @prop-comp-composition et la propriété d'identité découle de la @prop-comp-identite, donc $H_n$ est bien un foncteur de $sans("Comp")$ vers $sans("Ab")$.
+])
+
+#corollary([
+  L'homologie $H_cdot$ est un foncteur de $sans("Comp")$ vers $sans("GrAb")$.
+]) <cor-foncteur-comp-grab>
+
+#proof([
+  - Soit $C_cdot in ob(sans("Comp"))$ un complexe de chaînes.
+    Alors l'homologie $H_(cdot)(C_cdot) := sequence(H_(n)(C_cdot))$ définit bien un groupe abélien gradué.
+  - Soit $C_cdot, D_cdot in ob(sans("Comp"))$ deux complexes de chaînes et $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de chaînes.
+    Alors la suite des morphismes induits $H_(cdot)(phi) := sequence(H_(n)(phi))$ définit bien un morphisme de groupes abéliens gradués.
+  Les propriétés de composition et d'identité découlent du @thm-foncteur-comp-ab, donc $H_cdot$ est bien un foncteur de $sans("Comp")$ vers $sans("GrAb")$.
+])
+
 #pagebreak()
 
 = Homologie singulière
-
-#definition([
-  Une _théorie de l'homologie_ sur la catégorie des paires d'espaces topologiques $sans("Top")_2$ dans la catégorie des groupes abéliens $sans("Ab")$ est une suite de foncteurs $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie de transformations naturelles $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A) := H_(n-1)(A, emptyset)))$ vérifiant les _axiomes d'Eilenberg-Steenrod_ pour toutes paires d'espaces topologiques $(X, A), (Y, B)$ et $n in ZZ$ :
-  - _Dimension <axiome-dimension>_ : Soit $P$ un espace constitué d'un unique point.
-    Alors le groupe $H_(n)(P)$ est non-trivial si et seulement si $n = 0$.
-  - _Exactitude <axiome-exactitude>_ : En notant $func(i, A, X)$ et $func(j, X, (X, A))$ les inclusions canoniques, alors la suite suivante est exacte :
-    $
-      ... -> H_(n+1)(X, A) ->^(partial_(n+1)) H_(n)(A) ->^(H_(n)(i)) H_(n)(X) ->^(H_(n)(j)) H_(n)(X, A) ->^(partial_n) H_(n-1)(A) -> ...
-    $
-  - _Homotopie <axiome-homotopie>_ : Soit $func(f_0 \, f_1, (X, A), (Y, B))$ deux morphismes de paires homotopes.
-    Alors les applications induites en homologie $func(H_(n)(f_(0))\, H_(n)(f_(1)), H_(n)(X, A), H_(n)(Y, B))$ sont égales.
-  - _Excision <axiome-excision>_ : Soit $U$ un sous-ensemble de $A$ tel que l'adhérence de $U$ est contenue dans l'intérieur de $A$.
-    En notant $func(i, (X without U, A without U), (X, A))$ l'inclusion canonique.
-    Alors l'application induite en homologie $func(H_(n)(i), H_(n)(X without U, A without U), H_(n)(X, A))$ est un isomorphisme.
-]) <def-theorie-homologie>
 
 == Simplexes
 
@@ -187,7 +293,7 @@
 
 #definition([
   Soit $E$ un $RR$-espace vectoriel, $A$ un sous-ensemble de $E$ et $p_0, ..., p_n$ des éléments de $A$.
-  On appelle _combinaison convexe_ une combinaison de la forme $t_0 p_0 + dots.c + t_n p_n$, telle que $t_0, ..., t_n in [0, 1]$ et $t_0 + dots.c + t_n = 1$.
+  On appelle _combinaison convexe_ une combinaison linéaire de la forme $t_0 p_0 + dots.c + t_n p_n$ où $t_0, ..., t_n in [0, 1]$ et $t_0 + dots.c + t_n = 1$.
 ])
 
 #proposition([
@@ -204,7 +310,7 @@
 
 #definition([
   Soit $E$ un $RR$-espace vectoriel et $A$ un sous-ensemble de $E$.
-  On appelle _enveloppe convexe de $A$_, notée $[A]$, l'ensemble des combinaisons convexes d'éléments de $A$.
+  On appelle _enveloppe convexe de $A$_, notée $"Conv"(A)$, l'ensemble des combinaisons convexes d'éléments de $A$.
 ])
 
 #proposition([
@@ -213,18 +319,18 @@
 ])
 
 #proof([
-  Soit $p, q in [A]$ et $t in [0, 1]$.
-  Puisque $p$ et $q$ sont des combinaisons convexes d'éléments de $A$, la combinaison $(1 - t)p + t q$ est aussi une combinaison convexe d'éléments de $A$, d'après la @prop-combinaison-convexe on a $(1 - t)p + t q in [A]$.
-  Donc l'ensemble $[A]$ est convexe.
+  Soit $p, q in "Conv"(A)$ et $t in [0, 1]$.
+  Puisque $p$ et $q$ sont des combinaisons convexes d'éléments de $A$, d'après la @prop-combinaison-convexe on a $(1 - t)p + t q in "Conv"(A)$.
+  Donc l'ensemble $"Conv"(A)$ est convexe.
 
   Soit $B$ un sous-ensemble convexe de $E$ contenant $A$.
-  Soit $x in [A]$. Puisque $x$ est une combinaison convexe d'éléments de $A subset B$, d'après la @prop-combinaison-convexe on a $x in B$.
-  Donc $[A] subset B$.
+  Soit $x in "Conv"(A)$. Puisque $x$ est une combinaison convexe d'éléments de $A subset B$, d'après la @prop-combinaison-convexe on a $x in B$.
+  Donc $"Conv"(A) subset B$.
 ])
 
 #definition([
   Soit $E$ un $RR$-espace vectoriel et $F$ une famille libre de $n + 1$ éléments de $E$.
-  On appelle _$n$-simplexe généré par $F$_ l'enveloppe convexe de $F$. On dit que les éléments de $F$ sont les _sommets_ de $[F]$ et que $n$ est la _dimension_ de $[F]$.
+  On appelle _$n$-simplexe généré par $F$_ l'enveloppe convexe de $F$. On dit que les éléments de $F$ sont les _sommets_ de $"Conv"(F)$ et que $n$ est la _dimension_ de $"Conv"(F)$.
 ])
 
 #definition([
@@ -235,7 +341,7 @@
   Soit $E$ un $RR$-espace vectoriel et $F := (f_0, ..., f_n)$ une famille libre de $n + 1$ éléments de $E$.
   Alors l'application :
   $
-    func(gensubgroup(f_0, ..., f_n), Delta^n, [F], (t_0, ..., t_n), t_0 f_0 + ... + t_n f_n)
+    func(gensubgroup(f_0, ..., f_n), Delta^n, "Conv"(F), (t_0, ..., t_n), t_0 f_0 + ... + t_n f_n)
   $
   est un homéomorphisme.
 ]) <prop-coordonnees-barycentriques>
@@ -243,27 +349,63 @@
 #proof([
   Soit $(s_0, ..., s_n), (t_0, ..., t_n) in Delta^n$ tels que $s_0 f_0 + ... + s_n f_n = t_0 f_0 + ... + t_n f_n$.
   En particulier on a $(s_0 - t_0)f_0 + ... + (s_n - t_n)f_n = 0$, et puisque la famille $(f_0, ..., f_n)$ est libre, on obtient $s_0 - t_0 = ... = s_n - t_n = 0$, c'est-à-dire $(s_0, ..., s_n) = (t_0, ..., t_n)$.
-  Donc $gensubgroup(f_0, ..., f_n)$ est injective.
-
-  Soit $x in [F]$.
-  Alors par définition de $[F]$, il existe $(t_0, ..., t_n) in Delta^n$ tels que $x := t_0 f_0 + ... + t_n f_n$.
+  Donc $gensubgroup(f_0, ..., f_n)$ est injective. \
+  Soit $x in "Conv"(F)$.
+  Alors il existe $(t_0, ..., t_n) in Delta^n$ tels que $x := t_0 f_0 + ... + t_n f_n$.
   Donc $gensubgroup(f_0, ..., f_n)$ est surjective.
-
   Puisque $gensubgroup(f_0, ..., f_n)$ est une application linéaire et que $Delta^n$ est de dimension finie, $gensubgroup(f_0, ..., f_n)$ est continue.
-  De plus $Delta^n$ est compact et $[F]$ est séparé, donc $gensubgroup(f_0, ..., f_n)$ est un homéomorphisme.
+  De plus $Delta^n$ est compact et $"Conv"(F)$ est séparé, donc $gensubgroup(f_0, ..., f_n)$ est un homéomorphisme.
 ])
 
 #definition([
-  Soit $E$ un $RR$-espace vectoriel, $F := (f_0, ..., f_n)$ une famille libre de $n + 1$ éléments de $E$ et $x := t_0 f_0 + ... + t_n f_n$ un élément de $[F]$.
+  Soit $E$ un $RR$-espace vectoriel, $F := (f_0, ..., f_n)$ une famille libre de $n + 1$ éléments de $E$ et $x := t_0 f_0 + ... + t_n f_n$ un élément de $"Conv"(F)$.
   On appelle _coordonnées barycentriques de $x$_ les coefficients $t_0, ..., t_n in [0, 1]$.
 ])
 
 #definition([
-  Soit $E$ un $RR$-espace vectoriel, $F$ une famille libre de $n+1$ éléments de $E$ et $G$ une famille non-vide d'éléments de $F$.
-  On dit que $[G]$ est une _face_ de $[F]$.
+  Soit $E$ un $RR$-espace vectoriel, $F$ une famille libre de $n+1$ éléments de $E$ et $G$ une famille non-vide d'éléments de $m + 1$ éléments de $F$.
+  On dit que $"Conv"(G)$ est une _$m$-face_ de $"Conv"(F)$.
 ])
 
-== Chaînes
+#example([
+  Un $2$-simplexe standard, il s'agit d'un triangle, les arêtes en vert sont des $1$-faces du triangle, les sommets en rouge sont des $0$-faces du triangle et des arêtes :
+  #align(center)[
+    #cetz.canvas({
+      import cetz.draw: *
+
+      set-style(
+        stroke: (cap: "round"),
+        mark: (transform-shape: false, fill: black),
+      )
+      line((-2.75, 0, 0), (4, 0, 0), mark: (end: "stealth"))
+      line((0, -2.5, 0), (0, 4, 0), mark: (end: "stealth"))
+      line((0, 0, -4), (0, 0, 4), mark: (end: "stealth"))
+
+      line((2, 0, 0), (0, 2, 0), stroke: (paint: green))
+      line((0, 2, 0), (0, 0, 2), stroke: (paint: green))
+      line((0, 0, 2), (2, 0, 0), stroke: (paint: green))
+      line(
+        (2, 0, 0),
+        (0, 2, 0),
+        (0, 0, 2),
+        fill: luma(50%, 50%),
+        stroke: none,
+      )
+
+      set-style(circle: (radius: 0.03, fill: red, stroke: red))
+      circle((2, 0, 0), name: "e_0")
+      circle((0, 2, 0), name: "e_1")
+      circle((0, 0, 2), name: "e_2")
+
+      set-style(content: (padding: 0.1))
+      content("e_0", [$e_0$], anchor: "south-west")
+      content("e_1", [$e_1$], anchor: "south-east")
+      content("e_2", [$e_2$], anchor: "south-east")
+    })
+  ]
+])
+
+== Chaînes singulières
 
 #definition([
   Soit $X$ un espace topologique.
@@ -274,13 +416,13 @@
   L'application $gensubgroup(e_0, ..., e_n)$ de la @prop-coordonnees-barycentriques, où $(e_0, ..., e_n)$ est la base canonique de $RR^(n+1)$, est un $n$-simplexe singulier sur $RR^(n+1)$.
 ])
 
-#definition([
-  Soit $X$ un espace topologique. On note $C_(n)(X)$ le groupe abélien libre engendré par les $n$-simplexes singuliers sur $X$, on appelle _$n$-chaîne singulière_ un élément de $C_(n)(X)$.
-])
-
 #proposition([
   Soit $X$ et $Y$ deux espaces topologiques, $func(sigma, Delta^n, X)$ un $n$-simplexe singulier sur $X$ et $func(f, X, Y)$ une application continue.
   Alors la composition $func(f compose sigma, Delta^n, Y)$ est un $n$-simplexe singulier sur $Y$.
+])
+
+#definition([
+  Soit $X$ un espace topologique. Pour tout $n in ZZ$, on appelle _groupe des $n$-chaînes singulières_, noté $C_(n)(X)$, le groupe abélien libre engendré par les $n$-simplexes singuliers sur $X$.
 ])
 
 #proof([
@@ -290,24 +432,37 @@
 
 #definition([
   Soit $X$ et $Y$ deux espaces topologiques et $func(f, X, Y)$ une application continue.
-  On appelle _application induite par $f$_, notée $f_*$, le morphisme de groupes :
+  Pour tout $n in NN$, on appelle _application induite par $f$_, notée $C_(n)(f)$, le morphisme de groupes :
   $
-    func(f_*, C_n (X), C_n (Y), sum_(k=0)^m lambda_k sigma_k, sum_(k=0)^m lambda_k (f compose sigma_k)).
+    func(C_(n)(f), C_(n)(X), C_(n)(Y), sum_(k=0)^m lambda_k sigma_k, sum_(k=0)^m lambda_k (f compose sigma_k)).
   $
 ])
 
 #proposition([
   Soit $X$, $Y$ et $Z$ trois espaces topologiques, $func(f, X, Y)$ et $func(g, Y, Z)$ deux applications continues.
-  Alors $(g compose f)_* = g_* compose f_*$.
-])
+  Alors pour tout $n in NN$, on a $C_(n)(g compose f) = C_(n)(g) compose C_(n)(f)$.
+]) <prop-top-composition>
 
 #proof([
   Soit $n in NN$.
   Puisque les $n$-chaînes singulières sont engendrées par les $n$-simplexes singuliers, il suffit de montrer le résultat pour un $n$-simplexe singulier $func(sigma, Delta^n, X)$.
   Alors on a :
   $
-    (g compose f)_(*)(sigma) = (g compose f) compose sigma = g compose (f compose sigma) = g compose f_(*)(sigma) = g_(*)(f_(*)(sigma))
+    C_(n)(g compose f)(sigma) = (g compose f) compose sigma = g compose (f compose sigma) = g compose C_(n)(f)(sigma) = C_(n)(g)(C_(n)(f)(sigma))
   $
+])
+
+#proposition([
+  Pour tout $n in NN$, le groupe des $n$-chaînes singulières $C_n$ est un foncteur de $sans("Top")$ vers $sans("Ab")$.
+]) <prop-foncteur-top-ab>
+
+#proof([
+  Soit $n in NN$.
+  - Soit $X$ un espace topologique.
+    Alors le groupe des $n$-chaînes singulières $C_(n)(X)$ est bien un groupe abélien.
+  - Soit $X$ et $Y$ deux espaces topologiques, $func(f, X, Y)$ une application continue.
+    Alors l'application induite $func(C_(n)(f), C_(n)(X), C_(n)(Y))$ est bien un morphisme de groupes.
+  La propriété de composition découle de la @prop-top-composition et la propriété d'identité découle directement de la définition, donc $C_n$ est bien un foncteur de $sans("Top")$ vers $sans("Ab")$.
 ])
 
 #definition([
@@ -329,7 +484,7 @@
 
 #proposition([
   Soit $X$ et $Y$ deux espaces topologiques et $func(f, X, Y)$ une application continue.
-  Alors pour tout $n in NN$, on a $dif_n f_* = f_* dif_n$.
+  Alors pour tout $n in NN$, on a $dif_n C_(n)(f) = C_(n-1)(f) dif_n$.
 ]) <prop-continue-commute>
 
 #proof([
@@ -337,15 +492,15 @@
   Puisque les $n$-chaînes singulières sont engendrées par les $n$-simplexes singuliers, il suffit de montrer le résultat pour un $n$-simplexe singulier $func(sigma, Delta^n, X)$.
   Alors on a :
   $
-    dif_n f_(*)(sigma) &= sum_(k=0)^n (-1)^k ((f compose sigma) compose gensubgroup(e_0, ..., overshell(e_k), ..., e_n)) \
+    dif_n C_(n)(f)(sigma) &= sum_(k=0)^n (-1)^k ((f compose sigma) compose gensubgroup(e_0, ..., overshell(e_k), ..., e_n)) \
     &= sum_(k=0)^n (-1)^k (f compose (sigma compose gensubgroup(e_0, ..., overshell(e_k), ..., e_n)))\
-    &= f_*(dif_n sigma).
+    &= C_(n-1)(f)(dif_n sigma).
   $
 ])
 
 #proposition([
   Soit $X$ un espace topologique. Alors pour tout $n in NN$, on a $dif_n dif_(n+1) = 0$.
-]) <prop-compose-bord>
+]) <prop-bord-composition>
 
 #proof([
   Soit $n in NN$.
@@ -358,8 +513,11 @@
   $
     (dif_n dif_(n+1))(sigma)
     &= &&dif_(n)(sum_(k=0)^(n+1) (-1)^k (sigma compose gensubgroup(e_0, ..., overshell(e_k), ..., e_n))) \
-    &= &&sum_(k=0)^(n+1) (-1)^k dif_(n)(sigma compose gensubgroup(e_0, ..., overshell(e_k), ..., e_n))) \
-    &= &&sum_(0 <= k < l <= n + 1) (-1)^(k + l) (sigma compose gensubgroup(e_0, ..., overshell(e_k), ..., overshell(e_l), ..., e_n)) \
+    &= &&sum_(k=0)^(n+1) (-1)^k dif_(n)(sigma compose gensubgroup(e_0, ..., overshell(e_k), ..., e_n)))
+  $
+  on sépare la somme en deux selon les éléments enlevés :
+  $
+    (dif n dif_(n+1))(sigma) &= &&sum_(0 <= k < l <= n + 1) (-1)^(k + l) (sigma compose gensubgroup(e_0, ..., overshell(e_k), ..., overshell(e_l), ..., e_n)) \
     & &&+ sum_(0 <= l < k <= n + 1) (-1)^(k + l - 1) (sigma compose gensubgroup(e_0, ..., overshell(e_l), ..., overshell(e_k), ..., e_n)) \
     &= &&sum_(0 <= k < l <= n + 1) ((-1)^(k + l) + (-1)^(k + l + 1)) (sigma compose gensubgroup(e_0, ..., overshell(e_k), ..., overshell(e_l), ..., e_n)) \
     &= &&0
@@ -367,103 +525,55 @@
   car les puissances de $-1$ s'annulent.
 ])
 
-== Complexes de chaînes
+#proposition([
+  La suite $sequence(C_n)$ où pour tout $n < 0$, on pose $C_n := 0$, munie des morphismes des bords $sequence(func(d_n, C_n, C_(n-1)))$ est un foncteur de $sans("Top")$ vers $sans("Comp")$.
+]) <prop-foncteur-top-comp>
+
+#proof([
+  Soit $n in ZZ$.
+  - Soit $X$ un espace topologique.
+    Alors la suite $sequence(C_(n)(X))$ munie des morphismes de bords $sequence(func(d_n, C_(n)(X), C_(n-1)(X)))$ est bien un complexe de chaînes d'après la @prop-bord-composition.
+  - Soit $X$ et $Y$ deux espaces topologiques, $func(f, X, Y)$ une application continue.
+    Alors la suite des applications induites $sequence(func(C_(n)(f), C_(n)(X), C_(n)(Y)))$ est bien un morphisme de chaînes d'après la @prop-continue-commute.
+  La propriété de composition découle de la @prop-top-composition et la propriété d'identité découle directement de la définition, donc $C_n$ est bien un foncteur de $sans("Top")$ vers $sans("Ab")$.
+])
+
+== Définitions de l'homologie singulière
+
+=== D'un espace topologique
 
 #definition([
   Soit $X$ un espace topologique.
-  On appelle _complexe de chaînes singulières_, noté $C_(cdot)(X)$, la suite de groupes abéliens libres $sequence(C_(n)(X))$ munie des morphismes de bords $sequence(func(dif_n, C_(n)(X), C_(n-1)(X)))$, avec pour convention $C_(n)(X)$ trivial si $n < 0$.
+  On appelle _complexe de chaînes singulières de $X$_, noté $C_(cdot)(X)$, le complexe de chaînes déterminé par la suite $sequence(C_(n)(X), dom: NN)$ munie des morphismes de bords $sequence(func(d_n, C_(n)(X), C_(n-1)(X)), dom: NN)$.
 ])
 
 #definition([
   Soit $C_(cdot)(X)$ un complexe de chaînes singulières et $n in ZZ$.
-  - On appelle _$n$-cycle singulier_ un élément de $Z_(n)(X) := ker(dif_n)$.
-  - On appelle _$n$-bord singulier_ un élément de $B_(n)(X) := im(dif_(n+1))$.
-  - On appelle _$n$#super("e") groupe d'homologie singulière_ le groupe quotient $H_(n)(X) := lquotient(Z_(n)(X), B_(n)(X))$.
+  - On appelle _$n$-cycle singulier_ un élément de $Z_(n)(X) := Z_(n)(C_(cdot)(X))$.
+  - On appelle _$n$-bord singulier_ un élément de $B_(n)(X) := B_(n)(C_(cdot)(X))$.
+  - On appelle _$n$#super("e") groupe d'homologie singulière de $X$_ le groupe $H_(n)(X) := H_(n)(C_(cdot)(X))$.
+  - On appelle _homologie singulière de $X$_ la suite des groupes $H_(cdot)(X) := sequence(H_(n)(X))$.
 ])
 
-#remark([
-  Soit $C_(cdot)(X)$ un complexe de chaînes singulières et $n in ZZ$.
-  Puisque $dif_n compose d_(n+1) = 0$, on a $B_(n)(X) = im(d_(n+1)) subset ker(dif_n) = Z_(n)(X)$.
-])
-
-#remark([
-  Soit $C_(cdot)(X)$ un complexe de chaînes singulières et $n in ZZ$.
-  Si $n < 0$, alors $Z_(n)(X)$ et $B_(n)(X)$ sont triviaux, donc $H_(n)(X)$ est trivial.
-])
-
-#definition([
-  Soit $C_(cdot)(X)$ un complexe de chaînes singulières et $n in ZZ$.
-  - On dit que $C_(cdot)(X)$ est _exact en $C_(n)(X)$_ si $H_(n)(X)$ est trivial, c'est-à-dire, $im(d_(n+1)) = ker(dif_n)$.
-  - On dit que $C_(cdot)(X)$ est _exact_ s'il est exact en tout $sequence(C_(n)(X))$.
-  - On dit que $C_(cdot)(X)$ est _acyclique_ s'il est exact en tout $sequence(C_(n)(X))$ avec $n != 0$.
-])
-
-#definition([
-  Soit $C_(cdot)(X)$ un complexe de chaînes singulières et $n in ZZ$.
-  On appelle _$n$#super("e") nombre de Betti de X_ le rang de $H_(n)(X)$ s'il est fini.
-])
-
-== Morphismes de chaînes
-
-#definition([
-  Soit $C_(cdot)(X)$ et $C_(cdot)(Y)$ deux complexes de chaînes singulières.
-  On appelle _morphisme de chaînes_, noté $func(phi_cdot, C_(cdot)(X), C_(cdot)(Y))$, une suite de morphismes $sequence(func(phi_n, C_(n)(X), C_(n)(Y)))$ telle que pour tout $n in ZZ$, on a $dif_n phi_n = phi_(n-1) dif_n$.
-])
-
-#proposition([
-  Soit $C_(cdot)(X)$ et $C_(cdot)(Y)$ deux complexes de chaînes singulières, $func(phi_cdot, C_(cdot)(X), C_(cdot)(Y))$ un morphisme de chaînes.
-  Alors pour tout $n in ZZ$, $phi_n$ induit un morphisme de $H_(n)(X)$ dans $H_(n)(Y)$.
+#theorem([
+  Pour tout $n in ZZ$, le $n$#super("e") groupe d'homologie singulière est un foncteur de $sans("Top")$ vers $sans("Ab")$
 ])
 
 #proof([
-  Soit $n in ZZ$. \
-  Soit $sigma in Z_(n)(X)$. Alors on a
-  $dif_n phi_(n)(sigma) = phi_(n-1)(dif_n sigma) = phi_(n-1)(0) = 0$,
-  donc $phi_(n)(sigma) in Z_(n)(Y)$. \
-  Soit $beta in B_(n)(X)$. Alors il existe $sigma in C_(n+1)(X)$ tel que $beta = d_(n+1) sigma$, et on a :
-  $ phi_(n)(beta) = phi_(n)(d_(n+1) sigma) = d_(n+1) phi_(n+1)(sigma) $
-  donc $phi_(n)(beta) in B_(n)(Y)$.
-
-  On pose $func(psi_n := overline(phi_n), Z_(n)(X), H_(n)(Y))$, alors $B_(n)(X) subset ker(psi_n)$ et d'après la propriété universelle du groupe quotient le morphisme $psi_n$ induit bien un morphisme de $H_(n)(X)$ dans $H_(n)(Y)$.
+  Soit $n in ZZ$.
+  D'après la @prop-foncteur-top-comp $C_cdot$ est un foncteur de $sans("Top")$ vers $sans("Comp")$ et d'après le @thm-foncteur-comp-ab $H_cdot$ est un foncteur de $sans("Comp")$ vers $sans("Ab")$, par composition des foncteurs $H_(cdot) = H_(cdot)(C_cdot)$ est bien un foncteur de $sans("Top")$ vers $sans("Ab")$.
 ])
 
-#definition([
-  Soit $C_(cdot)(X)$ et $C_(cdot)(Y)$ deux complexes de chaînes singulières, $func(phi_cdot, C_(cdot)(X), C_(cdot)(Y))$ un morphisme de chaînes.
-  Pour tout $n in ZZ$, on note $func(H_(n)(phi), H_(n)(X), H_(n)(Y))$ le morphisme induit par $phi_n$.
-])
+TODO
 
-#proposition([
-  Soit $C_(cdot)(X)$, $C_(cdot)(Y)$ et $C_(cdot)(Z)$ trois complexes de chaînes singulières, $func(phi_cdot, C_(cdot)(X), C_(cdot)(Y))$ et $func(psi_cdot, C_(cdot)(Y), C_(cdot)(Z))$ deux morphismes de chaînes.
-  Alors la composition $func(psi_cdot compose phi_cdot, C_(cdot)(X), C_(cdot)(Z))$ est un morphisme de chaînes.
-])
-
-#proof([
-  Soit $n in ZZ$. Alors on a :
-  $
-    dif_n (psi_n compose phi_n) = psi_(n-1) dif_n phi_n = (psi_(n-1) compose phi_(n-1)) dif_n.
-  $
-  Donc $sequence(psi_n compose phi_n)$ est bien un morphisme de chaînes.
-])
-
-#proposition([
-  Soit $C_(cdot)(X)$ et $C_(cdot)(Y)$ deux complexes de chaînes singulières, et $func(f, X, Y)$ une application continue.
-  Alors l'application induite $f_*$ détermine un morphisme de chaînes.
-])
-
-#proof([
-  Pour tout $n in ZZ$, on considère le morphisme défini par $phi_n := f_*$.
-  Soit $n in ZZ$. Alors d'après la @prop-continue-commute on a :
-  $ dif_n phi_n = dif_n f_* = f_* dif_n = phi_(n-1) dif_n. $
-  Donc $sequence(phi_n)$ est bien un morphisme de chaînes.
-])
+=== D'une paire d'espace topologique
 
 #definition([
   Soit $C_(cdot)(X)$ et $C_(cdot)(Y)$ deux complexes de chaînes singulières, et $func(f, X, Y)$ une application continue.
-  Pour tout $n in ZZ$, on note $func(H_(n)(f), H_(n)(X), H_(n)(Y))$ le morphisme induit par le morphisme de chaînes déterminé par $f_*$.
+  Pour tout $n in ZZ$, on note $func(H_(n)(f), H_(n)(X), H_(n)(Y))$ le morphisme de groupes induit par $C_(n)(f)$.
 ])
 
 == Paires d'espaces topologiques
-
 
 #proposition([
   Soit $(X, A)$ une paire d'espaces topologiques.
@@ -540,7 +650,7 @@
 #proof([
   Soit $n in ZZ$. \
   Soit $tau in dif_(n+1)(C_(n+1)(X)) + C_(n)(A)$, il existe $sigma_1 in C_(n+1)(X)$ et $sigma_2 in C_(n)(A)$ tels que $tau = dif_(n+1) sigma_1 + sigma_2$.
-  Alors d'après la @prop-compose-bord on a :
+  Alors d'après la @prop-bord-composition on a :
   $
     dif_(n) tau = dif_(n)(dif_(n+1) sigma_1 + sigma_2) = (dif_(n) dif_(n+1)) sigma_1 + dif_(n) sigma_2 = dif_(n) sigma_2
   $
@@ -553,7 +663,7 @@
   - Soit $sigma in ker(phi)$.
     Puisque $overline(tau) = 0 in H_(n)(X, A)$, il existe $b in B_(n)(X, A)$ tel que $overline(tau) = overline(b)$.
     C'est-à-dire qu'il existe $c in C_(n+1)(X, A)$ et $sigma in C_(n+1)(X)$ tels que $b = overline(dif)_(n+1) c$ et $c = overline(sigma)$. \
-    On peut écrire $overline(tau) = overline(dif)_(n+1) overline(sigma) = overline(d_(n+1) sigma) in C_(n)(X, A)$, donc $tau in dif_(n+1)(C_(n+1)(X)) + C_(n)(A)$.
+    On peut écrire $overline(tau) = overline(dif)_(n+1) overline(sigma) = overline(dif_(n+1) sigma) in C_(n)(X, A)$, donc $tau in dif_(n+1)(C_(n+1)(X)) + C_(n)(A)$.
 
     Soit $tau in dif_(n+1)(C_(n+1)(X)) + C_(n)(A)$, il existe $sigma_1 in C_(n+1)(X)$ et $sigma_2 in C_(n)(A)$ tels que $tau = dif_(n+1) sigma_1 + sigma_2$.
     Alors $overline(tau) = overline(dif_(n+1) sigma_1) = overline(dif)_(n+1) overline(sigma) in C_(n)(X, A) $, d'où $overline(tau) in B_(n)(X, A)$ et $overline(tau) = 0 in H_(n)(X, A)$, donc $tau in ker(phi)$.
@@ -573,7 +683,7 @@
     func(psi, H_(n)(X, A), lquotient(dif_(n)^(-1)(C_(n-1)(A)), (dif_(n+1)(C_(n+1)(X)) + C_(n)(A)))).
   $
   Pour tout $eta in H_(n)(X, A)$, il existe $tau in dif_(n)^(-1)(C_(n-1)(A))$ tel que $overline(tau) = psi(eta)$.
-  Alors d'après la @prop-compose-bord on a $dif_(n-1) dif_n tau = 0$, donc $dif_n tau in Z_(n-1)(A)$.
+  Alors d'après la @prop-bord-composition on a $dif_(n-1) dif_n tau = 0$, donc $dif_n tau in Z_(n-1)(A)$.
   On pose $partial_(n) eta := overline(dif_(n) tau) in H_(n-1)(A)$.
 
   Supposons que $eta = 0$, c'est-à-dire $tau in dif_(n+1)(C_(n+1)(X)) + C_(n)(A)$, alors $dif_n tau in B_(n)(A)$, d'où $partial_(n) eta = 0$.
@@ -593,6 +703,28 @@
   $
   Donc $partial_n$ est bien une transformation naturelle. TODO.
 ])
+
+
+#definition([
+  Soit $C_(cdot)(X)$ un complexe de chaînes singulières et $n in ZZ$.
+  On appelle _$n$#super("e") nombre de Betti de X_ le rang de $H_(n)(X)$ s'il est fini.
+])
+
+#definition([
+  Une _théorie de l'homologie_ sur la catégorie des paires d'espaces topologiques $sans("Top")_2$ dans la catégorie des groupes abéliens $sans("Ab")$ est une suite de foncteurs $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie de transformations naturelles $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A) := H_(n-1)(A, emptyset)))$ vérifiant les _axiomes d'Eilenberg-Steenrod_ pour toutes paires d'espaces topologiques $(X, A), (Y, B)$ et $n in ZZ$ :
+  - _Dimension <axiome-dimension>_ : Soit $P$ un espace constitué d'un unique point.
+    Alors le groupe $H_(n)(P)$ est non-trivial si et seulement si $n = 0$.
+  - _Exactitude <axiome-exactitude>_ : En notant $func(i, A, X)$ et $func(j, X, (X, A))$ les inclusions canoniques, alors la suite suivante est exacte :
+    $
+      ... -> H_(n+1)(X, A) ->^(partial_(n+1)) H_(n)(A) ->^(H_(n)(i)) H_(n)(X) ->^(H_(n)(j)) H_(n)(X, A) ->^(partial_n) H_(n-1)(A) -> ...
+    $
+  - _Homotopie <axiome-homotopie>_ : Soit $func(f_0 \, f_1, (X, A), (Y, B))$ deux morphismes de paires homotopes.
+    Alors les applications induites en homologie $func(H_(n)(f_(0))\, H_(n)(f_(1)), H_(n)(X, A), H_(n)(Y, B))$ sont égales.
+  - _Excision <axiome-excision>_ : Soit $U$ un sous-ensemble de $A$ tel que l'adhérence de $U$ est contenue dans l'intérieur de $A$.
+    En notant $func(i, (X without U, A without U), (X, A))$ l'inclusion canonique.
+    Alors l'application induite en homologie $func(H_(n)(i), H_(n)(X without U, A without U), H_(n)(X, A))$ est un isomorphisme.
+]) <def-theorie-homologie>
+
 
 #theorem([
   La suite des $n$#super("e") groupe d'homologie singulière des paires d'espaces topologiques $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie des morphismes $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A)))$ est une théorie de l'homogie vérifiant les @def-theorie-homologie[axiomes d'Eilenberg-Steenrod].
@@ -617,8 +749,8 @@
   [
     Soit $n in ZZ$.
     - Soit $alpha in ker(H_(n)(i))$, il existe $tau in C_(n)(A)$ tel que $alpha = overline(tau)$. \
-      Puisque $alpha in ker(H_(n)(i))$, on a $tau in B_(n)(X)$, il existe $sigma in C_(n+1)(X)$ tel que $tau = d_(n+1) sigma$. \
-      Puisque $overline(d)_(n+1) overline(sigma) = overline(d_(n+1) sigma) = overline(tau) = 0 in C_(n)(X, A)$, on a $overline(sigma) in Z_(n)(X, A)$. \
+      Puisque $alpha in ker(H_(n)(i))$, on a $tau in B_(n)(X)$, il existe $sigma in C_(n+1)(X)$ tel que $tau = dif_(n+1) sigma$. \
+      Puisque $overline(d)_(n+1) overline(sigma) = overline(dif_(n+1) sigma) = overline(tau) = 0 in C_(n)(X, A)$, on a $overline(sigma) in Z_(n)(X, A)$. \
       Alors d'après la définition de $partial_(n+1)$, on a $partial_(n+1)(overline(sigma)) = alpha$.
     - TODO.
     - TODO.

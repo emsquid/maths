@@ -2,6 +2,7 @@
 #import "@preview/outrageous:0.4.0"
 #import "@preview/rich-counters:0.2.2": *
 #import "@preview/ez-today:1.1.0": *
+#import "@preview/cetz:0.3.4"
 #import "@local/touvlo:0.1.0": *
 #import "@local/mathematica:0.1.0": *
 
