@@ -279,7 +279,62 @@
   Les propriétés de composition et d'identité découlent du @thm-foncteur-comp-ab, donc $H_cdot$ est bien un foncteur de $sans("Comp")$ vers $sans("GrAb")$.
 ])
 
-== Propriétés
+== Premières propriétés
+
+#definition([
+  Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ et $func(psi_cdot, C_cdot, D_cdot)$ deux morphismes de complexes.
+  On dit que $phi_cdot$ et $psi_cdot$ sont _homotopes_ s'il existe une suite de morphismes de groupes $sequence(func(h_n, C_(n), D_(n+1)))$ telle que pour tout $n in ZZ$, on a $phi_n - psi_n = h_(n-1) dif_n + dif_n h_n$.
+])
+
+#proposition([
+  L'homotopie est une relation d'équivalence sur les morphismes de complexes.
+])
+
+#proof([
+  Notons $~$ la relation d'homotopie. Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes.
+  - _Réflexivité_ : Soit $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de complexes.
+    Alors pour tout $n in ZZ$, on peut écrire $phi_n - phi_n = 0 = 0 dif_n + dif_n 0$.
+    Donc on a bien $phi_cdot ~ phi_cdot$.
+  - _Symétrie_ : Soit $func(phi_cdot, C_cdot, D_cdot)$ et $func(psi_cdot, C_cdot, D_cdot)$ deux morphismes de complexes tels que $phi_cdot ~ psi_cdot$.
+    Alors pour tout $n in ZZ$, on a $psi_n - phi_n = -(phi_n - psi_n)$.
+    On en déduit bien $psi_cdot ~ phi_cdot$.
+  - _Transitivité_ : Soit $func(phi_cdot, C_cdot, D_cdot)$, $func(psi_cdot, C_cdot, D_cdot)$ et $func(xi_cdot, C_cdot, D_cdot)$ trois morphismes de complexes tels que $phi_cdot ~ psi_cdot$ et $psi_cdot ~ xi_cdot$.
+    Alors pour tout $n in ZZ$, on a $phi_n - xi_n = phi_n - psi_n + psi_n - xi_n$.
+    On en déduit bien que $phi_cdot ~ xi_cdot$.
+  Donc l'homotopie est bien une relation d'équivalence sur les morphismes de complexes.
+])
+
+#proposition([
+  Soit $A_cdot$, $B_cdot$ et $C_cdot$ trois complexes de chaînes, $func(phi_cdot, A_cdot, B_cdot)$ et $func(psi_cdot, A_cdot, B_cdot)$, ainsi que $func(alpha_cdot, B_cdot, C_cdot)$ et $func(beta_cdot, B_cdot, C_cdot)$ deux paires de morphismes de complexes homotopes.
+  Alors les compositions $func(alpha_cdot compose phi_cdot, A_cdot, C_cdot)$ et $func(beta_cdot compose psi_cdot, A_cdot, C_cdot)$ sont homotopes.
+])
+
+#proof([
+  Par définition il existe deux suites de morphismes de groupes $sequence(func(f_n, A_n, B_(n+1)))$ et $sequence(func(g_n, B_n, C_(n+1)))$ telles que pour tout $n in ZZ$, on a $phi_n - psi_n = f_(n-1) dif_n + dif_n f_n$ et $alpha_n - beta_n = g_(n-1) dif_n + dif_n g_n$.
+  Soit $n in ZZ$. Alors on a:
+  $
+    alpha_n compose phi_n - beta_n compose psi_n
+    &= alpha_n compose phi_n - alpha_n compose psi_n + alpha_n compose psi_n - beta_n compose psi_n \
+    &= alpha_n compose (phi_n - psi_n) + (alpha_n - beta_n) compose psi_n \
+    &= alpha_n compose (f_(n-1) dif_n + dif_n f_n) + (g_(n-1) dif_n + dif_n f_n) compose psi_n \
+    &= (a_n compose f_(n-1)) dif_n + dif_n (a_(n+1) compose f_n) + (g_(n-1) compose psi_(n-1)) dif_n + dif_n (f_n compose psi_n) \
+    &= (a_n compose f_(n-1) + g_(n-1) compose psi_(n-1)) dif_n + dif_n (a_(n+1) compose f_n + f_n compose psi_n)
+  $
+  En posant $h_n := a_(n+1) compose f_n + g_n compose psi_n$, on obtient l'égalité voulue $alpha_n compose phi_n - beta_n compose psi_n = h_(n-1) dif_n + dif_n h_n$.
+  Donc $alpha_cdot compose phi_cdot$ et $beta_cdot compose psi_cdot$ sont bien homotopes.
+])
+
+#lemma([
+  Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ et $func(psi_cdot, C_cdot, D_cdot)$ deux morphismes de complexes homotopes.
+  Alors pour tout $n in ZZ$, on a $H_(n)(phi) = H_(n)(psi)$.
+])
+
+#proof([
+  Par définition il existe une suite de morphismes de groupes $sequence(func(h_n, C_n, D_(n+1)))$ telle que pour tout $n in ZZ$, on a $phi_n - psi_n = h_(n-1) dif_n + dif_n h_n$. \
+  Soit $n in ZZ$ et $overline(c) in H_(n)(C_cdot)$.
+  Alors on a $phi_(n)(c) - psi_(n)(c) = h_(n-1)(dif_n c) + dif_n h_(n)(c) = dif_n h_(n)(c) in B_(n)(D_cdot)$, on en déduit $H_(n)(phi)(c) - H_(n)(psi)(c) = 0 in H_(n)(D_cdot)$.
+  Donc $H_(n)(phi) = H_(n)(psi)$.
+])
 
 #definition([
   On dit qu'une suite courte de complexes de chaînes est _exacte_, notée :
@@ -311,8 +366,8 @@
       arr((0, 3), (0, 4), ""),
     )]
   c'est-à-dire que $phi_n$ est injectif, $im(phi_n) = ker(psi_n)$ et $psi_n$ est surjectif.
-
 ])
+
 
 #lemma([
   Soit une suite exacte courte de complexes de chaînes :
@@ -331,8 +386,8 @@
     )]
   Alors pour tout $n in ZZ$, il existe un morphisme de groupes $func(partial_n, H_(n)(C_cdot), H_(n-1)(A_cdot))$ telle que la suite longue des groupes d'homologie est exacte :
   #align(center)[#commutative-diagram(
-      node-padding: (40pt, 45pt),
-      padding: 10pt,
+      node-padding: (40pt, 40pt),
+      padding: 5pt,
       node((0, 0), $dots.c$),
       node((0, 1), $H_(n)(A_cdot)$),
       node((0, 2), $H_(n)(B_cdot)$),
@@ -349,25 +404,39 @@
       arr((1, 2), (1, 3), $H_(n-1)(psi)$, label-pos: right),
       arr((1, 3), (1, 4), $partial_(n-1)$, label-pos: right),
     )]
-  De plus soit une autre suite exacte courte de complexes de chaînes :
+  De plus pour tout diagramme commutatif :
   #align(center)[#commutative-diagram(
-      node-padding: (40pt, 50pt),
+      node-padding: (40pt, 40pt),
       padding: 0pt,
+
       node((0, 0), $0$),
-      node((0, 1), $A'_cdot$),
-      node((0, 2), $B'_cdot$),
-      node((0, 3), $C'_cdot$),
+      node((0, 1), $A_cdot$),
+      node((0, 2), $B_cdot$),
+      node((0, 3), $C_cdot$),
       node((0, 4), $0$),
       arr((0, 0), (0, 1), ""),
-      arr((0, 1), (0, 2), $phi'_cdot$),
-      arr((0, 2), (0, 3), $psi'_cdot$),
+      arr((0, 1), (0, 2), $phi_cdot$),
+      arr((0, 2), (0, 3), $psi_cdot$),
       arr((0, 3), (0, 4), ""),
+
+      node((1, 0), $0$),
+      node((1, 1), $A'_cdot$),
+      node((1, 2), $B'_cdot$),
+      node((1, 3), $C'_cdot$),
+      node((1, 4), $0$),
+      arr((1, 0), (1, 1), ""),
+      arr((1, 1), (1, 2), $phi'_cdot$),
+      arr((1, 2), (1, 3), $psi'_cdot$),
+      arr((1, 3), (1, 4), ""),
+
+      arr((0, 1), (1, 1), $f_cdot$),
+      arr((0, 2), (1, 2), $g_cdot$),
+      arr((0, 3), (1, 3), $h_cdot$),
     )]
-  ainsi que $func(f_cdot, A_cdot, A'_cdot)$, $func(g_cdot, B_cdot, B'_cdot)$ et $func(h_cdot, C_cdot, C'_cdot)$ trois morphismes de complexes.
-  Alors la transformation $partial_n$ est naturelle dans le sens où le diagramme suivant est commutatif :
+  la transformation $partial_n$ est naturelle dans le sens où le diagramme suivant est commutatif :
   #align(center)[#commutative-diagram(
-      node-padding: (40pt, 50pt),
-      padding: 5pt,
+      node-padding: (40pt, 40pt),
+      padding: 2pt,
       node((0, 0), $H_(n)(C_cdot)$),
       node((0, 1), $H_(n-1)(A_cdot)$),
       node((1, 0), $H_(n)(C'_cdot)$),
@@ -383,7 +452,7 @@
 #proof([
   Soit $n in ZZ$. On commence par faire un diagramme en 3 dimensions pour la suite :
   #align(center)[#commutative-diagram(
-      node-padding: (20pt, 20pt),
+      node-padding: (20pt, 15pt),
       padding: 0pt,
 
       node((-1, 2), $dots.v$),
@@ -510,12 +579,12 @@
   Soit $overline(c) in H_(n)(C_cdot)$.
   Puisque $psi_n$ est surjective par exactitude, il existe $b in B_n$ tel que $psi_(n)(b) = c$.
   De plus on a $psi_(n-1)(dif_(n) b) = dif_n psi_(n)(b) = dif_n c = 0$, donc $dif_(n) b in ker(psi_(n-1))$ et par exactitude il existe $a in A_(n-1)$ tel que $phi_(n-1)(a) = dif_n b$.
-  De plus on a $phi_(n-2)(dif_(n-1) a) = dif_(n-1) phi_(n-1)(a) = dif_(n-1) dif_n b = 0$, puisque $phi_(n-2)$ est injective par exactitude, on a $dif_(n-1) a = 0$, donc $a in Z_(n-1)(A_cdot)$. \
-  On pose $partial_n overline(c) := overline(a) in H_(n-1)(A_cdot)$.
+  De plus on a $phi_(n-2)(dif_(n-1) a) = dif_(n-1) phi_(n-1)(a) = dif_(n-1) dif_n b = 0$, puisque $phi_(n-2)$ est injective par exactitude, on a $dif_(n-1) a = 0$, donc $a in Z_(n-1)(A_cdot)$. Donc on pose $partial_n overline(c) := overline(a) in H_(n-1)(A_cdot)$.
 
   Vérifions que $partial_n overline(c)$ ne dépend pas des choix réalisés.
-  Soit $b' in B_(n)$ tel que $psi_(n)(b') = c$ et $a' in A_(n-1)$ tel que $dif_n b' = phi_(n-1)(a')$. De plus on a $psi_(n)(b - b') = c - c = 0$, donc $b-b' in ker(psi_(n))$ et par exactitude il existe $hat(a) in A_(n)$ tel que $phi_(n)(hat(a)) = b - b'$. Alors
-  $phi_(n-1)(dif_n hat(a)) = dif_n phi_(n)(hat(a)) = dif_n b - dif_n b' = phi_(n-1)(a - a')$,
+  Soit $b' in B_(n)$ tel que $psi_(n)(b') = c$ et $a' in A_(n-1)$ tel que $dif_n b' = phi_(n-1)(a')$.
+  Alors on a $psi_(n)(b - b') = c - c = 0$, donc $b-b' in ker(psi_(n))$ et par exactitude il existe $hat(a) in A_(n)$ tel que $phi_(n)(hat(a)) = b - b'$. Alors
+  $phi_(n-1)(dif_n hat(a)) = dif_n b - dif_n b' = phi_(n-1)(a - a')$,
   puisque $phi_(n-1)$ est injective par exactitude, on a $dif_n hat(a) = a - a'$, donc $a - a' in B_(n-1)(A_cdot)$ et $overline(a) = overline(a') in H_(n-1)(A_cdot)$.
 
   Vérifions que la suite longue est exacte.
@@ -550,62 +619,21 @@
     Alors $c in Z_(n)(C_cdot)$, puisque $psi_n$ est surjective par exactitude, il existe $b in B_n$ tel que $psi_(n)(b) = c$, d'où $H_(n)(psi)(overline(b)) = overline(c)$.
     Donc $overline(c) in im(H_(n)(psi))$.
   Donc la suite longue est bien exacte.
+
+  Vérifions que $partial_n$ est naturelle.
+  Soit $overline(c) in H_(n)(C_cdot)$. \
+  Par construction il existe $b in B_n$ tel que $psi_(n)(b) = c$ et il existe $a in Z_(n-1)(A_cdot)$ tel que $phi_(n-1)(a) = dif_n b$ et $partial_n overline(c) = overline(a) in H_(n-1)(A_cdot)$.
+  Donc on a $H_(n-1)(f)(partial_n overline(c)) = overline(f_(n-1)(a)) in H_(n-1)(A'_cdot)$. \
+  De plus $h_(n)(c) = h_(n)(psi_(n)(b)) = psi'_(n)(g_(n)(b))$ et $phi'_(n-1)(f_(n-1)(a)) = g_(n-1)(phi_(n-1)(a)) = g_(n-1)(dif_n b) = dif_n g_(n)(b)$, alors par construction on a $partial_n H_(n)(h)(overline(c)) = overline(f_(n-1)(a)) in H_(n-1)(A'_cdot)$.
+  Donc $H_(n-1)(f)(partial_n) = partial_n H_(n)(h)$.
 ])
 
 #definition([
-  Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ et $func(psi_cdot, C_cdot, D_cdot)$ deux morphismes de complexes.
-  On dit que $phi_cdot$ et $psi_cdot$ sont _homotopes_ s'il existe une suite de morphismes de groupes $sequence(func(h_n, C_(n), D_(n+1)))$ telle que pour tout $n in ZZ$, on a $phi_n - psi_n = h_(n-1) dif_n + dif_n h_n$.
+  Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes.
+  On dit que $D_cdot$ est un _sous-complexe de chaînes de $C_cdot$_ si pour tout $n in ZZ$, on a $D_n subset C_n$.
 ])
 
-#proposition([
-  Alors l'homotopie est une relation d'équivalence sur les morphismes de complexes.
-])
-
-#proof([
-  Notons $~$ la relation d'homotopie. Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes.
-  - _Réflexivité_ : Soit $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de complexes.
-    Alors pour tout $n in ZZ$, on peut écrire $phi_n - phi_n = 0 = 0 dif_n + dif_n 0$.
-    Donc on a bien $phi_cdot ~ phi_cdot$.
-  - _Symétrie_ : Soit $func(phi_cdot, C_cdot, D_cdot)$ et $func(psi_cdot, C_cdot, D_cdot)$ deux morphismes de complexes tels que $phi_cdot ~ psi_cdot$.
-    Alors pour tout $n in ZZ$, on a $psi_n - phi_n = -(phi_n - psi_n)$.
-    On en déduit bien $psi_cdot ~ phi_cdot$.
-  - _Transitivité_ : Soit $func(phi_cdot, C_cdot, D_cdot)$, $func(psi_cdot, C_cdot, D_cdot)$ et $func(xi_cdot, C_cdot, D_cdot)$ trois morphismes de complexes tels que $phi_cdot ~ psi_cdot$ et $psi_cdot ~ xi_cdot$.
-    Alors pour tout $n in ZZ$, on a $phi_n - xi_n = phi_n - psi_n + psi_n - xi_n$.
-    On en déduit bien que $phi_cdot ~ xi_cdot$.
-  Donc l'homotopie est bien une relation d'équivalence sur les morphismes de complexes.
-])
-
-#proposition([
-  Soit $A_cdot$, $B_cdot$ et $C_cdot$ trois complexes de chaînes, $func(phi_cdot, A_cdot, B_cdot)$ et $func(psi_cdot, A_cdot, B_cdot)$, ainsi que $func(alpha_cdot, B_cdot, C_cdot)$ et $func(beta_cdot, B_cdot, C_cdot)$ deux paires de morphismes de complexes homotopes.
-  Alors les compositions $func(alpha_cdot compose phi_cdot, A_cdot, C_cdot)$ et $func(beta_cdot compose psi_cdot, A_cdot, C_cdot)$ sont homotopes.
-])
-
-#proof([
-  Par définition des morphismes de complexes homotopes il existe deux suites de morphismes de groupes $sequence(func(f_n, A_n, B_(n+1)))$ et $sequence(func(g_n, B_n, C_(n+1)))$ telles que pour tout $n in ZZ$, on a $phi_n - psi_n = f_(n-1) dif_n + dif_n f_n$ et $alpha_n - beta_n = g_(n-1) dif_n + dif_n g_n$.
-  Soit $n in ZZ$. Alors on a:
-  $
-    alpha_n compose phi_n - beta_n compose psi_n
-    &= alpha_n compose phi_n - alpha_n compose psi_n + alpha_n compose psi_n - beta_n compose psi_n \
-    &= alpha_n compose (phi_n - psi_n) + (alpha_n - beta_n) compose psi_n \
-    &= alpha_n compose (f_(n-1) dif_n + dif_n f_n) + (g_(n-1) dif_n + dif_n f_n) compose psi_n \
-    &= (a_n compose f_(n-1)) dif_n + dif_n (a_(n+1) compose f_n) + (g_(n-1) compose psi_(n-1)) dif_n + dif_n (f_n compose psi_n) \
-    &= (a_n compose f_(n-1) + g_(n-1) compose psi_(n-1)) dif_n + dif_n (a_(n+1) compose f_n + f_n compose psi_n)
-  $
-  En posant $h_n := a_(n+1) compose f_n + g_n compose psi_n$, on obtient l'égalité voulue $alpha_n compose phi_n - beta_n compose psi_n = h_(n-1) dif_n + dif_n h_n$.
-  Donc $alpha_cdot compose phi_cdot$ et $beta_cdot compose psi_cdot$ sont bien homotopes.
-])
-
-#lemma([
-  Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ et $func(psi_cdot, C_cdot, D_cdot)$ deux morphismes de complexes homotopes.
-  Alors pour tout $n in ZZ$, on a $H_(n)(phi) = H_(n)(psi)$.
-])
-
-#proof([
-  Par définition des morphismes de complexes homotopes il existe une suite de morphismes de groupes $sequence(func(h_n, C_n, D_(n+1)))$ telle que pour tout $n in ZZ$, on a $phi_n - psi_n = h_(n-1) dif_n + dif_n h_n$. \
-  Soit $n in ZZ$ et $overline(c) in H_(n)(C_cdot)$.
-  Alors on a $phi_(n)(c) - psi_(n)(c) = h_(n-1)(dif_n c) + dif_n h_(n)(c) = dif_n h_(n)(c) in B_(n)(D_cdot)$, on en déduit $H_(n)(phi)(c) - H_(n)(psi)(c) = 0 in H_(n)(D_cdot)$.
-  Donc $H_(n)(phi) = H_(n)(psi)$.
-])
+TODO : Complexe quotient.
 
 #pagebreak()
 
