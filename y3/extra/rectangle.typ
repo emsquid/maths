@@ -189,16 +189,16 @@
   - On dit que $C_cdot$ est _acyclique_ si pour tout $n in ZZ without {0}$, il est exact en $C_(n)$.
 ])
 
-== Morphismes de chaînes
+== Morphismes de complexes
 
 #definition([
   Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes.
-  On appelle _morphisme de chaînes_, noté $func(phi_cdot, C_cdot, D_cdot)$, une suite de morphismes de groupes $sequence(func(phi_n, C_(n), D_(n)))$ telle que pour tout $n in ZZ$, on a $dif_n phi_n = phi_(n-1) dif_n$.
+  On appelle _morphisme de complexes_, noté $func(phi_cdot, C_cdot, D_cdot)$, une suite de morphismes de groupes $sequence(func(phi_n, C_(n), D_(n)))$ telle que pour tout $n in ZZ$, on a $dif_n phi_n = phi_(n-1) dif_n$.
 ])
 
 #proposition([
-  Soit $C_cdot$, $D_cdot$ et $E_cdot$ trois complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ et $func(psi_cdot, D_cdot, E_cdot)$ deux morphismes de chaînes.
-  Alors la composition $func(psi_cdot compose phi_cdot, C_cdot, E_cdot)$ est un morphisme de chaînes.
+  Soit $C_cdot$, $D_cdot$ et $E_cdot$ trois complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ et $func(psi_cdot, D_cdot, E_cdot)$ deux morphismes de complexes.
+  Alors la composition $func(psi_cdot compose phi_cdot, C_cdot, E_cdot)$ est un morphisme de complexes.
 ]) <prop-comp-composition>
 
 #proof([
@@ -206,12 +206,12 @@
   $
     dif_n (psi_n compose phi_n) = psi_(n-1) dif_n phi_n = (psi_(n-1) compose phi_(n-1)) dif_n.
   $
-  Donc $sequence(psi_n compose phi_n)$ est bien un morphisme de chaînes.
+  Donc $sequence(psi_n compose phi_n)$ est bien un morphisme de complexes.
 ])
 
 #proposition([
   Soit $C_cdot$ un complexe de chaînes.
-  Alors le morphisme identité $func(id_C_cdot, C_cdot, C_cdot)$ est un morphisme de chaînes.
+  Alors le morphisme identité $func(id_C_cdot, C_cdot, C_cdot)$ est un morphisme de complexes.
 ]) <prop-comp-identite>
 
 #proof([
@@ -219,11 +219,11 @@
   $
     dif_n id_n = dif_n = id_(n-1) dif_n.
   $
-  Donc $sequence(id_C_n)$ est bien un morphisme de chaînes.
+  Donc $sequence(id_C_n)$ est bien un morphisme de complexes.
 ])
 
 #proposition([
-  Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de chaînes.
+  Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de complexes.
   Alors pour tout $n in ZZ$, $phi_n$ induit un morphisme de groupes de $H_(n)(C_cdot)$ dans $H_(n)(D_cdot)$.
 ])
 
@@ -240,7 +240,7 @@
 ])
 
 #definition([
-  Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de chaînes.
+  Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de complexes.
   Pour tout $n in ZZ$, on note $func(H_(n)(phi), H_(n)(C_cdot), H_(n)(D_cdot))$ le morphisme de groupes induit par $phi_n$.
 ])
 
@@ -249,7 +249,7 @@
 #definition([
   On appelle $sans("Comp")$ la catégorie des complexes de chaînes :
   - Les objets de $sans("Comp")$ sont les complexes de chaînes.
-  - Les morphismes de $sans("Comp")$ sont les morphismes de chaînes.
+  - Les morphismes de $sans("Comp")$ sont les morphismes de complexes.
   - La composition de $sans("Comp")$ découle de la @prop-comp-composition.
   - Le morphisme identité de $sans("Comp")$ découle de @prop-comp-identite.
 ])
@@ -262,7 +262,7 @@
   Soit $n in ZZ$.
   - Soit $C_cdot in ob(sans("Comp"))$ un complexe de chaînes.
     Alors le $n$#super("e") groupe d'homologie $H_(n)(C_cdot)$ est bien un groupe abélien.
-  - Soit $C_cdot, D_cdot in ob(sans("Comp"))$ deux complexes de chaînes et $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de chaînes.
+  - Soit $C_cdot, D_cdot in ob(sans("Comp"))$ deux complexes de chaînes et $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de complexes.
     Alors le morphisme induit $func(H_(n)(phi), H_(n)(C_cdot), H_(n)(D_cdot))$ est bien un morphisme de groupes.
   La propriété de composition découle de la @prop-comp-composition et la propriété d'identité découle de la @prop-comp-identite, donc $H_n$ est bien un foncteur de $sans("Comp")$ vers $sans("Ab")$.
 ])
@@ -274,7 +274,7 @@
 #proof([
   - Soit $C_cdot in ob(sans("Comp"))$ un complexe de chaînes.
     Alors l'homologie $H_(cdot)(C_cdot) := plus.circle.big_(n in ZZ) H_(n)(C_cdot)$ définit bien un groupe abélien gradué.
-  - Soit $C_cdot, D_cdot in ob(sans("Comp"))$ deux complexes de chaînes et $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de chaînes.
+  - Soit $C_cdot, D_cdot in ob(sans("Comp"))$ deux complexes de chaînes et $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de complexes.
     Alors la somme directe des morphismes induits $H_(cdot)(phi) := plus.circle.big_(n in ZZ) H_(n)(phi)$ définit bien un morphisme de groupes abéliens gradués.
   Les propriétés de composition et d'identité découlent du @thm-foncteur-comp-ab, donc $H_cdot$ est bien un foncteur de $sans("Comp")$ vers $sans("GrAb")$.
 ])
@@ -282,30 +282,21 @@
 == Propriétés
 
 #definition([
-  On appelle _suite exacte_ une suite de groupes $sequence(G_i, ind:i, dom:I)$ munie de morphismes de groupes $sequence(func(phi_i, G_i, G_(i-1)), ind:i, dom:I)$ tels que pour tout $i in I$, on a $im(phi_(i+1)) = ker(phi_i)$.
-])
-
-#definition([
-  On appelle _suite exacte courte_ une suite exacte de la forme :
+  On dit qu'une suite courte de complexes de chaînes est _exacte_, notée :
   #align(center)[#commutative-diagram(
       node-padding: (40pt, 50pt),
       padding: 0pt,
       node((0, 0), $0$),
-      node((0, 1), $A$),
-      node((0, 2), $B$),
-      node((0, 3), $C$),
+      node((0, 1), $A_cdot$),
+      node((0, 2), $B_cdot$),
+      node((0, 3), $C_cdot$),
       node((0, 4), $0$),
       arr((0, 0), (0, 1), ""),
-      arr((0, 1), (0, 2), $phi$),
-      arr((0, 2), (0, 3), $psi$),
+      arr((0, 1), (0, 2), $phi_cdot$),
+      arr((0, 2), (0, 3), $psi_cdot$),
       arr((0, 3), (0, 4), ""),
     )]
-  où $0$ représente le groupe trivial.
-])
-
-#lemma([
-  Soit $A_cdot, B_cdot, C_cdot$ trois complexes de chaînes, $func(phi_cdot, A_cdot, B_cdot)$ et $func(psi_cdot, B_cdot, C_cdot)$ deux morphismes de chaînes.
-  Si pour tout $n in ZZ$, la suite courte suivante est exacte :
+  si pour tout $n in ZZ$, la suite courte suivante est exacte :
   #align(center)[#commutative-diagram(
       node-padding: (40pt, 50pt),
       padding: 0pt,
@@ -319,11 +310,30 @@
       arr((0, 2), (0, 3), $psi_n$),
       arr((0, 3), (0, 4), ""),
     )]
-  alors pour tout $n in ZZ$, il existe une transformation naturelle $func(partial_n, H_(n)(C_cdot), H_(n-1)(A_cdot))$ telle que la suite longue des groupes d'homologie est exacte :
+  c'est-à-dire que $phi_n$ est injectif, $im(phi_n) = ker(psi_n)$ et $psi_n$ est surjectif.
+
+])
+
+#lemma([
+  Soit une suite exacte courte de complexes de chaînes :
+  #align(center)[#commutative-diagram(
+      node-padding: (40pt, 50pt),
+      padding: 0pt,
+      node((0, 0), $0$),
+      node((0, 1), $A_cdot$),
+      node((0, 2), $B_cdot$),
+      node((0, 3), $C_cdot$),
+      node((0, 4), $0$),
+      arr((0, 0), (0, 1), ""),
+      arr((0, 1), (0, 2), $phi_cdot$),
+      arr((0, 2), (0, 3), $psi_cdot$),
+      arr((0, 3), (0, 4), ""),
+    )]
+  Alors pour tout $n in ZZ$, il existe un morphisme de groupes $func(partial_n, H_(n)(C_cdot), H_(n-1)(A_cdot))$ telle que la suite longue des groupes d'homologie est exacte :
   #align(center)[#commutative-diagram(
       node-padding: (40pt, 45pt),
       padding: 10pt,
-      node((0, 0), $...$),
+      node((0, 0), $dots.c$),
       node((0, 1), $H_(n)(A_cdot)$),
       node((0, 2), $H_(n)(B_cdot)$),
       node((0, 3), $H_(n)(C_cdot)$),
@@ -334,54 +344,170 @@
       node((1, 1), $H_(n-1)(A_cdot)$),
       node((1, 2), $H_(n-1)(B_cdot)$),
       node((1, 3), $H_(n-1)(C_cdot)$),
-      node((1, 4), $...$),
+      node((1, 4), $dots.c$),
       arr((1, 1), (1, 2), $H_(n-1)(phi)$, label-pos: right),
       arr((1, 2), (1, 3), $H_(n-1)(psi)$, label-pos: right),
       arr((1, 3), (1, 4), $partial_(n-1)$, label-pos: right),
     )]
+  De plus soit une autre suite exacte courte de complexes de chaînes :
+  #align(center)[#commutative-diagram(
+      node-padding: (40pt, 50pt),
+      padding: 0pt,
+      node((0, 0), $0$),
+      node((0, 1), $A'_cdot$),
+      node((0, 2), $B'_cdot$),
+      node((0, 3), $C'_cdot$),
+      node((0, 4), $0$),
+      arr((0, 0), (0, 1), ""),
+      arr((0, 1), (0, 2), $phi'_cdot$),
+      arr((0, 2), (0, 3), $psi'_cdot$),
+      arr((0, 3), (0, 4), ""),
+    )]
+  ainsi que $func(f_cdot, A_cdot, A'_cdot)$, $func(g_cdot, B_cdot, B'_cdot)$ et $func(h_cdot, C_cdot, C'_cdot)$ trois morphismes de complexes.
+  Alors la transformation $partial_n$ est naturelle dans le sens où le diagramme suivant est commutatif :
+  #align(center)[#commutative-diagram(
+      node-padding: (40pt, 50pt),
+      padding: 5pt,
+      node((0, 0), $H_(n)(C_cdot)$),
+      node((0, 1), $H_(n-1)(A_cdot)$),
+      node((1, 0), $H_(n)(C'_cdot)$),
+      node((1, 1), $H_(n-1)(A'_cdot)$),
+      arr((0, 0), (0, 1), $partial_n$),
+      arr((1, 0), (1, 1), $partial_n$, label-pos: right),
+      arr((0, 0), (1, 0), $H_(n)(h)$, label-pos: right),
+      arr((0, 1), (1, 1), $H_(n-1)(f)$),
+    )]
+
 ])
 
 #proof([
-  Soit $n in ZZ$. On commence par faire un diagramme :
+  Soit $n in ZZ$. On commence par faire un diagramme en 3 dimensions pour la suite :
   #align(center)[#commutative-diagram(
-      node-padding: (40pt, 30pt),
-      padding: 10pt,
-      node((-1, 0), $0$),
-      node((-1, 1), $A_(n+1)$),
-      node((-1, 2), $B_(n+1)$),
-      node((-1, 3), $C_(n+1)$),
-      node((-1, 4), $0$),
-      arr((-1, 0), (-1, 1), ""),
-      arr((-1, 1), (-1, 2), $phi_(n+1)$),
-      arr((-1, 2), (-1, 3), $psi_(n+1)$),
-      arr((-1, 3), (-1, 4), ""),
+      node-padding: (20pt, 20pt),
+      padding: 0pt,
+
+      node((-1, 2), $dots.v$),
+      node((-1, 4), $dots.v$),
+      node((-1, 6), $dots.v$),
+      node((-2, 3), $dots.v$),
+      node((-2, 5), $dots.v$),
+      node((-2, 7), $dots.v$),
+      node((7, 2), $dots.v$),
+      node((7, 4), $dots.v$),
+      node((7, 6), $dots.v$),
+      node((6, 3), $dots.v$),
+      node((6, 5), $dots.v$),
+      node((6, 7), $dots.v$),
+
       node((1, 0), $0$),
-      node((0, 0), $0$),
-      node((0, 1), $A_n$),
-      node((0, 2), $B_n$),
-      node((0, 3), $C_n$),
-      node((0, 4), $0$),
-      arr((0, 0), (0, 1), ""),
-      arr((0, 1), (0, 2), $phi_n$),
-      arr((0, 2), (0, 3), $psi_n$),
-      arr((0, 3), (0, 4), ""),
-      arr((-1, 1), (0, 1), $dif_(n+1)$),
-      arr((-1, 2), (0, 2), $dif_(n+1)$),
-      arr((-1, 3), (0, 3), $dif_(n+1)$),
-      node((1, 0), $0$),
-      node((1, 1), $A_(n-1)$),
-      node((1, 2), $B_(n-1)$),
-      node((1, 3), $C_(n-1)$),
-      node((1, 4), $0$),
-      arr((1, 0), (1, 1), ""),
-      arr((1, 1), (1, 2), $phi_(n-1)$),
-      arr((1, 2), (1, 3), $psi_(n-1)$),
-      arr((1, 3), (1, 4), ""),
-      arr((0, 1), (1, 1), $dif_n$),
-      arr((0, 2), (1, 2), $dif_n$),
-      arr((0, 3), (1, 3), $dif_n$),
+      node((1, 2), $A_(n+1)$),
+      node((1, 4), $B_(n+1)$),
+      node((1, 6), $C_(n+1)$),
+      node((1, 8), $0$),
+
+      node((3, 0), $0$),
+      node((3, 2), $A_n$),
+      node((3, 4), $B_n$),
+      node((3, 6), $C_n$),
+      node((3, 8), $0$),
+
+      node((5, 0), $0$),
+      node((5, 2), $A_(n-1)$),
+      node((5, 4), $B_(n-1)$),
+      node((5, 6), $C_(n-1)$),
+      node((5, 8), $0$),
+
+      arr((1, 0), (1, 2), ""),
+      arr((1, 2), (1, 4), ""),
+      arr((1, 4), (1, 6), ""),
+      arr((1, 6), (1, 8), ""),
+
+      arr((3, 0), (3, 2), ""),
+      arr((3, 2), (3, 4), ""),
+      arr((3, 4), (3, 6), ""),
+      arr((3, 6), (3, 8), ""),
+
+      arr((5, 0), (5, 2), ""),
+      arr((5, 2), (5, 4), ""),
+      arr((5, 4), (5, 6), ""),
+      arr((5, 6), (5, 8), ""),
+
+      arr((-1, 2), (1, 2), ""),
+      arr((1, 2), (3, 2), ""),
+      arr((3, 2), (5, 2), ""),
+      arr((5, 2), (7, 2), ""),
+
+      arr((-1, 4), (1, 4), ""),
+      arr((1, 4), (3, 4), ""),
+      arr((3, 4), (5, 4), ""),
+      arr((5, 4), (7, 4), ""),
+
+      arr((-1, 6), (1, 6), ""),
+      arr((1, 6), (3, 6), ""),
+      arr((3, 6), (5, 6), ""),
+      arr((5, 6), (7, 6), ""),
+
+      node((0, 1), $0$),
+      node((0, 3), $A'_(n+1)$),
+      node((0, 5), $B'_(n+1)$),
+      node((0, 7), $C'_(n+1)$),
+      node((0, 9), $0$),
+
+      node((2, 1), $0$),
+      node((2, 3), $A'_n$),
+      node((2, 5), $B'_n$),
+      node((2, 7), $C'_n$),
+      node((2, 9), $0$),
+
+      node((4, 1), $0$),
+      node((4, 3), $A'_(n-1)$),
+      node((4, 5), $B'_(n-1)$),
+      node((4, 7), $C'_(n-1)$),
+      node((4, 9), $0$),
+
+      arr((0, 1), (0, 3), ""),
+      arr((0, 3), (0, 5), ""),
+      arr((0, 5), (0, 7), ""),
+      arr((0, 7), (0, 9), ""),
+
+      arr((2, 1), (2, 3), ""),
+      arr((2, 3), (2, 5), ""),
+      arr((2, 5), (2, 7), ""),
+      arr((2, 7), (2, 9), ""),
+
+      arr((4, 1), (4, 3), ""),
+      arr((4, 3), (4, 5), ""),
+      arr((4, 5), (4, 7), ""),
+      arr((4, 7), (4, 9), ""),
+
+      arr((-2, 3), (0, 3), ""),
+      arr((0, 3), (2, 3), ""),
+      arr((2, 3), (4, 3), ""),
+      arr((4, 3), (6, 3), ""),
+
+      arr((-2, 5), (0, 5), ""),
+      arr((0, 5), (2, 5), ""),
+      arr((2, 5), (4, 5), ""),
+      arr((4, 5), (6, 5), ""),
+
+      arr((-2, 7), (0, 7), ""),
+      arr((0, 7), (2, 7), ""),
+      arr((2, 7), (4, 7), ""),
+      arr((4, 7), (6, 7), ""),
+
+      arr((1, 2), (0, 3), ""),
+      arr((1, 4), (0, 5), ""),
+      arr((1, 6), (0, 7), ""),
+
+      arr((3, 2), (2, 3), ""),
+      arr((3, 4), (2, 5), ""),
+      arr((3, 6), (2, 7), ""),
+
+      arr((5, 2), (4, 3), ""),
+      arr((5, 4), (4, 5), ""),
+      arr((5, 6), (4, 7), ""),
     )]
-  Soit $c in Z_(n)(C_cdot)$.
+  Soit $overline(c) in H_(n)(C_cdot)$.
   Puisque $psi_n$ est surjective par exactitude, il existe $b in B_n$ tel que $psi_(n)(b) = c$.
   De plus on a $psi_(n-1)(dif_(n) b) = dif_n psi_(n)(b) = dif_n c = 0$, donc $dif_(n) b in ker(psi_(n-1))$ et par exactitude il existe $a in A_(n-1)$ tel que $phi_(n-1)(a) = dif_n b$.
   De plus on a $phi_(n-2)(dif_(n-1) a) = dif_(n-1) phi_(n-1)(a) = dif_(n-1) dif_n b = 0$, puisque $phi_(n-2)$ est injective par exactitude, on a $dif_(n-1) a = 0$, donc $a in Z_(n-1)(A_cdot)$. \
@@ -391,8 +517,6 @@
   Soit $b' in B_(n)$ tel que $psi_(n)(b') = c$ et $a' in A_(n-1)$ tel que $dif_n b' = phi_(n-1)(a')$. De plus on a $psi_(n)(b - b') = c - c = 0$, donc $b-b' in ker(psi_(n))$ et par exactitude il existe $hat(a) in A_(n)$ tel que $phi_(n)(hat(a)) = b - b'$. Alors
   $phi_(n-1)(dif_n hat(a)) = dif_n phi_(n)(hat(a)) = dif_n b - dif_n b' = phi_(n-1)(a - a')$,
   puisque $phi_(n-1)$ est injective par exactitude, on a $dif_n hat(a) = a - a'$, donc $a - a' in B_(n-1)(A_cdot)$ et $overline(a) = overline(a') in H_(n-1)(A_cdot)$.
-
-  Vérifions que $partial_n$ est une transformation naturelle ?
 
   Vérifions que la suite longue est exacte.
   - Soit $overline(a) in im(partial_(n+1))$.
@@ -429,35 +553,35 @@
 ])
 
 #definition([
-  Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ et $func(psi_cdot, C_cdot, D_cdot)$ deux morphismes de chaînes.
+  Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ et $func(psi_cdot, C_cdot, D_cdot)$ deux morphismes de complexes.
   On dit que $phi_cdot$ et $psi_cdot$ sont _homotopes_ s'il existe une suite de morphismes de groupes $sequence(func(h_n, C_(n), D_(n+1)))$ telle que pour tout $n in ZZ$, on a $phi_n - psi_n = h_(n-1) dif_n + dif_n h_n$.
 ])
 
 #proposition([
-  Alors l'homotopie est une relation d'équivalence sur les morphismes de chaînes.
+  Alors l'homotopie est une relation d'équivalence sur les morphismes de complexes.
 ])
 
 #proof([
   Notons $~$ la relation d'homotopie. Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes.
-  - _Réflexivité_ : Soit $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de chaînes.
+  - _Réflexivité_ : Soit $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de complexes.
     Alors pour tout $n in ZZ$, on peut écrire $phi_n - phi_n = 0 = 0 dif_n + dif_n 0$.
     Donc on a bien $phi_cdot ~ phi_cdot$.
-  - _Symétrie_ : Soit $func(phi_cdot, C_cdot, D_cdot)$ et $func(psi_cdot, C_cdot, D_cdot)$ deux morphismes de chaînes tels que $phi_cdot ~ psi_cdot$.
+  - _Symétrie_ : Soit $func(phi_cdot, C_cdot, D_cdot)$ et $func(psi_cdot, C_cdot, D_cdot)$ deux morphismes de complexes tels que $phi_cdot ~ psi_cdot$.
     Alors pour tout $n in ZZ$, on a $psi_n - phi_n = -(phi_n - psi_n)$.
     On en déduit bien $psi_cdot ~ phi_cdot$.
-  - _Transitivité_ : Soit $func(phi_cdot, C_cdot, D_cdot)$, $func(psi_cdot, C_cdot, D_cdot)$ et $func(xi_cdot, C_cdot, D_cdot)$ trois morphismes de chaînes tels que $phi_cdot ~ psi_cdot$ et $psi_cdot ~ xi_cdot$.
+  - _Transitivité_ : Soit $func(phi_cdot, C_cdot, D_cdot)$, $func(psi_cdot, C_cdot, D_cdot)$ et $func(xi_cdot, C_cdot, D_cdot)$ trois morphismes de complexes tels que $phi_cdot ~ psi_cdot$ et $psi_cdot ~ xi_cdot$.
     Alors pour tout $n in ZZ$, on a $phi_n - xi_n = phi_n - psi_n + psi_n - xi_n$.
     On en déduit bien que $phi_cdot ~ xi_cdot$.
-  Donc l'homotopie est bien une relation d'équivalence sur les morphismes de chaînes.
+  Donc l'homotopie est bien une relation d'équivalence sur les morphismes de complexes.
 ])
 
 #proposition([
-  Soit $A_cdot$, $B_cdot$ et $C_cdot$ trois complexes de chaînes, $func(phi_cdot, A_cdot, B_cdot)$ et $func(psi_cdot, A_cdot, B_cdot)$, ainsi que $func(alpha_cdot, B_cdot, C_cdot)$ et $func(beta_cdot, B_cdot, C_cdot)$ deux paires de morphismes de chaînes homotopes.
+  Soit $A_cdot$, $B_cdot$ et $C_cdot$ trois complexes de chaînes, $func(phi_cdot, A_cdot, B_cdot)$ et $func(psi_cdot, A_cdot, B_cdot)$, ainsi que $func(alpha_cdot, B_cdot, C_cdot)$ et $func(beta_cdot, B_cdot, C_cdot)$ deux paires de morphismes de complexes homotopes.
   Alors les compositions $func(alpha_cdot compose phi_cdot, A_cdot, C_cdot)$ et $func(beta_cdot compose psi_cdot, A_cdot, C_cdot)$ sont homotopes.
 ])
 
 #proof([
-  Par définition des morphismes de chaînes homotopes il existe deux suites de morphismes de groupes $sequence(func(f_n, A_n, B_(n+1)))$ et $sequence(func(g_n, B_n, C_(n+1)))$ telles que pour tout $n in ZZ$, on a $phi_n - psi_n = f_(n-1) dif_n + dif_n f_n$ et $alpha_n - beta_n = g_(n-1) dif_n + dif_n g_n$.
+  Par définition des morphismes de complexes homotopes il existe deux suites de morphismes de groupes $sequence(func(f_n, A_n, B_(n+1)))$ et $sequence(func(g_n, B_n, C_(n+1)))$ telles que pour tout $n in ZZ$, on a $phi_n - psi_n = f_(n-1) dif_n + dif_n f_n$ et $alpha_n - beta_n = g_(n-1) dif_n + dif_n g_n$.
   Soit $n in ZZ$. Alors on a:
   $
     alpha_n compose phi_n - beta_n compose psi_n
@@ -472,12 +596,12 @@
 ])
 
 #lemma([
-  Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ et $func(psi_cdot, C_cdot, D_cdot)$ deux morphismes de chaînes homotopes.
+  Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ et $func(psi_cdot, C_cdot, D_cdot)$ deux morphismes de complexes homotopes.
   Alors pour tout $n in ZZ$, on a $H_(n)(phi) = H_(n)(psi)$.
 ])
 
 #proof([
-  Par définition des morphismes de chaînes homotopes il existe une suite de morphismes de groupes $sequence(func(h_n, C_n, D_(n+1)))$ telle que pour tout $n in ZZ$, on a $phi_n - psi_n = h_(n-1) dif_n + dif_n h_n$. \
+  Par définition des morphismes de complexes homotopes il existe une suite de morphismes de groupes $sequence(func(h_n, C_n, D_(n+1)))$ telle que pour tout $n in ZZ$, on a $phi_n - psi_n = h_(n-1) dif_n + dif_n h_n$. \
   Soit $n in ZZ$ et $overline(c) in H_(n)(C_cdot)$.
   Alors on a $phi_(n)(c) - psi_(n)(c) = h_(n-1)(dif_n c) + dif_n h_(n)(c) = dif_n h_(n)(c) in B_(n)(D_cdot)$, on en déduit $H_(n)(phi)(c) - H_(n)(psi)(c) = 0 in H_(n)(D_cdot)$.
   Donc $H_(n)(phi) = H_(n)(psi)$.
@@ -742,7 +866,7 @@
   - Soit $X$ un espace topologique.
     Alors la suite $sequence(C_(n)(X))$ munie des morphismes de bords $sequence(func(dif_n, C_(n)(X), C_(n-1)(X)))$ est bien un complexe de chaînes d'après la @prop-bord-composition.
   - Soit $X$ et $Y$ deux espaces topologiques, $func(f, X, Y)$ une application continue.
-    Alors la suite des applications induites $sequence(func(C_(n)(f), C_(n)(X), C_(n)(Y)))$ est bien un morphisme de chaînes d'après la @prop-continue-commute.
+    Alors la suite des applications induites $sequence(func(C_(n)(f), C_(n)(X), C_(n)(Y)))$ est bien un morphisme de complexes d'après la @prop-continue-commute.
   La propriété de composition découle de la @prop-top-composition et la propriété d'identité découle directement de la définition, donc $C_n$ est bien un foncteur de $sans("Top")$ vers $sans("Ab")$.
 ])
 
@@ -840,7 +964,7 @@ TODO
 
 // #proposition([
 //   Soit $C_(cdot)(X, A)$ et $C_(cdot)(Y, B)$ deux complexes de chaînes singulières, et $func(f, (X, A), (Y, B))$ un morphisme de paires.
-//   Alors l'application induite $func(f_*, C_(n)(X), C_(n)(Y))$ détermine un morphisme de chaînes.
+//   Alors l'application induite $func(f_*, C_(n)(X), C_(n)(Y))$ détermine un morphisme de complexes.
 // ])
 
 // #proof([
@@ -848,12 +972,12 @@ TODO
 //   on pose $func(phi_n := overline(f_*), C_(n)(X), C_(n)(Y, B))$, alors puisque $f(A) subset B$, on en déduit $f_* (C_(n)(A)) subset ker(phi_n)$ et d'après la propriété universelle du groupe quotient $phi_n$ induit un morphisme $overline(phi_n)$ de $C_(n)(X, A)$ dans $C_(n)(Y, B)$.
 
 //   Soit $n in ZZ$. Alors d'après la @prop-continue-commute puisque $dif_n f_* = f_* dif_n$, on a $overline(dif_n phi_n) = overline(phi_(n-1) dif_n)$.
-//   Donc $phi_n$ est bien un morphisme de chaînes.
+//   Donc $phi_n$ est bien un morphisme de complexes.
 // ])
 
 // #definition([
 //   Soit $C_(cdot)(X, A)$ et $C_(cdot)(Y, B)$ deux complexes de chaînes singulières, et $func(f, (X, A), (Y, B))$ un morphisme de paires.
-//   Pour tout $n in ZZ$, on note $func(H_(n)(f), H_(n)(X, A), H_(n)(Y, B))$ le morphisme induit par le morphisme de chaînes déterminé par $f_*$.
+//   Pour tout $n in ZZ$, on note $func(H_(n)(f), H_(n)(X, A), H_(n)(Y, B))$ le morphisme induit par le morphisme de complexes déterminé par $f_*$.
 // ])
 
 // #theorem([
