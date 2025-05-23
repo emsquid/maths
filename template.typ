@@ -128,6 +128,7 @@
 
   // Link colors
   show link: it => text(rgb(color), it)
+  show ref: it => text(rgb(color), it)
 
   // List/enum references
   show ref: it => {

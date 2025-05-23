@@ -3,3 +3,9 @@ algtop:
   title: Algebraic Topology - an introduction
   author: Eduard Looijenga
   date: 2010
+
+hatcher:
+  type: Book
+  title: Algebraic Topology
+  author: Allen Hatcher
+  date: 2001

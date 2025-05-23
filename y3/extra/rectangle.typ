@@ -129,7 +129,7 @@
     $ func(F(u) := transpose(u), F^*, E^*). $
 ])
 
-== Transformations naturelles
+== Transformations naturelles <sec-transformation-naturelle>
 
 #definition([
   Soit $cal(C)$ et $cal(D)$ deux catégories, $func(F, cal(C), cal(D))$ et $func(G, cal(C), cal(D))$ deux foncteurs covariants.
@@ -138,7 +138,7 @@
   $ partial_Y compose F(f) = G(f) compose partial_X $
   c'est-à-dire que le diagramme suivant est commutatif :
   #align(center)[#commutative-diagram(
-      node-padding: (80pt, 60pt),
+      node-padding: (50pt, 40pt),
       padding: 10pt,
       node((0, 0), $F(X)$),
       node((0, 1), $F(Y)$),
@@ -281,6 +281,8 @@
 
 == Premières propriétés
 
+=== Homotopie
+
 #definition([
   Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ et $func(psi_cdot, C_cdot, D_cdot)$ deux morphismes de complexes.
   On dit que $phi_cdot$ et $psi_cdot$ sont _homotopes_ s'il existe une suite de morphismes de groupes $sequence(func(h_n, C_(n), D_(n+1)))$ telle que pour tout $n in ZZ$, on a $phi_n - psi_n = h_(n-1) dif_n + dif_n h_n$.
@@ -327,7 +329,7 @@
 #lemma([
   Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ et $func(psi_cdot, C_cdot, D_cdot)$ deux morphismes de complexes homotopes.
   Alors pour tout $n in ZZ$, on a $H_(n)(phi) = H_(n)(psi)$.
-])
+]) <lem-homotopie>
 
 #proof([
   Par définition il existe une suite de morphismes de groupes $sequence(func(h_n, C_n, D_(n+1)))$ telle que pour tout $n in ZZ$, on a $phi_n - psi_n = h_(n-1) dif_n + dif_n h_n$. \
@@ -336,11 +338,56 @@
   Donc $H_(n)(phi) = H_(n)(psi)$.
 ])
 
+=== Complexe de chaînes quotient
+
+#definition([
+  Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes.
+  On dit que $D_cdot$ est un _sous-complexe de chaînes de $C_cdot$_ si pour tout $n in ZZ$, on a $D_n subset C_n$.
+])
+
+#proposition([
+  Soit $C_cdot$ un complexe de chaînes et $D_cdot$ un sous-complexe de chaînes de $C_cdot$.
+  Alors pour tout $n in ZZ$, $dif_n$ induit un morphisme $func(overline(dif)_n, lquotient(C_(n), D_(n)), lquotient(C_(n-1), D_(n-1)))$ tel que $overline(dif)_n overline(dif)_(n+1) = 0$.
+]) <prop-bord-quotient>
+
+#proof([
+  Soit $n in ZZ$.
+  Alors on a $D_n subset C_n$, on peut donc former le quotient $lquotient(C_n, D_n)$. \
+  On pose $func(delta_n := overline(dif_n), C_n, lquotient(C_(n-1), D_(n-1)))$, alors $D_(n) subset ker(delta_n)$ et d'après la propriété universelle du groupe quotient $delta_n$ induit bien un morphisme $func(overline(dif)_n, lquotient(C_n, D_n), lquotient(C_(n-1), D_(n-1)))$. \
+  Enfin puisque $dif_n dif_(n+1) = 0$, on a bien $overline(dif)_n overline(dif)_(n+1) = overline(dif_n dif_(n+1)) = 0$.
+])
+
+#proposition([
+  Soit $C_cdot$ un complexe de chaînes et $D_cdot$ un sous-complexe de chaînes de $C_cdot$.
+  Alors la suite $sequence(lquotient(C_n, D_n))$ munie des morphismes de bords induits $sequence(func(overline(dif)_n, lquotient(C_n, D_n), lquotient(C_(n-1), D_(n-1))))$ forme un complexe de chaînes.
+])
+
+#definition([
+  Soit $C_cdot$ un complexe de chaînes et $D_cdot$ un sous-complexe de chaînes de $C_cdot$.
+  On appelle _complexe de chaînes quotient_ le complexe de chaînes $lquotient(C_(cdot), D_(cdot))$.
+])
+
+#proposition([
+  Soit $lquotient(A_cdot, B_cdot)$ et $lquotient(C_cdot, D_cdot)$ deux complexes de chaînes et $func(phi_cdot, A_cdot, C_cdot)$ un morphisme de complexes.
+  Si $phi_(cdot)(B_cdot) subset D_cdot$, alors $phi_cdot$ induit un morphisme de complexes $func(overline(phi)_cdot, lquotient(A_cdot, B_cdot), lquotient(C_cdot, D_cdot))$.
+]) <prop-morphisme-quotient>
+
+#proof([
+  Pour tout $n in ZZ$,
+  on considère $func(overline(phi_n), A_n, lquotient(C_n, D_n))$, alors puisque $phi_(n)(B_n) subset D_n$, on en déduit $B_n subset ker(overline(phi_n))$ et d'après la propriété universelle du groupe quotient $overline(phi_n)$ induit un morphisme $func(overline(phi)_n, lquotient(A_n, B_n), lquotient(C_n, D_n))$.
+  On pose $overline(phi)_cdot := sequence(overline(phi)_n)$
+
+  Soit $n in ZZ$. Alors par définition $overline(dif)_n overline(phi)_n = overline(dif_n phi_n) = overline(phi_(n-1) dif_n) = overline(phi)_(n-1) overline(dif)_n$.
+  Donc $phi_cdot$ est bien un morphisme de complexes.
+])
+
+=== Exactitude
+
 #definition([
   On dit qu'une suite courte de complexes de chaînes est _exacte_, notée :
   #align(center)[#commutative-diagram(
       node-padding: (40pt, 50pt),
-      padding: 0pt,
+      padding: 5pt,
       node((0, 0), $0$),
       node((0, 1), $A_cdot$),
       node((0, 2), $B_cdot$),
@@ -354,7 +401,7 @@
   si pour tout $n in ZZ$, la suite courte suivante est exacte :
   #align(center)[#commutative-diagram(
       node-padding: (40pt, 50pt),
-      padding: 0pt,
+      padding: 5pt,
       node((0, 0), $0$),
       node((0, 1), $A_n$),
       node((0, 2), $B_n$),
@@ -373,7 +420,7 @@
   Soit une suite exacte courte de complexes de chaînes :
   #align(center)[#commutative-diagram(
       node-padding: (40pt, 50pt),
-      padding: 0pt,
+      padding: 5pt,
       node((0, 0), $0$),
       node((0, 1), $A_cdot$),
       node((0, 2), $B_cdot$),
@@ -392,22 +439,19 @@
       node((0, 1), $H_(n)(A_cdot)$),
       node((0, 2), $H_(n)(B_cdot)$),
       node((0, 3), $H_(n)(C_cdot)$),
+      node((0, 4), $H_(n-1)(A_cdot)$),
+      node((0, 5), $dots.c$),
+
       arr((0, 0), (0, 1), $partial_(n+1)$),
       arr((0, 1), (0, 2), $H_(n)(phi)$),
       arr((0, 2), (0, 3), $H_(n)(psi)$),
-      arr((0, 3), (1, 1), $partial_(n)$),
-      node((1, 1), $H_(n-1)(A_cdot)$),
-      node((1, 2), $H_(n-1)(B_cdot)$),
-      node((1, 3), $H_(n-1)(C_cdot)$),
-      node((1, 4), $dots.c$),
-      arr((1, 1), (1, 2), $H_(n-1)(phi)$, label-pos: right),
-      arr((1, 2), (1, 3), $H_(n-1)(psi)$, label-pos: right),
-      arr((1, 3), (1, 4), $partial_(n-1)$, label-pos: right),
+      arr((0, 3), (0, 4), $partial_n$),
+      arr((0, 4), (0, 5), $H_(n-1)(phi)$),
     )]
   De plus pour tout diagramme commutatif :
   #align(center)[#commutative-diagram(
       node-padding: (40pt, 40pt),
-      padding: 0pt,
+      padding: 5pt,
 
       node((0, 0), $0$),
       node((0, 1), $A_cdot$),
@@ -425,8 +469,8 @@
       node((1, 3), $C'_cdot$),
       node((1, 4), $0$),
       arr((1, 0), (1, 1), ""),
-      arr((1, 1), (1, 2), $phi'_cdot$),
-      arr((1, 2), (1, 3), $psi'_cdot$),
+      arr((1, 1), (1, 2), $phi'_cdot$, label-pos: right),
+      arr((1, 2), (1, 3), $psi'_cdot$, label-pos: right),
       arr((1, 3), (1, 4), ""),
 
       arr((0, 1), (1, 1), $f_cdot$),
@@ -436,23 +480,27 @@
   la transformation $partial_n$ est naturelle dans le sens où le diagramme suivant est commutatif :
   #align(center)[#commutative-diagram(
       node-padding: (40pt, 40pt),
-      padding: 2pt,
+      padding: 5pt,
       node((0, 0), $H_(n)(C_cdot)$),
-      node((0, 1), $H_(n-1)(A_cdot)$),
-      node((1, 0), $H_(n)(C'_cdot)$),
+      node((1, 0), $H_(n-1)(A_cdot)$),
+      node((0, 1), $H_(n)(C'_cdot)$),
       node((1, 1), $H_(n-1)(A'_cdot)$),
-      arr((0, 0), (0, 1), $partial_n$),
-      arr((1, 0), (1, 1), $partial_n$, label-pos: right),
-      arr((0, 0), (1, 0), $H_(n)(h)$, label-pos: right),
-      arr((0, 1), (1, 1), $H_(n-1)(f)$),
+      arr((0, 0), (0, 1), $H_(n)(h)$),
+      arr((1, 0), (1, 1), $H_(n-1)(f)$, label-pos: right),
+      arr((0, 0), (1, 0), $partial_n$, label-pos: right),
+      arr((0, 1), (1, 1), $partial_n$),
     )]
 
+]) <lem-courte-longue-homologie>
+
+#remark([
+  La naturalité de $partial_n$ coïncide bien avec la notion introduite dans le @sec-transformation-naturelle si on considère la catégorie des suites exactes courtes de complexes.
 ])
 
 #proof([
   Soit $n in ZZ$. On commence par faire un diagramme en 3 dimensions pour la suite :
   #align(center)[#commutative-diagram(
-      node-padding: (20pt, 15pt),
+      node-padding: (20pt, 13pt),
       padding: 0pt,
 
       node((-1, 2), $dots.v$),
@@ -596,7 +644,6 @@
     Alors $phi_(n)(a) in B_(n)(B_cdot)$ et il existe $b in B_(n+1)$ tel que $phi_(n)(a) = dif_(n+1) b$.
     De plus par exactitude on a $d_(n+1) psi_(n+1)(b) = psi_(n)(dif_(n+1)(b)) = psi_(n)(phi_(n)(a)) = 0$, d'où $psi_(n+1)(b) in Z_(n+1)(C_cdot)$, et par construction on retrouve bien $partial_n overline(psi_(n+1)(b)) = overline(a) in H_(n)(A_cdot)$.
     Donc $overline(a) in im(partial_(n+1))$.
-
   - Soit $overline(b) in im(H_(n)(phi))$.
     Il existe $a in A_n$ tel que $phi_(n)(a) = b$.
     Alors on a $b in im(phi_n)$ et par exactitude $b in ker(psi_n)$.
@@ -609,7 +656,6 @@
     Alors $phi_(n-1)(dif_n a) = dif_n b - dif_n dif_(n+1) b' = dif_n b = 0$, puisque $phi_(n-1)$ est injective par exactitude, on a $dif_n a = 0$, donc $a in Z_(n)(A_cdot)$.
     De plus $H_(n)(phi)(overline(a)) = overline(b) in H_(n)(B_cdot)$.
     Donc $overline(b) in im(H_(n)(phi))$.
-
   - Soit $overline(c) in im(H_(n)(psi))$.
     Il existe $b in Z_(n)(B_cdot)$ tel que $psi_(n)(b) = c$.
     De plus on a $dif_n b = 0 in ker(psi_(n-1))$, par exactitude il existe $a in A_(n-1)$ tel que $phi_(n-1)(a) = dif_n b = 0$, puisque $phi_(n-1)$ est injective par exactitude, on a $a = 0$ et par construction $partial_n overline(c) = overline(a) = 0 in H_(n-1)(A_cdot)$.
@@ -618,22 +664,58 @@
     Soit $overline(c) in ker(partial_n)$.
     Alors $c in Z_(n)(C_cdot)$, puisque $psi_n$ est surjective par exactitude, il existe $b in B_n$ tel que $psi_(n)(b) = c$, d'où $H_(n)(psi)(overline(b)) = overline(c)$.
     Donc $overline(c) in im(H_(n)(psi))$.
-  Donc la suite longue est bien exacte.
+
 
   Vérifions que $partial_n$ est naturelle.
   Soit $overline(c) in H_(n)(C_cdot)$. \
   Par construction il existe $b in B_n$ tel que $psi_(n)(b) = c$ et il existe $a in Z_(n-1)(A_cdot)$ tel que $phi_(n-1)(a) = dif_n b$ et $partial_n overline(c) = overline(a) in H_(n-1)(A_cdot)$.
   Donc on a $H_(n-1)(f)(partial_n overline(c)) = overline(f_(n-1)(a)) in H_(n-1)(A'_cdot)$. \
-  De plus $h_(n)(c) = h_(n)(psi_(n)(b)) = psi'_(n)(g_(n)(b))$ et $phi'_(n-1)(f_(n-1)(a)) = g_(n-1)(phi_(n-1)(a)) = g_(n-1)(dif_n b) = dif_n g_(n)(b)$, alors par construction on a $partial_n H_(n)(h)(overline(c)) = overline(f_(n-1)(a)) in H_(n-1)(A'_cdot)$.
+  De plus $psi'_(n)(g_(n)(b)) = h_(n)(psi_(n)(b)) = h_(n)(c)$ et $phi'_(n-1)(f_(n-1)(a)) = g_(n-1)(phi_(n-1)(a)) = g_(n-1)(dif_n b) = dif_n g_(n)(b)$, alors par construction on a $partial_n H_(n)(h)(overline(c)) = overline(f_(n-1)(a)) in H_(n-1)(A'_cdot)$.
   Donc $H_(n-1)(f)(partial_n) = partial_n H_(n)(h)$.
 ])
 
-#definition([
-  Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes.
-  On dit que $D_cdot$ est un _sous-complexe de chaînes de $C_cdot$_ si pour tout $n in ZZ$, on a $D_n subset C_n$.
+#lemma([
+  Soit $lquotient(C_cdot, D_cdot)$ un complexe de chaînes quotient.
+  Alors pour tout $n in ZZ$, il existe un morphisme de groupes $func(partial_n, H_(n)(lquotient(C_cdot, D_cdot)), H_(n-1)(D_cdot))$ telle que la suite longue suivante est exacte :
+  #align(center)[#commutative-diagram(
+      node-padding: (40pt, 40pt),
+      padding: 5pt,
+      node((0, 0), $dots.c$),
+      node((0, 1), $H_(n)(D_cdot)$),
+      node((0, 2), $H_(n)(C_cdot)$),
+      node((0, 3), $H_(n)(lquotient(C_cdot, D_cdot))$),
+      node((0, 4), $H_(n-1)(D_cdot)$),
+      node((0, 5), $dots.c$),
+
+      arr((0, 0), (0, 1), $partial_(n+1)$),
+      arr((0, 1), (0, 2), $H_(n)(i)$),
+      arr((0, 2), (0, 3), $H_(n)(pi)$),
+      arr((0, 3), (0, 4), $partial_n$),
+      arr((0, 4), (0, 5), $H_(n-1)(i)$),
+    )]
+  où $func(i_cdot, D_cdot, C_cdot)$ est l'inclusion canonique et $func(pi_cdot, C_cdot ,lquotient(C_cdot, D_cdot))$ est la projection canonique.
+
+]) <lem-courte-longue-homologie-quotient>
+
+#proof([
+  Soit $n in ZZ$. Par définition l'inclusion $func(i_n, D_n, C_n)$ est injective, de plus on a clairement $im(i_n) = D_n = ker(pi_n)$ et par définition la projection $func(pi_n, C_n, lquotient(C_n, D_n))$ est surjective. \
+  Donc on a une suite exacte courte de complexe de chaînes :
+  #align(center)[#commutative-diagram(
+      node-padding: (40pt, 50pt),
+      padding: 5pt,
+      node((0, 0), $0$),
+      node((0, 1), $D_cdot$),
+      node((0, 2), $C_cdot$),
+      node((0, 3), $lquotient(C_cdot, D_cdot)$),
+      node((0, 4), $0$),
+      arr((0, 0), (0, 1), ""),
+      arr((0, 1), (0, 2), $i_cdot$),
+      arr((0, 2), (0, 3), $pi_cdot$),
+      arr((0, 3), (0, 4), ""),
+    )]
+  Alors d'après le @lem-courte-longue-homologie il existe bien un morphisme de groupes $func(partial_n, H_(n)(lquotient(C_cdot, D_cdot)), H_(n-1)(D_cdot))$ tel que la suite longue est exacte.
 ])
 
-TODO : Complexe quotient.
 
 #pagebreak()
 
@@ -843,7 +925,7 @@ TODO : Complexe quotient.
 ])
 
 #proposition([
-  Soit $X$ et $Y$ deux espaces topologiques et $func(f, X, Y)$ une application continue.
+  Soit $X$ et $Y$ deux espaces topologiques, $func(f, X, Y)$ une application continue.
   Alors pour tout $n in NN$, on a $dif_n C_(n)(f) = C_(n-1)(f) dif_n$.
 ]) <prop-continue-commute>
 
@@ -885,6 +967,10 @@ TODO : Complexe quotient.
   car les puissances de $-1$ s'annulent.
 ])
 
+== Définitions de l'homologie singulière
+
+=== D'un espace topologique
+
 #proposition([
   La suite $sequence(C_n)$ où pour tout $n < 0$, on pose $C_n := 0$, munie des morphismes des bords $sequence(func(dif_n, C_n, C_(n-1)))$ est un foncteur de $sans("Top")$ vers $sans("Comp")$.
 ]) <prop-foncteur-top-comp>
@@ -895,12 +981,8 @@ TODO : Complexe quotient.
     Alors la suite $sequence(C_(n)(X))$ munie des morphismes de bords $sequence(func(dif_n, C_(n)(X), C_(n-1)(X)))$ est bien un complexe de chaînes d'après la @prop-bord-composition.
   - Soit $X$ et $Y$ deux espaces topologiques, $func(f, X, Y)$ une application continue.
     Alors la suite des applications induites $sequence(func(C_(n)(f), C_(n)(X), C_(n)(Y)))$ est bien un morphisme de complexes d'après la @prop-continue-commute.
-  La propriété de composition découle de la @prop-top-composition et la propriété d'identité découle directement de la définition, donc $C_n$ est bien un foncteur de $sans("Top")$ vers $sans("Ab")$.
+  La propriété de composition découle de la @prop-top-composition et la propriété d'identité découle directement de la définition, donc $C_n$ est bien un foncteur de $sans("Top")$ vers $sans("Comp")$.
 ])
-
-== Définitions de l'homologie singulière
-
-=== D'un espace topologique
 
 #definition([
   Soit $X$ un espace topologique.
@@ -915,8 +997,13 @@ TODO : Complexe quotient.
   - On appelle _homologie singulière de $X$_ le groupe $H_(cdot)(X) := H_(cdot)(C_(cdot)(X))$.
 ])
 
+#definition([
+  Soit $X$ et $Y$ deux espaces topologiques, $func(f, X, Y)$ une application continue.
+  On appelle _morphisme de complexes induit par $f$_, notée $func(f_cdot, C_(cdot)(X), C_(cdot)(Y))$, la suite des applications induites $f_cdot := sequence(func(C_(n)(f), C_(n)(X), C_(n)(Y)))$
+])
+
 #corollary([
-  Pour tout $n in ZZ$, le $n$#super("e") groupe d'homologie singulière $H_n$ est un foncteur de $sans("Top")$ vers $sans("Ab")$
+  Pour tout $n in ZZ$, le $n$#super("e") groupe d'homologie singulière $H_n$ est un foncteur de $sans("Top")$ vers $sans("Ab")$.
 ])
 
 #proof([
@@ -929,14 +1016,71 @@ TODO : Complexe quotient.
 ])
 
 #proof([
-  D'après la @prop-foncteur-top-comp $C_cdot$ est un foncteur de $sans("Top")$ vers $sans("Comp")$ et d'après le @cor-foncteur-comp-grab $H_cdot$ est un foncteur de $sans("Comp")$ vers $sans("GrAb")$, par composition $H_cdot = H_(cdot)(C_cdot)$ est bien un foncteur de $sans("Top")$ vers $sans("Ab")$.
+  D'après la @prop-foncteur-top-comp $C_cdot$ est un foncteur de $sans("Top")$ vers $sans("Comp")$ et d'après le @cor-foncteur-comp-grab $H_cdot$ est un foncteur de $sans("Comp")$ vers $sans("GrAb")$, par composition $H_cdot = H_(cdot)(C_cdot)$ est bien un foncteur de $sans("Top")$ vers $sans("GrAb")$.
 ])
+
+
+// #definition([
+//   Soit $C_(cdot)(X)$ un complexe de chaînes singulières et $n in ZZ$.
+//   On appelle _$n$#super("e") nombre de Betti de X_ le rang de $H_(n)(X)$ s'il est fini.
+// ])
+
+=== D'une paire d'espace topologique
+
+#proposition([
+  La suite $sequence(lquotient(C_n, C_n))$ où pour tout $n < 0$, on pose $C_n := 0$, munie des morphismes des bords induits $sequence(func(overline(dif)_n, lquotient(C_(n), C_(n)), lquotient(C_(n-1), C_(n-1))))$ est un foncteur de $sans("Top")_2$ vers $sans("Comp")$.
+]) <prop-foncteur-top2-comp>
+
+#proof([
+  Soit $n in ZZ$.
+  - Soit $(X, A)$ une paire d'espaces topologiques.
+    Alors il est clair que $C_(cdot)(A)$ est un sous-complexe de chaînes de $C_(cdot)(X)$, donc la suite $sequence(lquotient(C_(n)(X), C_(n)(A)))$ munie des morphismes de bords induits $sequence(func(overline(dif)_n, lquotient(C_(n)(X), C_(n)(A)), lquotient(C_(n-1)(X), C_(n-1)(A))))$ est bien un complexe de chaînes d'après la @prop-bord-quotient.
+  - Soit $(X, A)$ et $(Y, B)$ deux paires d'espaces topologiques, $func(f, (X, A), (Y, B))$ un morphisme de paires.
+    Alors il est clair que $f_(cdot)(C_(cdot)(A)) subset C_(cdot)(B)$, donc le morphisme $func(overline(f)_cdot, lquotient(C_(n)(X), C_(n)(A)), lquotient(C_(n)(Y), C_(n)(B)))$ induit par $f_cdot$ est bien un morphisme de complexes d'après la @prop-morphisme-quotient.
+  La propriété de composition découle de la @prop-top-composition par passage au quotient et la propriété d'identité découle directement de la définition, donc $C_n$ est bien un foncteur de $sans("Top")$ vers $sans("Comp")$.
+])
+
+#definition([
+  Soit $(X, A)$ une paire d'espaces topologiques.
+  On appelle _complexe de chaînes singulières de la paire $(X, A)$_, noté $C_(cdot)(X, A)$, le complexe de chaînes quotient $C_(cdot)(X, A) := lquotient(C_(cdot)(X), C_(cdot)(A))$.
+])
+
+#definition([
+  Soit $C_(cdot)(X, A)$ un complexe de chaînes singulières et $n in ZZ$.
+  - On appelle _$n$-cycle singulier_ un élément de $Z_(n)(X, A) := Z_(n)(lquotient(C_(cdot)(X), C_(cdot)(A)))$.
+  - On appelle _$n$-bord singulier_ un élément de $B_(n)(X, A) := B_(n)(lquotient(C_(cdot)(X), C_(cdot)(A)))$.
+  - On appelle _$n$#super("e") groupe d'homologie singulière de $X$_ le groupe $H_(n)(X, A) := H_(n)(lquotient(C_(cdot)(X), C_(cdot)(A)))$.
+  - On appelle _homologie singulière de $X$_ le groupe $H_(cdot)(X, A) := H_(cdot)(lquotient(C_(cdot)(X), C_(cdot)(A)))$.
+])
+
+#remark([
+  Dans le cas de la paire d'espaces topologiques $(X, emptyset)$, on trouve $C_(cdot)(X, emptyset) tilde.eq C_(cdot)(X)$ et $H_(cdot)(X, emptyset) tilde.eq H_(cdot)(X)$.
+])
+
+#corollary([
+  Pour tout $n in ZZ$, le $n$#super("e") groupe d'homologie singulière de paires $H_n$ est un foncteur de $sans("Top")_2$ vers $sans("Ab")$.
+])
+
+#proof([
+  Soit $n in ZZ$.
+  D'après la @prop-foncteur-top2-comp $C_cdot$ est un foncteur de $sans("Top")_2$ vers $sans("Comp")$ et d'après le @thm-foncteur-comp-ab $H_n$ est un foncteur de $sans("Comp")$ vers $sans("Ab")$, par composition $H_n = H_(n)(C_cdot)$ est bien un foncteur de $sans("Top")_2$ vers $sans("Ab")$.
+])
+
+#corollary([
+  L'homologie singulière de paires $H_cdot$ est un foncteur de $sans("Top")_2$ vers $sans("GrAb")$.
+])
+
+#proof([
+  D'après la @prop-foncteur-top2-comp $C_cdot$ est un foncteur de $sans("Top")_2$ vers $sans("Comp")$ et d'après le @cor-foncteur-comp-grab $H_cdot$ est un foncteur de $sans("Comp")$ vers $sans("GrAb")$, par composition $H_cdot = H_(cdot)(C_cdot)$ est bien un foncteur de $sans("Top")_2$ vers $sans("GrAb")$.
+])
+
+== Principales propriétés
 
 #theorem(
   title: "Axiome de dimension",
   [
-    Soit $P$ un espace topologie constitué d'un unique point.
-    Alors le groupe $H_(n)(P)$ est non-trivial si et seulement $n = 0$.
+    Soit $P$ un espace topologique constitué d'un unique point.
+    Alors pour tout $n in ZZ$, on a $H_(n)(P) = ZZ$ si $n = 0$ et $H_(n)(P) = {0}$ sinon.
   ],
 )
 
@@ -951,151 +1095,36 @@ TODO : Complexe quotient.
   dans le cas $n != 0 $ et $n$ est pair, alors $H_(n)(P) = lquotient({0}, {0}) tilde.eq {0}$.
 ])
 
-TODO
 
-=== D'une paire d'espace topologique
+#theorem(
+  title: "Axiome d'exactitude",
+  [
+    Soit $C_(cdot)(X, A)$ un complexe de chaînes singulières.
+    Alors pour tout $n in ZZ$, il existe un morphisme de groupes $func(partial_n, H_(n)(X, A), H_(n-1)(A))$ telle que la suite longue suivante est exacte :
+    #align(center)[#commutative-diagram(
+        node-padding: (40pt, 40pt),
+        padding: 5pt,
+        node((0, 0), $dots.c$),
+        node((0, 1), $H_(n)(A)$),
+        node((0, 2), $H_(n)(X)$),
+        node((0, 3), $H_(n)(X, A)$),
+        node((0, 4), $H_(n-1)(A)$),
+        node((0, 5), $dots.c$),
 
-#definition([
-  Soit $C_(cdot)(X)$ et $C_(cdot)(Y)$ deux complexes de chaînes singulières, et $func(f, X, Y)$ une application continue.
-  Pour tout $n in ZZ$, on note $func(H_(n)(f), H_(n)(X), H_(n)(Y))$ le morphisme de groupes induit par $C_(n)(f)$.
+        arr((0, 0), (0, 1), $partial_(n+1)$),
+        arr((0, 1), (0, 2), $H_(n)(i)$),
+        arr((0, 2), (0, 3), $H_(n)(j)$),
+        arr((0, 3), (0, 4), $partial_n$),
+        arr((0, 4), (0, 5), $H_(n-1)(i)$),
+      )]
+    où $func(i, A, X)$ et $func(j, (X, emptyset), (X, A))$ sont les inclusions canoniques.
+  ],
+)
+
+#proof([
+  On remarque que $func(i_cdot, C_(cdot)(A), C_(cdot)(X))$ est l'inclusion canonique et qu'en passant au quotient $func(j_cdot, C_(cdot)(X, emptyset) tilde.eq C_(cdot)(X), C_(cdot)(X, A))$ devient la projection canonique. \
+  Donc d'après le @lem-courte-longue-homologie-quotient il existe bien un morphisme de groupes $func(partial_n, H_(n)(X, A), H_(n-1)(A))$ tel que la suite longue est exacte.
 ])
-
-// == Paires d'espaces topologiques
-
-// #proposition([
-//   Soit $(X, A)$ une paire d'espaces topologiques.
-//   Alors pour tout $n in ZZ$, $dif_n$ induit un morphisme $overline(dif)_n$ de $lquotient(C_(n)(X), C_(n)(A))$ dans $lquotient(C_(n-1)(X), C_(n-1)(A))$ tel que $overline(dif)_n overline(dif)_(n+1) = 0$.
-// ])
-
-// #proof([
-//   Soit $n in ZZ$.
-//   Alors on a $C_(n)(A) subset C_(n)(X)$, on peut donc former le quotient $lquotient(C_(n)(X), C_(n)(A))$.
-
-//   On pose $func(delta_n := overline(dif_n), C_(n)(X), lquotient(C_(n-1)(X), C_(n-1)(A)))$, alors $C_(n)(A) subset ker(delta_n)$ et d'après la propriété universelle du groupe quotient $delta_n$ induit bien un morphisme $overline(dif)_n$ de $lquotient(C_(n)(X), C_(n)(A))$ dans $lquotient(C_(n-1)(X), C_(n-1)(A))$.
-//   Enfin puisque $dif_n dif_(n+1) = 0$, on a $overline(dif)_n overline(dif)_(n+1) = overline(dif_n dif_(n+1)) = 0$.
-// ])
-
-// #remark([
-//   Soit $(X, A)$ une paire d'espaces topologiques.
-//   La suite $sequence(lquotient(C_(n)(X), C_(n)(A)))$ munie des morphismes de bords induits $sequence(func(overline(dif)_n, lquotient(C_(n)(X), C_(n)(A)), lquotient(C_(n-1)(X), C_(n-1)(A))))$ forme un complexe de chaînes singulières.
-// ])
-
-// #definition([
-//   Soit $(X, A)$ une paire d'espaces topologiques.
-//   On appelle _complexe de chaînes singulières de la paire $(X, A)$_ le complexe de chaînes singulières quotient $C_(cdot)(X, A) := lquotient(C_(cdot)(X), C_(cdot)(A))$.
-// ])
-
-// #remark([
-//   Dans le cas de la paire d'espaces topologiques $(X, emptyset)$, on trouve $C_(cdot)(X, emptyset) tilde.eq C_(cdot)(X)$ et $H_(cdot)(X, emptyset) tilde.eq H_(cdot)(X)$.
-// ])
-
-
-// #proposition([
-//   Soit $C_(cdot)(X, A)$ et $C_(cdot)(Y, B)$ deux complexes de chaînes singulières, et $func(f, (X, A), (Y, B))$ un morphisme de paires.
-//   Alors l'application induite $func(f_*, C_(n)(X), C_(n)(Y))$ détermine un morphisme de complexes.
-// ])
-
-// #proof([
-//   Pour tout $n in ZZ$,
-//   on pose $func(phi_n := overline(f_*), C_(n)(X), C_(n)(Y, B))$, alors puisque $f(A) subset B$, on en déduit $f_* (C_(n)(A)) subset ker(phi_n)$ et d'après la propriété universelle du groupe quotient $phi_n$ induit un morphisme $overline(phi_n)$ de $C_(n)(X, A)$ dans $C_(n)(Y, B)$.
-
-//   Soit $n in ZZ$. Alors d'après la @prop-continue-commute puisque $dif_n f_* = f_* dif_n$, on a $overline(dif_n phi_n) = overline(phi_(n-1) dif_n)$.
-//   Donc $phi_n$ est bien un morphisme de complexes.
-// ])
-
-// #definition([
-//   Soit $C_(cdot)(X, A)$ et $C_(cdot)(Y, B)$ deux complexes de chaînes singulières, et $func(f, (X, A), (Y, B))$ un morphisme de paires.
-//   Pour tout $n in ZZ$, on note $func(H_(n)(f), H_(n)(X, A), H_(n)(Y, B))$ le morphisme induit par le morphisme de complexes déterminé par $f_*$.
-// ])
-
-// #theorem([
-//   Pour tout $n in ZZ$, le $n$#super("e") groupe d'homologie singulière des paires d'espaces topologiques $func(H_n, sans("Top")_2, sans("Ab"))$ est un foncteur.
-// ])
-
-// #proof([
-//   Soit $n in ZZ$.
-//   - Soit $(X, A)$ une paire d'espaces topologiques.
-//     Alors le $n$#super("e") groupe d'homologie singulière $H_(n)(X, A)$ est bien un groupe abélien libre.
-//   - Soit $(X, A)$ et $(Y, B)$ deux paires d'espaces topologiques, et $func(f, (X, A), (Y, B))$ un morphisme de paires.
-//     Alors l'application $func(H_(n)(f), H_(n)(X, A), H_(n)(Y, B))$ est un bien morphisme de groupes.
-//   Soit $(X, A), (Y, B)$ et $(Z, C)$ trois paires d'espaces topologiques.
-//   - Soit $func(f, (X, A), (Y, B))$ et $func(g, (Y, B), (Z, C))$ deux morphismes de paires.
-//     Alors la composition $func(g compose f, (X, A), (Z, C))$ est un morphisme de paires qui passe au quotient et vérifie :
-//     $ H_(n)(g compose f) = H_(n)(g) compose H_(n)(f). $
-//   - On considère $func(id_((X, A)))$. Soit $func(sigma, Delta^n, (X, A))$ un $n$-simplexe singulier, alors :
-//     $ id_((X, A)*)(sigma) = id_((X, A)) compose sigma = sigma $
-//     puisque les $n$-chaînes singulières sont engendrées par les $n$-simplexes singuliers, on en déduit que $id_((X, A)*) = id_(C_(n)(X, A))$, par passage au quotient on a :
-//     $ H_(n)(id_((X, A))) = id_(H_(n)(X, A)). $
-//   Donc $H_(n)$ est un foncteur.
-// ])
-
-// #proposition([
-//   Soit $C_(cdot)(X, A)$ un complexe de chaînes singulières.
-//   Alors pour tout $n in ZZ$, les groupes $H_(n)(X, A)$ et $lquotient(dif_(n)^(-1)(C_(n-1)(A)), (dif_(n+1)(C_(n+1)(X)) + C_(n)(A)))$ sont isomorphes.
-// ]) <prop-iso-homologie-paire>
-
-// #proof([
-//   Soit $n in ZZ$. \
-//   Soit $tau in dif_(n+1)(C_(n+1)(X)) + C_(n)(A)$, il existe $sigma_1 in C_(n+1)(X)$ et $sigma_2 in C_(n)(A)$ tels que $tau = dif_(n+1) sigma_1 + sigma_2$.
-//   Alors d'après la @prop-bord-composition on a :
-//   $
-//     dif_(n) tau = dif_(n)(dif_(n+1) sigma_1 + sigma_2) = (dif_(n) dif_(n+1)) sigma_1 + dif_(n) sigma_2 = dif_(n) sigma_2
-//   $
-//   donc $tau in dif_(n)^(-1)(C_(n-1)(A))$, on peut donc former le quotient $lquotient(dif_(n)^(-1)(C_(n-1)(A)), (dif_(n+1)(C_(n+1)(X)) + C_(n)(A)))$.
-
-//   On pose $func(phi, dif_(n)^(-1)(C_(n-1)(A)), H_(n)(X, A), sigma, overline(sigma))$, qui est bien un morphisme de groupes.
-//   - Soit $eta in H_(n)(X, A)$, il existe $zeta in Z_(n)(X, A)$ et $z in C_(n)(X)$ tels que $eta = overline(zeta)$ et $zeta = overline(z)$. \
-//     Puisque $overline(dif_(n) z) = overline(dif)_(n) zeta = 0 in C_(n)(X, A)$, il existe $sigma in C_(n-1)(A)$ tel que $dif_n z = sigma$, d'où $z in dif_(n)^(-1)(C_(n-1)(A))$.
-//     Donc $phi(z) = eta$ et $phi$ est surjectif.
-//   - Soit $sigma in ker(phi)$.
-//     Puisque $overline(tau) = 0 in H_(n)(X, A)$, il existe $b in B_(n)(X, A)$ tel que $overline(tau) = overline(b)$.
-//     C'est-à-dire qu'il existe $c in C_(n+1)(X, A)$ et $sigma in C_(n+1)(X)$ tels que $b = overline(dif)_(n+1) c$ et $c = overline(sigma)$. \
-//     On peut écrire $overline(tau) = overline(dif)_(n+1) overline(sigma) = overline(dif_(n+1) sigma) in C_(n)(X, A)$, donc $tau in dif_(n+1)(C_(n+1)(X)) + C_(n)(A)$.
-
-//     Soit $tau in dif_(n+1)(C_(n+1)(X)) + C_(n)(A)$, il existe $sigma_1 in C_(n+1)(X)$ et $sigma_2 in C_(n)(A)$ tels que $tau = dif_(n+1) sigma_1 + sigma_2$.
-//     Alors $overline(tau) = overline(dif_(n+1) sigma_1) = overline(dif)_(n+1) overline(sigma) in C_(n)(X, A) $, d'où $overline(tau) in B_(n)(X, A)$ et $overline(tau) = 0 in H_(n)(X, A)$, donc $tau in ker(phi)$.
-//   D'après le premier théorème d'isomorphisme $phi$ induit un isomorphisme entre les groupes
-//   $H_(n)(X, A)$ et $lquotient(dif_(n)^(-1)(C_(n-1)(A)), (dif_(n+1)(C_(n+1)(X)) + C_(n)(A)))$.
-// ])
-
-// #proposition([
-//   Soit $C_(cdot)(X, A)$ un complexe de chaînes singulières.
-//   Alors pour tout $n in ZZ$, $dif_n$ induit un morphisme $partial_n$ de $H_(n)(X, A)$ dans $H_(n-1)(A)$.
-// ])
-
-// #proof([
-//   Soit $n in ZZ$.
-//   D'après la @prop-iso-homologie-paire il existe un isomorphisme :
-//   $
-//     func(psi, H_(n)(X, A), lquotient(dif_(n)^(-1)(C_(n-1)(A)), (dif_(n+1)(C_(n+1)(X)) + C_(n)(A)))).
-//   $
-//   Pour tout $eta in H_(n)(X, A)$, il existe $tau in dif_(n)^(-1)(C_(n-1)(A))$ tel que $overline(tau) = psi(eta)$.
-//   Alors d'après la @prop-bord-composition on a $dif_(n-1) dif_n tau = 0$, donc $dif_n tau in Z_(n-1)(A)$.
-//   On pose $partial_(n) eta := overline(dif_(n) tau) in H_(n-1)(A)$.
-
-//   Supposons que $eta = 0$, c'est-à-dire $tau in dif_(n+1)(C_(n+1)(X)) + C_(n)(A)$, alors $dif_n tau in B_(n)(A)$, d'où $partial_(n) eta = 0$.
-//   Donc $partial_n$ est un morphisme bien défini.
-// ])
-
-// #theorem([
-//   Soit $C_(cdot)(X, A)$ et $C_(cdot)(Y, B)$ deux complexes de chaînes singulières. Alors pour tout $n in ZZ$, le morphisme $partial_n$ est une transformation naturelle, c'est-à-dire, pour tout morphisme de paires $func(f, (X, A), (Y, B))$, on a :
-//   $ partial_n H_(n)(f) = H_(n-1)(f) partial_n. $
-// ])
-
-// #proof([
-//   Soit $n in ZZ$.
-//   Puisque $partial_n$ est induit par $dif_n$, d'après la @prop-continue-commute on a bien :
-//   $
-//     partial_n H_(n)(f) = overline(dif_n f_*) = overline(f_* dif_n) = H_(n-1)(f) partial_n.
-//   $
-//   Donc $partial_n$ est bien une transformation naturelle. TODO.
-// ])
-
-
-// #definition([
-//   Soit $C_(cdot)(X)$ un complexe de chaînes singulières et $n in ZZ$.
-//   On appelle _$n$#super("e") nombre de Betti de X_ le rang de $H_(n)(X)$ s'il est fini.
-// ])
 
 // #definition([
 //   Une _théorie de l'homologie_ sur la catégorie des paires d'espaces topologiques $sans("Top")_2$ dans la catégorie des groupes abéliens $sans("Ab")$ est une suite de foncteurs $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie de transformations naturelles $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A) := H_(n-1)(A, emptyset)))$ vérifiant les _axiomes d'Eilenberg-Steenrod_ pour toutes paires d'espaces topologiques $(X, A), (Y, B)$ et $n in ZZ$ :
@@ -1117,42 +1146,28 @@ TODO
 //   La suite des $n$#super("e") groupe d'homologie singulière des paires d'espaces topologiques $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie des morphismes $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A)))$ est une théorie de l'homogie vérifiant les @def-theorie-homologie[axiomes d'Eilenberg-Steenrod].
 // ])
 
-
-// #proof(
-//   of: [de @axiome-exactitude[l'axiome d'exactitude]],
-//   [
-//     Soit $n in ZZ$.
-//     - Soit $alpha in ker(H_(n)(i))$, il existe $tau in C_(n)(A)$ tel que $alpha = overline(tau)$. \
-//       Puisque $alpha in ker(H_(n)(i))$, on a $tau in B_(n)(X)$, il existe $sigma in C_(n+1)(X)$ tel que $tau = dif_(n+1) sigma$. \
-//       Puisque $overline(d)_(n+1) overline(sigma) = overline(dif_(n+1) sigma) = overline(tau) = 0 in C_(n)(X, A)$, on a $overline(sigma) in Z_(n)(X, A)$. \
-//       Alors d'après la définition de $partial_(n+1)$, on a $partial_(n+1)(overline(sigma)) = alpha$.
-//     - TODO.
-//     - TODO.
-//   ],
-// )
-
-// #proof(
-//   of: [de @axiome-homotopie[l'axiome d'homotopie]],
-//   [
-//     TODO.
-//   ],
-// )
-
-// #proof(
-//   of: [de @axiome-excision[l'axiome d'excision]],
-//   [
-//     TODO.
-//   ],
-// )
-
 // #theorem(
 //   title: "Théorème de Mayer-Vietoris",
 //   [
 //     Soit $U$ et $V$ deux ouverts d'un espace topologique.
-//     En notant $func(i_U, U inter V, U)$, $func(i_V, U inter V, V)$, $func(j_U, U, U union V)$ et $func(j_V, V, U union V)$ les inclusions canoniques, alors la suite suivante est exacte :
-//     $
-//       ... -> H_(n+1)(U union V) ->^(partial_(n+1)) H_(n)(U inter V) ->^((-i_(U*), i_(V*))) directsum(H_(n)(U), H_(n)(V)) ->^(j_(U*) + j_(V*)) H_(n)(U union V) -> ...
-//     $
+//     Alors pour tout $n in ZZ$, il existe un morphisme de groupes $func(partial_n, H_(n)(U union V), H_(n)(U inter V))$ tel que la suite longue suivante est exacte :
+//     #align(center)[#commutative-diagram(
+//         node-padding: (40pt, 40pt),
+//         padding: 10pt,
+//         node((0, 0), $dots.c$),
+//         node((0, 1), $H_(n)(U inter V)$),
+//         node((0, 2), $H_(n)(U) plus.circle H_(n)(V)$),
+//         node((0, 3), $H_(n)(U union V)$),
+//         node((0, 4), $H_(n-1)(U inter V)$),
+//         node((0, 5), $dots.c$),
+
+//         arr((0, 0), (0, 1), $partial_(n+1)$, label-pos: 13pt),
+//         arr((0, 1), (0, 2), $(-H_(n)(i_0), H_(n)(i_1))$, label-pos: 13pt),
+//         arr((0, 2), (0, 3), $H_(n)(j_0) + H_(n)(j_1)$, label-pos: 13pt),
+//         arr((0, 3), (0, 4), $partial_n$, label-pos: 13pt),
+//         arr((0, 4), (0, 5), $(-H_(n-1)(i_0), H_(n-1)(i_1))$, label-pos: 13pt),
+//       )]
+//     où $func(i_0, U inter V, U)$, $func(i_1, U inter V, V)$, $func(j_0, U, U union V)$ et $func(j_1, V, U union V)$ sont les inclusions canoniques
 //   ],
 // )
 
