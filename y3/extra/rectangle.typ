@@ -224,7 +224,7 @@
 
 #proposition([
   Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de complexes.
-  Alors pour tout $n in ZZ$, $phi_n$ induit un morphisme de groupes de $H_(n)(C_cdot)$ dans $H_(n)(D_cdot)$.
+  Alors pour tout $n in ZZ$, $phi_n$ induit un morphisme de groupes $func(H_(n)(phi), H_(n)(C_cdot), H_(n)(D_cdot))$.
 ])
 
 #proof([
@@ -236,12 +236,12 @@
   $ phi_(n)(b) = phi_(n)(dif_(n+1) c) = dif_(n+1) phi_(n+1)(c) $
   donc $phi_(n)(b) in B_(n)(D_cdot)$.
 
-  On considère $func(overline(phi_n), Z_(n)(C_cdot), H_(n)(D_cdot))$, alors $B_(n)(C_cdot) subset ker(overline(phi_n))$ et d'après la propriété universelle du groupe quotient le morphisme $overline(phi_n)$ induit bien un morphisme de $H_(n)(C_cdot)$ dans $H_(n)(D_cdot)$.
+  On considère $func(overline(phi_n), Z_(n)(C_cdot), H_(n)(D_cdot))$, alors $B_(n)(C_cdot) subset ker(overline(phi_n))$ et d'après la propriété universelle du groupe quotient le morphisme $overline(phi_n)$ induit bien un morphisme $func(H_(n)(phi), H_(n)(C_cdot), H_(n)(D_cdot))$.
 ])
 
 #definition([
   Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de complexes.
-  Pour tout $n in ZZ$, on note $func(H_(n)(phi), H_(n)(C_cdot), H_(n)(D_cdot))$ le morphisme de groupes induit par $phi_n$.
+  On note $func(H_(cdot)(phi), H_(cdot)(C_cdot), H_(cdot)(D_cdot))$ la somme directe $H_(cdot)(phi) := plus.circle.big_(n in ZZ) H_(n)(phi)$.
 ])
 
 == La catégorie $sans("Comp")$
@@ -275,7 +275,7 @@
   - Soit $C_cdot in ob(sans("Comp"))$ un complexe de chaînes.
     Alors l'homologie $H_(cdot)(C_cdot) := plus.circle.big_(n in ZZ) H_(n)(C_cdot)$ définit bien un groupe abélien gradué.
   - Soit $C_cdot, D_cdot in ob(sans("Comp"))$ deux complexes de chaînes et $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de complexes.
-    Alors la somme directe des morphismes induits $H_(cdot)(phi) := plus.circle.big_(n in ZZ) H_(n)(phi)$ définit bien un morphisme de groupes abéliens gradués.
+    Alors le morphisme induit $func(H_(cdot)(phi), H_(cdot)(C_cdot), H_(cdot)(D_cdot))$ est bien un morphisme de groupes abéliens gradués.
   Les propriétés de composition et d'identité découlent du @thm-foncteur-comp-ab, donc $H_cdot$ est bien un foncteur de $sans("Comp")$ vers $sans("GrAb")$.
 ])
 
@@ -328,14 +328,14 @@
 
 #lemma([
   Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ et $func(psi_cdot, C_cdot, D_cdot)$ deux morphismes de complexes homotopes.
-  Alors pour tout $n in ZZ$, on a $H_(n)(phi) = H_(n)(psi)$.
+  Alors on a $H_(cdot)(phi) = H_(cdot)(psi)$.
 ]) <lem-homotopie>
 
 #proof([
   Par définition il existe une suite de morphismes de groupes $sequence(func(h_n, C_n, D_(n+1)))$ telle que pour tout $n in ZZ$, on a $phi_n - psi_n = h_(n-1) dif_n + dif_n h_n$. \
   Soit $n in ZZ$ et $overline(c) in H_(n)(C_cdot)$.
   Alors on a $phi_(n)(c) - psi_(n)(c) = h_(n-1)(dif_n c) + dif_n h_(n)(c) = dif_n h_(n)(c) in B_(n)(D_cdot)$, on en déduit $H_(n)(phi)(c) - H_(n)(psi)(c) = 0 in H_(n)(D_cdot)$.
-  Donc $H_(n)(phi) = H_(n)(psi)$.
+  Donc $H_(cdot)(phi) = H_(cdot)(psi)$.
 ])
 
 === Complexe de chaînes quotient
@@ -675,7 +675,7 @@
 ])
 
 #lemma([
-  Soit $lquotient(C_cdot, D_cdot)$ un complexe de chaînes quotient.
+  Soit $lquotient(C_cdot, D_cdot)$ un complexe de chaînes.
   Alors pour tout $n in ZZ$, il existe un morphisme de groupes $func(partial_n, H_(n)(lquotient(C_cdot, D_cdot)), H_(n-1)(D_cdot))$ telle que la suite longue suivante est exacte :
   #align(center)[#commutative-diagram(
       node-padding: (40pt, 40pt),
@@ -1036,7 +1036,7 @@
   - Soit $(X, A)$ une paire d'espaces topologiques.
     Alors il est clair que $C_(cdot)(A)$ est un sous-complexe de chaînes de $C_(cdot)(X)$, donc la suite $sequence(lquotient(C_(n)(X), C_(n)(A)))$ munie des morphismes de bords induits $sequence(func(overline(dif)_n, lquotient(C_(n)(X), C_(n)(A)), lquotient(C_(n-1)(X), C_(n-1)(A))))$ est bien un complexe de chaînes d'après la @prop-bord-quotient.
   - Soit $(X, A)$ et $(Y, B)$ deux paires d'espaces topologiques, $func(f, (X, A), (Y, B))$ un morphisme de paires.
-    Alors il est clair que $f_(cdot)(C_(cdot)(A)) subset C_(cdot)(B)$, donc le morphisme $func(overline(f)_cdot, lquotient(C_(n)(X), C_(n)(A)), lquotient(C_(n)(Y), C_(n)(B)))$ induit par $f_cdot$ est bien un morphisme de complexes d'après la @prop-morphisme-quotient.
+    Alors il est clair que $f_(cdot)(C_(cdot)(A)) subset C_(cdot)(B)$, donc le morphisme induit $func(overline(f)_cdot, lquotient(C_(n)(X), C_(n)(A)), lquotient(C_(n)(Y), C_(n)(B)))$ est bien un morphisme de complexes d'après la @prop-morphisme-quotient.
   La propriété de composition découle de la @prop-top-composition par passage au quotient et la propriété d'identité découle directement de la définition, donc $C_n$ est bien un foncteur de $sans("Top")$ vers $sans("Comp")$.
 ])
 
@@ -1074,7 +1074,7 @@
   D'après la @prop-foncteur-top2-comp $C_cdot$ est un foncteur de $sans("Top")_2$ vers $sans("Comp")$ et d'après le @cor-foncteur-comp-grab $H_cdot$ est un foncteur de $sans("Comp")$ vers $sans("GrAb")$, par composition $H_cdot = H_(cdot)(C_cdot)$ est bien un foncteur de $sans("Top")_2$ vers $sans("GrAb")$.
 ])
 
-== Principales propriétés
+== Principales propriétés et axiomes d'Eilenberg-Steenrod
 
 #theorem(
   title: "Axiome de dimension",
@@ -1095,6 +1095,63 @@
   dans le cas $n != 0 $ et $n$ est pair, alors $H_(n)(P) = lquotient({0}, {0}) tilde.eq {0}$.
 ])
 
+#definition([
+  Soit $X$ et $Y$ deux espaces topologies, $func(f, X, Y)$ et $func(g, X, Y)$ deux applications continues.
+  On dit que $f$ et $g$ sont _homotopes_ s'il existe une application continue $func(h, X times [0, 1], Y)$ telle que pour tout $x in X$, on a $f(x) = h(x, 0)$ et $g(x) = h(x, 1)$.
+])
+
+
+#lemma([
+  Soit $X$ et $Y$ deux espaces topologiques, $func(f, X, Y)$ et $func(g, X, Y)$ deux applications continues homotopes.
+  Alors les morphismes de complexes $func(f_cdot, C_(cdot)(X), C_(cdot)(Y))$ et $func(g, C_(cdot)(X), C_(cdot)(Y))$ sont homotopes.
+
+]) <lem-homotopie-chaine>
+
+#proof([
+  Par définition de l'homotopie il existe une application continue $func(h, X times [0, 1], Y)$ telle que $f(x) = h(x, 0)$ et $g(x) = h(x, 1)$.
+
+  Soit $n in ZZ$.
+  Puisque les $n$-chaînes singulières sont engendrées par les $n$-simplexes singuliers, il suffit de définir une homotopie pour un $n$-simplexe singulier $func(sigma, Delta^n, X)$.
+  Alors on pose :
+  $
+    h_(n)(sigma) := sum_(k=0)^n (-1)^k (h compose (sigma times id) compose gensubgroup(f_0, ..., f_k, g_k, ..., g_n)) in C_(n+1)(Y)
+  $
+  où $(f_0, ..., f_n) := (e_0 times {1}, ..., e_n times {1})$ et $(g_0, ..., g_n) := (e_0 times {0}, ..., e_n times {0})$.
+  Calculons maintenant les deux expressions qui nous intéressent :
+  $
+    h_(n-1)(dif_n sigma) &= &&h_(n)(sum_(l=0)^n (-1)^l (sigma compose gensubgroup(e_0, ..., overshell(e_l), ..., e_n))) \
+    &= &&sum_(0<=k<l<=n) (-1)^(k+l) (h compose (sigma times id) compose gensubgroup(f_0, ..., f_k, g_k, ..., overshell(g_l), ..., g_n)) \
+    & &&+ sum_(0<=l<k<=n) (-1)^(k+l-1) (h compose (sigma times id) compose gensubgroup(f_0, ..., overshell(f_l), ..., f_k, g_k, ..., g_n)) \
+  $
+  et :
+  $
+    dif_n h_(n)(sigma) &= &&dif_n sum_(k=0)^n (-1)^k (h compose (sigma times id) compose gensubgroup(f_0, ..., f_k, g_k, ..., g_n)) \
+    &= &&sum_(0<=l<=k<=n) (-1)^(k+l) (h compose (sigma times id) compose gensubgroup(f_0, ..., overshell(f_l), ..., f_k, g_k, ..., g_n)) \
+    & &&+ sum_(0<=k<=l<=n) (-1)^(k+l-1) (h compose (sigma times id) compose gensubgroup(f_0, ..., f_k, g_k, ..., overshell(g_l), ..., g_n)) \
+  $
+  en faisant la somme des deux expressions les termes d'indices différents s'annulent deux à deux :
+  $
+    h_(n-1)(dif_n sigma) + dif_n h_(n)(sigma) &= &&sum_(k=0)^n (h compose (sigma times id) compose gensubgroup(f_0, ..., f_(k-1), g_k, ..., g_n)) \
+    & &&-sum_(k=0)^n (h compose (sigma times id) compose gensubgroup(f_0, ..., f_k, g_(k+1), ..., g_n)) \
+    &= &&(h compose (sigma times id) compose gensubgroup(g_0, ..., g_n)) - (h compose (sigma times id) compose gensubgroup(f_0, ..., f_n)) \
+    &= &&(h compose (sigma times {0})) - (h compose (sigma times {1})) \
+    &= &&(f compose sigma) - (g compose sigma) \
+    &= &&C_(n)(f)(sigma) - C_(n)(g)(sigma)
+  $
+  Donc les morphismes de complexes $f_cdot$ et $g_cdot$ sont bien homotopes.
+])
+
+#theorem(
+  title: "Axiome d'homotopie",
+  [
+    Soit $X$ et $Y$ deux espaces topologiques, $func(f, X, Y)$ et $func(g, X, Y)$ deux applications continues homotopes.
+    Alors on a $H_(cdot)(f) = H_(cdot)(g)$.
+  ],
+)
+
+#proof([
+  Puisque $f$ et $g$ sont homotopes, d'après le @lem-homotopie-chaine $f_cdot$ et $g_cdot$ sont homotopes. Donc d'après le @lem-homotopie on a bien $H_(cdot)(f) = H_(cdot)(g)$.
+])
 
 #theorem(
   title: "Axiome d'exactitude",
@@ -1122,57 +1179,86 @@
 )
 
 #proof([
-  On remarque que $func(i_cdot, C_(cdot)(A), C_(cdot)(X))$ est l'inclusion canonique et qu'en passant au quotient $func(j_cdot, C_(cdot)(X, emptyset) tilde.eq C_(cdot)(X), C_(cdot)(X, A))$ devient la projection canonique. \
+  On remarque que $func(i_cdot, C_(cdot)(A), C_(cdot)(X))$ est l'inclusion canonique et qu'en passant au quotient $func(overline(j)_cdot, C_(cdot)(X, emptyset) tilde.eq C_(cdot)(X), C_(cdot)(X, A))$ devient la projection canonique. \
   Donc d'après le @lem-courte-longue-homologie-quotient il existe bien un morphisme de groupes $func(partial_n, H_(n)(X, A), H_(n-1)(A))$ tel que la suite longue est exacte.
 ])
 
-// #definition([
-//   Une _théorie de l'homologie_ sur la catégorie des paires d'espaces topologiques $sans("Top")_2$ dans la catégorie des groupes abéliens $sans("Ab")$ est une suite de foncteurs $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie de transformations naturelles $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A) := H_(n-1)(A, emptyset)))$ vérifiant les _axiomes d'Eilenberg-Steenrod_ pour toutes paires d'espaces topologiques $(X, A), (Y, B)$ et $n in ZZ$ :
-//   - _Dimension <axiome-dimension>_ : Soit $P$ un espace constitué d'un unique point.
-//     Alors le groupe $H_(n)(P)$ est non-trivial si et seulement si $n = 0$.
-//   - _Exactitude <axiome-exactitude>_ : En notant $func(i, A, X)$ et $func(j, X, (X, A))$ les inclusions canoniques, alors la suite suivante est exacte :
-//     $
-//       ... -> H_(n+1)(X, A) ->^(partial_(n+1)) H_(n)(A) ->^(H_(n)(i)) H_(n)(X) ->^(H_(n)(j)) H_(n)(X, A) ->^(partial_n) H_(n-1)(A) -> ...
-//     $
-//   - _Homotopie <axiome-homotopie>_ : Soit $func(f_0 \, f_1, (X, A), (Y, B))$ deux morphismes de paires homotopes.
-//     Alors les applications induites en homologie $func(H_(n)(f_(0))\, H_(n)(f_(1)), H_(n)(X, A), H_(n)(Y, B))$ sont égales.
-//   - _Excision <axiome-excision>_ : Soit $U$ un sous-ensemble de $A$ tel que l'adhérence de $U$ est contenue dans l'intérieur de $A$.
-//     En notant $func(i, (X without U, A without U), (X, A))$ l'inclusion canonique.
-//     Alors l'application induite en homologie $func(H_(n)(i), H_(n)(X without U, A without U), H_(n)(X, A))$ est un isomorphisme.
-// ]) <def-theorie-homologie>
+#theorem(
+  title: "Axiome d'excision",
+  [
+    Soit $(X, A)$ une paire d'espaces topologiques, $U$ une partie de $A$ telle que $overline(U) subset circle(A)$ et $func(i, (X without U, A without U), (X, A))$ l'inclusion canonique.
+    Alors pour tout $n in ZZ$, le morphisme induit $func(H_(n)(i), H_(n)(X without U, A without U), H_(n)(X, A))$ est un isomorphisme.
+  ],
+)
+
+#proof([
+  Admise.
+])
 
 
-// #theorem([
-//   La suite des $n$#super("e") groupe d'homologie singulière des paires d'espaces topologiques $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie des morphismes $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A)))$ est une théorie de l'homogie vérifiant les @def-theorie-homologie[axiomes d'Eilenberg-Steenrod].
-// ])
+#theorem(
+  title: "Théorème de Mayer-Vietoris",
+  [
+    Soit $U$ et $V$ deux ouverts d'un espace topologique.
+    Alors pour tout $n in ZZ$, il existe un morphisme de groupes $func(partial_n, H_(n)(U union V), H_(n-1)(U inter V))$ tel que la suite longue suivante est exacte :
+    #align(center)[
+      #commutative-diagram(
+        node-padding: (40pt, 40pt),
+        padding: 10pt,
+        node((0, 0), $dots.c$),
+        node((0, 1), $H_(n)(U inter V)$),
+        node((0, 2), $H_(n)(U) plus.circle H_(n)(V)$),
+        node((0, 3), $H_(n)(U union V)$),
+        node((0, 4), $H_(n-1)(U inter V)$),
+        node((0, 5), $dots.c$),
 
-// #theorem(
-//   title: "Théorème de Mayer-Vietoris",
-//   [
-//     Soit $U$ et $V$ deux ouverts d'un espace topologique.
-//     Alors pour tout $n in ZZ$, il existe un morphisme de groupes $func(partial_n, H_(n)(U union V), H_(n)(U inter V))$ tel que la suite longue suivante est exacte :
-//     #align(center)[#commutative-diagram(
-//         node-padding: (40pt, 40pt),
-//         padding: 10pt,
-//         node((0, 0), $dots.c$),
-//         node((0, 1), $H_(n)(U inter V)$),
-//         node((0, 2), $H_(n)(U) plus.circle H_(n)(V)$),
-//         node((0, 3), $H_(n)(U union V)$),
-//         node((0, 4), $H_(n-1)(U inter V)$),
-//         node((0, 5), $dots.c$),
+        arr((0, 0), (0, 1), $partial_(n+1)$, label-pos: 13pt),
+        arr((0, 1), (0, 2), $(-H_(n)(i_0), H_(n)(i_1))$, label-pos: 13pt),
+        arr((0, 2), (0, 3), $H_(n)(j_0) + H_(n)(j_1)$, label-pos: 13pt),
+        arr((0, 3), (0, 4), $partial_n$, label-pos: 13pt),
+        arr((0, 4), (0, 5), $(-H_(n-1)(i_0), H_(n-1)(i_1))$, label-pos: 13pt),
+      )]
+    où $func(i_0, U inter V, U)$, $func(i_1, U inter V, V)$, $func(j_0, U, U union V)$ et $func(j_1, V, U union V)$ sont les inclusions canoniques
+  ],
+)
 
-//         arr((0, 0), (0, 1), $partial_(n+1)$, label-pos: 13pt),
-//         arr((0, 1), (0, 2), $(-H_(n)(i_0), H_(n)(i_1))$, label-pos: 13pt),
-//         arr((0, 2), (0, 3), $H_(n)(j_0) + H_(n)(j_1)$, label-pos: 13pt),
-//         arr((0, 3), (0, 4), $partial_n$, label-pos: 13pt),
-//         arr((0, 4), (0, 5), $(-H_(n-1)(i_0), H_(n-1)(i_1))$, label-pos: 13pt),
-//       )]
-//     où $func(i_0, U inter V, U)$, $func(i_1, U inter V, V)$, $func(j_0, U, U union V)$ et $func(j_1, V, U union V)$ sont les inclusions canoniques
-//   ],
-// )
+#proof([
+  Admise.
+])
 
-// #proof([
-//   TODO.
-// ])
+#definition([
+  Une _théorie de l'homologie_ sur la catégorie des paires d'espaces topologiques $sans("Top")_2$ dans la catégorie des groupes abéliens $sans("Ab")$ est une suite de foncteurs $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie de transformations naturelles $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A) := H_(n-1)(A, emptyset)))$ vérifiant les _axiomes d'Eilenberg-Steenrod_ pour toutes paires d'espaces topologiques $(X, A), (Y, B)$ et $n in ZZ$ :
+  - _Dimension <axiome-dimension>_ : Soit $P$ un espace constitué d'un unique point.
+    Alors le groupe $H_(n)(P)$ est non-trivial si et seulement si $n = 0$.
+  - _Homotopie <axiome-homotopie>_ : Soit $func(f, (X, A), (Y, B))$ et $func(g, (X, A), (Y, B))$ deux morphismes de paires homotopes.
+    Alors on a $H_(n)(f) = H_(n)(g)$
+  - _Exactitude <axiome-exactitude>_ : La suite longue suivante est exacte :
+    #align(center)[#commutative-diagram(
+        node-padding: (40pt, 40pt),
+        padding: 5pt,
+        node((0, 0), $dots.c$),
+        node((0, 1), $H_(n)(A)$),
+        node((0, 2), $H_(n)(X)$),
+        node((0, 3), $H_(n)(X, A)$),
+        node((0, 4), $H_(n-1)(A)$),
+        node((0, 5), $dots.c$),
+
+        arr((0, 0), (0, 1), $partial_(n+1)$),
+        arr((0, 1), (0, 2), $H_(n)(i)$),
+        arr((0, 2), (0, 3), $H_(n)(j)$),
+        arr((0, 3), (0, 4), $partial_n$),
+        arr((0, 4), (0, 5), $H_(n-1)(i)$),
+      )]
+    où $func(i, A, X)$ et $func(j, (X, emptyset), (X, A))$ sont les inclusions canoniques.
+  - _Excision <axiome-excision>_ : Soit $U$ une partie de $A$ telle que $overline(U) subset circle(A)$ et $func(i, (X without U, A without U), (X, A))$ l'inclusion canonique.
+    Alors le morphisme induit $func(H_(n)(i), H_(n)(X without U, A without U), H_(n)(X, A))$ est un isomorphisme.
+]) <def-theorie-homologie>
+
+
+#corollary([
+  La suite des $n$#super("e") groupe d'homologie singulière de paires $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie des morphismes $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A)))$ est une théorie de l'homogie vérifiant les @def-theorie-homologie[axiomes d'Eilenberg-Steenrod].
+])
+
+#pagebreak()
 
 #bibliography("biblio.yml", full: true)
