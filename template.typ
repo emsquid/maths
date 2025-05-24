@@ -44,6 +44,7 @@
 #let maths(
   title: none,
   authors: (),
+  note: none,
   color: none,
   header: false,
   date: false,
@@ -157,17 +158,21 @@
   // Title
   align(
     center,
-    [
-      #text(size: 26pt)[#title]
-      #if authors != none {
+    {
+      text(size: 26pt)[#title]
+      if authors != none {
         v(-12pt)
         text(size: 13pt)[#authors]
       }
-      #v(0pt)
-      #if date {
+      if note != none {
+        v(0pt)
+        text(size: 13pt)[#note]
+      }
+      v(0pt)
+      if date {
         text(size: 12pt)[#today(lang: "fr", format: "d M Y")]
       }
-    ],
+    },
   )
 
   // Contents

@@ -1,19 +1,147 @@
 #import "../../template.typ": *
-#import "@preview/wordometer:0.1.4": *
 
 #set-maths(sequence: (ind: $n$, dom: $ZZ$))
 
 #let cdot = $circle.filled.tiny$
 
+#let superformula(
+  m,
+  n1,
+  n2,
+  n3,
+  samples: 100,
+) = (
+  for x in range(0, samples + 1) {
+    let x = 2 * calc.pi * x / samples
+    let r = calc.pow(
+      calc.pow(calc.abs(calc.cos(m * x / 4)), n2)
+        + calc.pow(calc.abs(calc.sin(m * x / 4)), n3),
+      -1 / n1,
+    )
+
+    ((r * calc.cos(x), r * calc.sin(x)),)
+  }
+)
+
 #show: maths.with(
   title: "Problème du rectangle inscrit",
   authors: ("Emanuel Morille",),
+  note: [Avec les conseils de Jean-Baptiste Campesato],
   color: "#718355",
   date: true,
 )
 
-#show: word-count
-#total-characters
+#pagebreak()
+
+#heading([Introduction], numbering: none)
+
+Le questionnement à l'origine de ce sujet est le _problème du carré inscrit_, énoncé par #link("https://fr.wikipedia.org/wiki/Otto_Toeplitz")[Otto Toeplitz] en 1911 de la manière suivante :
+
+#align(center)[_"Toute courbe de Jordan admet-elle un carré inscrit ?"_]
+
+Bien que cette question fut l'objet de nombreuses recherches, elle n'est toujours pas résolue, en revanche nous sommes capables d'en démontrer une version simplifiée :
+
+#align(center)[_"Toute courbe de Jordan admet-elle un #strike("carré") rectangle inscrit ?"_]
+
+C'est donc cet énoncé que nous appellerons le _problème du rectangle inscrit_.
+
+Par exemple dans le cas d'un cercle, on peut évidemment toujours trouver une infinité de carrés et de rectangles inscrits, le problème devient plus difficile lorsque la courbe est quelconque.
+
+#grid(
+  align: horizon,
+  columns: (1fr, 1fr),
+  rows: auto,
+  [
+    #figure(
+      align(center)[#cetz.canvas({
+          import cetz.draw: *
+
+          let r = 1.58
+          circle((0, 0), radius: r)
+          line(
+            (r * calc.cos(calc.pi / 4), r * calc.sin(calc.pi / 4)),
+            (r * calc.cos(3 * calc.pi / 4), r * calc.sin(3 * calc.pi / 4)),
+            (r * calc.cos(5 * calc.pi / 4), r * calc.sin(5 * calc.pi / 4)),
+            (r * calc.cos(7 * calc.pi / 4), r * calc.sin(7 * calc.pi / 4)),
+            (r * calc.cos(calc.pi / 4), r * calc.sin(calc.pi / 4)),
+            stroke: green,
+          )
+          set-style(circle: (radius: 0.03, fill: red, stroke: red))
+          circle((r * calc.cos(calc.pi / 4), r * calc.sin(calc.pi / 4)))
+          circle((r * calc.cos(3 * calc.pi / 4), r * calc.sin(3 * calc.pi / 4)))
+          circle((r * calc.cos(5 * calc.pi / 4), r * calc.sin(5 * calc.pi / 4)))
+          circle((r * calc.cos(7 * calc.pi / 4), r * calc.sin(7 * calc.pi / 4)))
+        })
+      ],
+      caption: [Un carré inscrit.],
+    ) <fig-cercle-carre>
+  ],
+  [
+    #figure(
+      align(center)[#cetz.canvas({
+          import cetz.draw: *
+
+          line(..superformula(7, 3, 4, 10, samples: 1000))
+          set-style(circle: (radius: 0.03, fill: red, stroke: red))
+          line(
+            (0.56, 1.17),
+            (0.56, -0.85),
+            (-0.89, -0.85),
+            (-0.89, 1.17),
+            (0.56, 1.17),
+            stroke: green,
+          )
+          circle((0.56, 1.17))
+          circle((0.56, -0.85))
+          circle((-0.89, -0.85))
+          circle((-0.89, 1.17))
+        })
+      ],
+      caption: [Un rectangle inscrit.],
+    ) <fig-courbe-rectangle>
+  ],
+)
+
+Dans la suite nous allons étudier l'homologie singulière qui nous permettra de démontrer un résultat très important dans la résolution du problème. Tout d'abord définissons quelques termes.
+
+#definition([
+  Soit $C$ une partie de $RR^2$.
+  On dit que $C$ est une _courbe Jordan_ s'il existe une fonction continue $func(gamma_C, [0, 1], RR^2)$ telle que :
+  - $C$ est l'image de $gamma_C$ : $im(gamma_C) = C$.
+  - $C$ est fermée : $gamma_(C)(0) = gamma_(C)(1)$
+  - $C$ est simple : $forall x, y in [0, 1[, gamma_(C)(x) = gamma_(C)(y) => x = y$.
+])
+
+#example([
+  Le cercle $C$ de la @fig-cercle-carre est bien une courbe de Jordan, en effet on pose :
+  $ func(gamma_C, [0, 1], RR^2, (x, y), (cos(2 pi x), sin(2 pi x))) $
+  Alors $gamma_C$ est bien continue, de plus :
+  - On a clairement $im(gamma_C) = C$.
+  - On a $gamma_(C)(0) = (1, 0) = gamma_(C)(1)$.
+  - Pour $x in [0, 1[$, on a $2pi x in [0, 2pi[$, donc $gamma_C$ est injective sur $[0, 1[$.
+])
+
+#definition([
+  Soit $C$ une courbe de Jordan de $RR^2$ et $R := (a, b, c, d)$ un rectangle de $RR^2$.
+  On dit que $R$ est _inscrit dans $C$_ si $a, b, c, d in C$.
+])
+
+#example([
+  Le rectangle $R := ((sqrt(2)  slash  2, sqrt(2)  slash  2), (-sqrt(2)  slash  2, sqrt(2)  slash  2), (-sqrt(2)  slash  2, -sqrt(2)  slash  2), (sqrt(2)  slash  2, -sqrt(2)  slash  2))$ est bien inscrit dans le cercle $C$ de la @fig-cercle-carre, en effet :
+  - On a $gamma_(C)(1 slash 8) = (sqrt(2) slash 2, sqrt(2) slash 2)$, donc $(sqrt(2) slash 2, sqrt(2) slash 2) in C$.
+
+  - On a $gamma_(C)(3 slash 8) = (-sqrt(2) slash 2, sqrt(2) slash 2)$, donc $(-sqrt(2) slash 2, sqrt(2) slash 2) in C$.
+
+  - On a $gamma_(C)(5 slash 8) = (-sqrt(2) slash 2, -sqrt(2) slash 2)$, donc $(-sqrt(2) slash 2, -sqrt(2) slash 2) in C$.
+
+  - On a $gamma_(C)(7 slash 8) = (sqrt(2) slash 2, -sqrt(2) slash 2)$, donc $(sqrt(2) slash 2, -sqrt(2) slash 2) in C$.
+])
+
+#theorem([
+  Soit $C$ une courbe de Jordan de $RR^2$.
+  Alors il existe un rectangle inscrit dans $C$.
+])
+
 #pagebreak()
 
 = Bases de théorie des catégories
@@ -805,9 +933,8 @@
   On dit que $"Conv"(G)$ est une _$m$-face_ de $"Conv"(F)$.
 ])
 
-#example([
-  Un $2$-simplexe standard, il s'agit d'un triangle, les arêtes en vert sont des $1$-faces du triangle, les sommets en rouge sont des $0$-faces du triangle et des arêtes :
-  #align(center)[
+#figure(
+  align(center)[
     #cetz.canvas({
       import cetz.draw: *
 
@@ -840,8 +967,11 @@
       content("e_1", [$e_1$], anchor: "south-east")
       content("e_2", [$e_2$], anchor: "south-east")
     })
-  ]
-])
+  ],
+  caption: [Un $2$-simplexe standard. \
+    En vert les arêtes sont des $1$-faces du triangle. \
+    En rouge les sommets sont des $0$-faces du triangle et des arêtes.],
+)
 
 == Chaînes singulières
 
