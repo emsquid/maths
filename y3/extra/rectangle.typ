@@ -102,14 +102,14 @@ Par exemple dans le cas d'un cercle, on peut évidemment toujours trouver une in
   ],
 )
 
-Dans la suite nous allons étudier l'homologie singulière qui nous permettra de démontrer un résultat très important dans la résolution du problème. Tout d'abord définissons quelques termes.
+Dans la suite nous allons étudier l'homologie singulière qui nous permettra de démontrer un résultat très important dans la résolution du problème. Commençons d'abord par définir quelques notions du sujet.
 
 #definition([
   Soit $C$ une partie de $RR^2$.
-  On dit que $C$ est une _courbe Jordan_ s'il existe une fonction continue $func(gamma_C, [0, 1], RR^2)$ telle que :
+  On dit que $C$ est une _courbe de Jordan_ s'il existe une fonction continue $func(gamma_C, [0, 1], RR^2)$ telle que :
   - $C$ est l'image de $gamma_C$ : $im(gamma_C) = C$.
-  - $C$ est fermée : $gamma_(C)(0) = gamma_(C)(1)$
-  - $C$ est simple : $forall x, y in [0, 1[, gamma_(C)(x) = gamma_(C)(y) => x = y$.
+  - $C$ est fermée : $gamma_(C)(0) = gamma_(C)(1)$.
+  - $C$ est simple : $gamma_C$ est injective sur $[0, 1[$, c'est-à-dire $forall x, y in [0, 1[, gamma_(C)(x) = gamma_(C)(y) => x = y$.
 ])
 
 #example([
@@ -122,12 +122,12 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
 ])
 
 #definition([
-  Soit $C$ une courbe de Jordan de $RR^2$ et $R := (a, b, c, d)$ un rectangle de $RR^2$.
-  On dit que $R$ est _inscrit dans $C$_ si $a, b, c, d in C$.
+  Soit $C$ une courbe de Jordan de $RR^2$ et $R := {a, b, c, d}$ un rectangle de $RR^2$.
+  On dit que le rectangle $R$ est _inscrit dans $C$_ si $a, b, c, d in C$.
 ])
 
 #example([
-  Le rectangle $R := ((sqrt(2)  slash  2, sqrt(2)  slash  2), (-sqrt(2)  slash  2, sqrt(2)  slash  2), (-sqrt(2)  slash  2, -sqrt(2)  slash  2), (sqrt(2)  slash  2, -sqrt(2)  slash  2))$ est bien inscrit dans le cercle $C$ de la @fig-cercle-carre, en effet :
+  Le carré $R := {(sqrt(2)  slash  2, sqrt(2)  slash  2), (-sqrt(2)  slash  2, sqrt(2)  slash  2), (-sqrt(2)  slash  2, -sqrt(2)  slash  2), (sqrt(2)  slash  2, -sqrt(2)  slash  2)}$ est bien inscrit dans le cercle $C$ de la @fig-cercle-carre, en effet :
   - On a $gamma_(C)(1 slash 8) = (sqrt(2) slash 2, sqrt(2) slash 2)$, donc $(sqrt(2) slash 2, sqrt(2) slash 2) in C$.
 
   - On a $gamma_(C)(3 slash 8) = (-sqrt(2) slash 2, sqrt(2) slash 2)$, donc $(-sqrt(2) slash 2, sqrt(2) slash 2) in C$.
@@ -140,7 +140,7 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
 #theorem([
   Soit $C$ une courbe de Jordan de $RR^2$.
   Alors il existe un rectangle inscrit dans $C$.
-])
+]) <thm-rectangle-inscrit>
 
 #pagebreak()
 
@@ -1388,6 +1388,67 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
 #corollary([
   La suite des $n$#super("e") groupe d'homologie singulière de paires $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie des morphismes $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A)))$ est une théorie de l'homogie vérifiant les @def-theorie-homologie[axiomes d'Eilenberg-Steenrod].
 ])
+
+== Applications
+
+#definition([
+  On appelle _plan projectif réel_, noté $RR P^2$, le quotient de $RR^3 without {(0, 0, 0)}$ par la relation d'équivalence $~$ où pour tout $u, v in RR^3 without {(0, 0, 0)}$, on a $u ~ v$ si $u$ et $v$ sont colinéaires.
+])
+
+#proposition([
+  Le plan projectif réel est homéomorphe au quotient du disque $SS^2$ par la relation d'équivalence $~$ où pour tout $u, v in SS^2$, on a $u ~ v$ si $u = plus.minus v$.
+])
+
+#proof([
+  On pose $func(phi, RR^3 without {(0, 0, 0)}, lquotient(SS^2, ~), u, overline(u slash norm(u)))$. \
+  Alors $phi$ est continue par opérations élémentaires sur des fonctions continues.
+  - Soit $overline(u) in lquotient(SS^2, ~)$.
+    Alors $norm(u) = 1$, d'où $phi(u) = overline(u slash norm(u)) = overline(u)$.
+    Donc $phi$ est surjective.
+  - Soit $u, v in RR^3 without {(0, 0, 0)}$.
+    Alors on a :
+    $
+      phi(u) = phi(v) &<=> overline(u slash norm(u)) = overline(v slash norm(v)) in lquotient(SS^2, ~) \
+      &<=> u slash norm(u) = plus.minus v slash norm(v) \
+      &<=> u = plus.minus (norm(u) slash norm(v)) v \
+      &<=> overline(u) = overline(v) in RR P^2 
+    $
+    donc $phi$ est injective à équivalence dans $RR P^2$ près.
+  Donc $phi$ induit un homéomorphisme de $RR P^2$ dans $lquotient(SS^2, ~)$.
+])
+
+#proposition([
+  Le plan projectif réel est homéomorphe au quotient du carré $[0, 1]^2$ par la relation d'équivalence $~$ où pour tout $t in [0, 1]$, on a $(t, 0) ~ (1-t, 1)$ et $(0, t) ~ (1, 1-t)$.
+])
+
+// #proof([
+//   On pose $func(psi, [0, 1]^2, lquotient(SS^2, tilde), (x, y), overline((x - 1/2, y - 1/2) slash norm((x - 1/2, y - 1/2))))$. \
+//   Alors $phi$ est continue par opé
+// ])
+
+#figure(
+  cetz.canvas({
+    import cetz.draw: *
+
+    set-style(
+      stroke: (cap: "round"),
+      mark: (transform-shape: false, fill: black, anchor: "center"),
+    )
+    circle((0, 0), radius: 2)
+    circle((0, 0), radius: (2, 1), stroke: (dash: "dashed"))
+    mark((0, 1), 0deg, symbol: "stealth", fill: red, stroke: red)
+    mark((0, -1), 180deg, symbol: "stealth", fill: red, stroke: red)
+
+    line((2.5, 0), (3.5, 0), mark: (end: "stealth"))
+
+    line((4, 2), (8, 2), (8, -2), (4, -2), (4, 2))
+    mark((6, 2), 0deg, symbol: "stealth", fill: red, stroke: red)
+    mark((8, 0), -90deg, symbol: "stealth", fill: blue, stroke: blue)
+    mark((6, -2), 180deg, symbol: "stealth", fill: red, stroke: red)
+    mark((4, 0), 90deg, symbol: "stealth", fill: blue, stroke: blue)
+  }),
+  caption: [Représentations du plan projectif réel.],
+)
 
 #pagebreak()
 
