@@ -1734,7 +1734,7 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
       mark((11, 1.5), 90deg, fill: red, stroke: red)
       mark((11, -1.5), 90deg, fill: red, stroke: red)
     }),
-    caption: "Découpage d'un ruban de Möbius.",
+    caption: "Recollage du disque.",
   )
   De plus l'intersection $M inter D$ est homéomorphe au bord du disque, donc à un cercle.
   Puisque les déformations à chaque étapes sont continues et préservent les points identifiés, on a bien construit un homéomorphisme entre $PP^2_RR$ et $M union D$.
