@@ -81,7 +81,7 @@ Par exemple dans le cas d'un cercle, on peut évidemment toujours trouver une in
       align(center)[#cetz.canvas({
           import cetz.draw: *
 
-          line(..superformula(7, 3, 4, 10, samples: 1000))
+          line(..superformula(7, 3, 4, 10, samples: 1000), close: true)
           set-style(circle: (radius: 0.03, fill: red, stroke: red))
           line(
             (0.56, 1.17),
@@ -1389,66 +1389,356 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
   La suite des $n$#super("e") groupe d'homologie singulière de paires $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie des morphismes $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A)))$ est une théorie de l'homogie vérifiant les @def-theorie-homologie[axiomes d'Eilenberg-Steenrod].
 ])
 
-== Applications
+#pagebreak()
+
+= Espaces projectifs réels
+
+== La droite projective réelle
+
+#let equ(e) = $attach(~, br: #e)$
 
 #definition([
-  On appelle _plan projectif réel_, noté $RR P^2$, le quotient de $RR^3 without {(0, 0, 0)}$ par la relation d'équivalence $~$ où pour tout $u, v in RR^3 without {(0, 0, 0)}$, on a $u ~ v$ si $u$ et $v$ sont colinéaires.
+  On appelle _droite projective réelle_, noté $PP^1_RR$, le quotient de $RR^2 without {(0, 0)}$ par la relation d'équivalence $equ(PP^1)$ où pour tout $u, v in RR^2 without {(0, 0)}$, on a $u equ(PP^1) v$ s'il existe $lambda in RR$ tel que $u = lambda v$. \
+  Soit $(x, y) in RR^2 without {(0, 0)}$.
+  On appelle _coordonnées homogènes de $(x, y)$_ le point associé sur la droite projective réelle $[x:y] := overline((x, y)) in PP^1_RR$.
+])
+
+#remark([
+  Formellement un point de $PP^1_RR$ est induit par une droite de $RR^2$.
+])
+
+#definition([
+  On appelle _cartes affines de $PP^1_RR$_ les ensembles suivants :
+  - $A_x := {[x:y] in PP^1_RR|x!=0} = {[1:y] in PP^1_RR}$.
+  - $A_y := {[x:y] in PP^1_RR|y!=0} = {[x:1] in PP^1_RR}$.
+])
+
+#remark([
+  On a $PP^1_RR = A_x union A_y$, cette union n'est pas disjointe. \
+  On a aussi $PP^1_RR = A_y union cal(l)_oo$ où $cal(l)_oo := {[x:0] in RR^2} = {[1:0]}$, cette union est disjointe.
+  On peut dire que $A_y$ est une copie de $RR$ et $cal(l)_oo$ un point à l'infini.
 ])
 
 #proposition([
-  Le plan projectif réel est homéomorphe au quotient du disque $SS^2$ par la relation d'équivalence $~$ où pour tout $u, v in SS^2$, on a $u ~ v$ si $u = plus.minus v$.
-])
+  La droite projective réelle $PP^1_RR$ est homéomorphe au quotient du cercle $SS^1$ par la relation d'équivalence $equ(SS^1)$ où pour tout $u, v in SS^1$, on a $u equ(SS^1) v$ si $u = plus.minus v$.
+]) <prop-homeo-p1-s1>
 
 #proof([
-  On pose $func(phi, RR^3 without {(0, 0, 0)}, lquotient(SS^2, ~), u, overline(u slash norm(u)))$. \
-  Alors $phi$ est continue par opérations élémentaires sur des fonctions continues.
-  - Soit $overline(u) in lquotient(SS^2, ~)$.
-    Alors $norm(u) = 1$, d'où $phi(u) = overline(u slash norm(u)) = overline(u)$.
-    Donc $phi$ est surjective.
-  - Soit $u, v in RR^3 without {(0, 0, 0)}$.
-    Alors on a :
-    $
-      phi(u) = phi(v) &<=> overline(u slash norm(u)) = overline(v slash norm(v)) in lquotient(SS^2, ~) \
-      &<=> u slash norm(u) = plus.minus v slash norm(v) \
-      &<=> u = plus.minus (norm(u) slash norm(v)) v \
-      &<=> overline(u) = overline(v) in RR P^2 
-    $
-    donc $phi$ est injective à équivalence dans $RR P^2$ près.
-  Donc $phi$ induit un homéomorphisme de $RR P^2$ dans $lquotient(SS^2, ~)$.
+  On pose $func(i, SS^1, PP^1_RR, (x, y), [x:y])$.
+  Alors $i$ est bien définie, pour tout $u, v in SS^1$, si $u equ(SS^1) v$, alors $u = plus.minus v$, d'où $i(u) = i(v)$.
+  Et $i$ est continue par composition de fonctions continues.
+  Donc $func(I, lquotient(SS^1, equ(SS^1)), PP^1_RR)$ telle que $I compose pi = i$ est continue.
+
+  Réciproquement on pose $func(j, RR^2, lquotient(SS^1, equ(SS^1)), u, overline(u slash norm(u)))$.
+  Alors $j$ est bien définie, en effet pour tout $u, v in RR^2$, si $u equ(PP^1) v$, alors il existe $lambda in RR$ tel que $u = lambda v$, d'où $j(u) = j(lambda v) = j(v)$.
+  Et $j$ est continue par composition de fonctions continues.
+  Donc $func(J, PP^1_RR, lquotient(SS^1, equ(SS^1)))$ telle que $J compose pi = j$ est continue.
+
+  De plus il est clair que $J compose I = id$, donc $I$ est bien un homéomorphisme entre $PP^1_RR$ et $lquotient(SS^1, equ(SS^1))$.
+])
+
+== Le plan projectif réel
+
+#definition([
+  On appelle _plan projectif réel_, noté $PP^2_RR$, le quotient de $RR^3 without {(0, 0, 0)}$ par la relation d'équivalence $equ(PP^2)$ où pour tout $u, v in RR^3 without {(0, 0, 0)}$, on a $u equ(PP^2) v$ s'il existe $lambda in RR$ tel que $u = lambda v$. \
+  Soit $(x, y, z) in RR^3 without {(0, 0, 0)}$.
+  On appelle _coordonnées homogènes de $(x, y, z)$_ le point associé sur le plan projectif réel $[x:y:z] := overline((x, y, z)) in PP^2_RR$.
+])
+
+#remark([
+  Formellement un point de $PP^2_RR$ est induit par une droite de $RR^3$ et une droite de $PP^2_RR$ est induite par un plan de $RR^3$.
+  On déduit de la formule de Grassmann. que deux droites de $PP^2_RR$ non-confondues s'intersectent toujours en un point de $PP^2_RR$.
+])
+
+#definition([
+  On appelle _cartes affines de $PP^2_RR$_ les ensembles suivants :
+  - $A_x := {[x:y:z] in PP^1_RR|x!=0} = {[1:y:z] in PP^2_RR}$.
+  - $A_y := {[x:y:z] in PP^1_RR|y!=0} = {[x:1:z] in PP^2_RR}$.
+  - $A_z := {[x:y:z] in PP^1_RR|z!=0} = {[x:y:1] in PP^2_RR}$.
+])
+
+#remark([
+  On a $PP^2_RR = A_x union A_y union A_z$, cette union n'est pas disjointe. \
+  On a aussi $PP^2_RR = A_z union cal(l)_oo$ où $cal(l)_oo := {[x:y:0] in RR^2}$, cette union est disjointe.
+  On peut dire que $A_z$ est une copie de $RR^2$ et $cal(l)_oo$ une copie de $PP^1_RR$.
 ])
 
 #proposition([
-  Le plan projectif réel est homéomorphe au quotient du carré $[0, 1]^2$ par la relation d'équivalence $~$ où pour tout $t in [0, 1]$, on a $(t, 0) ~ (1-t, 1)$ et $(0, t) ~ (1, 1-t)$.
+  Le plan projectif réel $PP^2_RR$ est homéomorphe au quotient de la sphère $SS^2$ par la relation d'équivalence $equ(SS^2)$ où pour tout $u, v in SS^2$, on a $u equ(SS^2) v$ si $u = plus.minus v$.
+]) <prop-homeo-p2-s2>
+
+#proof([
+  La démonstration est similaire à celle de la @prop-homeo-p1-s1, on identifie chaque élément de $PP^2_RR$ à deux éléments antipodaux de $SS^2$.
 ])
 
-// #proof([
-//   On pose $func(psi, [0, 1]^2, lquotient(SS^2, tilde), (x, y), overline((x - 1/2, y - 1/2) slash norm((x - 1/2, y - 1/2))))$. \
-//   Alors $phi$ est continue par opé
-// ])
+#proposition([
+  Le plan projectif réel $PP^2_RR$ est homéomorphe au quotient du carré $[0, 1]^2$ par la relation d'équivalence $equ([0, 1])$ où pour tout $t in [0, 1]$, on a $(t, 0) equ([0, 1]) (1-t, 1)$ et $(0, t) equ([0, 1]) (1, 1-t)$.
+]) <prop-homeo-p2-carre>
 
-#figure(
-  cetz.canvas({
-    import cetz.draw: *
+#proof([
+  D'après la @prop-homeo-p2-s2 le plan projectif $PP^2_RR$ est homéomorphe à $lquotient(SS^2, equ(SS^2))$, ensuite puisque l'on identifie les points antipodaux de $SS^2$, on peut considérer seulement l'hémisphère nord de $SS^2$ en identifiant les points antipodaux du cercle de l'équateur :
+  #figure(
+    cetz.canvas({
+      import cetz.draw: *
 
-    set-style(
-      stroke: (cap: "round"),
-      mark: (transform-shape: false, fill: black, anchor: "center"),
-    )
-    circle((0, 0), radius: 2)
-    circle((0, 0), radius: (2, 1), stroke: (dash: "dashed"))
-    mark((0, 1), 0deg, symbol: "stealth", fill: red, stroke: red)
-    mark((0, -1), 180deg, symbol: "stealth", fill: red, stroke: red)
+      set-style(
+        stroke: (cap: "round"),
+        mark: (transform-shape: false, anchor: "center"),
+      )
+      circle((0, 0), radius: 2)
+      circle((0, 0), radius: (2, 1), stroke: (dash: "dashed"))
 
-    line((2.5, 0), (3.5, 0), mark: (end: "stealth"))
+      arc-through((4, 0), (6, 2), (8, 0))
+      circle((6, 0), radius: (2, 1), stroke: (dash: "dashed"))
 
-    line((4, 2), (8, 2), (8, -2), (4, -2), (4, 2))
-    mark((6, 2), 0deg, symbol: "stealth", fill: red, stroke: red)
-    mark((8, 0), -90deg, symbol: "stealth", fill: blue, stroke: blue)
-    mark((6, -2), 180deg, symbol: "stealth", fill: red, stroke: red)
-    mark((4, 0), 90deg, symbol: "stealth", fill: blue, stroke: blue)
-  }),
-  caption: [Représentations du plan projectif réel.],
-)
+      line((2.5, 0), (3.5, 0), mark: (end: "stealth", fill: black))
+
+      set-style(mark: (start: "stealth", end: "stealth"))
+      mark(
+        (2 * calc.cos(calc.pi / 4), calc.sin(calc.pi / 4)),
+        -30deg,
+        fill: red,
+        stroke: red,
+      )
+      mark(
+        (-2 * calc.cos(calc.pi / 4), -calc.sin(calc.pi / 4)),
+        150deg,
+        fill: red,
+        stroke: red,
+      )
+      mark(
+        (-2 * calc.cos(calc.pi / 4), calc.sin(calc.pi / 4)),
+        25deg,
+        fill: blue,
+        stroke: blue,
+      )
+      mark(
+        (2 * calc.cos(calc.pi / 4), -calc.sin(calc.pi / 4)),
+        -155deg,
+        fill: blue,
+        stroke: blue,
+      )
+      mark((0, 2), 0deg, fill: green, stroke: green)
+      mark((0, -2), 180deg, fill: green, stroke: green)
+
+      mark(
+        (6 + 2 * calc.cos(calc.pi / 4), calc.sin(calc.pi / 4)),
+        -30deg,
+        fill: red,
+        stroke: red,
+      )
+      mark(
+        (6 - 2 * calc.cos(calc.pi / 4), -calc.sin(calc.pi / 4)),
+        150deg,
+        fill: red,
+        stroke: red,
+      )
+      mark(
+        (6 - 2 * calc.cos(calc.pi / 4), calc.sin(calc.pi / 4)),
+        25deg,
+        fill: blue,
+        stroke: blue,
+      )
+      mark(
+        (6 + 2 * calc.cos(calc.pi / 4), -calc.sin(calc.pi / 4)),
+        -155deg,
+        fill: blue,
+        stroke: blue,
+      )
+    }),
+    caption: "Passage de la sphère à la demi-sphère.",
+  )
+  On peut déformer continûment cette demi-sphère sur le disque en identifiant toujours les points antipodaux du cercle :
+  #figure(
+    cetz.canvas({
+      import cetz.draw: *
+
+      set-style(
+        stroke: (cap: "round"),
+        mark: (transform-shape: false, anchor: "center"),
+      )
+
+      arc-through((-2, 0), (0, 2), (2, 0))
+      circle((0, 0), radius: (2, 1), stroke: (dash: "dashed"))
+
+      circle((6, 0), radius: 2)
+
+      line((2.5, 0), (3.5, 0), mark: (end: "stealth", fill: black))
+
+      set-style(mark: (start: "stealth", end: "stealth"))
+      mark(
+        (2 * calc.cos(calc.pi / 4), calc.sin(calc.pi / 4)),
+        -30deg,
+        fill: red,
+        stroke: red,
+      )
+      mark(
+        (-2 * calc.cos(calc.pi / 4), -calc.sin(calc.pi / 4)),
+        150deg,
+        fill: red,
+        stroke: red,
+      )
+      mark(
+        (-2 * calc.cos(calc.pi / 4), calc.sin(calc.pi / 4)),
+        25deg,
+        fill: blue,
+        stroke: blue,
+      )
+      mark(
+        (2 * calc.cos(calc.pi / 4), -calc.sin(calc.pi / 4)),
+        -155deg,
+        fill: blue,
+        stroke: blue,
+      )
+
+      circle((6, 0), radius: 2, stroke: none, fill: luma(50%, 40%))
+      mark((6, 2), 0deg, fill: red, stroke: red)
+      mark((8, 0), -90deg, fill: blue, stroke: blue)
+      mark((6, -2), 180deg, fill: red, stroke: red)
+      mark((4, 0), 90deg, fill: blue, stroke: blue)
+    }),
+    caption: "Passage de la demi-sphère au disque.",
+  )
+  On peut de nouveau déformer continûment ce disque sur le carré en identifiant les points sur le bord du carré et en conservant l'orientation :
+  #figure(
+    cetz.canvas({
+      import cetz.draw: *
+
+      set-style(
+        stroke: (cap: "round"),
+        mark: (transform-shape: false, anchor: "center"),
+      )
+      circle((0, 0), radius: 2)
+      line((4, 2), (8, 2), (8, -2), (4, -2), (4, 2))
+
+      line((2.5, 0), (3.5, 0), mark: (end: "stealth", fill: black))
+
+      set-style(mark: (start: "stealth", end: "stealth", symbol: "stealth"))
+
+      circle((0, 0), radius: 2, stroke: none, fill: luma(50%, 40%))
+      mark((0, 2), 0deg, fill: red, stroke: red)
+      mark((2, 0), -90deg, fill: blue, stroke: blue)
+      mark((0, -2), 180deg, fill: red, stroke: red)
+      mark((-2, 0), 90deg, fill: blue, stroke: blue)
+
+      line(
+        (4, 2),
+        (8, 2),
+        (8, -2),
+        (4, -2),
+        (4, 2),
+        stroke: none,
+        fill: luma(50%, 40%),
+        mark: none,
+      )
+      mark((6, 2), 0deg, fill: red, stroke: red)
+      mark((8, 0), -90deg, fill: blue, stroke: blue)
+      mark((6, -2), 180deg, fill: red, stroke: red)
+      mark((4, 0), 90deg, fill: blue, stroke: blue)
+    }),
+    caption: "Passage du disque au carré.",
+  )
+  Puisque les déformations à chaque étapes sont continues et préservent les points identifiés, on a bien construit un homéomorphisme entre $PP^2_RR$ et $[0, 1]^2$.
+])
+
+#proposition([
+  Le plan projectif réel $PP^2_RR$ est homéomorphe à l'union d'un ruban de Möbius $M$ et d'un disque $D$ tels que $M inter D$ est homéomorphe à un cercle.
+]) <prop-homeo-p2-mobius-disque>
+
+#proof([
+  D'après la @prop-homeo-p2-carre le plan projectif $PP^2_RR$ est homéomorphe à $lquotient([0, 1]^2, equ([0, 1]))$, ensuite on peut découper dans ce carré un ruban de Möbius.
+  #figure(
+    cetz.canvas({
+      import cetz.draw: *
+
+      set-style(
+        stroke: (cap: "round"),
+        mark: (transform-shape: false, anchor: "center"),
+      )
+      line((-2, 2), (2, 2), (2, -2), (-2, -2), (-2, 2), fill: luma(50%, 40%))
+      line((4, 2), (8, 2), (8, -2), (4, -2), (4, 2))
+      line(
+        (5.5, 2),
+        (6.5, 2),
+        (6.5, -2),
+        (5.5, -2),
+        (5.5, 2),
+        fill: luma(50%, 40%),
+        stroke: (dash: "dashed"),
+      )
+
+      content((6, 0), $M$)
+
+      line((2.5, 0), (3.5, 0), mark: (end: "stealth", fill: black))
+
+      set-style(mark: (start: "stealth", end: "stealth", symbol: "stealth"))
+
+      mark((0, 2), 0deg, fill: red, stroke: red)
+      mark((2, 0), -90deg, fill: blue, stroke: blue)
+      mark((0, -2), 180deg, fill: red, stroke: red)
+      mark((-2, 0), 90deg, fill: blue, stroke: blue)
+
+      mark((6, 2), 0deg, fill: red, stroke: red)
+      mark((8, 0), -90deg, fill: blue, stroke: blue)
+      mark((6, -2), 180deg, fill: red, stroke: red)
+      mark((4, 0), 90deg, fill: blue, stroke: blue)
+    }),
+    caption: "Découpage d'un ruban de Möbius.",
+  )
+  On peut recoller les parties restantes en suivant l'orientation des flèches bleues, puis l'orientation des flèches rouges pour obtenir un disque :
+  #figure(
+    cetz.canvas({
+      import cetz.draw: *
+
+      set-style(
+        stroke: (cap: "round"),
+        mark: (transform-shape: false, anchor: "center"),
+      )
+      line(
+        (-2, 2),
+        (-0.5, 2),
+        (-0.5, -2),
+        (-2, -2),
+        (-2, 2),
+        fill: luma(50%, 40%),
+      )
+      line((0.5, 2), (2, 2), (2, -2), (0.5, -2), (0.5, 2), fill: luma(50%, 40%))
+
+      line((4, 2), (7, 2), (7, -2), (4, -2), (4, 2), fill: luma(50%, 40%))
+      line((5.5, 2), (5.5, -2))
+
+      circle((11, 0), radius: 2, fill: luma(50%, 40%))
+      line((11, 2), (11, -2))
+
+      line((2.5, 0), (3.5, 0), mark: (end: "stealth", fill: black))
+      line((7.5, 0), (8.5, 0), mark: (end: "stealth", fill: black))
+
+      content((10, 0), $D$)
+
+      set-style(mark: (start: "stealth", end: "stealth", symbol: "stealth"))
+
+      mark((-1.25, 2), 0deg, fill: red, stroke: red)
+      mark((1.25, 2), 0deg, fill: red, stroke: red)
+      mark((2, 0), -90deg, fill: blue, stroke: blue)
+      mark((-1.25, -2), 180deg, fill: red, stroke: red)
+      mark((1.25, -2), 180deg, fill: red, stroke: red)
+      mark((-2, 0), 90deg, fill: blue, stroke: blue)
+
+      mark((6.25, 2), 0deg, fill: red, stroke: red)
+      mark((4.75, 2), 180deg, fill: red, stroke: red)
+      mark((5.5, 0), 90deg, fill: blue, stroke: blue)
+      mark((6.25, -2), 180deg, fill: red, stroke: red)
+      mark((4.75, -2), 0deg, fill: red, stroke: red)
+
+      mark((11, 0), 90deg, fill: blue, stroke: blue)
+      mark((11, 1.5), 90deg, fill: red, stroke: red)
+      mark((11, -1.5), 90deg, fill: red, stroke: red)
+    }),
+    caption: "Découpage d'un ruban de Möbius.",
+  )
+  De plus l'intersection $M inter D$ est homéomorphe au bord du disque, donc à un cercle.
+  Puisque les déformations à chaque étapes sont continues et préservent les points identifiés, on a bien construit un homéomorphisme entre $PP^2_RR$ et $M union D$.
+])
 
 #pagebreak()
 
