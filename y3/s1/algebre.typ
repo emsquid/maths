@@ -698,13 +698,13 @@
 
 #definition([
   Soit $E$ un $RR$-espace vectoriel.
-  On appelle _produit scalaire_ sur $E$, noté $dotproduct(dot, dot)$, une forme bilinéaire symétrique définie positive.
-  Si $E$ est de dimension finie, on appelle _espace euclidien_ le couple $(E, dotproduct(dot, dot))$.
+  On appelle _produit scalaire_ sur $E$, noté $innerproduct(dot, dot)$, une forme bilinéaire symétrique définie positive.
+  Si $E$ est de dimension finie, on appelle _espace euclidien_ le couple $(E, innerproduct(dot, dot))$.
 ])
 
 #definition([
-  Soit $(E, dotproduct(dot, dot))$ un espace euclidien.
-  On appelle _norme associée au produit scalaire_, l'application $func(||dot||, E, RR_+, x, sqrt(dotproduct(x, x)))$.
+  Soit $(E, innerproduct(dot, dot))$ un espace euclidien.
+  On appelle _norme associée au produit scalaire_, l'application $func(||dot||, E, RR_+, x, sqrt(innerproduct(x, x)))$.
 ])
 
 == Norme d'un vecteur
@@ -712,73 +712,73 @@
 #theorem(
   title: "Inégalité de Cauchy-Schwarz",
   [
-    Soit $(E, dotproduct(dot, dot))$ un espace euclidien.
+    Soit $(E, innerproduct(dot, dot))$ un espace euclidien.
     Alors
-    $ forall x, y in E, |dotproduct(x, y)| <= ||x||||y|| $
+    $ forall x, y in E, |innerproduct(x, y)| <= ||x||||y|| $
     avec égalité si et seulement si les deux éléments sont liés.
   ],
 )
 
 #proposition([
-  Soit $(E, dotproduct(dot, dot))$ un espace euclidien.
+  Soit $(E, innerproduct(dot, dot))$ un espace euclidien.
   Alors l'application $||dot||$ est une norme.
 ])
 
 == Orthogonalité, base orthogonale et base orthonormée
 
 #definition([
-  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $x, y in E$.
-  On dit que $x$ et $y$ sont _orthogonaux_, noté $x perp y$, si $dotproduct(x, y) = 0$.
+  Soit $(E, innerproduct(dot, dot))$ un espace euclidien et $x, y in E$.
+  On dit que $x$ et $y$ sont _orthogonaux_, noté $x perp y$, si $innerproduct(x, y) = 0$.
 ])
 
 #definition([
-  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $F$ un sous-ensemble de $E$.
+  Soit $(E, innerproduct(dot, dot))$ un espace euclidien et $F$ un sous-ensemble de $E$.
   On appelle _orthogonal_ de $F$, noté $F^perp$, l'ensemble
-  $ F^perp := {x in E | forall y in F, dotproduct(x, y) = 0}. $
+  $ F^perp := {x in E | forall y in F, innerproduct(x, y) = 0}. $
 ])
 
 #notation([
-  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $x in E$.
+  Soit $(E, innerproduct(dot, dot))$ un espace euclidien et $x in E$.
   On note $x^perp := {x}^perp$.
 ])
 
 #proposition([
-  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $F$ un sous-ensemble de $E$.
+  Soit $(E, innerproduct(dot, dot))$ un espace euclidien et $F$ un sous-ensemble de $E$.
   Alors $F^perp$ est un sous-espace vectoriel de $E$.
 ])
 
 #proposition([
-  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $x, y in E$. Alors
+  Soit $(E, innerproduct(dot, dot))$ un espace euclidien et $x, y in E$. Alors
   $
     x perp y <=> ||x+y||^2 = ||x||^2 + ||y||^2 <=> ||x-y||^2 = ||x||^2 + ||y||^2.
   $
 ])
 
 #proposition([
-  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $x in E without {0}$. Alors $span(x)^perp = x^perp$ et
+  Soit $(E, innerproduct(dot, dot))$ un espace euclidien et $x in E without {0}$. Alors $span(x)^perp = x^perp$ et
   $ E = span(x) plus.circle x^perp. $
 ])
 
 #definition([
-  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $cal(E) = (e_1, ..., e_n)$ une base de $E$.
+  Soit $(E, innerproduct(dot, dot))$ un espace euclidien et $cal(E) = (e_1, ..., e_n)$ une base de $E$.
   - On dit que $cal(E)$ est _orthogonale_ si elle vérifie
-    $ forall i, j in {1, ..., n}, i != j => dotproduct(e_i, e_j) = 0. $
+    $ forall i, j in {1, ..., n}, i != j => innerproduct(e_i, e_j) = 0. $
   - On dit que $cal(E)$ est _orthonormée_ si elle vérifie
-    $ forall i, j in {1, ..., n}, dotproduct(e_i, e_j) = delta_(i, j). $
+    $ forall i, j in {1, ..., n}, innerproduct(e_i, e_j) = delta_(i, j). $
 ])
 
 #remark([
-  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $cal(E) = (e_1, ..., e_n)$ une base orthogonale de $E$.
+  Soit $(E, innerproduct(dot, dot))$ un espace euclidien et $cal(E) = (e_1, ..., e_n)$ une base orthogonale de $E$.
   Alors la famille $(e_1/(||e_1||), ..., e_n/(||e_n||))$ est une base orthonormée de $E$.
 ])
 
 #theorem([
-  Soit $(E, dotproduct(dot, dot))$ un espace euclidien.
+  Soit $(E, innerproduct(dot, dot))$ un espace euclidien.
   Alors il existe une base orthonormée de $E$.
 ])
 
 #proposition([
-  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $F$ un sous-espace vectoriel de $E$. Alors
+  Soit $(E, innerproduct(dot, dot))$ un espace euclidien et $F$ un sous-espace vectoriel de $E$. Alors
   + $E = F plus.circle F^perp$,
   + $dim(F^perp) = dim(E) - dim(F)$,
   + $(F^perp)^perp = F$.
@@ -787,7 +787,7 @@
 #theorem(
   title: "Procédé d'orthogonalisation de Gram-Schmidt",
   [
-    Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $(e_1, ..., e_n)$ une base de $E$.
+    Soit $(E, innerproduct(dot, dot))$ un espace euclidien et $(e_1, ..., e_n)$ une base de $E$.
     Alors il existe une base orthonormée $(f_1, ..., f_n)$ de $E$ telle que
     $ forall k in {1, ..., n}, span(e_1, ..., e_k) = span(f_1, ..., f_k). $
   ],
@@ -798,15 +798,15 @@
   - Pour $k = 1$, on pose $f_1 := e_1/(||e_1||)$.
   - Pour $k > 1$, supposons qu'il existe une famille orthonormée $(f_1, ..., f_(k-1))$ telle que
     $ span(e_1, ..., e_(k-1)) = span(f_1, ..., f_(k-1)) $
-    alors on pose $f'_k := e_k - sum_(i=1)^(k-1) dotproduct(e_k, f_i) f_i$. Soit $j in {1, ..., k-1}$, alors
+    alors on pose $f'_k := e_k - sum_(i=1)^(k-1) innerproduct(e_k, f_i) f_i$. Soit $j in {1, ..., k-1}$, alors
     $
-      dotproduct(f'_k, f_j) &= dotproduct(e_k - sum_(i=1)^(k-1) dotproduct(e_k, f_i) f_i, f_j)
+      innerproduct(f'_k, f_j) &= innerproduct(e_k - sum_(i=1)^(k-1) innerproduct(e_k, f_i) f_i, f_j)
     $
     et par bilinéarité du produit scalaire
     $
-      dotproduct(f'_k, f_j) &= dotproduct(e_k, f_j) - sum_(i=1)^(k-1) dotproduct(e_k, f_i) dotproduct(f_i, f_j) \
-      &= dotproduct(e_k, f_j) - sum_(i=1)^(k-1) dotproduct(e_k, f_i) delta_(i, j) \
-      &= dotproduct(e_k, f_j) - dotproduct(e_k, f_j) = 0.
+      innerproduct(f'_k, f_j) &= innerproduct(e_k, f_j) - sum_(i=1)^(k-1) innerproduct(e_k, f_i) innerproduct(f_i, f_j) \
+      &= innerproduct(e_k, f_j) - sum_(i=1)^(k-1) innerproduct(e_k, f_i) delta_(i, j) \
+      &= innerproduct(e_k, f_j) - innerproduct(e_k, f_j) = 0.
     $
     Enfin on pose $f_k := (f'_k)/(||f'_k||)$, donc la famille $(f_1, ..., f_k)$ est orthonormée et vérifie l'égalité.
 ])
@@ -824,14 +824,14 @@
 ])
 
 #definition([
-  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $f in cal(L)(E)$ un endomorphisme.
+  Soit $(E, innerproduct(dot, dot))$ un espace euclidien et $f in cal(L)(E)$ un endomorphisme.
   On dit que $f$ est un _endomorphisme orthogonal_ si
-  $ forall x, y in E, dotproduct(f(x), f(y)) = dotproduct(x, y). $
+  $ forall x, y in E, innerproduct(f(x), f(y)) = innerproduct(x, y). $
   On appelle _groupe orthogonal_, noté $O(E)$, le sous-groupe des endomorphismes orthogonaux.
 ])
 
 #proposition([
-  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $f in cal(L)(E)$ un endomorphisme. Alors les énoncés suivants sont équivalents
+  Soit $(E, innerproduct(dot, dot))$ un espace euclidien et $f in cal(L)(E)$ un endomorphisme. Alors les énoncés suivants sont équivalents
   + $f$ est orthogonal.
   + Soit $x in E$, alors $||f(x)|| = ||x||$.
   + Soit $cal(E)$ une base orthonormée de $E$, alors $[f]_cal(E) in O_n (RR)$.
@@ -839,7 +839,7 @@
 ])
 
 #remark([
-  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $f in cal(L)(E)$ un endomorphisme orthogonal.
+  Soit $(E, innerproduct(dot, dot))$ un espace euclidien et $f in cal(L)(E)$ un endomorphisme orthogonal.
   Alors on remarque que $det(f) = plus.minus 1$, on appelle _groupe spécial orthogonal_ le sous-groupe
   $ S O(E) := O(E) inter "det"^(-1)(1). $
 ])
@@ -848,25 +848,25 @@
 
 #proposition([
   Soit $[a, b]$ un intervalle fermé de $RR$ et $func(w, [a, b], R_+ without {0})$. Alors la forme bilinéaire symétrique définie par
-  $ forall P, Q in RR[X], dotproduct(P, Q) := integral_a^b P(t)Q(t)w(t) dif t $
+  $ forall P, Q in RR[X], innerproduct(P, Q) := integral_a^b P(t)Q(t)w(t) dif t $
   est un produit scalaire.
 ])
 
 #proof([
   Soit $P in RR[X]$, alors $P^2 w$ est continue et positive, de plus
   $
-    dotproduct(P, P) = 0 &=> integral_a^b P^2 (t) w(t) = 0 \
+    innerproduct(P, P) = 0 &=> integral_a^b P^2 (t) w(t) = 0 \
     &=> forall t in [a, b], P^2 (t) w(t) = 0 \
     &=> forall t in [a, b], P(t) = 0 \
     &=> P = 0
   $
-  donc $dotproduct(dot, dot)$ est un produit scalaire.
+  donc $innerproduct(dot, dot)$ est un produit scalaire.
 ])
 
 #definition([
-  Soit $dotproduct(dot, dot)$ un produit scalaire sur $RR[X]$. On appelle _famille de polynômes orthogonaux_, une famille $(P_n)_(n in NN)$ de polynômes qui vérifie
+  Soit $innerproduct(dot, dot)$ un produit scalaire sur $RR[X]$. On appelle _famille de polynômes orthogonaux_, une famille $(P_n)_(n in NN)$ de polynômes qui vérifie
   $
-    cases(forall i"," j in NN"," i != j => dotproduct(P_i, P_j) = 0, forall n in NN"," deg(P_n) = n)
+    cases(forall i"," j in NN"," i != j => innerproduct(P_i, P_j) = 0, forall n in NN"," deg(P_n) = n)
   $
 ])
 
@@ -892,11 +892,11 @@
 #proof([
   Soit $P, Q in RR_(n-1) [X]$, alors
   $
-    dotproduct(T_n (P), Q) &= dotproduct(p_n (X P), Q) \
-    &= dotproduct(x P, p_n (Q)) \
-    &= dotproduct(x P, Q) \
-    &= dotproduct(P, X Q)
-    = dotproduct(P, T_n (Q))
+    innerproduct(T_n (P), Q) &= innerproduct(p_n (X P), Q) \
+    &= innerproduct(x P, p_n (Q)) \
+    &= innerproduct(x P, Q) \
+    &= innerproduct(P, X Q)
+    = innerproduct(P, T_n (Q))
   $
   donc $T_n$ est symétrique.
 ])
@@ -905,37 +905,37 @@
 == Endomorphismes symétriques
 
 #notation([
-  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
+  Soit $(E, innerproduct(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
   On note $func(theta_u, E, E^*)$, l'application définie par
-  $ forall y in E, theta_u (y) := x |-> dotproduct(u(x), y). $
+  $ forall y in E, theta_u (y) := x |-> innerproduct(u(x), y). $
 ])
 
 #definition([
-  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
+  Soit $(E, innerproduct(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
   On appelle _application transposée_ (ou _adjoint_) de $u$, l'application définie par $u^* := theta^(-1)_id compose theta_u$.
 ])
 
 #proposition([
-  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
+  Soit $(E, innerproduct(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
   Alors
-  $ forall x, y in E, dotproduct(x, u^*(y)) = dotproduct(u(x), y). $
+  $ forall x, y in E, innerproduct(x, u^*(y)) = innerproduct(u(x), y). $
   Soit $cal(E)$ une base orthonormée de $E$, on a $[u^*]_cal(E) = transpose([u]_cal(E))$.
 ])
 
 #proof([
   Soit $x, y in E$. Alors
   $
-    dotproduct(x, u^*(y)) = theta_id (u^*(y))(x) = (theta_id compose u^*)(y)( x ) = theta_u (y)(x) = dotproduct(u(x), y).
+    innerproduct(x, u^*(y)) = theta_id (u^*(y))(x) = (theta_id compose u^*)(y)( x ) = theta_u (y)(x) = innerproduct(u(x), y).
   $
 ])
 
 #definition([
-  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
+  Soit $(E, innerproduct(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
   On dit que $u$ est _symétrique_ (ou _auto-adjoint_), si $u^* = u$.
 ])
 
 #proposition([
-  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
+  Soit $(E, innerproduct(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
   Alors $u$ est symétrique si et seulement si sa matrice dans une base orthonormée de $E$ est symétrique.
 ])
 
@@ -957,7 +957,7 @@
 ])
 
 #theorem([
-  Soit $(E, dotproduct(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
+  Soit $(E, innerproduct(dot, dot))$ un espace euclidien et $u in cal(L)(E)$ un endomorphisme.
   Alors $u$ est diagonalisable dans une base orthonormée de $E$.
 ])
 
@@ -966,7 +966,7 @@
 ])
 
 #corollary([
-  Soit $(E, dotproduct(dot, dot))$ un espace euclidien, $Q$ une forme quadratique définie positive sur $E$ et $lambda_1 <= ... <= lambda_n$ ses valeurs propres ordonnées. Alors
+  Soit $(E, innerproduct(dot, dot))$ un espace euclidien, $Q$ une forme quadratique définie positive sur $E$ et $lambda_1 <= ... <= lambda_n$ ses valeurs propres ordonnées. Alors
   $ forall x in E, lambda_1||x||^2 <= Q(x) <= lambda_n||x||^2 $
   et ces inégalités sont optimales.
 ])

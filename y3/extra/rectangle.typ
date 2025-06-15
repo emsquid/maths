@@ -23,6 +23,24 @@
   }
 )
 
+#let superformula-3d(
+  m,
+  n1,
+  n2,
+  n3,
+  samples: 100,
+) = (
+  for x in range(0, samples + 1) {
+    let x = 2 * calc.pi * x / samples
+    let r = calc.pow(
+      calc.pow(calc.abs(calc.cos(m * x / 4)), n2)
+        + calc.pow(calc.abs(calc.sin(m * x / 4)), n3),
+      -1 / n1,
+    )
+
+    ((r * calc.cos(x), 0, r * calc.sin(x)),)
+  }
+)
 #show: maths.with(
   title: "Problème du rectangle inscrit",
   authors: ("Emanuel Morille",),
@@ -30,6 +48,10 @@
   color: "#718355",
   date: true,
 )
+
+#import "@preview/wordometer:0.1.4": *
+#show: word-count
+#total-characters
 
 #pagebreak()
 
@@ -939,7 +961,7 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
       import cetz.draw: *
 
       set-style(
-        stroke: (cap: "round"),
+        stroke: (cap: "round", join: "round"),
         mark: (transform-shape: false, fill: black),
       )
       line((-2.75, 0, 0), (4, 0, 0), mark: (end: "stealth"))
@@ -953,7 +975,7 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
         (2, 0, 0),
         (0, 2, 0),
         (0, 0, 2),
-        fill: luma(50%, 50%),
+        fill: luma(50%, 40%),
         stroke: none,
       )
 
@@ -1391,32 +1413,36 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
 
 #pagebreak()
 
-= Espaces projectifs réels
+= Droite et plan projectifs réels
 
 == La droite projective réelle
 
 #let equ(e) = $attach(~, br: #e)$
 
 #definition([
-  On appelle _droite projective réelle_, noté $PP^1_RR$, le quotient de $RR^2 without {(0, 0)}$ par la relation d'équivalence $equ(PP^1)$ où pour tout $u, v in RR^2 without {(0, 0)}$, on a $u equ(PP^1) v$ s'il existe $lambda in RR$ tel que $u = lambda v$. \
-  Soit $(x, y) in RR^2 without {(0, 0)}$.
+  On appelle _droite projective réelle_, noté $PP^1_RR$, le quotient de $RR^2 without {0}$ par la relation d'équivalence $equ(PP^1)$ où pour tout $u, v in RR^2 without {0}$, on a $u equ(PP^1) v$ s'il existe $lambda in RR without {0}$ tel que $u = lambda v$. \
+  Soit $(x, y) in RR^2 without {0}$.
   On appelle _coordonnées homogènes de $(x, y)$_ le point associé sur la droite projective réelle $[x:y] := overline((x, y)) in PP^1_RR$.
 ])
 
 #remark([
-  Formellement un point de $PP^1_RR$ est induit par une droite de $RR^2$.
+  Formellement un point de $PP^1_RR$ est induit par une droite linéaire de $RR^2$.
 ])
 
 #definition([
-  On appelle _cartes affines de $PP^1_RR$_ les ensembles suivants :
-  - $A_x := {[x:y] in PP^1_RR|x!=0} = {[1:y] in PP^1_RR}$.
-  - $A_y := {[x:y] in PP^1_RR|y!=0} = {[x:1] in PP^1_RR}$.
+  On appelle _cartes affines de $PP^1_RR$_ les sous-ensembles suivants :
+  - $A_x := {[x:y] in PP^1_RR | x!=0} = {[1:y] in PP^1_RR}$.
+  - $A_y := {[x:y] in PP^1_RR | y!=0} = {[x:1] in PP^1_RR}$.
 ])
 
 #remark([
-  On a $PP^1_RR = A_x union A_y$, cette union n'est pas disjointe. \
-  On a aussi $PP^1_RR = A_y union cal(l)_oo$ où $cal(l)_oo := {[x:0] in RR^2} = {[1:0]}$, cette union est disjointe.
-  On peut dire que $A_y$ est une copie de $RR$ et $cal(l)_oo$ un point à l'infini.
+  Les cartes affines $A_x$ et $A_y$ sont homéomorphes à $RR$. \
+  On a $PP^1_RR = A_x union A_y$, mais surtout $PP^1_RR = A_y union.sq {oo}$ où $oo := [1:0]$. \
+  Intuitivement $PP^1_RR$ s'obtient donc à partir de $RR$ auquel on ajoute un point à l'infini.
+])
+
+#remark([
+  La proposition suivante est naturelle puisque $PP^1_RR$ est donnée par les droites linéaires de $RR^2$ et $SS^1$ par les demi-droites linéaires de $RR^2$.
 ])
 
 #proposition([
@@ -1426,41 +1452,55 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
 #proof([
   On pose $func(i, SS^1, PP^1_RR, (x, y), [x:y])$.
   Alors $i$ est bien définie, pour tout $u, v in SS^1$, si $u equ(SS^1) v$, alors $u = plus.minus v$, d'où $i(u) = i(v)$.
-  Et $i$ est continue par composition de fonctions continues.
-  Donc $func(I, lquotient(SS^1, equ(SS^1)), PP^1_RR)$ telle que $I compose pi = i$ est continue.
+  De plus $i$ est continue par composition de fonctions continues.
+  Donc l'application $func(I, lquotient(SS^1, equ(SS^1)), PP^1_RR)$ telle que $I compose pi = i$ est continue.
 
-  Réciproquement on pose $func(j, RR^2, lquotient(SS^1, equ(SS^1)), u, overline(u slash norm(u)))$.
-  Alors $j$ est bien définie, en effet pour tout $u, v in RR^2$, si $u equ(PP^1) v$, alors il existe $lambda in RR$ tel que $u = lambda v$, d'où $j(u) = j(lambda v) = j(v)$.
-  Et $j$ est continue par composition de fonctions continues.
-  Donc $func(J, PP^1_RR, lquotient(SS^1, equ(SS^1)))$ telle que $J compose pi = j$ est continue.
+  Réciproquement on pose $func(j, RR^2 without {0}, lquotient(SS^1, equ(SS^1)), u, overline(u slash norm(u)))$.
+  Alors $j$ est bien définie, en effet pour tout $u, v in RR^2 without {0}$, si $u equ(PP^1) v$, alors il existe $lambda in RR without {0}$ tel que $u = lambda v$, d'où $j(u) = j(lambda v) = j(v)$.
+  De plus $j$ est continue par composition de fonctions continues.
+  Donc l'application $func(J, PP^1_RR, lquotient(SS^1, equ(SS^1)))$ telle que $J compose pi = j$ est continue.
 
-  De plus il est clair que $J compose I = id$, donc $I$ est bien un homéomorphisme entre $PP^1_RR$ et $lquotient(SS^1, equ(SS^1))$.
+  Enfin il est clair que $J compose I = id$ et $I compose J = id$, donc $I$ et $J$ sont bien des homéomorphisme de la droite projective réelle $PP^1_RR$ dans $lquotient(SS^1, equ(SS^1))$.
 ])
 
 == Le plan projectif réel
 
 #definition([
-  On appelle _plan projectif réel_, noté $PP^2_RR$, le quotient de $RR^3 without {(0, 0, 0)}$ par la relation d'équivalence $equ(PP^2)$ où pour tout $u, v in RR^3 without {(0, 0, 0)}$, on a $u equ(PP^2) v$ s'il existe $lambda in RR$ tel que $u = lambda v$. \
-  Soit $(x, y, z) in RR^3 without {(0, 0, 0)}$.
+  On appelle _plan projectif réel_, noté $PP^2_RR$, le quotient de $RR^3 without {0}$ par la relation d'équivalence $equ(PP^2)$ où pour tout $u, v in RR^3 without {0}$, on a $u equ(PP^2) v$ s'il existe $lambda in RR without {0}$ tel que $u = lambda v$. \
+  Soit $(x, y, z) in RR^3 without {0}$.
   On appelle _coordonnées homogènes de $(x, y, z)$_ le point associé sur le plan projectif réel $[x:y:z] := overline((x, y, z)) in PP^2_RR$.
 ])
 
 #remark([
-  Formellement un point de $PP^2_RR$ est induit par une droite de $RR^3$ et une droite de $PP^2_RR$ est induite par un plan de $RR^3$.
-  On déduit de la formule de Grassmann. que deux droites de $PP^2_RR$ non-confondues s'intersectent toujours en un point de $PP^2_RR$.
+  Formellement un point de $PP^2_RR$ est induit par une droite linéaire de $RR^3$ et une droite de $PP^2_RR$ est induite par un plan passant linéaire de $RR^3$.
 ])
 
 #definition([
-  On appelle _cartes affines de $PP^2_RR$_ les ensembles suivants :
-  - $A_x := {[x:y:z] in PP^1_RR|x!=0} = {[1:y:z] in PP^2_RR}$.
-  - $A_y := {[x:y:z] in PP^1_RR|y!=0} = {[x:1:z] in PP^2_RR}$.
-  - $A_z := {[x:y:z] in PP^1_RR|z!=0} = {[x:y:1] in PP^2_RR}$.
+  On appelle _cartes affines de $PP^2_RR$_ les sous-ensembles suivants :
+  - $A_x := {[x:y:z] in PP^1_RR | x!=0} = {[1:y:z] in PP^2_RR}$.
+  - $A_y := {[x:y:z] in PP^1_RR | y!=0} = {[x:1:z] in PP^2_RR}$.
+  - $A_z := {[x:y:z] in PP^1_RR | z!=0} = {[x:y:1] in PP^2_RR}$.
 ])
 
 #remark([
-  On a $PP^2_RR = A_x union A_y union A_z$, cette union n'est pas disjointe. \
-  On a aussi $PP^2_RR = A_z union cal(l)_oo$ où $cal(l)_oo := {[x:y:0] in RR^2}$, cette union est disjointe.
-  On peut dire que $A_z$ est une copie de $RR^2$ et $cal(l)_oo$ une copie de $PP^1_RR$.
+  Les cartes affines $A_x$, $A_y$ et $A_z$ sont homéomorphes à $RR^2$. \
+  On a $PP^2_RR = A_x union A_y union A_z$, mais surtout $PP^2_RR = A_z union.sq cal(l)_oo$ où $cal(l)_oo := {[x:y:0] in RR^2}$. \
+  De plus l'ensemble $cal(l)_oo$ est homéomorphe à $PP^1_RR$, intuitivement $PP^2_RR$ s'obtient donc à partir de $RR^2$ auquel on ajoute une copie de $PP^1_RR$ à l'infini.
+])
+
+#remark([
+  On déduit de la formule de Grassmann que deux droites distinctes de $PP^2_RR$ (même parallèles) s'intersectent toujours en un point de $PP^2_RR$. \
+  Pour être exact, une droite de $A_z tilde.eq RR^2$ intersecte $cal(l)_oo$ en un point dépendant uniquement de son vecteur directeur.
+  En effet, soit $D := {(x_0 +t a, y_0 + t b) | t in RR}$ une droite de $RR^2 tilde.eq A_z$ passant par un point $(x_0, y_0) in RR^2$ et de vecteur directeur $(a, b) in RR^2 without {0}$.
+  Alors l'image de $D$ dans $A_z$ est donnée par $D_z := {[x_0+t a:y_0 + t b:1] | t in RR}$, et on a :
+  $
+    [x_0 + t a: y_0 + t b:1] = [x_0 / t + a:y_0 / t+b:1 / t] ->_(t->+oo) [a:b:0] in cal(l)_oo
+  $
+  Donc $D_z$ intersecte $cal(l)_oo$ en $[a:b:0]$.
+])
+
+#remark([
+  La proposition suivante est naturelle puisque $PP^2_RR$ est donné par les droites linéaires de $RR^3$ et $SS^2$ par les demi-droites linéaires de $RR^3$.
 ])
 
 #proposition([
@@ -1469,6 +1509,11 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
 
 #proof([
   La démonstration est similaire à celle de la @prop-homeo-p1-s1, on identifie chaque élément de $PP^2_RR$ à deux éléments antipodaux de $SS^2$.
+])
+
+#remark([
+  Pour les propositions suivantes on fera les démonstrations au travers de dessins.
+  On pourrait penser que cette démarche manque de rigueur, mais cette dernière est assurée par la continuité des déformations effectuées et par les flèches qui indiquent les points associés.
 ])
 
 #proposition([
@@ -1482,7 +1527,7 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
       import cetz.draw: *
 
       set-style(
-        stroke: (cap: "round"),
+        stroke: (cap: "round", join: "round"),
         mark: (transform-shape: false, anchor: "center"),
       )
       circle((0, 0), radius: 2)
@@ -1554,7 +1599,7 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
       import cetz.draw: *
 
       set-style(
-        stroke: (cap: "round"),
+        stroke: (cap: "round", join: "round"),
         mark: (transform-shape: false, anchor: "center"),
       )
 
@@ -1605,7 +1650,7 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
       import cetz.draw: *
 
       set-style(
-        stroke: (cap: "round"),
+        stroke: (cap: "round", join: "round"),
         mark: (transform-shape: false, anchor: "center"),
       )
       circle((0, 0), radius: 2)
@@ -1638,21 +1683,21 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
     }),
     caption: "Passage du disque au carré.",
   )
-  Puisque les déformations à chaque étapes sont continues et préservent les points identifiés, on a bien construit un homéomorphisme entre $PP^2_RR$ et $[0, 1]^2$.
+  Puisque les déformations à chaque étapes sont continues et préservent les points identifiés, on a bien construit un homéomorphisme du plan projectif réel $PP^2_RR$ dans $lquotient([0, 1]^2, equ([0, 1]))$.
 ])
 
 #proposition([
-  Le plan projectif réel $PP^2_RR$ est homéomorphe à l'union d'un ruban de Möbius $M$ et d'un disque $D$ tels que $M inter D$ est homéomorphe à un cercle.
+  Le plan projectif réel $PP^2_RR$ se décompose en l'union de deux ensembles $M union D$ tels que $M$ est homéomorphe une bande de Möbius, $D$ est homéomorphe à un disque fermé, et $M inter D$ est homéomorphe à un cercle.
 ]) <prop-homeo-p2-mobius-disque>
 
 #proof([
-  D'après la @prop-homeo-p2-carre le plan projectif $PP^2_RR$ est homéomorphe à $lquotient([0, 1]^2, equ([0, 1]))$, ensuite on peut découper dans ce carré un ruban de Möbius.
+  D'après la @prop-homeo-p2-carre le plan projectif $PP^2_RR$ est homéomorphe à $lquotient([0, 1]^2, equ([0, 1]))$, ensuite on peut découper dans ce carré une bande de Möbius :
   #figure(
     cetz.canvas({
       import cetz.draw: *
 
       set-style(
-        stroke: (cap: "round"),
+        stroke: (cap: "round", join: "round"),
         mark: (transform-shape: false, anchor: "center"),
       )
       line((-2, 2), (2, 2), (2, -2), (-2, -2), (-2, 2), fill: luma(50%, 40%))
@@ -1666,8 +1711,21 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
         fill: luma(50%, 40%),
         stroke: (dash: "dashed"),
       )
+      line(
+        (5, -1.985),
+        (5, 1.83),
+        stroke: green,
+        mark: (end: "stealth", fill: green),
+      )
+      line(
+        (7, -1.985),
+        (7, 1.83),
+        stroke: green,
+        mark: (end: "stealth", fill: green),
+      )
 
       content((6, 0), $M$)
+      // content((4.5, 0), $D$)
 
       line((2.5, 0), (3.5, 0), mark: (end: "stealth", fill: black))
 
@@ -1683,15 +1741,15 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
       mark((6, -2), 180deg, fill: red, stroke: red)
       mark((4, 0), 90deg, fill: blue, stroke: blue)
     }),
-    caption: "Découpage d'un ruban de Möbius.",
+    caption: "Découpage d'une bande de Möbius.",
   )
-  On peut recoller les parties restantes en suivant l'orientation des flèches bleues, puis l'orientation des flèches rouges pour obtenir un disque :
+  On peut recoller les parties restantes en suivant l'orientation des flèches bleues, puis l'orientation des flèches rouges pour obtenir un disque fermé :
   #figure(
     cetz.canvas({
       import cetz.draw: *
 
       set-style(
-        stroke: (cap: "round"),
+        stroke: (cap: "round", join: "round"),
         mark: (transform-shape: false, anchor: "center"),
       )
       line(
@@ -1704,16 +1762,43 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
       )
       line((0.5, 2), (2, 2), (2, -2), (0.5, -2), (0.5, 2), fill: luma(50%, 40%))
 
+      line(
+        (-1, -1.985),
+        (-1, 1.83),
+        stroke: green,
+        mark: (end: "stealth", fill: green),
+      )
+      line(
+        (1, -1.985),
+        (1, 1.83),
+        stroke: green,
+        mark: (end: "stealth", fill: green),
+      )
+
       line((4, 2), (7, 2), (7, -2), (4, -2), (4, 2), fill: luma(50%, 40%))
       line((5.5, 2), (5.5, -2))
 
+      line(
+        (6.5, -1.985),
+        (6.5, 1.83),
+        stroke: green,
+        mark: (end: "stealth", fill: green),
+      )
+      line(
+        (4.5, 1.985),
+        (4.5, -1.83),
+        stroke: green,
+        mark: (end: "stealth", fill: green),
+      )
+
       circle((11, 0), radius: 2, fill: luma(50%, 40%))
+      circle((11, 0), radius: 1.65, stroke: green)
       line((11, 2), (11, -2))
 
       line((2.5, 0), (3.5, 0), mark: (end: "stealth", fill: black))
       line((7.5, 0), (8.5, 0), mark: (end: "stealth", fill: black))
 
-      content((10, 0), $D$)
+      content((-1.5, 0), $D$)
 
       set-style(mark: (start: "stealth", end: "stealth", symbol: "stealth"))
 
@@ -1734,11 +1819,364 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
       mark((11, 1.5), 90deg, fill: red, stroke: red)
       mark((11, -1.5), 90deg, fill: red, stroke: red)
     }),
-    caption: "Recollage du disque.",
+    caption: "Recollage du disque fermé.",
   )
-  De plus l'intersection $M inter D$ est homéomorphe au bord du disque, donc à un cercle.
-  Puisque les déformations à chaque étapes sont continues et préservent les points identifiés, on a bien construit un homéomorphisme entre $PP^2_RR$ et $M union D$.
+  De plus $M inter D$ est homéomorphe au bord du disque, donc à un cercle.
+
+  Puisque les déformations à chaque étapes sont continues et préservent les points identifiés, on a bien décomposé le plan projectif réel $PP^2_RR$ comme l'union $M union D$ de deux ensembles tels que $M$ est homéomorphe à une bande de Möbius, $D$ est homéomorphe à un disque fermé et $M inter D$ est homéomorphe à un cercle.
 ])
+
+=== Non-plongement dans l'espace euclidien
+
+#definition([
+  Soit $X$ et $Y$ deux espaces topologiques, $func(f, X, Y)$ une application.
+  On dit que $f$ est un _plongement de $X$ dans $Y$_ si elle induit un homéomorphisme de $X$ dans $f(X)$.
+])
+
+#theorem([
+  Il n'existe pas de plongement du plan projectif réel $PP^2_RR$ dans l'espace euclidien $RR^3$.
+])
+
+#proof([
+  Supposons par l'absurde qu'il existe un plongement $func(f, PP^2_RR, RR^3)$. \
+  D'après la @prop-homeo-p2-mobius-disque on peut écrire $PP^2_RR = M union D$ où $M$ est homéomorphe à une bande de Möbius, $D$ est homéomorphe à un disque fermé et $M inter D$ est homéomorphe à un cercle,
+  dans la suite on identifie $PP^2_RR$, $M$ et $D$ avec leur images $f(PP^2_RR)$, $f(M)$ et $f(D)$ dans $RR^3$.
+
+  - Première étape : On calcule l'homologie singulière de $RR^3 without M$ :
+    $ H_(n)(RR^3 without M) = cases(ZZ "si" n in {0, 1, 2}, 0 "sinon"). $
+
+  - Deuxième étape : On détermine l'application induite par l'inclusion $func(i, RR^3 without M, RR^3 without boundary(M))$ en homologie de degré 1, c'est la multiplication par 2.
+
+  - Troisième étape : On en déduit qu'il existe un élément non-nul d'ordre 2 de $H_(0)(RR^3 without PP^2_RR)$.
+
+  Or $H_(0)(RR^3 without PP^2_RR)$ est un groupe abélien libre, donc il n'admet aucun élément non-nul d'ordre 2, d'où une contradiction.
+  Donc il n'existe pas de plongement du plan projectif réel $PP^2_RR$ dans l'espace euclidien $RR^3$. \
+])
+
+TODO : Compléter la démonstration :
+- Calculer l'homologie des compléments de sphères
+- Montrer que le groupe d'homologie en degré 0 est un groupe abélien libre engendré par les composantes connexes.
+
+#pagebreak()
+
+#heading([Conclusion], numbering: none)
+
+#proof(
+  of: [du @thm-rectangle-inscrit[Problème du rectangle inscrit]],
+  [
+    Soit $C$ une courbe de Jordan. \
+    Pour commencer, au lieu de considérer un rectangle comme 4 sommets, on va considérer un rectangle comme 2 paires de sommets formant les diagonales :
+
+    #figure(
+      cetz.canvas({
+        import cetz.draw: *
+
+        set-style(
+          stroke: (cap: "round", join: "round"),
+          mark: (transform-shape: false, anchor: "center"),
+        )
+        line((0, 0), (4, 2), stroke: red)
+        line((0, 2), (4, 0), stroke: blue)
+        line((0, 0), (4, 0), (4, 2), (0, 2), (0, 0))
+
+        set-style(content: (padding: 0.1))
+        content((0, 2), text($a$, blue), anchor: "south-east")
+        content((4, 2), text($b$, red), anchor: "south-west")
+        content((4, 0), text($c$, blue), anchor: "north-west")
+        content((0, 0), text($d$, red), anchor: "north-east")
+      }),
+      caption: [2 paires de sommets formant un rectangle.],
+    )
+    On note $P := C times C$ l'ensemble des paires de points de $C$.
+    Cette représentation d'un rectangle nous permet de le caractériser de la manière suivante, 2 paires #underline("non-ordonnées") de $P$ forment un rectangle si et seulement si elles sont distinctes, ont le même milieu et ont la même distance.
+
+    Le faire que les paires soient non-ordonnées est très important, on va donc considérer le quotient de $P$ par la relation d'équivalence $~$ où pour tout $(u, v) in P$, on a $(u, v) ~ (v, u)$.
+
+    Maintenant que l'on a caractérisé un rectangle par cette propriété, on va définir une fonction qui regroupe les informations dont nous avons besoin :
+    $
+      func(f, P, RR^2 times RR, (u, v), ((u+v)/2, d(u, v)))
+    $
+    où $d(dot, dot)$ est la distance euclidienne. En parcourant toutes les paires de $P$ cette fonction dessine une surface dans $RR^2 times RR tilde.eq RR^3$ :
+
+    #figure(
+      cetz.canvas({
+        import cetz.draw: *
+
+        set-style(
+          stroke: (cap: "round", join: "round"),
+          mark: (transform-shape: false, anchor: "center", fill: black),
+        )
+        line((-3.5, 0, 0), (3.5, 0, 0), mark: (end: "stealth"))
+        line((0, -2, 0), (0, 3.5, 0), mark: (end: "stealth"))
+        line((0, 0, -3.5), (0, 0, 3.5), mark: (end: "stealth"))
+        let jc = superformula-3d(
+          7,
+          3,
+          4,
+          10,
+          samples: 1000,
+        ).map(it => it.map(e => 1.75 * e))
+        line(..jc, close: true)
+
+        line(
+          (-1.9, 0, -0.44),
+          (1.15, 0, 1.33),
+          stroke: (dash: "dashed", paint: red),
+        )
+        line(
+          (-0.375, 0, 0.445),
+          (-0.375, 3.18, 0.445),
+          stroke: (dash: "dashed", paint: blue),
+        )
+
+        set-style(circle: (radius: 0.03, fill: red, stroke: red))
+        circle((-1.9, 0, -0.44))
+        circle((1.15, 0, 1.33))
+        circle((-0.375, 0, 0.445), fill: blue, stroke: blue)
+        circle((-0.375, 3.18, 0.445), fill: blue, stroke: blue)
+
+        set-style(content: (padding: 0.1))
+        content((-1.9, 0, -0.44), $u$, anchor: "south-east")
+        content((1.15, 0, 1.33), $v$, anchor: "north-west")
+        content(
+          (-0.375, 3.18, 0.445),
+          $f(u, v)$,
+          anchor: "south-east",
+        )
+      }),
+      caption: [Image d'une paire de sommets par la fonction $f$.],
+    )
+
+    Puisque chacune de ses composantes est continue, la fonction $f$ est continue.
+    De plus puisque pour tout $(u, v) in P$, on a $f(u, v) = f(v, u)$, la fonction $f$ passe bien au quotient pour la relation d'équivalence $~$ et induit une fonction continue $func(phi, lquotient(P, thin~), RR^3)$.
+
+    Ainsi 2 paires non-ordonnées de sommets $overline(p), overline(q) in lquotient(P, thin~)$ forment un rectangle si et seulement si elles sont distinctes et $phi(overline(p)) = phi(overline(q))$, donc montrer l'existence d'un rectangle inscrit dans $C$ revient à montrer que la fonction $phi$ n'est pas injective.
+
+    Supposons par l'absurde que la fonction $phi$ est injective. \
+    Puisque $lquotient(P, thin~)$ est compact, $phi(lquotient(P, thin~)) subset RR^3$ est séparé et $phi$ est une bijection continue de $lquotient(P, thin~)$ sur son image $phi(lquotient(P, thin~))$, alors $phi$ est un homéomorphisme de $lquotient(P, thin~)$ sur son image $phi(lquotient(P, thin~))$.
+
+    Puisque la courbe de Jordan $C$ est paramétrée par une fonction continue $func(gamma_C, [0, 1], C)$, on peut paramétrer $lquotient(P, thin~)$ par la fonction $func(gamma := overline((gamma_C, gamma_C)), [0, 1]^2, lquotient(P, thin~))$ :
+
+    #figure(
+      cetz.canvas({
+        import cetz.draw: *
+
+        set-style(
+          stroke: (cap: "round", join: "round"),
+          mark: (transform-shape: false, anchor: "center", fill: black),
+          content: (padding: 0.1),
+        )
+
+        line((0, 0), (0, 3), (3, 3), (3, 0), (0, 0), fill: luma(50%, 40%))
+
+        content((0, 0), $0$, anchor: "north-east")
+        content((0, 3), $1$, anchor: "east")
+        content((3, 0), $1$, anchor: "north")
+
+        line((3.5, 1.5), (4.5, 1.5), mark: (end: "stealth"))
+
+        content((4, 1.5), $gamma$, anchor: "south")
+
+        let jc = superformula(
+          7,
+          3,
+          4,
+          10,
+          samples: 1000,
+        ).map(it => (it.at(0) * 1.1 + 7, it.at(1) * 1.1 + 1.5))
+        line(..jc, close: true)
+
+        set-style(circle: (radius: 0.03, fill: red, stroke: red))
+        circle((0.3, 1.8))
+        circle(jc.at(99))
+        circle(jc.at(599))
+
+        content((0.3, 1.8), text($(0.1, 0.6)$, red), anchor: "north-west")
+        content(jc.at(99), text($gamma_(C)(0.1)$, red), anchor: "south")
+        content(jc.at(599), text($gamma_(C)(0.6)$, red), anchor: "east")
+      }),
+      caption: [Image d'un point du carré par la fonction $gamma_C dot gamma_C$.],
+    )
+
+    Mais ce paramétrage n'est pas un homéomorphisme, en effet $gamma_(C)(0) = gamma_(C)(1)$, et pour tout $t in [0, 1]$, on a $gamma(0, t) = gamma(1, t)$ et $gamma(t, 0) = gamma(t, 1)$.
+    On va donc considérer le quotient de $[0, 1]^2$ par la relation d'équivalence $equ(1)$ où pour tout $t in [0, 1]$, on a $(0, t) equ(1) (1, t)$ et $(t, 0) equ(1) (t, 1)$, on représente cette identification par des flèches :
+
+    #figure(
+      cetz.canvas({
+        import cetz.draw: *
+
+        set-style(
+          stroke: (cap: "round", join: "round"),
+          mark: (transform-shape: false, anchor: "center", fill: black),
+          content: (padding: 0.1),
+        )
+
+        line(
+          (0, 0),
+          (0, 3),
+          (3, 3),
+          (3, 0),
+          (0, 0),
+          fill: luma(50%, 40%),
+          stroke: none,
+        )
+        line((0, 0), (0, 3), stroke: (dash: "dashed", paint: blue))
+        line((3, 3), (3, 0), stroke: (dash: "dashed", paint: blue))
+        line((0, 3), (3, 3), stroke: (dash: "dashed", paint: red))
+        line((3, 0), (0, 0), stroke: (dash: "dashed", paint: red))
+
+        content((0, 0), $0$, anchor: "north-east")
+        content((0, 3), $1$, anchor: "east")
+        content((3, 0), $1$, anchor: "north")
+
+        line((3.5, 1.5), (4.5, 1.5), mark: (end: "stealth"))
+
+        content((4, 1.5), $gamma$, anchor: "south")
+
+        let jc = superformula(
+          7,
+          3,
+          4,
+          10,
+          samples: 1000,
+        ).map(it => (it.at(0) * 1.1 + 7, it.at(1) * 1.1 + 1.5))
+        line(..jc, close: true)
+
+        set-style(circle: (radius: 0.03, fill: red, stroke: red))
+        circle((0.3, 0))
+        circle((0.3, 3))
+        circle(jc.at(99))
+        circle(jc.at(999))
+
+        content(
+          (0.3, 0),
+          text($(0.1, 0)$, red),
+          anchor: "south-west",
+          padding: 0.15,
+        )
+        content(
+          (0.3, 3),
+          text($(0.1, 1)$, red),
+          anchor: "north-west",
+          padding: 0.15,
+        )
+        content(jc.at(99), text($gamma_(C)(0.1)$, red), anchor: "south")
+        content(
+          jc.at(999),
+          text($gamma_(C)(0) = gamma_(C)(1)$, red),
+          anchor: "east",
+        )
+
+        set-style(mark: (start: "stealth", end: "stealth", symbol: "stealth"))
+        mark((0, 1.5), 90deg, stroke: blue, fill: blue)
+        mark((3, 1.5), 90deg, stroke: blue, fill: blue)
+        mark((1.5, 0), 0deg, stroke: red, fill: red)
+        mark((1.5, 3), 0deg, stroke: red, fill: red)
+      }),
+      caption: [Quotient du carré par la relation $equ(1)$.],
+    )
+
+    De plus pour tout $(a, b) in [0, 1]^2$, on a $gamma(a, b) = gamma(b, a)$ car les paires sont non-ordonnées.
+    On va donc considérer le quotient de $[0, 1]^2$ par la relation d'équivalence $equ(2)$ où pour tout $(a, b) in [0, 1]^2$, on a $(a, b) equ(2) (b, a)$, on représente cette identification en pliant le carré le long de la droite $y = x$ :
+
+    #figure(
+      cetz.canvas({
+        import cetz.draw: *
+
+        set-style(
+          stroke: (cap: "round", join: "round"),
+          mark: (transform-shape: false, anchor: "center", fill: black),
+          content: (padding: 0.1),
+        )
+
+        line((0, 0), (3, 0), (3, 3), fill: luma(50%, 40%))
+        line((0, 0), (3, 3), stroke: (dash: "dashed", paint: red))
+
+        content((0, 0), $0$, anchor: "north-east")
+        content((3, 0), $1$, anchor: "north")
+
+        line((3.5, 1.5), (4.5, 1.5), mark: (end: "stealth"))
+
+        content((4, 1.5), $gamma$, anchor: "south")
+
+        let jc = superformula(
+          7,
+          3,
+          4,
+          10,
+          samples: 1000,
+        ).map(it => (it.at(0) * 1.1 + 7, it.at(1) * 1.1 + 1.5))
+        line(..jc, close: true)
+
+        set-style(circle: (radius: 0.03, fill: red, stroke: red))
+        circle((1.8, 0.3))
+        circle(jc.at(99))
+        circle(jc.at(599))
+
+        content((1.8, 0.3), text($(0.6, 0.1)$, red), anchor: "south")
+        content(jc.at(99), text($gamma_(C)(0.1)$, red), anchor: "south")
+        content(jc.at(599), text($gamma_(C)(0.6)$, red), anchor: "east")
+
+        set-style(mark: (start: "stealth", end: "stealth", symbol: "stealth"))
+        mark((3, 1.5), 90deg, stroke: purple, fill: purple)
+        mark((1.5, 0), 0deg, stroke: purple, fill: purple)
+      }),
+      caption: [Quotient du carré par la relation $equ(2)$.],
+    )
+
+    On découpe le long de la hauteur du triangle pour pouvoir recoller les flèches :
+
+    #figure(
+      cetz.canvas({
+        import cetz.draw: *
+
+        set-style(
+          stroke: (cap: "round", join: "round"),
+          mark: (transform-shape: false, anchor: "center", fill: black),
+          content: (padding: 0.1),
+        )
+
+        line((1.5, 1.5), (3, 0), stroke: (dash: "dashed", paint: blue))
+        line((0, 0), (3, 0), (3, 3), (0, 0), fill: luma(50%, 40%))
+
+        content((0, 0), $0$, anchor: "north-east")
+        content((3, 0), $1$, anchor: "north")
+
+        line((3.5, 1.5), (4.5, 1.5), mark: (end: "stealth"))
+
+        line(
+          (8, 1.5),
+          (6.5, 3),
+          (5, 1.5),
+          (6.5, 0),
+          fill: luma(50%, 40%),
+          stroke: none,
+        )
+        line((8, 1.5), (6.5, 3), stroke: (dash: "dashed", paint: blue))
+        line((5, 1.5), (6.5, 3))
+        line((8, 1.5), (6.5, 0))
+        line((5, 1.5), (6.5, 0), stroke: (dash: "dashed", paint: blue))
+        line((6.5, 0), (6.5, 3))
+
+        set-style(mark: (start: "stealth", end: "stealth", symbol: "stealth"))
+
+        mark((2.25, 0.75), -45deg, stroke: blue, fill: blue)
+        mark((3, 1.5), 90deg, stroke: purple, fill: purple)
+        mark((1.5, 0), 0deg, stroke: purple, fill: purple)
+
+        mark((6.5, 1.5), 90deg, stroke: purple, fill: purple)
+        mark((5.75, 0.75), -45deg, stroke: blue, fill: blue)
+        mark((7.25, 2.25), -45deg, stroke: blue, fill: blue)
+      }),
+      caption: [Apparition d'une bande de Möbius.],
+    )
+
+    La figure ainsi obtenue est une bande de Möbius.
+    
+    On a créé un homéomorphisme d'une bande de Möbius aux paires non-ordonnées de la courbe de Jordan $lquotient(P, thin~)$, puisque $f$ est un homéomorphisme de $lquotient(P, thin~)$ sur son image $f(lquotient(P, thin~)) subset RR^3$, par composition on obtient donc un plongement d'une bande de Möbius dans $RR^3$.
+  ],
+)
+
 
 #pagebreak()
 

@@ -1141,7 +1141,7 @@ On peut étendre les exemples de $RR$, ainsi que les définitions de densité et
   Si pour tout $t in RR$, on a $hat(mu)(t) = hat(nu)(t)$, alors $mu = nu$.
 ]) <thm-injectivite>
 
-== Théorème d'inversion
+== Formules d'inversion
 
 #theorem([
   Soit $mu$ une mesure de probabilité sur $(RR^d, borel(RR^d))$.
