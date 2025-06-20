@@ -9,3 +9,9 @@ hatcher:
   title: Algebraic Topology
   author: Allen Hatcher
   date: 2001
+
+ginot:
+  type: Book
+  title: Topologie Algébrique
+  author: Grégory Ginot
+  date: 2019
