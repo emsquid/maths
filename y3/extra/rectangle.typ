@@ -41,6 +41,7 @@
     ((r * calc.cos(x), 0, r * calc.sin(x)),)
   }
 )
+
 #show: maths.with(
   title: "Problème du rectangle inscrit",
   authors: ("Emanuel Morille",),
@@ -123,7 +124,7 @@ Par exemple dans le cas d'un cercle, on peut évidemment toujours trouver une in
   ],
 )
 
-Dans la suite nous allons étudier l'homologie singulière qui nous permettra de démontrer un résultat très important dans la résolution du problème. Commençons d'abord par définir quelques notions du sujet.
+Dans la suite nous allons étudier l'homologie singulière, et plus particulièrement celle du plan projectif réel, ce qui nous permettra de démontrer un résultat très important dans la résolution du problème. Commençons d'abord par définir quelques notions du sujet.
 
 #definition([
   Soit $C$ une partie de $RR^2$.
@@ -143,12 +144,12 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
 ])
 
 #definition([
-  Soit $C$ une courbe de Jordan de $RR^2$ et $R := {a, b, c, d}$ un rectangle de $RR^2$.
+  Soit $C$ une courbe de Jordan de $RR^2$ et $R := (a, b, c, d)$ un rectangle de $RR^2$.
   On dit que le rectangle $R$ est _inscrit dans $C$_ si $a, b, c, d in C$.
 ])
 
 #example([
-  Le carré $R := {(sqrt(2)  slash  2, sqrt(2)  slash  2), (-sqrt(2)  slash  2, sqrt(2)  slash  2), (-sqrt(2)  slash  2, -sqrt(2)  slash  2), (sqrt(2)  slash  2, -sqrt(2)  slash  2)}$ est bien inscrit dans le cercle $C$ de la @fig-cercle-carre, en effet :
+  Le carré $R := ((sqrt(2)  slash  2, sqrt(2)  slash  2), (-sqrt(2)  slash  2, sqrt(2)  slash  2), (-sqrt(2)  slash  2, -sqrt(2)  slash  2), (sqrt(2)  slash  2, -sqrt(2)  slash  2))$ est bien inscrit dans le cercle $C$ de la @fig-cercle-carre, en effet :
   - On a $gamma_(C)(1 slash 8) = (sqrt(2) slash 2, sqrt(2) slash 2)$, donc $(sqrt(2) slash 2, sqrt(2) slash 2) in C$.
 
   - On a $gamma_(C)(3 slash 8) = (-sqrt(2) slash 2, sqrt(2) slash 2)$, donc $(-sqrt(2) slash 2, sqrt(2) slash 2) in C$.
@@ -328,7 +329,7 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
 #definition([
   Soit $C_cdot$ un complexe de chaînes et $n in ZZ$.
   - On appelle _$n$#super("e") groupe d'homologie_ le groupe quotient $H_(n)(C_cdot) := lquotient(Z_(n)(C_cdot), B_(n)(C_cdot))$.
-  - On appelle _homologie_ la somme directe des groupes $H_(cdot)(C_cdot) := plus.circle.big_(n in ZZ) H_(n)(C_cdot)$.
+  - On appelle _homologie_ le groupe abélien gradué $H_(cdot)(C_cdot) := plus.circle.big_(n in ZZ) H_(n)(C_cdot)$.
 ])
 
 #definition([
@@ -390,7 +391,7 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
 
 #definition([
   Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de complexes.
-  On note $func(H_(cdot)(phi), H_(cdot)(C_cdot), H_(cdot)(D_cdot))$ la somme directe $H_(cdot)(phi) := plus.circle.big_(n in ZZ) H_(n)(phi)$.
+  On note $func(H_(cdot)(phi), H_(cdot)(C_cdot), H_(cdot)(D_cdot))$ le morphisme de groupes gradués $H_(cdot)(phi) := plus.circle.big_(n in ZZ) H_(n)(phi)$.
 ])
 
 == La catégorie $sans("Comp")$
@@ -422,7 +423,7 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
 
 #proof([
   - Soit $C_cdot in ob(sans("Comp"))$ un complexe de chaînes.
-    Alors l'homologie $H_(cdot)(C_cdot) := plus.circle.big_(n in ZZ) H_(n)(C_cdot)$ définit bien un groupe abélien gradué.
+    Alors l'homologie $H_(cdot)(C_cdot) := plus.circle.big_(n in ZZ) H_(n)(C_cdot)$ est bien un groupe abélien gradué.
   - Soit $C_cdot, D_cdot in ob(sans("Comp"))$ deux complexes de chaînes et $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de complexes.
     Alors le morphisme induit $func(H_(cdot)(phi), H_(cdot)(C_cdot), H_(cdot)(D_cdot))$ est bien un morphisme de groupes abéliens gradués.
   Les propriétés de composition et d'identité découlent du @thm-foncteur-comp-ab, donc $H_cdot$ est bien un foncteur de $sans("Comp")$ vers $sans("GrAb")$.
@@ -1006,17 +1007,17 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
 ])
 
 #proposition([
-  Soit $X$ et $Y$ deux espaces topologiques, $func(sigma, Delta^n, X)$ un $n$-simplexe singulier sur $X$ et $func(f, X, Y)$ une application continue.
+  Soit $X$ et $Y$ deux espaces topologiques, $func(f, X, Y)$ une application continue et $func(sigma, Delta^n, X)$ un $n$-simplexe singulier sur $X$.
   Alors la composition $func(f compose sigma, Delta^n, Y)$ est un $n$-simplexe singulier sur $Y$.
-])
-
-#definition([
-  Soit $X$ un espace topologique. Pour tout $n in ZZ$, on appelle _groupe des $n$-chaînes singulières_, noté $C_(n)(X)$, le groupe abélien libre engendré par les $n$-simplexes singuliers sur $X$.
 ])
 
 #proof([
   Puisque $f$ est continue sur $X$ et $sigma$ est continue sur $Delta^n$, par composition $f compose sigma$ est continue de $Delta^n$ dans $Y$.
   Donc $f compose sigma$ est un $n$-simplexe singulier sur $X$.
+])
+
+#definition([
+  Soit $X$ un espace topologique. Pour tout $n in ZZ$, on appelle _groupe des $n$-chaînes singulières_, noté $C_(n)(X)$, le groupe abélien libre engendré par les $n$-simplexes singuliers sur $X$.
 ])
 
 #definition([
@@ -1225,8 +1226,7 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
   D'après la @prop-foncteur-top2-comp $C_cdot$ est un foncteur de $sans("Top")_2$ vers $sans("Comp")$ et d'après le @cor-foncteur-comp-grab $H_cdot$ est un foncteur de $sans("Comp")$ vers $sans("GrAb")$, par composition $H_cdot = H_(cdot)(C_cdot)$ est bien un foncteur de $sans("Top")_2$ vers $sans("GrAb")$.
 ])
 
-== Axiomes d'Eilenberg-Steenrod et principales propriétés
-
+== Principales propriétés et axiomes d'Eilenberg-Steenrod
 
 #theorem(
   title: "Axiome de dimension",
@@ -1375,39 +1375,40 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
   ],
 )
 
-// #proof([
-//   Admise.
-// ])
+#proof([
+  Admise.
+])
 
 #theorem(
   title: "Théorème de Mayer-Vietoris",
   [
-    Soit $U$ et $V$ deux ouverts d'un espace topologique.
+    Soit $X$ un espace topologique, $U$ et $V$ deux parties de $X$ tels que $circle(U) union circle(V) = X$.
     Alors pour tout $n in ZZ$, il existe un morphisme de groupes $func(partial_n, H_(n)(U union V), H_(n-1)(U inter V))$ tel que la suite longue suivante est exacte :
     #align(center)[
+      #set text(10pt)
       #commutative-diagram(
         node-padding: (40pt, 40pt),
         padding: 10pt,
         node((0, 0), $dots.c$),
         node((0, 1), $H_(n)(U inter V)$),
         node((0, 2), $H_(n)(U) plus.circle H_(n)(V)$),
-        node((0, 3), $H_(n)(U union V)$),
+        node((0, 3), $H_(n)(X)$),
         node((0, 4), $H_(n-1)(U inter V)$),
         node((0, 5), $dots.c$),
 
         arr((0, 0), (0, 1), $partial_(n+1)$, label-pos: 13pt),
-        arr((0, 1), (0, 2), $(-H_(n)(i_0), H_(n)(i_1))$, label-pos: 13pt),
-        arr((0, 2), (0, 3), $H_(n)(j_0) + H_(n)(j_1)$, label-pos: 13pt),
+        arr((0, 1), (0, 2), $(-H_(n)(i), H_(n)(j))$, label-pos: 13pt),
+        arr((0, 2), (0, 3), $H_(n)(k) + H_(n)(l)$, label-pos: 13pt),
         arr((0, 3), (0, 4), $partial_n$, label-pos: 13pt),
-        arr((0, 4), (0, 5), $(-H_(n-1)(i_0), H_(n-1)(i_1))$, label-pos: 13pt),
+        arr((0, 4), (0, 5), $(-H_(n-1)(i), H_(n-1)(j))$, label-pos: 13pt),
       )]
-    où $func(i_0, U inter V, U)$, $func(i_1, U inter V, V)$, $func(j_0, U, U union V)$ et $func(j_1, V, U union V)$ sont les inclusions canoniques
+    où $func(i, U inter V, U)$, $func(j, U inter V, V)$, $func(k, U, U union V)$ et $func(l, V, U union V)$ sont les inclusions canoniques.
   ],
 ) <thm-mayer-vietoris>
 
-// #proof([
-//   Admise.
-// ])
+#proof([
+  Admise.
+])
 
 #definition([
   Une _théorie de l'homologie_ sur la catégorie des paires d'espaces topologiques $sans("Top")_2$ dans la catégorie des groupes abéliens $sans("Ab")$ est une suite de foncteurs $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie de transformations naturelles $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A) := H_(n-1)(A, emptyset)))$ vérifiant les _axiomes d'Eilenberg-Steenrod_ pour toutes paires d'espaces topologiques $(X, A), (Y, B)$ et $n in ZZ$ :
@@ -1441,21 +1442,49 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
   La suite des $n$#super("e") groupe d'homologie singulière de paires $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie des morphismes $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A)))$ est une théorie de l'homogie vérifiant les @def-theorie-homologie[axiomes d'Eilenberg-Steenrod].
 ])
 
-== Cas particuliers
+=== Connexité par arcs
 
 #proposition([
   Soit $X$ un espace topologique.
-  Alors $H_(0)(X)$ est un groupe abélien libre engendré par les composantes connexes par arc de $X$.
+  Alors, en notant $sequence(X, ind: i, dom: I)$ les composantes connexes par arcs de $X$, pour tout $n in ZZ$, on a $H_(n)(X) tilde.eq plus.circle.big_(i in I) H_(n)(X_i)$.
+]) <prop-somme-composantes-connexes>
+
+#proof([
+  Soit $n in ZZ$.
+  Pour toute $n$-chaîne singulière $func(sigma, Delta^n, X)$, puisque $Delta^n$ est convexe, et en particulier connexe par arcs, par continuité de $sigma$ il existe un unique $i in I$ tel que $im(sigma) subset X_i$.
+  Alors on en déduit que $C_(n)(X) tilde.eq plus.circle.big_(i in I) C_(n)(X_i)$.
+  De plus $dif_n$ préserve cette décomposition en somme directe, par passage au quotient on a bien $H_(n)(X) tilde.eq plus.circle.big_(Y in pi(X)) H_(n)(Y)$.
+])
+
+#proposition([
+  Soit $X$ un espace topologique.
+  Alors, en notant $sequence(X, ind: i, dom: I)$ les composantes connexes par arcs de $X$, on a $H_(0)(X) tilde.eq plus.circle.big_(i in I) ZZ$.
 ]) <prop-h0-abelien-libre>
 
 #proof([
-  On a déjà $ker(partial_0) = C_(0)(X) tilde.eq X$.
-  Le groupe abélien $C_(1)(X)$ est engendré par les applications continues de $Delta^1$ dans $X$.
-  De plus pour tout $sigma in C_(1)(X)$, on a $partial_1 sigma = sigma(1) - sigma(0)$, puisque $sigma$ est une application continue les points $sigma(0)$ et $sigma(1)$ appartiennent à une même composante connexe par arcs de $X$, on en déduit :
-  $
-    im(partial_1) = gensubgroup(x - y | x\, y in X, x "et" y "appartiennent à la même composante connexe par arcs").
-  $
-  On a $H_(0)(X) := lquotient(ker(partial_0), im(partial_1))$, par passage au quotient on a bien que $H_(0)(X)$ est un groupe abélien libre engendré par les composantes connexes par arcs de $X$.
+  On a déjà $ker(dif_0) = C_(0)(X)$.
+
+  Supposons que $X$ est non-vide et connexe par arcs.
+  On pose $func(phi, C_(0)(X), ZZ, sum_(k=0)^n lambda_k sigma_k, sum_(k=0)^n lambda_k)$.
+  Alors $phi$ est un morphisme de groupes surjectif. Vérifions que $im(dif_1) = ker(phi)$. \
+
+  Les $1$-chaînes singulières sont engendrées par les $1$-simplexes singuliers et pour tout $1$-simplexe singulier $func(sigma, Delta^1, X)$, on a $phi(dif_1 sigma) = phi(sigma compose gensubgroup(overshell(e_0), e_1) - sigma compose gensubgroup(e_0, overshell(e_1))) = 1 - 1 = 0$, donc $im(dif_1) subset ker(phi)$. \
+
+  Réciproquement on considère $sum_(k=0)^n lambda_k sigma_k in ker(phi)$.
+  Pour tout $k in {0, ..., n}$, on note $func(gamma_k, [0, 1], X)$ un chemin d'un point $x in X$ au point $sigma_(k)(e_1) in X$ et on pose $func(sigma, Delta^0, X)$ un $0$-simplexe singulier d'image $x$, en considérant $gamma_k$ comme un $1$-simplexe singulier on a $dif_1 gamma_k = sigma_k - sigma$.
+  Alors en considérant la $n$-chaîne singulière $sum_(k=0)^n lambda_k gamma_k$, on a $dif_1 sum_(k=0)^n lambda_k gamma_k = sum_(k=0)^n lambda_k sigma_k - sum_(k=0)^n lambda_k sigma = sum_(k=0)^n lambda_k sigma_k$, donc $ker(phi) subset im(dif_1)$.
+
+  Alors d'après le premier théorème d'isomorphisme on a bien $H_(0)(X) = lquotient(C_(0)(X), ker(phi)) tilde.eq ZZ$.
+
+  Dans le cas général, d'après la @prop-somme-composantes-connexes on a $H_(n)(X) tilde.eq plus.circle.big_(i in I) H_(n)(X_i) tilde.eq plus.circle.big_(Y in pi(X)) ZZ$.
+])
+
+=== Cas particuliers
+
+#remark([
+  Les propositions suivantes seront utilisées pour démontrer qu'il n'existe pas de plongement du plan projectif réel $PP^2_RR$ dans l'espace euclidien $RR^3$.
+  Certains calculs d'homologie singulière paraissent alambiqués mais ils s'enchaînent tout de même de manière naturelle.
+  Dans la suite on note $BB^n$ une boule de dimension $n$ et $SS^n := partial BB^(n+1)$ une sphère de dimension $n$.
 ])
 
 #proposition([
@@ -1495,7 +1524,7 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
         mark: (transform-shape: false, anchor: "center"),
       )
 
-      let circletemp(center, radius, start, stop, stroke) = {
+      let circle-2d(center, radius, start, stop, stroke) = {
         line(
           ..range(start, stop).map(x => (
             center.at(0) + radius * calc.cos(2 * calc.pi * x / 100),
@@ -1505,10 +1534,10 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
         )
       }
 
-      circletemp((0, 0), 1.5, -5, 55, red)
-      circletemp((0, 0), 1.5, 45, 105, blue)
-      circletemp((0, 0), 1.5, 45, 55, green)
-      circletemp((0, 0), 1.5, -5, 5, green)
+      circle-2d((0, 0), 1.5, -5, 55, red)
+      circle-2d((0, 0), 1.5, 45, 105, blue)
+      circle-2d((0, 0), 1.5, 45, 55, green)
+      circle-2d((0, 0), 1.5, -5, 5, green)
 
       content((0, 1.5), $U$, anchor: "south", padding: 0.1)
       content((0, -1.5), $V$, anchor: "north", padding: 0.1)
@@ -1517,7 +1546,7 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
     caption: [Recouvrement de $SS^1$.],
   )
   Les arcs $U$ et $V$ sont homotopiquement équivalents à un point, et l'intersection $U inter V$ est homotopiquement équivalente à $SS^0$.
-  D'après le @cor-homotopie-equ, l'@thm-dimension et la @prop-homologie-s0, pour tout $n in ZZ$, on a :
+  Alors d'après le @cor-homotopie-equ, l'@thm-dimension et la @prop-homologie-s0, pour tout $n in ZZ$, on a :
   $
     H_(n)(U) tilde.eq H_(n)(V) tilde.eq cases(ZZ &"si" n = 0, 0 &"sinon")
     quad "et" quad
@@ -1562,15 +1591,13 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
 ])
 
 #proposition([
-  Soit $SS^1 or SS^1$ deux sphères de dimension 1 ayant un point d'intersection.
+  Soit $SS^2$ la sphère de dimension 2.
   Alors pour tout $n in ZZ$, on a :
-  $
-    H_(n)(SS^1 or SS^1) tilde.eq cases(ZZ &"si" n=0, ZZ plus.circle ZZ &"si" n=1, 0 &"sinon")
-  $
-]) <prop-homologie-s1ws1>
+  $ H_(n)(SS^2) tilde.eq cases(ZZ &"si" n in {0, 2}, 0 &"sinon") $
+]) <prop-homologie-s2>
 
 #proof([
-  On recouvre $SS^1 or SS^1$ par deux ouverts $U$ et $V$ recouvrant chacun un $SS^1$ :
+  On recouvre $SS^2$ par deux ouverts $U$ et $V$ recouvrant chacun un hémisphère :
   #figure(
     cetz.canvas({
       import cetz.draw: *
@@ -1580,33 +1607,44 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
         mark: (transform-shape: false, anchor: "center"),
       )
 
-      let circletemp(center, radius, start, stop, stroke) = {
-        line(
-          ..range(start, stop + 1).map(x => (
-            center.at(0) + radius * calc.cos(2 * calc.pi * x / 100),
-            center.at(1) + radius * calc.sin(2 * calc.pi * x / 100),
-          )),
-          stroke: stroke,
-        )
+      let circle-2d(center, radius) = {
+        range(101).map(x => (
+          center.at(0) + radius.at(0) * calc.cos(2 * calc.pi * x / 100),
+          center.at(1) + radius.at(1) * calc.sin(2 * calc.pi * x / 100),
+        ))
       }
 
-      circletemp((0, 0), 1.5, 0, 100, red)
-      circletemp((3, 0), 1.5, 0, 100, blue)
-      circletemp((0, 0), 1.5, -5, 5, green)
-      circletemp((3, 0), 1.5, 45, 55, green)
+      let circ1 = circle-2d((0, 0), (1.5, 1.5))
+      let circ2 = circle-2d((0, 0), (1.5, 0.75))
 
-      content((-1.5, 0), $U$, anchor: "east", padding: 0.1)
-      content((4.5, 0), $V$, anchor: "west", padding: 0.1)
-      content((1.5, 0), $U inter V$, anchor: "east", padding: 0.1)
+      line(..circ1)
+      line(
+        ..circ1.slice(49, 101),
+        ..circ2.slice(0, 51),
+        stroke: blue,
+        fill: rgb("#0074d9bb"),
+      )
+      line(..circ2, stroke: green)
+      line(
+        ..circ1.slice(0, 51),
+        ..circ2.slice(49, 101),
+        stroke: red,
+        fill: rgb("#ff4136bb"),
+      )
+      line(..circ2.slice(50, 101), stroke: green)
+
+      content((0, 1.5), $U$, anchor: "south", padding: 0.1)
+      content((0, -1.5), $V$, anchor: "north", padding: 0.1)
+      content((-1.5, 0), $U inter V$, anchor: "east", padding: 0.1)
     }),
-    caption: [Recouvrement de $SS^1 or SS^1$.],
+    caption: [Recouvrement de $SS^2$.],
   )
-  Les ouverts $U$ et $V$ sont homotopiquement équivalents à $SS^1$, et l'intersection $U inter V$ est homotopiquement équivalente à un point.
-  D'après le @cor-homotopie-equ, l'@thm-dimension et la @prop-homologie-s1, pour tout $n in ZZ$, on a :
+  Les ouverts $U$ et $V$ sont homotopiquement équivalents à un point, et l'intersection $U inter V$ est homotopiquement équivalente à $SS^1$.
+  Alors d'après le @cor-homotopie-equ, l'@thm-dimension et la @prop-homologie-s1, pour tout $n in ZZ$, on a :
   $
-    H_(n)(U) tilde.eq H_(n)(V) tilde.eq cases(ZZ &"si" n in {0, 1}, 0 &"sinon")
+    H_(n)(U) tilde.eq H_(n)(V) tilde.eq cases(ZZ &"si" n=0, 0 &"sinon")
     quad "et" quad
-    H_(n)(U inter V) tilde.eq cases(ZZ &"si" n = 0, 0 &"sinon")
+    H_(n)(U inter V) tilde.eq cases(ZZ &"si" n in {0, 1}, 0 &"sinon")
   $
   Alors d'après le @thm-mayer-vietoris la suite suivante est exacte :
   #align(
@@ -1617,13 +1655,13 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
         padding: 5pt,
         node((0, 0), $dots.c$),
         node((0, 1), $0$),
-        node((0, 2), $H_(2)(SS^1 or SS^1)$),
-        node((0, 3), $0$),
-        node((0, 4), $ZZ plus.circle ZZ$),
-        node((0, 5), $H_(1)(SS^1 or SS^1)$),
+        node((0, 2), $H_(2)(SS^2)$),
+        node((0, 3), $ZZ$),
+        node((0, 4), $0$),
+        node((0, 5), $H_(1)(SS^2)$),
         node((0, 6), $ZZ$),
         node((0, 7), $ZZ plus.circle ZZ$),
-        node((0, 8), $H_(0)(SS^1 or SS^1)$),
+        node((0, 8), $H_(0)(SS^2)$),
         node((0, 9), $0$),
 
         arr((0, 0), (0, 1), $$),
@@ -1637,87 +1675,129 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
         arr((0, 8), (0, 9), $$),
       )],
   )
-  On en déduit directement que si $n >= 2$, on a $H_(n)(SS^1 or SS^1) tilde.eq 0$. \
+  On en déduit directement que si $n >= 3$, on a $H_(n)(SS^2) tilde.eq 0$. \
 
   En étudiant $func(phi_0, ZZ, ZZ plus.circle ZZ)$ on trouve que pour tout $a in ZZ$, on a $phi_(0)(a) = (-a, a)$.
 
-  Alors on a $ker(phi_0) tilde.eq 0$. Par exactitude de la suite, $psi_1$ est injective, de plus $im(partial_1) = ker(phi_0) tilde.eq 0$ et on a bien $H_(1)(SS^1 or SS^1) tilde.eq im(psi_1) = ker(partial_1) = ZZ plus.circle ZZ$.
+  Par exactitude de la suite, $partial_2$ est bijective, donc on a bien $H_(2)(SS^2) tilde.eq ZZ$.
 
-  Enfin on a $im(phi_0) = {(-a, a) | a in ZZ} tilde.eq ZZ$. Par exactitude de la suite, $psi_0$ est surjective et on a bien $H_(0)(SS^1 or SS^1) tilde.eq lquotient((ZZ plus.circle ZZ), im(phi_0)) tilde.eq lquotient((ZZ plus.circle ZZ), ZZ) tilde.eq ZZ$.
+  De plus on a $ker(phi_0) tilde.eq 0$. Par exactitude de la suite, $partial_1$ est injective et on a bien $H_(1)(SS^2) tilde.eq im(partial_1) = ker(phi_0) tilde.eq 0$.
+
+  Enfin on a $im(phi_0) = {(-a, a) | a in ZZ} tilde.eq ZZ$. Par exactitude de la suite, $psi_0$ est surjective et on a bien $H_(0)(SS^2) tilde.eq lquotient((ZZ plus.circle ZZ), im(phi_0)) tilde.eq lquotient((ZZ plus.circle ZZ), ZZ) tilde.eq ZZ$.
 ])
 
 #proposition([
-  Soit $TT^2$ un tore.
-  Alors pour tout $n in ZZ$, on a :
-  $
-    H_(n)(TT^2) tilde.eq cases(ZZ &"si" n in {0, 2}, ZZ plus.circle ZZ &"si" n = 1, 0 &"sinon")
-  $
-]) <prop-homologie-t2>
+  Soit $X$ un sous-espace de $SS^3$ homéomorphe à $BB^m$. Alors pour tout $n in ZZ$, on a :
+  $ H_(n)(SS^3 without X) tilde.eq cases(ZZ &"si" n = 0, 0 &"sinon") $
+]) <prop-homologie-s3-b>
 
 #proof([
-  On recouvre $TT^2$ par deux ouverts $U$ et $V$ de la manière suivante :
-  #figure(
-    cetz.canvas({
-      import cetz.draw: *
-
-      set-style(
-        stroke: (cap: "round", join: "round"),
-        mark: (transform-shape: false, anchor: "center"),
-      )
-
-      line((0, 0), (0, 3), (3, 3), (3, 0), (0, 0), fill: red)
-      line(
-        (0.5, 0.5),
-        (0.5, 2.5),
-        (2.5, 2.5),
-        (2.5, 0.5),
-        (0.5, 0.5),
-        fill: green,
-        stroke: none,
-      )
-      line((1, 1), (1, 2), (2, 2), (2, 1), (1, 1), fill: blue, stroke: none)
-
-      content((0.28, 1.5), $U$)
-      content((1.5, 2.25), $U inter V$)
-      content((1.5, 1.5), $V$)
-
-      set-style(mark: (start: "stealth", end: "stealth", fill: black))
-      mark((1.5, 0), 0deg)
-      mark((1.5, 3), 0deg)
-      mark((0, 1.45), 90deg)
-      mark((3, 1.45), 90deg)
-      mark((0, 1.55), 90deg)
-      mark((3, 1.55), 90deg)
-    }),
-    caption: [Recouvrement de $TT^2$.],
-  )
-  L'ouvert $U$ est homotopiquement équivalent à $SS^1 or SS^1$, l'ouvert $V$ est homotopiquement équivalent à un point, et l'intersection $U inter V$ est homotopiquement équivalente à $SS^1$.
-  D'après le @cor-homotopie-equ, l'@thm-dimension, la @prop-homologie-s1 et la @prop-homologie-s1ws1, pour tout $n in ZZ$, on a :
+  On considère un plongement $func(f, BB^m, SS^3)$ et on raisonne par récurrence sur $m$ avec :
   $
-    H_(n)(U) tilde.eq cases(ZZ &"si" n=0, ZZ plus.circle ZZ &"si" n=1, 0 &"sinon"), quad
-    H_(n)(V) tilde.eq cases(ZZ &"si" n = 0, 0 &"sinon") quad "et" quad
-    H_(n)(U inter V) tilde.eq cases(ZZ &"si" n in {0, 1}, 0 &"sinon")
+    P(m) : H_(n)(SS^3 without f(BB^m)) tilde.eq cases(ZZ &"si" n=0, 0 &"sinon")
   $
+
+  Pour $m = 0$, l'espace $BB^0$ est composé d'un unique point, par @thm-projection-stereographie $SS^3 without f(BB^0)$ est homéomorphe à $RR^3$ et $RR^3$ est homotopiquement équivalent à un point.
+  Alors d'après le @cor-homotopie-equ et l'@thm-dimension, pour tout $n in ZZ$, on a :
+  $
+    H_(n)(SS^3 without f(BB^0)) tilde.eq H_(n)(RR^3) tilde.eq cases(ZZ &"si" n=0, 0 &"sinon")
+  $
+
+  Soit $m > 0$, on suppose que $P(m - 1)$ est vérifiée.
+  L'espace $BB^m$ est homéomorphe à $BB^(m-1) times [0, 1]$.
+
+  Alors on recouvre $BB^(m-1) times [0, 1]$ par deux fermés $BB^- := BB^(m-1) times [0, 1 slash 2]$ et $BB^+ := BB^(m-1) times [1 slash 2, 1]$, ils sont homéomorphes à $BB^m$, et leur intersection $BB^- inter BB^+ = BB^(m-1) times {1 slash 2}$ est homéomorphe à $BB^(m-1)$.
+  Ainsi on recouvre $SS^3 without f(BB^(m-1) times {1 slash 2})$ par les ouverts $U := SS^3 without f(BB^-)$ et $V := SS^3 without f(BB^+)$, et leur intersection vaut $U inter V = SS^3 without f(BB^m)$.
+
+  Alors d'après le @thm-mayer-vietoris la suite suivante est exacte :
+  #align(center)[
+    #commutative-diagram(
+      node-padding: (30pt, 40pt),
+      padding: 10pt,
+      node((0, -1), $dots.c$),
+      node((0, 0), $H_(n+1)(U union V)$),
+      node((0, 1), $H_(n)(U inter V)$),
+      node((0, 2), $H_(n)(U) plus.circle H_(n)(V)$),
+      node((0, 3), $H_(n)(U union V)$),
+      node((0, 4), $dots.c$),
+
+      arr((0, -1), (0, 0), $psi_(n+1)$),
+      arr((0, 0), (0, 1), $partial_(n+1)$),
+      arr((0, 1), (0, 2), $phi_n$),
+      arr((0, 2), (0, 3), $psi_n$),
+      arr((0, 3), (0, 4), $partial_n$),
+    )]
+  où $func(phi_n := (i_0, j_0), H_(n)(U inter V), H_(n)(U) plus.circle H_(n)(V))$ est induite par les inclusions canoniques.
+
+  Pour $n = 0$, on remarque que $SS^3 without f(BB^m)$ est connexe par arcs, donc d'après la @prop-h0-abelien-libre on a bien $H_(0)(SS^3 without f(BB^m)) tilde.eq ZZ$.
+
+  Soit $n >= 1$, on suppose par l'absurde qu'il existe $alpha_0 in H_(n)(U inter V)$ non-nul.
+  Alors par hypothèse de récurrence on a $H_(n)(U union V) tilde.eq 0$, par exactitude de la suite $phi_n$ est injective et on peut supposer sans perte de généralité qu'il existe $alpha_1 in H_(n)(U)$ non-nul tel que $i_(0)(alpha_0) = alpha_1$ (sinon on prend $alpha_1 in H_(n)(V)$ et $j_(0)(alpha_0) = alpha_1$).
+
+  Puisque $BB^-$ est homéomorphe à $BB^m$, on peut refaire le même raisonnement avec $SS^3 without f(BB^-)$ à la place de $SS^3 without f(BB^m)$, alors il existe $alpha_2 in H_(n)(SS^3 without f(BB^(m-1) times [0, 1 slash 4]))$ non-nul tel que $i_(1)(alpha_1) = alpha_2$, où $func(i_1, H_(n)(SS^3 without f(BB^-)), H_(n)(SS^3 without f(B times [0, 1 slash 4])))$ est induite par l'inclusion canonique.
+
+  En itérant ce raisonnement on obtient une suite $sequence(alpha_k, ind:k, dom: NN)$, où pour tout $k in NN$, on a $alpha_k in H_(n)(A_k) := H_(n)(SS^3 without f(BB^(m-1) times [0, 1 slash 2^k]))$ qui est non-nul tel que $i_(k)(alpha_k) = alpha_(k+1)$, où $func(i_k, H_(n)(A_k), H_(n)(A_(k+1)))$ est induite par l'inclusion canonique.
+
+  Soit $func(sigma, Delta^n, A_0)$ un $n$-cycle singulier représentant $alpha_0$.
+  Puisque pour tout $k in NN$, on a $i_(k)(alpha_k) = alpha_(k+1)$, on en déduit que $sigma$ est aussi un représentant de tous les $alpha_k$.
+
+  On note $Y := union.big_(k in NN) A_k = SS^3 without f(BB^(m-1) times {0})$.
+  Alors $BB^(m-1) times {0}$ est homéomorphe à $BB^(m-1)$, donc par hypothèse de récurrence on a $H_(n)(Y) tilde.eq 0$.
+  De plus par inclusion on a $sigma in Z_(n)(Y)$ et $overline(sigma) = 0 in H_(n)(Y)$.
+
+  Alors on a $sigma in B_(n)(Y)$ et il existe une $(n+1)$-chaîne singulière $func(tau, Delta^(n+1), Y)$ telle que $dif_(n+1) tau = sigma$.
+  Puisque $tau$ est continue et $Delta^(n+1)$ est compact, son image $K := tau(Delta^(n+1))$ est compacte.
+  Or $Y := union.big_(k in NN) A_k$ est un recouvrement ouvert de $K$, donc par définition il existe $k_0 in NN$ tel que $K subset A_k_0$.
+
+  Alors $sigma = dif_(n+1) tau in B_(n+1)(A_k_0)$ et $a_k_0 = overline(sigma) = 0 in H_(n)(A_k_0)$, d'où une contradiction.
+
+  Donc on a bien $H_(n)(SS^3 without f(BB^m)) tilde.eq 0$.
+])
+
+#proposition([
+  Soit $X$ un sous-espace de $RR^3$ homéomorphe à $BB^2$.
+  Alors pour tout $n in ZZ$, on a :
+  $
+    H_(n)(RR^3 without X) tilde.eq H_(n)(SS^2) tilde.eq cases(ZZ &"si" n in {0, 2}, 0 &"sinon")
+  $
+]) <prop-homologie-complementaire-b2>
+
+#proof([
+  Par @thm-projection-stereographie $RR^3 union {oo}$ est homéomorphe à $SS^3$, en particulier la restriction $(RR^3 without X) union {oo}$ est homéomorphe à $SS^3 without X$.
+  Alors on recouvre $(RR^3 without X) union {oo}$ par deux ouverts $U := RR^3 without X$ et $V$ une boule au voisinage de $oo$ qui n'intersecte pas $X$ (qui est compact).
+
+  L'ouvert $V$ est homotopiquement équivalent au point ${oo}$ et l'intersection $U inter V = V without {oo}$ est homotopiquement équivalente à $SS^2$.
+  Alors d'après le @cor-homotopie-equ, l'@thm-dimension, la @prop-homologie-s2 et la @prop-homologie-s3-b, pour tout $n in ZZ$, on a :
+  $
+    H_(n)(U union V) tilde.eq H_(n)(V) tilde.eq cases(ZZ &"si" n = 0, 0 &"sinon")
+    quad "et" quad
+    H_(n)(U inter V) tilde.eq cases(ZZ &"si" n in {0, 2}, 0 &"sinon")
+  $
+
   Alors d'après le @thm-mayer-vietoris la suite suivante est exacte :
   #align(
     center,
     [
       #commutative-diagram(
-        node-padding: (25pt, 40pt),
+        node-padding: (22pt, 40pt),
         padding: 5pt,
-        node((0, 0), $dots.c$),
-        node((0, 1), $0$),
-        node((0, 2), $H_(2)(TT^2)$),
-        node((0, 3), $ZZ$),
-        node((0, 4), $ZZ plus.circle ZZ$),
-        node((0, 5), $H_(1)(TT^2)$),
+        node((0, -2), $dots.c$),
+        node((0, -1), $0$),
+        node((0, 0), $ZZ$),
+        node((0, 1), $H_(2)(U)$),
+        node((0, 2), $0$),
+        node((0, 3), $0$),
+        node((0, 4), $H_(1)(U)$),
+        node((0, 5), $0$),
         node((0, 6), $ZZ$),
-        node((0, 7), $ZZ plus.circle ZZ$),
-        node((0, 8), $H_(0)(TT^2)$),
+        node((0, 7), $H_(0)(U) plus.circle ZZ$),
+        node((0, 8), $ZZ$),
         node((0, 9), $0$),
 
-        arr((0, 0), (0, 1), $$),
-        arr((0, 1), (0, 2), $$),
+        arr((0, -2), (0, -1), $$),
+        arr((0, -1), (0, 0), $partial_3$),
+        arr((0, 0), (0, 1), $phi_2$),
+        arr((0, 1), (0, 2), $psi_2$),
         arr((0, 2), (0, 3), $partial_2$),
         arr((0, 3), (0, 4), $phi_1$),
         arr((0, 4), (0, 5), $psi_1$),
@@ -1727,115 +1807,51 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
         arr((0, 8), (0, 9), $$),
       )],
   )
-  On en déduit directement que si $n > 2$, on a $H_(n)(TT^2) tilde.eq 0$. \
+  En étudiant $func(phi_0, ZZ, H_(0)(U) plus.circle ZZ)$ on trouve qu'il existe un $0$-cycle singulier $func(sigma, Delta^0, U)$, c'est-à-dire un point, tel que pour tout $a in ZZ$, on a $phi_(0)(a) = (-a overline(sigma), a)$.
 
-  En étudiant $func(phi_0, ZZ, ZZ plus.circle ZZ)$ on trouve que pour tout $a in ZZ$, on a $phi_(1)(a) = (-a, a)$.
-  D'une manière similaire, en étudiant $func(phi_1, ZZ, ZZ plus.circle ZZ)$ on trouve que pour tout $a in ZZ$, on a $phi_(1)(a) = (0, 0)$.
+  Par exactitude de la suite, $phi_2$ est bijective et on a bien $H_(2)(RR^3 without X) tilde.eq ZZ$.
 
-  Alors on a $ker(phi_1) = ZZ$. Par exactitude de la suite, $partial_2$ est injective et on a bien $H_(2)(TT^2) tilde.eq im(partial_2) = ker(phi_1) = ZZ$.
+  Par exactitude de la suite, $phi_1$ est bijective et on a bien $H_(2)(RR^3 without X) tilde.eq 0$.
 
-  De plus on a $ker(phi_0) tilde.eq 0$. Par exactitude de la suite, $ker(psi_1) = im(phi_1) tilde.eq 0$ donc $psi_1$ est injective, de plus $im(partial_1) = ker(phi_0) tilde.eq 0$ et on a bien $H_(1)(SS^1 or SS^1) tilde.eq ker(partial_1) = im(psi_1) = ZZ plus.circle ZZ$.
-
-  Enfin on a $im(phi_0) = {(-a, a) | a in ZZ} tilde.eq ZZ$. Par exactitude de la suite, $psi_0$ est surjective et on a bien $H_(0)(SS^1 or SS^1) tilde.eq lquotient((ZZ plus.circle ZZ), im(phi_0)) tilde.eq lquotient((ZZ plus.circle ZZ), ZZ) tilde.eq ZZ$.
+  Enfin on a $im(phi_0) tilde.eq ZZ$. Par exactitude de la suite, $psi_0$ est surjective, de plus $ker(psi_0) = im(phi_0) tilde.eq ZZ$ et on a $lquotient((H_(0)(RR^3 without X) plus.circle ZZ), ZZ) tilde.eq lquotient((H_(0)(RR^3 without X) plus.circle ZZ), ker(psi_0)) tilde.eq ZZ$, d'après la @prop-h0-abelien-libre le groupe $H_(0)(RR^3 without X)$ est un groupe abélien libre, donc $H_(0)(RR^3 without X) tilde.eq ZZ$.
 ])
 
 #proposition([
-  Soit $SS^1$ une sphère de dimension 1 dans $RR^3$.
-  Alors pour tout $n in ZZ$, on a
-  $ H_(n)(RR^3 without SS^1) tilde.eq cases(ZZ &"si" n in {0, 1, 2}, 0 &"sinon") $
-]) <prop-homologie-complementaire-s1>
+  Soit $X$ un sous-espace de $SS^3$ homéomorphe à $SS^1$.
+  Alors pour tout $n in ZZ$, on a :
+  $
+    H_(n)(SS^3 without X) tilde.eq H_(n)(SS^1) tilde.eq cases(ZZ &"si" n in {0, 1}, 0 &"sinon")
+  $
+]) <prop-homologie-s3-s1>
 
 #proof([
-  On recouvre $RR^3 without SS^1$ par deux ouverts $U := (RR^3 without SS^1) without Z$ et $V := B(0, 1/2) times RR$, où on pose $Z := (0, 0) times RR$ l'axe des $z$ dans $RR^3$, dans la suite on note $X := RR^3 without SS^1$ :
-  #figure(
-    cetz.canvas({
-      import cetz.draw: *
+  On recouvre $SS^1$ par deux arcs fermés $A_+$ et $A_-$, ils sont homéomorphes à $BB^1$, et leur intersection vaut $A_+ inter A_- = SS^0$. On considère un plongement $func(f, SS^1, SS^3)$ tel que $f(SS^1) = X$ et on pose deux ouverts $U := SS^3 without f(A_+)$ et $V := SS^3 without f(A_-)$.
 
-      set-style(
-        stroke: (cap: "round", join: "round"),
-        mark: (
-          transform-shape: false,
-          anchor: "center",
-          fill: black,
-        ),
-      )
-
-      let circle-3d(center, radius, ran: (0, 101)) = {
-        range(..ran).map(x => (
-          center.at(0) + radius * calc.cos(2 * calc.pi * x / 100),
-          center.at(1),
-          center.at(2) + radius * calc.sin(2 * calc.pi * x / 100),
-        ))
-      }
-
-      let alphablue = rgb("#0074d9bb")
-
-      let arc1 = circle-3d((0, 2.5, 0), 1 / 2, ran: (40, 90))
-      let arc2 = circle-3d((0, 2.5, 0), 1 / 2, ran: (-10, 40))
-      let arc3 = circle-3d((0, -1.5, 0), 1 / 2, ran: (40, 90))
-      let arc4 = circle-3d((0, -1.5, 0), 1 / 2, ran: (-10, 40))
-
-      let arc5 = circle-3d((0, 0, 0), 1, ran: (-23, 60))
-      let arc6 = circle-3d((0, 0, 0), 1, ran: (59, 78))
-
-      line(..arc6, stroke: red)
-      line((-3.5, 0, 0), (3.5, 0, 0), mark: (end: "stealth"))
-      line(
-        (0, -2, 0),
-        (0, 3.5, 0),
-        mark: (end: "stealth", fill: red),
-        stroke: red,
-      )
-      line((0, 0, -3.5), (0, 0, 3.5), mark: (end: "stealth"))
-
-      line(..arc1, ..arc2, fill: alphablue)
-      line(..arc3, ..arc4, fill: alphablue)
-      line(..arc2, ..arc4.rev(), arc2.at(0), fill: alphablue)
-
-      line(
-        (0, 3.5, 0),
-        (0, 2.5, 0),
-        stroke: (cap: "round", paint: red),
-      )
-      line(..arc5, stroke: red)
-
-      set-style(content: (padding: 0.1))
-      content((0.1, 3.25, 0), $Z$, anchor: "west")
-      content((-0.6, 1.5, 0), $V$, anchor: "east")
-      content(
-        (calc.sqrt(2) / 2, 0, -calc.sqrt(2) / 2),
-        $SS^1$,
-        anchor: "south-west",
-      )
-    }),
-    caption: [Recouvrement de $RR^3 without SS^1$.],
-  )
-  L'ouvert $U$ est homotopiquement équivalent à $TT^2$, l'ouvert $V$ est homotopiquement équivalent à un point, et l'intersection $U inter V := V without Z$ est homotopiquement équivalente à $SS^1$. D'après le @cor-homotopie-equ, l'@thm-dimension, la @prop-homologie-s1 et la @prop-homologie-t2, pour tout $n in ZZ$, on a :
+  Par @thm-projection-stereographie l'union $U union V = SS^3 without f(SS^0)$ est homéomorphe à $SS^(2)$. Alors d'après la @prop-homologie-s2 et la @prop-homologie-s3-b, pour tout $n in ZZ$, on a :
   $
-    H_(n)(U) tilde.eq cases(ZZ &"si" n in {0, 2}, ZZ plus.circle ZZ &"si" n=1, 0 &"sinon"), quad
-    H_(n)(V) tilde.eq cases(ZZ &"si" n = 0, 0 &"sinon") quad "et" quad
-    H_(n)(U inter V) tilde.eq cases(ZZ &"si" n in {0, 1}, 0 &"sinon")
+    H_(n)(U) tilde.eq H_(n)(V) tilde.eq cases(ZZ &"si" n = 0, 0 &"sinon")
+    quad "et" quad
+    H_(n)(U union V) tilde.eq cases(ZZ &"si" n in {0, 2}, 0 &"sinon")
   $
+
   Alors d'après le @thm-mayer-vietoris la suite suivante est exacte :
   #align(
     center,
     [
       #commutative-diagram(
-        node-padding: (25pt, 40pt),
+        node-padding: (22pt, 40pt),
         padding: 5pt,
-        node((0, -1), $dots.c$),
-        node((0, 0), $0$),
-        node((0, 1), $ZZ$),
-        node((0, 2), $H_(2)(X)$),
-        node((0, 3), $ZZ$),
-        node((0, 4), $ZZ plus.circle ZZ$),
-        node((0, 5), $H_(1)(X)$),
-        node((0, 6), $ZZ$),
+        node((0, 0), $dots.c$),
+        node((0, 1), $0$),
+        node((0, 2), $ZZ$),
+        node((0, 3), $H_(1)(SS^3 without X)$),
+        node((0, 4), $0$),
+        node((0, 5), $0$),
+        node((0, 6), $H_(0)(SS^3 without X)$),
         node((0, 7), $ZZ plus.circle ZZ$),
-        node((0, 8), $H_(0)(X)$),
+        node((0, 8), $ZZ$),
         node((0, 9), $0$),
 
-        arr((0, -1), (0, 0), $$),
         arr((0, 0), (0, 1), $$),
         arr((0, 1), (0, 2), $psi_2$),
         arr((0, 2), (0, 3), $partial_2$),
@@ -1847,17 +1863,77 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
         arr((0, 8), (0, 9), $$),
       )],
   )
+  On en déduit directement que si $n >= 2$, on a $H_(n)(SS^3 without X) tilde.eq 0$. \
 
-  On en déduit directement que pour tout $n > 2$, on a $H_(n)(X) tilde.eq 0$.
+  En étudiant $func(psi_0, ZZ plus.circle ZZ, ZZ)$ on trouve que pour tout $(a, b) in ZZ plus.circle ZZ$, on a $psi_(0)(a, b) = a + b$.
 
-  En étudiant $func(phi_0, ZZ, ZZ plus.circle ZZ)$ on trouve que pour tout $a in ZZ$, on a $phi_(0)(a) = (-a, a)$.
-  D'une manière similaire, en étudiant $func(phi_1, ZZ, ZZ plus.circle ZZ)$ on trouve que pour tout $a in ZZ$, on a $phi_(1)(a) = (-a, 0)$.
+  Par exactitude de la suite, $partial_2$ est bijective et on a bien $H_(1)(SS^3 without X) tilde.eq ZZ$.
 
-  Alors on a $ker(phi_1) tilde.eq 0$. Par exactitude de la suite $psi_2$ est injective, de plus $im(partial_2) = ker(phi_1) tilde.eq 0$ et on a bien $H_(2)(X) tilde.eq ker(partial_2) = im(phi_2) = ZZ$.
+  De plus $ker(psi_0) tilde.eq ZZ$. Par exactitude de la suite, $phi_0$ est injective et on a $H_(0)(SS^3 without X) tilde.eq im(phi_0) = ker(psi_0) tilde.eq ZZ$.
+])
 
-  De plus on a $ker(phi_0) tilde.eq 0$. Par exactitude de la suite, $im(partial_1) = ker(phi_0) tilde.eq 0$ et $im(psi_1) = ker(partial_1) tilde.eq H_(1)(X)$ donc $psi_1$ est surjective et on a bien $H_(1)(X) tilde.eq lquotient((ZZ plus.circle ZZ), im(phi_1)) tilde.eq lquotient((ZZ plus.circle ZZ), ZZ) tilde.eq ZZ$.
+#proposition([
+  Soit $X$ un sous-espace de $RR^3$ homéomorphe à $SS^1$.
+  Alors pour tout $n in ZZ$, on a :
+  $ H_(n)(RR^3 without X) tilde.eq cases(ZZ &"si" n in {0, 1, 2}, 0 &"sinon") $
+]) <prop-homologie-complementaire-s1>
 
-  Enfin on a $im(phi_0) = {(-a, a) | a in ZZ} tilde.eq ZZ$. Par exactitude de la suite, $psi_0$ est surjective et on a bien $H_(0)(X) tilde.eq lquotient((ZZ plus.circle ZZ), im(phi_0)) tilde.eq lquotient((ZZ plus.circle ZZ), ZZ) tilde.eq ZZ$.
+#proof([
+  Par @thm-projection-stereographie $RR^3 union {oo}$ est homéomorphe à $SS^3$, en particulier la restriction $(RR^3 without X) union {oo}$ est homéomorphe à $SS^3 without X$.
+  Alors on recouvre $(RR^3 without X) union {oo}$ par deux ouverts $U := RR^3 without X$ et $V$ une boule au voisinage de $oo$ qui n'intersecte pas $X$ (qui est compact).
+
+  L'ouvert $V$ est homotopiquement équivalent à ${oo}$ et l'intersection $U inter V = V without {oo}$ est homotopiquement équivalente à $SS^2$.
+  Alors d'après le @cor-homotopie-equ, l'@thm-dimension, la @prop-homologie-s2 et la @prop-homologie-s3-s1, pour tout $n in ZZ$, on a :
+  $
+    H_(n)(U union V) tilde.eq cases(ZZ &"si" n in {0, 1}, 0 &"sinon")
+    , quad
+    H_(n)(V) tilde.eq cases(ZZ &"si" n = 0, 0 &"sinon")
+    quad "et" quad
+    H_(n)(U inter V) tilde.eq cases(ZZ &"si" n in {0, 2}, 0 &"sinon")
+  $
+
+  Alors d'après le @thm-mayer-vietoris la suite suivante est exacte :
+  #align(
+    center,
+    [
+      #commutative-diagram(
+        node-padding: (22pt, 40pt),
+        padding: 5pt,
+        node((0, -2), $dots.c$),
+        node((0, -1), $0$),
+        node((0, 0), $ZZ$),
+        node((0, 1), $H_(2)(U)$),
+        node((0, 2), $0$),
+        node((0, 3), $0$),
+        node((0, 4), $H_(1)(U)$),
+        node((0, 5), $ZZ$),
+        node((0, 6), $ZZ$),
+        node((0, 7), $H_(0)(U) plus.circle ZZ$),
+        node((0, 8), $ZZ$),
+        node((0, 9), $0$),
+
+        arr((0, -2), (0, -1), $$),
+        arr((0, -1), (0, 0), $partial_3$),
+        arr((0, 0), (0, 1), $phi_2$),
+        arr((0, 1), (0, 2), $psi_2$),
+        arr((0, 2), (0, 3), $partial_2$),
+        arr((0, 3), (0, 4), $phi_1$),
+        arr((0, 4), (0, 5), $psi_1$),
+        arr((0, 5), (0, 6), $partial_1$),
+        arr((0, 6), (0, 7), $phi_0$),
+        arr((0, 7), (0, 8), $psi_0$),
+        arr((0, 8), (0, 9), $$),
+      )],
+  )
+  On en déduit directement que si $n > 2$, on a $H_(n)(RR^3 without X) tilde.eq 0$. \
+
+  En étudiant $func(phi_0, ZZ, H_(0)(U) plus.circle ZZ)$ on trouve qu'il existe un $0$-cycle singulier $func(sigma, Delta^0, U)$, c'est-à-dire un point, tel que pour tout $a in ZZ$, on a $phi_(0)(a) = (-a overline(sigma), a)$.
+
+  Par exactitude de la suite, $phi_2$ est bijective et on a bien $H_(2)(RR^3 without X) tilde.eq ZZ$.
+
+  De plus on a $ker(phi_0) tilde.eq 0$. Par exactitude de la suite, $psi_1$ est injective, de plus $im(partial_1) = ker(phi_0) tilde.eq 0$ et on a bien $H_(1)(RR^3 without X) tilde.eq im(psi_1) = ker(partial_1) tilde.eq ZZ$.
+
+  Enfin on a $im(phi_0) tilde.eq ZZ$. Par exactitude de la suite, $psi_0$ est surjective, de plus $ker(psi_0) = im(phi_0) tilde.eq ZZ$ et on a $lquotient((H_(0)(RR^3 without X) plus.circle ZZ), ZZ) tilde.eq lquotient((H_(0)(RR^3 without X) plus.circle ZZ), ker(psi_0)) tilde.eq ZZ$, d'après la @prop-h0-abelien-libre le groupe $H_(0)(RR^3 without X)$ est un groupe abélien libre, donc $H_(0)(RR^3 without X) tilde.eq ZZ$.
 ])
 
 #pagebreak()
@@ -2137,7 +2213,7 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
 ])
 
 #proposition([
-  Le plan projectif réel $PP^2_RR$ se décompose en l'union de deux ensembles $M union D$ tels que $M$ est homéomorphe une bande de Möbius, $D$ est homéomorphe à un disque fermé, et $M inter D$ est homéomorphe à un cercle.
+  Le plan projectif réel $PP^2_RR$ se décompose en l'union de deux ensembles $M union D$ tels que $M$ est homéomorphe une bande de Möbius, $D$ est homéomorphe à un disque fermé, et l'intersection $M inter D = partial M = partial D$ est homéomorphe à $SS^1$.
 ]) <prop-homeo-p2-mobius-disque>
 
 #proof([
@@ -2271,9 +2347,9 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
     }),
     caption: "Recollage du disque fermé.",
   )
-  De plus $M inter D$ est homéomorphe au bord du disque, donc à un cercle.
+  De plus $M inter D = partial M = partial D$ est homéomorphe au bord du disque, donc à $SS^1$.
 
-  Puisque les déformations à chaque étapes sont continues et préservent les points identifiés, on a bien décomposé le plan projectif réel $PP^2_RR$ comme l'union $M union D$ de deux ensembles tels que $M$ est homéomorphe à une bande de Möbius, $D$ est homéomorphe à un disque fermé et $M inter D$ est homéomorphe à un cercle.
+  Puisque les déformations à chaque étapes sont continues et préservent les points identifiés, on a bien décomposé le plan projectif réel $PP^2_RR$ comme l'union $M union D$ de deux ensembles tels que $M$ est homéomorphe à une bande de Möbius, $D$ est homéomorphe à un disque fermé et $M inter D$ est homéomorphe à $SS^1$.
 ])
 
 === Non-plongement dans l'espace euclidien
@@ -2289,32 +2365,111 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
 
 #proof([
   Supposons par l'absurde qu'il existe un plongement $func(f, PP^2_RR, RR^3)$. \
-  D'après la @prop-homeo-p2-mobius-disque on peut écrire $PP^2_RR = M union D$ où $M$ est homéomorphe à une bande de Möbius, $D$ est homéomorphe à un disque fermé et $M inter D$ est homéomorphe à un cercle,
+  D'après la @prop-homeo-p2-mobius-disque on peut écrire $PP^2_RR = M union D$ où $M$ est homéomorphe à une bande de Möbius, $D$ est homéomorphe à un disque fermé et $M inter D = partial M = partial D$ est homéomorphe à $SS^1$,
   dans la suite on identifie $PP^2_RR$, $M$ et $D$ avec leur images $f(PP^2_RR)$, $f(M)$ et $f(D)$ dans $RR^3$.
 
-  La bande de Möbius $M$ est homotopiquement équivalente à son cercle central $C$, par passage au complémentaire $RR^3 without M$ est homotopiquement équivalent à $RR^3 without C$, d'après le @cor-homotopie-equ on a alors $H_(cdot)(RR^3 without M) tilde.eq H_(cdot)(RR^3 without C)$, donc $H_(cdot)(RR^3 without M) tilde.eq H_(cdot)(RR^3 without SS^1)$.
-  D'après la @prop-homologie-complementaire-s1, pour tout $n in ZZ$, on a :
-  $ H_(n)(RR^3 without M) tilde.eq cases(ZZ &"si" n in {0, 1, 2}, 0 &"sinon") $
+  Le complémentaire de la bande de Möbius $RR^3 without M$ se rétracte par déformation sur $RR^3 without C$ où $C$ est le cercle central de $M$, homéomorphe à $SS^1$. Alors d'après le @cor-retract-deformation et la @prop-homologie-complementaire-s1, pour tout $n in ZZ$, on a :
+  $
+    H_(n)(RR^3 without M) tilde.eq H_(n)(RR^3 without C) tilde.eq H_(n)(SS^1) tilde.eq cases(ZZ &"si" n in {0, 1, 2}, 0 &"sinon")
+  $
+  et on en déduit qu'un générateur de $H_(1)(RR^3 without M) tilde.eq H_(1)(SS^1)$ est donné par la classe d'un $1$-simplexe singulier $func(sigma, Delta^1, RR^3 without M)$ dont l'image est un cercle enlacé autour de $M$.
 
-  Deuxième étape : On détermine l'application induite par l'inclusion $func(i, RR^3 without M, RR^3 without boundary(M))$ en homologie de degré 1, c'est la multiplication par 2.
+  De plus le bord de la bande Möbius $partial M$ est homéomorphe à $SS^1$. Alors d'après la @prop-homologie-complementaire-s1, pour tout $n in ZZ$, on a :
+  $
+    H_(n)(RR^3 without partial M) tilde.eq H_(n)(SS^1) tilde.eq cases(ZZ &"si" n in {0, 1, 2}, 0 &"sinon")
+  $
+  et on en déduit qu'un générateur de $H_(1)(RR^3 without partial M) tilde.eq H_(1)(SS^1)$ est donné par la classe d'un $1$-simplexe singulier $func(tau, Delta^1, RR^3 without partial M)$ dont l'image est un cercle enlacé autour de $partial M$ avec la même orientation que $sigma$.
 
-  On a $RR^3 without PP^2_RR = (RR^3 without M) inter (RR^3 without D)$ et $RR^3 without (partial M) = (RR^3 without M) union (RR^3 without D)$. \
-  De plus d'après les calculs précédents on a $H_(1)(RR^3 without M) tilde.eq H_(1)(RR^3 without partial M) tilde.eq ZZ$ et $H_(1)(RR^3 without D) tilde.eq 0$, alors d'après le @thm-mayer-vietoris il existe $func(partial_0, H_(1)(RR^3 without partial M), H_(0)(RR^3 without PP^2_RR))$ telle que la suite suivante est exacte en $H_(1)(RR^3 without partial M)$ :
+  On considère $func(i, RR^3 without M, RR^3 without partial M)$ l'inclusion canonique.
+  Alors la composition $i compose sigma$ est homotope à deux cercles enlacés autour de $partial M$ avec la même orientation que $sigma$ et ayant un point d'intersection :
+
+  #figure(
+    cetz.canvas({
+      import cetz.draw: *
+
+      set-style(
+        stroke: (cap: "round", join: "round"),
+        mark: (transform-shape: false, anchor: "center"),
+      )
+
+      let circle-3d(center, radius, ran: (0, 101)) = {
+        range(..ran).map(x => (
+          center.at(0) + radius * calc.cos(2 * calc.pi * x / 100),
+          center.at(1),
+          center.at(2) + radius * calc.sin(2 * calc.pi * x / 100),
+        ))
+      }
+
+      let mobius(rt) = {
+        for t in range(rt + 1) {
+          t = 4 * calc.pi * t / rt
+          (
+            (
+              (1 - 1 / 2 * calc.sin(t / 2)) * calc.sin(t),
+              (1 - 1 / 2 * calc.sin(t / 2)) * calc.cos(t),
+              1 / 2 * calc.cos(t / 2),
+            ),
+          )
+        }
+      }
+
+      let mob = mobius(1000)
+      let circ1 = circle-3d((-0.97, -0.2, 0), 0.7)
+      let circ2 = circle-3d((3.65, -0.2, 0), 0.35)
+      let circ3 = circle-3d((4.43, 0, 0), 0.35)
+
+      line(..circ1, stroke: red)
+      line(
+        ..mob.slice(435, 950),
+        mob.at(480),
+        ..mob.slice(435, 480).rev(),
+        ..mob.slice(0, 435).rev(),
+        ..mob.slice(992, 1001).rev(),
+        fill: rgb("#0074d9bb"),
+      )
+      line(..circ1.slice(0, 30), stroke: red)
+
+      line((2, 0), (3, 0), mark: (end: "stealth", fill: black))
+
+      line(..circ2, stroke: red)
+      line(..circ3, stroke: red)
+      line(..mob.map(it => (it.at(0) + 5, it.at(1), it.at(2))))
+      line(..circ2.slice(0, 30), stroke: red)
+      line(..circ3.slice(0, 30), stroke: red)
+
+
+      set-style(mark: (stroke: red, fill: red, symbol: "stealth"))
+      mark((-0.97, -0.51), 12deg)
+      mark((3.65, -0.35), 13deg)
+      mark((4.43, -0.15), 12deg)
+    }),
+    caption: [Homotopie de l'inclusion de $sigma$ dans $RR^3 without M$.],
+  )
+
+  Alors puisque leur orientation est la même, la classe des deux cercles dans $H_(1)(RR^3 without partial M)$ est la même, c'est-à-dire $overline(tau)$, on en déduit que $H_(1)(i)(overline(sigma)) = 2 overline(tau)$, donc $H_(1)(i)$ est la multiplication par 2.
+
+  Le disque fermé $D$ est homéomorphe à $BB^2$. Alors d'après la @prop-homologie-complementaire-b2, pour tout $n in ZZ$, on a :
+
+  $
+    H_(n)(RR^3 without D) tilde.eq H_(n)(SS^2) tilde.eq cases(ZZ &"si" n in {0, 2}, 0 &"sinon")
+  $
+
+  Alors d'après le @thm-mayer-vietoris la suite suivante est exacte en $H_(1)(RR^3 without partial M)$ :
   #align(
     center,
     [
       #commutative-diagram(
         node-padding: (40pt, 40pt),
         padding: 10pt,
-        node((0, 2), $ZZ tilde.eq H_(1)(RR^3 without M) plus.circle 0$),
-        node((0, 3), $ZZ tilde.eq H_(1)(RR^3 without partial M)$),
+        node((0, 2), $ZZ$),
+        node((0, 3), $ZZ$),
         node((0, 4), $H_(0)(RR^3 without PP^2_RR)$),
 
         arr((0, 2), (0, 3), $H_(1)(i)$),
         arr((0, 3), (0, 4), $partial_0$),
       )],
   )
-  par exactitude on a $ker(partial_0) = im(H_(1)(i)) = 2ZZ$, d'où $partial_(0)(1) != 0$ et $2 partial_(0)(1) = partial_(0)(2) = 0$, donc $partial_(0)(1)$ est un élément non-nul d'ordre 2 de $H_(0)(RR^3 without PP^2_RR)$.
+  Par exactitude de la suite, on a $ker(partial_0) = im(H_(1)(i)) = 2ZZ$, d'où $partial_(0)(1) != 0$ et $2 partial_(0)(1) = partial_(0)(2) = 0$, donc $partial_(0)(1)$ est un élément non-nul d'ordre 2 de $H_(0)(RR^3 without PP^2_RR)$.
 
   Mais d'après la @prop-h0-abelien-libre $H_(0)(RR^3 without PP^2_RR)$ est un groupe abélien libre, donc il n'existe aucun élément non-nul d'ordre 2 de $H_(0)(RR^3 without PP^2_RR)$, d'où une contradiction.
   Donc il n'existe pas de plongement du plan projectif réel $PP^2_RR$ dans l'espace euclidien $RR^3$. \
@@ -2329,7 +2484,6 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
   [
     Soit $C$ une courbe de Jordan. \
     Pour commencer, au lieu de considérer un rectangle comme 4 sommets, on va considérer un rectangle comme 2 paires de sommets formant les diagonales :
-
     #figure(
       cetz.canvas({
         import cetz.draw: *
@@ -2416,7 +2570,7 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
     Ainsi 2 paires non-ordonnées de sommets $overline(p), overline(q) in lquotient(P, thin~)$ forment un rectangle si et seulement si elles sont distinctes et $phi(overline(p)) = phi(overline(q))$, donc montrer l'existence d'un rectangle inscrit dans $C$ revient à montrer que la fonction $phi$ n'est pas injective.
 
     Supposons par l'absurde que la fonction $phi$ est injective. \
-    Puisque $lquotient(P, thin~)$ est compact, $phi(lquotient(P, thin~)) subset RR^3$ est séparé et $phi$ est une bijection continue de $lquotient(P, thin~)$ sur son image $phi(lquotient(P, thin~))$, alors $phi$ est un homéomorphisme de $lquotient(P, thin~)$ sur son image $phi(lquotient(P, thin~))$.
+    Puisque $lquotient(P, thin~)$ est compact et $phi$ est une bijection continue de $lquotient(P, thin~)$ sur son image $phi(lquotient(P, thin~))$, d'après le @thm-bijection-continue-compact $phi$ est un homéomorphisme de $lquotient(P, thin~)$ sur son image $phi(lquotient(P, thin~))$.
 
     Puisque la courbe de Jordan $C$ est paramétrée par une fonction continue $func(gamma_C, [0, 1], C)$, on peut paramétrer $lquotient(P, thin~)$ par la fonction $func(gamma := overline((gamma_C, gamma_C)), [0, 1]^2, lquotient(P, thin~))$ :
 
@@ -2647,6 +2801,42 @@ Dans la suite nous allons étudier l'homologie singulière qui nous permettra de
     Donc il existe un rectangle inscrit dans la courbe de Jordan $C$.
   ],
 )
+
+#pagebreak()
+
+#heading([Annexe], numbering: none)
+
+#theorem(
+  title: [Projection stéréographique],
+  [$SS^n without {N}$ est homéomorphe à $RR^n$ où $N := (0, ..., 0, 1)$ est le pôle nord de $SS^n$.],
+) <thm-projection-stereographie>
+
+#proof([
+  On définit une application :
+  $
+    func(f, SS^n without {N}, RR^n, (x_1, ..., x_(n+1)), (x_1/(1-x_(n+1)), ..., x_n/(1-x_(n+1))))
+  $
+  elle est bien définie, continue, et son inverse est donnée par :
+  $
+    func(f, RR^n, SS^n without {N}, y := (y_1, ...y_n), ((2 y_1)/(norm(y)^2 + 1), ..., (2 y_n)/(norm(y)^2 + 1), (norm(y)^2 - 1)/(norm(y)^2 + 1)))
+  $
+  qui est bien définie et continue.
+  Donc $f$ est bien un homéomorphisme entre $SS^n without {N}$ et $RR^n$.
+])
+
+#theorem([
+  Soit $K$ un compact de $RR^n$, $L$ une partie de $RR^n$ et $func(f, K, L)$ une bijection continue.
+  Alors $f$ est un homéomorphisme.
+]) <thm-bijection-continue-compact>
+
+#proof([
+  Notons $g := f^(-1)$.
+  Soit $F$ un fermé de $K$.
+  Puisque $K$ est compact et $F$ est fermé, $F$ est compact.
+  Puisque $f$ est continue et $F$ est compact, $g^(-1)(F) = f(F)$ est compact.
+  Puisque $g^(-1)(F)$ est compact, $g^(-1)(F)$ est fermé.
+  Donc $f^(-1) = g$ est continue et $f$ est bien un homéomorphisme.
+])
 
 #v(1fr)
 
