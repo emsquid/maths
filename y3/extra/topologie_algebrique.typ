@@ -1580,33 +1580,34 @@ TODO : $SS^n$.
 ])
 
 #proposition([
-  Soit $X$ un sous-espace de $RR^3$ homéomorphe à $BB^2$.
+  Soit $X$ un sous-espace de $RR^p$ homéomorphe à $BB^q$.
   Alors pour tout $n in ZZ$, on a :
   $
-    H_(n)(RR^3 without X) tilde.eq H_(n)(SS^2) tilde.eq cases(ZZ &"si" n in {0, 2}, 0 &"sinon")
+    H_(n)(RR^p without X) tilde.eq H_(n)(SS^(p-1)) tilde.eq cases(ZZ &"si" n in {0, p-1}, 0 &"sinon")
   $
-]) <prop-homologie-complementaire-b2>
+]) <prop-homologie-rp-bq>
 
 #proof([
-  D'après le @thm-projection-stereographique et par compactification d'Alexandrov $RR^3 union {oo}$ est homéomorphe à $SS^3$, en particulier la restriction $(RR^3 without X) union {oo}$ est homéomorphe à $SS^3 without X$.
-  On recouvre $(RR^3 without X) union {oo}$ par deux ouverts $U := RR^3 without X$ et $V$ une boule au voisinage de $oo$ qui n'intersecte pas $X$ (qui est compact). \
+  D'après le @thm-projection-stereographique et par compactification d'Alexandrov $RR^p union {oo}$ est homéomorphe à $SS^p$, en particulier la restriction $(RR^p without X) union {oo}$ est homéomorphe à $SS^p without X$.
+  On recouvre $(RR^p without X) union {oo}$ par deux ouverts $U := RR^p without X$ et $V$ une boule au voisinage de $oo$ qui n'intersecte pas $X$ (qui est compact). \
 
-  Alors on peut calculer $H_(n)(SS^3 without X)$ de la même manière que dans la @prop-homologie-s1.
+  Alors on peut calculer $H_(n)(RR^p without X)$ de la même manière que dans la @prop-homologie-s1.
 ])
 
 #proposition([
-  Soit $X$ un sous-espace de $SS^3$ homéomorphe à $SS^1$.
+  Soit $X$ un sous-espace de $SS^p$ homéomorphe à $SS^q$.
   Alors pour tout $n in ZZ$, on a :
   $
-    H_(n)(SS^3 without X) tilde.eq H_(n)(SS^1) tilde.eq cases(ZZ &"si" n in {0, 1}, 0 &"sinon")
+    H_(n)(SS^p without X) tilde.eq H_(n)(SS^(p-q-1)) tilde.eq cases(ZZ &"si" n in {0, p - q -1}, 0 &"sinon")
   $
 ]) <prop-homologie-s3-s1>
 
 #proof([
-  On recouvre $SS^1$ par deux arcs fermés $A_+$ et $A_-$, ils sont homéomorphes à $BB^1$, et leur intersection vaut $A_+ inter A_- = SS^0$. On considère un homéomorphisme $func(f, SS^1, X)$ et on pose deux ouverts $U := SS^3 without f(A_+)$ et $V := SS^3 without f(A_-)$.
-  D'après le @thm-projection-stereographique l'union $U union V = SS^3 without f(SS^0)$ est homéomorphe à $RR^3 without {0}$, qui est homotopiquement équivalent à $SS^(2)$. \
+  On recouvre $SS^q$ par deux arcs fermés $A_+$ et $A_-$, ils sont homéomorphes à $BB^q$, et leur intersection vaut $A_+ inter A_- = SS^(q-1)$. On considère un homéomorphisme $func(f, SS^q, X)$ et on pose deux ouverts $U := SS^p without f(A_+)$ et $V := SS^p without f(A_-)$.
 
-  Alors on peut calculer $H_(n)(SS^3 without X)$ de la même manière que dans la @prop-homologie-s1.
+  Alors on peut calculer $H_(n)(SS^p without X)$ de la même manière que dans la @prop-homologie-s1 et par récurrence on se ramène au cas $q = 0$.
+
+  D'après le @thm-projection-stereographique l'espace $SS^p without f(SS^(0))$ est homéomorphe à $RR^(p) without {0}$, qui est homotopiquement équivalent à $SS^(p-1)$.
 ])
 
 #proposition([
@@ -1616,7 +1617,7 @@ TODO : $SS^n$.
 ]) <prop-homologie-complementaire-s1>
 
 #proof([
-  On peut recouvrir de la même manière que dans la @prop-homologie-complementaire-b2 et
+  On peut recouvrir de la même manière que dans la @prop-homologie-rp-bq et
   calculer $H_(n)(SS^3 without X)$ de la même manière que dans la @prop-homologie-s1
 ])
 
@@ -2132,7 +2133,7 @@ TODO : $SS^n$.
 
   Alors puisque leur orientation est la même, la classe des deux cercles dans $H_(1)(RR^3 without partial M)$ est le même générateur de $H_(1)(RR^3 without partial M)$, donc $H_(1)(i)$ est la multiplication par 2.
 
-  Le disque fermé $D$ est homéomorphe à $BB^2$. D'après la @prop-homologie-complementaire-b2, on a :
+  Le disque fermé $D$ est homéomorphe à $BB^2$. D'après la @prop-homologie-rp-bq, on a :
 
   $
     H_(1)(RR^3 without D) tilde.eq H_(1)(SS^2) tilde.eq 0
@@ -2145,7 +2146,10 @@ TODO : $SS^n$.
       #commutative-diagram(
         node-padding: (40pt, 40pt),
         padding: 10pt,
-        node((0, 2), $H_(1)(RR^3 without M) tilde.eq ZZ plus.circle H_(1)(RR^3 without D) tilde.eq 0$),
+        node(
+          (0, 2),
+          $H_(1)(RR^3 without M) tilde.eq ZZ plus.circle H_(1)(RR^3 without D) tilde.eq 0$,
+        ),
         node((0, 3), $H_(1)(RR^3 without partial M) tilde.eq ZZ$),
         node((0, 4), $H_(0)(RR^3 without PP^2_RR)$),
 
