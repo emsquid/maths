@@ -2037,7 +2037,7 @@ TODO : $SS^n$.
   Puisque les déformations à chaque étapes sont continues et préservent les points identifiés, on a bien décomposé le plan projectif réel $PP^2_RR$ comme l'union $M union D$ de deux ensembles tels que $M$ est homéomorphe à une bande de Möbius, $D$ est homéomorphe à un disque fermé et $M inter D$ est homéomorphe à $SS^1$.
 ])
 
-=== Non-plongement dans l'espace euclidien
+=== Non-plongement dans $RR^3$
 
 #definition([
   Soit $X$ et $Y$ deux espaces topologiques, $func(f, X, Y)$ une application.
@@ -2045,7 +2045,7 @@ TODO : $SS^n$.
 ])
 
 #theorem([
-  Il n'existe pas de plongement du plan projectif réel $PP^2_RR$ dans l'espace euclidien $RR^3$.
+  Il n'existe pas de plongement du plan projectif réel $PP^2_RR$ dans $RR^3$.
 ]) <thm-non-plongement-p2-r3>
 
 #proof([
@@ -2053,17 +2053,16 @@ TODO : $SS^n$.
   D'après la @prop-homeo-p2-mobius-disque on peut écrire $PP^2_RR = M union D$ où $M$ est homéomorphe à une bande de Möbius, $D$ est homéomorphe à un disque fermé et $M inter D = partial M = partial D$ est homéomorphe à $SS^1$,
   dans la suite on identifie $PP^2_RR$, $M$ et $D$ avec leur images $f(PP^2_RR)$, $f(M)$ et $f(D)$ dans $RR^3$.
 
-  Le complémentaire de la bande de Möbius $RR^3 without M$ est homotopiquement équivalent à $RR^3 without C$ où $C$ est le cercle central de $M$, homéomorphe à $SS^1$. Alors d'après le @cor-retract-deformation et la @prop-homologie-complementaire-s1, pour tout $n in ZZ$, on a :
+  Le complémentaire de la bande de Möbius $RR^3 without M$ est homotopiquement équivalent à $RR^3 without C$ où $C$ le cercle central de $M$ est homéomorphe à $SS^1$. D'après le @cor-retract-deformation et la @prop-homologie-complementaire-s1, on a :
   $
-    H_(n)(RR^3 without M) tilde.eq H_(n)(RR^3 without C) tilde.eq cases(ZZ &"si" n in {0, 1, 2}, 0 &"sinon")
+    H_(1)(RR^3 without M) tilde.eq H_(1)(RR^3 without C) tilde.eq ZZ
   $
   et on en déduit qu'un générateur de $H_(1)(RR^3 without M) tilde.eq H_(1)(SS^1)$ est donné par la classe d'un $1$-simplexe singulier $func(sigma, Delta^1, RR^3 without M)$ dont l'image est un cercle enlacé autour de $M$.
 
-  De plus le bord de la bande Möbius $partial M$ est homéomorphe à $SS^1$. Alors d'après la @prop-homologie-complementaire-s1, pour tout $n in ZZ$, on a :
+  De plus le bord de la bande Möbius $partial M$ est homéomorphe à $SS^1$. D'après la @prop-homologie-complementaire-s1, on a :
   $
-    H_(n)(RR^3 without partial M) tilde.eq cases(ZZ &"si" n in {0, 1, 2}, 0 &"sinon")
+    H_(1)(RR^3 without partial M) tilde.eq ZZ
   $
-  et on en déduit qu'un générateur de $H_(1)(RR^3 without partial M) tilde.eq H_(1)(SS^1)$ est donné par la classe d'un $1$-simplexe singulier $func(tau, Delta^1, RR^3 without partial M)$ dont l'image est un cercle enlacé autour de $partial M$ avec la même orientation que $sigma$.
 
   On considère $func(i, RR^3 without M, RR^3 without partial M)$ l'inclusion canonique.
   Alors la composition $i compose sigma$ est homotope à deux cercles enlacés autour de $partial M$ avec la même orientation que $sigma$ et ayant un point d'intersection :
@@ -2131,12 +2130,12 @@ TODO : $SS^n$.
     caption: [Homotopie de l'inclusion de $sigma$ dans $RR^3 without M$.],
   )
 
-  Alors puisque leur orientation est la même, la classe des deux cercles dans $H_(1)(RR^3 without partial M)$ est la même, c'est-à-dire $overline(tau)$, on en déduit que $H_(1)(i)(overline(sigma)) = 2 overline(tau)$, donc $H_(1)(i)$ est la multiplication par 2.
+  Alors puisque leur orientation est la même, la classe des deux cercles dans $H_(1)(RR^3 without partial M)$ est le même générateur de $H_(1)(RR^3 without partial M)$, donc $H_(1)(i)$ est la multiplication par 2.
 
-  Le disque fermé $D$ est homéomorphe à $BB^2$. Alors d'après la @prop-homologie-complementaire-b2, pour tout $n in ZZ$, on a :
+  Le disque fermé $D$ est homéomorphe à $BB^2$. D'après la @prop-homologie-complementaire-b2, on a :
 
   $
-    H_(n)(RR^3 without D) tilde.eq H_(n)(SS^2) tilde.eq cases(ZZ &"si" n in {0, 2}, 0 &"sinon")
+    H_(1)(RR^3 without D) tilde.eq H_(1)(SS^2) tilde.eq 0
   $
 
   Alors d'après le @thm-mayer-vietoris la suite suivante est exacte en $H_(1)(RR^3 without partial M)$ :
@@ -2146,8 +2145,8 @@ TODO : $SS^n$.
       #commutative-diagram(
         node-padding: (40pt, 40pt),
         padding: 10pt,
-        node((0, 2), $ZZ$),
-        node((0, 3), $ZZ$),
+        node((0, 2), $H_(1)(RR^3 without M) tilde.eq ZZ plus.circle H_(1)(RR^3 without D) tilde.eq 0$),
+        node((0, 3), $H_(1)(RR^3 without partial M) tilde.eq ZZ$),
         node((0, 4), $H_(0)(RR^3 without PP^2_RR)$),
 
         arr((0, 2), (0, 3), $H_(1)(i)$),
@@ -2157,7 +2156,8 @@ TODO : $SS^n$.
   Par exactitude de la suite, on a $ker(partial_0) = im(H_(1)(i)) = 2ZZ$, d'où $partial_(0)(1) != 0$ et $2 partial_(0)(1) = partial_(0)(2) = 0$, donc $partial_(0)(1)$ est un élément non-nul d'ordre 2 de $H_(0)(RR^3 without PP^2_RR)$.
 
   Mais d'après la @prop-h0-abelien-libre $H_(0)(RR^3 without PP^2_RR)$ est un groupe abélien libre, donc il n'existe aucun élément non-nul d'ordre 2 de $H_(0)(RR^3 without PP^2_RR)$, d'où une contradiction.
-  Donc il n'existe pas de plongement du plan projectif réel $PP^2_RR$ dans l'espace euclidien $RR^3$.
+
+  Donc il n'existe pas de plongement du plan projectif réel $PP^2_RR$ dans $RR^3$.
 ])
 
 #pagebreak()
