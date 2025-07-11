@@ -16,8 +16,8 @@ ginot:
   author: Grégory Ginot
   date: 2019
 
-clever:
-  type: Web
-  title: Clever Homotopy Equivalence
-  author: Math3ma
-  date: 2016
+vaughan:
+  type: Book
+  title: Rectangles and simple closed curves
+  author: Vaughan
+  date: 1977

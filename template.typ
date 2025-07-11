@@ -3,6 +3,7 @@
 #import "@preview/rich-counters:0.2.2": *
 #import "@preview/ez-today:1.1.0": *
 #import "@preview/cetz:0.3.4"
+#import "@preview/touying:0.6.1": *
 #import "@local/touvlo:0.1.0": *
 #import "@local/mathematica:0.1.0": *
 
@@ -15,6 +16,8 @@
     body
   },
 )
+#let questioncounter = rich-counter(identifier: "qst", inherited_levels: 0)
+#let questionbrick = brick.with(counter: questioncounter)
 #let exercisecounter = rich-counter(identifier: "ex", inherited_levels: 0)
 #let exercisebrick = brick.with(counter: exercisecounter)
 
@@ -31,6 +34,7 @@
 #let examples = examplebrick("Exemples")
 #let proof = proofbrick("Démonstration")
 
+#let question = questionbrick("Question")
 #let exercise = exercisebrick("Exercice")
 
 // Maths shortcuts
@@ -177,6 +181,168 @@
 
   // Contents
   outline()
+
+  body
+}
+
+#let header(self) = {
+  set align(top)
+  show: components.cell.with(fill: self.colors.primary, inset: 1em)
+  set align(horizon)
+  set text(fill: self.colors.neutral-lightest, size: .7em)
+  set text(size: 2em)
+  if self.store.title != none {
+    utils.call-or-display(self, self.store.title)
+  } else {
+    utils.display-current-heading(level: 2)
+  }
+}
+
+#let footer(self) = {
+  set align(bottom)
+  show: components.side-by-side(
+    gutter: 0em,
+    {
+      show: components.cell.with(fill: self.colors.primary, inset: 1em)
+      set text(
+        fill: self.colors.neutral-lightest,
+        size: .7em,
+        weight: "semibold",
+      )
+      set align(horizon)
+      h(1fr)
+      self.info.author
+    },
+    {
+      show: components.cell.with(fill: self.colors.secondary, inset: 1em)
+      set text(
+        fill: self.colors.neutral-lightest,
+        size: .7em,
+        weight: "semibold",
+      )
+      set align(horizon)
+      self.info.title
+      h(1fr)
+      context utils.slide-counter.display() + " / " + utils.last-slide-number
+    },
+  )
+  utils.call-or-display(self, self.store.footer)
+}
+
+#let slide(title: auto, ..args) = touying-slide-wrapper(self => {
+  if title != auto {
+    self.store.title = title
+  }
+  self = utils.merge-dicts(
+    self,
+    config-page(
+      header: header,
+      footer: footer,
+    ),
+  )
+  touying-slide(self: self, ..args)
+})
+
+#let title-slide(..args) = touying-slide-wrapper(self => {
+  let info = self.info + args.named()
+  let body = {
+    set align(center + horizon)
+    v(-1em)
+    block(
+      fill: self.colors.secondary,
+      inset: 2em,
+      radius: 0.5em,
+      text(
+        size: 2em,
+        fill: self.colors.neutral-lightest,
+        weight: "bold",
+        info.title,
+      ),
+    )
+    set text(fill: self.colors.neutral-darkest)
+    if info.date != none {
+      block(utils.display-info-date(self))
+    }
+  }
+  self = utils.merge-dicts(
+    self,
+    config-page(footer: footer),
+  )
+  touying-slide(self: self, body)
+})
+
+#let slide-brick(kind, col, body) = {
+  align(
+    center,
+    block(
+      width: 100%,
+      radius: 7pt,
+      align(
+        left,
+        grid(
+          rows: 2,
+          block(
+            width: 100%,
+            radius: (top: 7pt),
+            inset: 0.5em,
+            fill: col,
+            text(kind, white),
+          ),
+          block(
+            width: 100%,
+            radius: (bottom: 7pt),
+            inset: 0.5em,
+            fill: rgb(..col.components().slice(0, 3), 15%),
+            body,
+          ),
+        ),
+      ),
+    ),
+  )
+}
+
+#let slide-definition(body) = slide-brick("Définition", rgb("#718355"), body)
+#let slide-theorem(body) = slide-brick("Théorème", rgb("#A1534A"), body)
+#let slide-lemma(body) = slide-brick("Lemme", rgb("#A1534A"), body)
+#let slide-proposition(body) = slide-brick("Proposition", rgb("#4C6C8A"), body)
+#let slide-remark(body) = slide-brick("Remarque", rgb("#C2A34A"), body)
+
+#let touying-canvas = touying-reducer.with(
+  reduce: cetz.canvas,
+  cover: cetz.draw.hide.with(bounds: true),
+)
+
+
+#let beamer(
+  aspect-ratio: "16-9",
+  footer: none,
+  ..args,
+  body,
+) = {
+  set text(
+    font: "Source Sans 3",
+    size: 20pt,
+    lang: "fr",
+  )
+  show math.equation: set text(font: "STIX Two Math")
+
+  set par(justify: true)
+
+  show: touying-slides.with(
+    config-page(
+      paper: "presentation-" + aspect-ratio,
+      margin: (top: 3.5em, bottom: 1.5em, x: 1em),
+    ),
+    config-common(slide-fn: slide),
+    config-methods(alert: utils.alert-with-primary-color),
+    config-store(
+      title: none,
+      footer: footer,
+    ),
+    ..args,
+  )
+
+  title-slide()
 
   body
 }
