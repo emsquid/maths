@@ -43,7 +43,7 @@
 )
 
 #show: maths.with(
-  title: "Topologie algébrique",
+  title: [Homologie singulière et problème du rectangle inscrit],
   authors: ("Emanuel Morille",),
   note: [Avec les conseils de Jean-Baptiste Campesato],
   color: "#718355",
@@ -80,11 +80,11 @@
 ])
 
 #example([
-  Un _groupe gradué_ est un groupe $G$ muni d'une famille de sous-groupes $sequence(G_i, ind: i, dom: I)$ telle que $G = plus.circle.big_(i in I) G_i$.
-  Pour tout $i in I$, un élément non-nul de $G_i$ est dit _homogène de degré $i$_.
+  Un _groupe gradué_ est un groupe $G$ muni d'une famille de sous-groupes $sequence(G_n, ind: n, dom: NN)$ telle que $G = plus.circle.big_(n in NN) G_n$.
+  Pour tout $n in NN$, un élément non-nul de $G_n$ est dit _homogène de degré $n$_.
 
-  Soit $G := plus.circle.big_(i in I) G_i$ et $H := plus.circle.big_(i in I) H_i$ deux groupes gradués.
-  Un _morphisme de groupes gradués_ est un morphisme de groupes $func(phi, G, H)$ tel que pour tout $i in I$, on a $phi(G_i) subset H_i$.
+  Soit $G := plus.circle.big_(n in NN) G_n$ et $H := plus.circle.big_(n in NN) H_n$ deux groupes gradués.
+  Un _morphisme de groupes gradués_ est un morphisme de groupes $func(phi, G, H)$ tel que pour tout $n in NN$, on a $phi(G_n) subset H_n$.
 
   On définit ainsi la catégorie $sans("GrAb")$ des groupes abéliens gradués :
   - Les objets de $sans("GrAb")$ sont les groupes abéliens gradués. \
@@ -134,7 +134,7 @@
   Soit $cal(C)$ et $cal(D)$ deux catégories.
   Un _foncteur (covariant) $F$ de $cal(C)$ vers $cal(D)$_ est la donnée :
   - Pour tout objet $X in ob(cal(C))$, d'un objet $F(X) in ob(cal(D))$.
-  - Pour tout objets $X, Y in ob(C)$ et morphisme $func(f, X, Y)$, d'un morphisme $func(F(f), F(X), F(Y))$.
+  - Pour tout objets $X, Y in ob(cal(C))$ et morphisme $func(f, X, Y)$, d'un morphisme $func(F(f), F(X), F(Y))$.
   Vérifiant les propriétés suivantes pour tout objets $X, Y, Z in ob(cal(C))$ :
   - _Composition_ : Pour tout morphismes $func(f, X, Y)$ et $func(g, Y, Z)$, on a :
     $ F(g compose f) = F(g) compose F(f). $
@@ -154,7 +154,11 @@
 ])
 
 #definition([
-  Soit $cal(C)$ et $cal(D)$ deux catégories. Un _foncteur contravariant_ est un foncteur covariant de la catégorie opposée $cal(C)^sans("op")$ vers $cal(D)$.
+  Soit $cal(C)$ et $cal(D)$ deux catégories. Un _foncteur contravariant de $cal(C)$ vers $cal(D)$_ est un foncteur covariant de la catégorie opposée $cal(C)^sans("op")$ vers $cal(D)$.
+])
+
+#remark([
+  Un foncteur contravariant $F$ est la donnée pour tout morphisme $func(f, X, Y)$, d'un morphisme $func(F(f), F(Y), F(X))$, vérifiant la relation de composition $F(g compose f) = F(f) compose F(g)$.
 ])
 
 #example([
@@ -214,8 +218,8 @@
 
 #definition([
   Soit $C_cdot$ un complexe de chaînes et $n in ZZ$.
-  - On appelle _$n$#super("e") groupe d'homologie_ le groupe quotient $H_(n)(C_cdot) := lquotient(Z_(n)(C_cdot), B_(n)(C_cdot))$.
-  - On appelle _homologie_ le groupe abélien gradué $H_(cdot)(C_cdot) := plus.circle.big_(n in ZZ) H_(n)(C_cdot)$.
+  - On appelle _$n$#super("e") groupe d'homologie de $C_cdot$_ le groupe quotient $H_(n)(C_cdot) := lquotient(Z_(n)(C_cdot), B_(n)(C_cdot))$.
+  - On appelle _homologie de $C_cdot$_ le groupe abélien gradué $H_(cdot)(C_cdot) := plus.circle.big_(n in ZZ) H_(n)(C_cdot)$.
 ])
 
 #definition([
@@ -229,7 +233,21 @@
 
 #definition([
   Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes.
-  On appelle _morphisme de complexes_, noté $func(phi_cdot, C_cdot, D_cdot)$, une suite de morphismes de groupes $sequence(func(phi_n, C_(n), D_(n)))$ telle que pour tout $n in ZZ$, on a $dif_n phi_n = phi_(n-1) dif_n$.
+  On appelle _morphisme de complexes_, noté $func(phi_cdot, C_cdot, D_cdot)$, une suite de morphismes de groupes $sequence(func(phi_n, C_(n), D_(n)))$ telle que pour tout $n in ZZ$, on a :
+  $ dif_n phi_n = phi_(n-1) dif_n $
+  c'est-à-dire que le diagramme suivant est commutatif :
+  #align(center)[#commutative-diagram(
+      node-padding: (50pt, 40pt),
+      padding: 10pt,
+      node((0, 0), $C_n$),
+      node((0, 1), $D_n$),
+      node((1, 0), $C_(n-1)$),
+      node((1, 1), $D_(n-1)$),
+      arr((0, 0), (0, 1), $phi_n$),
+      arr((1, 0), (1, 1), $phi_(n-1)$, label-pos: right),
+      arr((0, 0), (1, 0), $dif_n$, label-pos: right),
+      arr((0, 1), (1, 1), $dif_n$),
+    )]
 ])
 
 #proposition([
@@ -326,19 +344,19 @@
 
 #proposition([
   L'homotopie est une relation d'équivalence sur les morphismes de complexes.
-])
+]) <prop-homotopie-chaine-rel-eq>
 
 #proof([
-  Notons $~$ la relation d'homotopie. Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes.
-  - _Réflexivité_ : Soit $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de complexes.
-    Alors pour tout $n in ZZ$, on peut écrire $phi_n - phi_n = 0 = 0 dif_n + dif_n 0$.
+  Notons $~$ la relation d'homotopie. \
+  Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, ainsi que $func(phi_cdot, C_cdot, D_cdot)$, $func(psi_cdot, C_cdot, D_cdot)$ et $func(xi_cdot, C_cdot, D_cdot)$ trois morphismes de complexes tels que $phi_cdot ~ psi_cdot$ et $psi_cdot ~ xi_cdot$.
+  Alors par définition il existe deux suites de morphismes de groupes $sequence(func(f_n, C_n, D_(n+1)))$ et $sequence(func(g_n, C_n, D_(n+1)))$ telles que pour tout $n in ZZ$, on a $phi_n - psi_n = f_(n-1) dif_n + dif_n f_n$ et $psi_n - xi_n = g_(n-1) dif_n + dif_n g_n$.
+
+  - _Réflexivité_ : Pour tout $n in ZZ$, on peut écrire $phi_n - phi_n = 0 = 0 dif_n + dif_n 0$.
     Donc on a bien $phi_cdot ~ phi_cdot$.
-  - _Symétrie_ : Soit $func(phi_cdot, C_cdot, D_cdot)$ et $func(psi_cdot, C_cdot, D_cdot)$ deux morphismes de complexes tels que $phi_cdot ~ psi_cdot$.
-    Alors pour tout $n in ZZ$, on a $psi_n - phi_n = -(phi_n - psi_n)$.
-    On en déduit bien $psi_cdot ~ phi_cdot$.
-  - _Transitivité_ : Soit $func(phi_cdot, C_cdot, D_cdot)$, $func(psi_cdot, C_cdot, D_cdot)$ et $func(xi_cdot, C_cdot, D_cdot)$ trois morphismes de complexes tels que $phi_cdot ~ psi_cdot$ et $psi_cdot ~ xi_cdot$.
-    Alors pour tout $n in ZZ$, on a $phi_n - xi_n = phi_n - psi_n + psi_n - xi_n$.
-    On en déduit bien que $phi_cdot ~ xi_cdot$.
+  - _Symétrie_ : Pour tout $n in ZZ$, on pose $h_n := -f_n$, alors on a $psi_n - phi_n = -(phi_n - psi_n) = h_(n-1) dif_n + dif_n h_n$.
+    Donc on a bien $psi_cdot ~ phi_cdot$.
+  - _Transitivité_ : Pour tout $n in ZZ$, on pose $h_n := f_n + g_n$, alors on a $phi_n - xi_n = phi_n - psi_n + psi_n - xi_n = h_(n-1) dif_n + dif_n h_n$.
+    Donc on a bien $phi_cdot ~ xi_cdot$.
   Donc l'homotopie est bien une relation d'équivalence sur les morphismes de complexes.
 ])
 
@@ -362,7 +380,7 @@
   Donc $alpha_cdot compose phi_cdot$ et $beta_cdot compose psi_cdot$ sont bien homotopes.
 ])
 
-#lemma([
+#proposition([
   Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ et $func(psi_cdot, C_cdot, D_cdot)$ deux morphismes de complexes homotopes.
   Alors on a $H_(cdot)(phi) = H_(cdot)(psi)$.
 ]) <lem-homotopie>
@@ -393,7 +411,7 @@
   Enfin puisque $dif_n dif_(n+1) = 0$, on a bien $overline(dif)_n overline(dif)_(n+1) = overline(dif_n dif_(n+1)) = 0$.
 ])
 
-#proposition([
+#corollary([
   Soit $C_cdot$ un complexe de chaînes et $D_cdot$ un sous-complexe de chaînes de $C_cdot$.
   Alors la suite $sequence(lquotient(C_n, D_n))$ munie des morphismes de bords induits $sequence(func(overline(dif)_n, lquotient(C_n, D_n), lquotient(C_(n-1), D_(n-1))))$ forme un complexe de chaînes.
 ])
@@ -404,7 +422,7 @@
 ])
 
 #proposition([
-  Soit $lquotient(A_cdot, B_cdot)$ et $lquotient(C_cdot, D_cdot)$ deux complexes de chaînes et $func(phi_cdot, A_cdot, C_cdot)$ un morphisme de complexes.
+  Soit $A_cdot$ et $C_cdot$ deux complexes de chaînes, $B_cdot$ et $D_cdot$ respectivement deux sous-complexe de chaînes de $A_cdot$ et $C_cdot$, et $func(phi_cdot, A_cdot, C_cdot)$ un morphisme de complexes.
   Si $phi_(cdot)(B_cdot) subset D_cdot$, alors $phi_cdot$ induit un morphisme de complexes $func(overline(phi)_cdot, lquotient(A_cdot, B_cdot), lquotient(C_cdot, D_cdot))$.
 ]) <prop-morphisme-quotient>
 
@@ -423,7 +441,8 @@
   On dit qu'une suite courte de complexes de chaînes est _exacte_, notée :
   #align(center)[#commutative-diagram(
       node-padding: (40pt, 50pt),
-      padding: 5pt,
+      padding: 10pt,
+
       node((0, 0), $0$),
       node((0, 1), $A_cdot$),
       node((0, 2), $B_cdot$),
@@ -434,10 +453,10 @@
       arr((0, 2), (0, 3), $psi_cdot$),
       arr((0, 3), (0, 4), ""),
     )]
-  si pour tout $n in ZZ$, la suite courte suivante est exacte :
+  si pour tout $n in ZZ$, la suite courte de groupes suivante est exacte :
   #align(center)[#commutative-diagram(
       node-padding: (40pt, 50pt),
-      padding: 5pt,
+      padding: 10pt,
       node((0, 0), $0$),
       node((0, 1), $A_n$),
       node((0, 2), $B_n$),
@@ -456,7 +475,7 @@
   Soit une suite exacte courte de complexes de chaînes :
   #align(center)[#commutative-diagram(
       node-padding: (40pt, 50pt),
-      padding: 5pt,
+      padding: 10pt,
       node((0, 0), $0$),
       node((0, 1), $A_cdot$),
       node((0, 2), $B_cdot$),
@@ -470,7 +489,8 @@
   Alors pour tout $n in ZZ$, il existe un morphisme de groupes $func(partial_n, H_(n)(C_cdot), H_(n-1)(A_cdot))$ telle que la suite longue des groupes d'homologie est exacte :
   #align(center)[#commutative-diagram(
       node-padding: (40pt, 40pt),
-      padding: 5pt,
+      padding: 10pt,
+
       node((0, 0), $dots.c$),
       node((0, 1), $H_(n)(A_cdot)$),
       node((0, 2), $H_(n)(B_cdot)$),
@@ -487,7 +507,7 @@
   De plus pour tout diagramme commutatif :
   #align(center)[#commutative-diagram(
       node-padding: (40pt, 40pt),
-      padding: 5pt,
+      padding: 10pt,
 
       node((0, 0), $0$),
       node((0, 1), $A_cdot$),
@@ -516,7 +536,8 @@
   la transformation $partial_n$ est naturelle dans le sens où le diagramme suivant est commutatif :
   #align(center)[#commutative-diagram(
       node-padding: (40pt, 40pt),
-      padding: 5pt,
+      padding: 10pt,
+
       node((0, 0), $H_(n)(C_cdot)$),
       node((1, 0), $H_(n-1)(A_cdot)$),
       node((0, 1), $H_(n)(C'_cdot)$),
@@ -710,12 +731,12 @@
   Donc $H_(n-1)(f)(partial_n) = partial_n H_(n)(h)$.
 ])
 
-#lemma([
-  Soit $lquotient(C_cdot, D_cdot)$ un complexe de chaînes.
+#corollary([
+  Soit $C_cdot$ un complexe de chaînes et $D_cdot$ un sous-complexe de chaînes de $C_cdot$.
   Alors pour tout $n in ZZ$, il existe un morphisme de groupes $func(partial_n, H_(n)(lquotient(C_cdot, D_cdot)), H_(n-1)(D_cdot))$ telle que la suite longue suivante est exacte :
   #align(center)[#commutative-diagram(
       node-padding: (40pt, 40pt),
-      padding: 5pt,
+      padding: 10pt,
       node((0, 0), $dots.c$),
       node((0, 1), $H_(n)(D_cdot)$),
       node((0, 2), $H_(n)(C_cdot)$),
@@ -729,7 +750,7 @@
       arr((0, 3), (0, 4), $partial_n$),
       arr((0, 4), (0, 5), $H_(n-1)(i)$),
     )]
-  où $func(i_cdot, D_cdot, C_cdot)$ est l'inclusion canonique et $func(pi_cdot, C_cdot ,lquotient(C_cdot, D_cdot))$ est la projection canonique.
+  où $func(i_cdot, D_cdot, C_cdot)$ est l'inclusion canonique et $func(pi_cdot, C_cdot, lquotient(C_cdot, D_cdot))$ est la projection canonique.
 
 ]) <lem-courte-longue-homologie-quotient>
 
@@ -738,7 +759,7 @@
   Donc on a une suite exacte courte de complexe de chaînes :
   #align(center)[#commutative-diagram(
       node-padding: (40pt, 50pt),
-      padding: 5pt,
+      padding: 10pt,
       node((0, 0), $0$),
       node((0, 1), $D_cdot$),
       node((0, 2), $C_cdot$),
@@ -945,7 +966,7 @@
   Soit $X$ un espace topologique et $func(sigma, Delta^n, X)$ un $n$-simplexe singulier sur $X$.
   On appelle _bord de $sigma$_, noté $dif_n sigma$, la $(n-1)$-chaîne singulière sur $X$ définie par :
   $
-    dif_n sigma := sum_(k=0)^n (-1)^k (sigma compose gensubgroup(e_0, ..., overshell(e_k),... e_n)).
+    dif_n sigma := sum_(k=0)^n (-1)^k (sigma compose gensubgroup(e_0, ..., overshell(e_k), ... e_n)).
   $
   où le symbole $overshell(dot)$ signifie que l'élément est enlevé.
 ])
@@ -1087,8 +1108,8 @@
   Soit $C_(cdot)(X, A)$ un complexe de chaînes singulières et $n in ZZ$.
   - On appelle _$n$-cycle singulier_ un élément de $Z_(n)(X, A) := Z_(n)(lquotient(C_(cdot)(X), C_(cdot)(A)))$.
   - On appelle _$n$-bord singulier_ un élément de $B_(n)(X, A) := B_(n)(lquotient(C_(cdot)(X), C_(cdot)(A)))$.
-  - On appelle _$n$#super("e") groupe d'homologie singulière de $X$_ le groupe $H_(n)(X, A) := H_(n)(lquotient(C_(cdot)(X), C_(cdot)(A)))$.
-  - On appelle _homologie singulière de $X$_ le groupe $H_(cdot)(X, A) := H_(cdot)(lquotient(C_(cdot)(X), C_(cdot)(A)))$.
+  - On appelle _$n$#super("e") groupe d'homologie singulière de $(X, A)$_ le groupe $H_(n)(X, A) := H_(n)(lquotient(C_(cdot)(X), C_(cdot)(A)))$.
+  - On appelle _homologie singulière de $(X, A)$_ le groupe $H_(cdot)(X, A) := H_(cdot)(lquotient(C_(cdot)(X), C_(cdot)(A)))$.
 ])
 
 // #remark([
@@ -1116,14 +1137,11 @@
 
 === Axiomes d'Eilenberg-Steenrod
 
-#theorem(
-  title: "Axiome de dimension",
-  [
-    Soit $P$ un espace topologique constitué d'un unique point.
-    Alors pour tout $n in ZZ$, on a :
-    $ H_(n)(P) tilde.eq cases(ZZ &"si" n = 0, 0 &"sinon") $
-  ],
-) <thm-homologie-point>
+#theorem(title: "Axiome de dimension", [
+  Soit $P$ un espace topologique constitué d'un unique point.
+  Alors pour tout $n in ZZ$, on a :
+  $ H_(n)(P) tilde.eq cases(ZZ &"si" n = 0, 0 &"sinon") $
+]) <thm-homologie-point>
 
 #proof([
   Soit $n in ZZ$.
@@ -1132,9 +1150,9 @@
   $
     dif_n sigma_n = sum_(k=0)^n (-1)^k sigma_(n-1) = cases(0 &"si" n = 0 "ou" n "est impair", sigma_(n-1) &"si" n != 0 "et" n "est pair")
   $
-  dans le cas $n = 0$, alors $H_(0)(P) = lquotient(gensubgroup(sigma_0), 0) tilde.eq ZZ $, \
-  dans le cas $n != 0 $ et $n$ est impair, alors $H_(n)(P) = lquotient(gensubgroup(sigma_n), gensubgroup(sigma_n)) tilde.eq 0$, \
-  dans le cas $n != 0 $ et $n$ est pair, alors $H_(n)(P) = lquotient(0, 0) tilde.eq 0$.
+  dans le cas $n = 0$, alors $H_(0)(P) = lquotient(gensubgroup(sigma_0), 0) tilde.eq ZZ$, \
+  dans le cas $n != 0$ et $n$ est impair, alors $H_(n)(P) = lquotient(gensubgroup(sigma_n), gensubgroup(sigma_n)) tilde.eq 0$, \
+  dans le cas $n != 0$ et $n$ est pair, alors $H_(n)(P) = lquotient(0, 0) tilde.eq 0$.
 ])
 
 #definition([
@@ -1149,7 +1167,7 @@
 ]) <lem-homotopie-chaine>
 
 #proof([
-  Par définition de l'homotopie il existe une application continue $func(h, X times [0, 1], Y)$ telle que $f(x) = h(x, 0)$ et $g(x) = h(x, 1)$.
+  Par définition de l'homotopie il existe une application continue $func(h, X times [0, 1], Y)$ telle que pour tout $x in X$, on a $f(x) = h(x, 0)$ et $g(x) = h(x, 1)$.
 
   Soit $n in ZZ$.
   Il suffit de définir une homotopie pour un $n$-simplexe singulier $func(sigma, Delta^n, X)$.
@@ -1265,7 +1283,7 @@
 ]) <def-theorie-homologie>
 
 #corollary([
-  La suite des $n$#super("e") groupe d'homologie singulière de paires $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie des morphismes $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A)))$ est une théorie de l'homogie vérifiant les @def-theorie-homologie[axiomes d'Eilenberg-Steenrod].
+  La suite des $n$#super("e") groupe d'homologie singulière de paires $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie des morphismes $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A)))$ est une théorie de l'homogie vérifiant les @def-theorie-homologie[axiomes d'Eilenberg-Steenrod] et $H_(0)(P) tilde.eq ZZ$.
 ])
 
 === Équivalence d'homotopie
@@ -1273,6 +1291,20 @@
 #definition([
   Soit $X$ et $Y$ deux espaces topologiques.
   On dit que $X$ et $Y$ sont _homotopiquement équivalents_ s'il existe deux applications continues $func(f, X, Y)$ et $func(g, Y, X)$ telles que $g compose f$ est homotope à $id_X$ et $f compose g$ est homotope à $id_Y$.
+])
+
+#example([
+  Les espaces $RR^2 without {0}$ et $SS^1$ sont homotopiquement équivalents. \
+  On considère l'application $func(f, RR^2 without {0}, SS^1, u, u slash norm(u))$ et on note $func(i, SS^1, RR^2 without {0})$ l'inclusion canonique.
+  On pose $func(h, (RR^2 without {0}) times [0, 1], RR^2 without {0}, (x, t), (1-t)x + t f(x))$, alors $h$ est continue et pour tout $x in RR^2 without {0}$, on a $h(x, 0) = x$ et $h(x, 1) = f(x)$, donc $i compose f = f$ est bien homotope à $id_(RR^2 without {0})$ et enfin $f compose i = id_(SS^1)$.
+])
+
+#proposition([
+  L'équivalence d'homotopie est une relation d'équivalence sur les espaces topologiques.
+])
+
+#proof([
+  La démonstration est similaire à celle de la @prop-homotopie-chaine-rel-eq.
 ])
 
 #corollary([
@@ -1287,7 +1319,15 @@
 
 #definition([
   Soit $X$ un espace topologique et $A$ un sous-ensemble de $X$.
-  On dit que $A$ est un _rétract par déformation de $X$_ s'il existe une application continue $func(f, X, X)$ homotope à $id_X$ telle que pour tout $x in X$, on a $f(x) in A$ et pour tout $a in A$, on a $f(a) = a$.
+  On dit que $A$ est un _rétract par déformation de $X$_ s'il existe une application continue $func(r, X, A)$ telle que $i compose r$ est homotope à $id_X$ où $func(i, A, X)$ est l'inclusion canonique et pour tout $a in A$, on a $r(a) = a$, dans ce cas on dit que $r$ est une _rétraction par déformation_.
+])
+
+#remark([
+  Un rétract par déformation est un cas particulier d'équivalence d'homotopie.
+])
+
+#example([
+  L'espace $SS^1$ est un rétract par déformation de $RR^2 without {0}$.
 ])
 
 #corollary([
@@ -1295,10 +1335,13 @@
   Alors les homologies $H_(cdot)(X)$ et $H_(cdot)(A)$ sont isomorphes.
 ]) <cor-retract-deformation>
 
-#proof([
-  Notons $func(i, A, X)$ l'inclusion canonique.
-  Par définition il existe une application continue $func(f, X, X)$ homotope à $id_X$ telle que pour tout $x in X$, on a $f(x) in A$ et pour tout $a in A$, on a $f(a) = a$.
-  Alors on a $f compose i = id_A$ et $i compose f$ est homotope à $id_X$, donc d'après le @cor-homotopie-equ on a bien $H_(cdot)(X) tilde.eq H_(cdot)(A)$.
+#definition([
+  Soit $X$ un espace topologique.
+  On dit que $X$ est contractile s'il est homotopiquement équivalent à un point.
+])
+
+#corollary([
+  Soit $X$ un espace topologique contractile.
 ])
 
 === Connexité par arcs
@@ -1338,7 +1381,20 @@
   Dans le cas général, d'après la @prop-somme-composantes-connexes on a $H_(n)(X) tilde.eq plus.circle.big_(i in I) H_(n)(X_i) tilde.eq plus.circle.big_(i in I) ZZ$.
 ])
 
-== Calculs d'homologie singulière
+// #remark([
+//   Dans la suite on note $BB^n$ une boule de dimension $n$ et $SS^n := partial BB^(n+1)$ une sphère de dimension $n$.
+// ])
+
+#example([
+  Pour tout $n in ZZ$, on a :
+  $ H_(n)(SS^0) tilde.eq cases(ZZ plus.circle ZZ &"si" n=0, 0 &"sinon") $
+]) <ex-homologie-s0>
+
+#proof([
+  $SS^0$ est composé de deux points et a deux composantes connexes par arcs, donc d'après la @prop-somme-composantes-connexes et l'@thm-homologie-point on a bien le résultat.
+])
+
+=== Suite exacte de Mayer-Vietoris
 
 #theorem(
   title: "Théorème de Mayer-Vietoris",
@@ -1371,25 +1427,9 @@
   Admise.
 ])
 
-#remark([
-  Dans la suite on note $BB^n$ une boule de dimension $n$ et $SS^n := partial BB^(n+1)$ une sphère de dimension $n$.
-])
-
-#proposition([
+#example([
   Pour tout $n in ZZ$, on a :
-  $ H_(n)(SS^0) tilde.eq cases( ZZ plus.circle ZZ &"si" n=0, 0 &"sinon") $
-]) <prop-homologie-s0>
-
-#proof([
-  $SS^0$ est composé de deux points et a deux composantes connexes par arcs, donc d'après la @prop-somme-composantes-connexes et l'@thm-homologie-point on a bien le résultat.
-])
-
-#proposition([
-  Pour tout $n in ZZ$, on a :
-  $ H_(n)(SS^1) tilde.eq cases( ZZ &"si" n in {0, 1}, 0 &"sinon") $
-]) <prop-homologie-s1>
-
-#proof([
+  $ H_(n)(SS^1) tilde.eq cases(ZZ &"si" n in {0, 1}, 0 &"sinon") $
   On recouvre $SS^1$ par deux arcs ouverts $U$ et $V$ recouvrant chacun un demi-cercle :
   #figure(
     cetz.canvas({
@@ -1421,36 +1461,33 @@
     }),
     caption: [Recouvrement de $SS^1$.],
   )
-  Les arcs $U$ et $V$ sont homotopiquement équivalents à un point, et l'intersection $U inter V$ est homotopiquement équivalente à $SS^0$.
-  D'après le @cor-homotopie-equ, l'@thm-homologie-point la et @prop-homologie-s0 on a :
+  Les arcs $U$ et $V$ sont contractiles, et l'intersection $U inter V$ est homotopiquement équivalente à $SS^0$.
+  D'après le @cor-homotopie-equ, l'@thm-homologie-point et l'@ex-homologie-s0 on a :
   $
     H_(n)(U) tilde.eq H_(n)(V) tilde.eq cases(ZZ &"si" n = 0, 0 &"sinon")
     quad "et" quad
     H_(n)(U inter V) tilde.eq cases(ZZ plus.circle ZZ &"si" n = 0, 0 &"sinon")
   $
   et d'après le @thm-mayer-vietoris la suite suivante est exacte :
-  #align(
-    center,
-    [
-      #commutative-diagram(
-        node-padding: (25pt, 40pt),
-        padding: 5pt,
-        node((0, 0), $dots.c$),
-        node((0, 1), $0$),
-        node((0, 2), $H_(1)(SS^1)$),
-        node((0, 3), $ZZ plus.circle ZZ$),
-        node((0, 4), $ZZ plus.circle ZZ$),
-        node((0, 5), $H_(0)(SS^1)$),
-        node((0, 6), $0$),
+  #align(center, [
+    #commutative-diagram(
+      node-padding: (25pt, 40pt),
+      padding: 5pt,
+      node((0, 0), $dots.c$),
+      node((0, 1), $0$),
+      node((0, 2), $H_(1)(SS^1)$),
+      node((0, 3), $ZZ plus.circle ZZ$),
+      node((0, 4), $ZZ plus.circle ZZ$),
+      node((0, 5), $H_(0)(SS^1)$),
+      node((0, 6), $0$),
 
-        arr((0, 0), (0, 1), $$),
-        arr((0, 1), (0, 2), $$),
-        arr((0, 2), (0, 3), $partial_1$),
-        arr((0, 3), (0, 4), $phi_0$),
-        arr((0, 4), (0, 5), $psi_0$),
-        arr((0, 5), (0, 6), $$),
-      )],
-  )
+      arr((0, 0), (0, 1), $$),
+      arr((0, 1), (0, 2), $$),
+      arr((0, 2), (0, 3), $partial_1$),
+      arr((0, 3), (0, 4), $phi_0$),
+      arr((0, 4), (0, 5), $psi_0$),
+      arr((0, 5), (0, 6), $$),
+    )])
   On en déduit directement que si $n >= 2$, on a $H_(n)(SS^1) tilde.eq 0$. \
 
   En étudiant $func(phi_0 := (H_(0)(i), H_(0)(j)), ZZ plus.circle ZZ, ZZ plus.circle ZZ)$ où $func(i, U inter V, U)$ et $func(j, U inter V, V)$ sont les inclusions canoniques, on trouve que $phi_(0)(1, 0) = phi_(0)(0, 1) = (1, 1)$.
@@ -1458,60 +1495,15 @@
   Alors $ker(phi_0) = {(a, -a) | a in ZZ} tilde.eq ZZ$ et $im(phi_0) = {(a+b, a+b) | a, b in ZZ} tilde.eq ZZ$.
   Par exactitude $partial_1$ est injective et on a $H_(1)(SS^1) tilde.eq im(partial_1) = ker(phi_0) tilde.eq ZZ$.
   De même, par exactitude $psi_0$ est surjective et on a $H_(0)(SS^1) tilde.eq lquotient((ZZ plus.circle ZZ), ker(psi_0)) tilde.eq lquotient((ZZ plus.circle ZZ), im(phi_0)) tilde.eq lquotient((ZZ plus.circle ZZ), ZZ) tilde.eq ZZ$.
+]) <ex-homologie-s1>
+
+#example([
+  Pour tout $m in ZZ without {0}$ et $n in ZZ$, on a :
+  $ H_(n)(SS^m) tilde.eq cases(ZZ &"si" n in {0, m}, 0 &"sinon") $
+  On raisonne par récurrence en recouvrant $SS^m$ par deux ouverts $U$ et $V$ homotopiquement équivalents à $SS^(m-1)$. Alors on peut calculer $H_(n)(SS^m)$ de la même manière que dans l'@ex-homologie-s1.
 ])
 
-#proposition([
-  Pour tout $n in ZZ$, on a :
-  $ H_(n)(SS^2) tilde.eq cases(ZZ &"si" n in {0, 2}, 0 &"sinon") $
-]) <prop-homologie-s2>
-
-#proof([
-  On recouvre $SS^2$ par deux ouverts $U$ et $V$ recouvrant chacun un hémisphère :
-  #figure(
-    cetz.canvas({
-      import cetz.draw: *
-
-      set-style(
-        stroke: (cap: "round", join: "round"),
-        mark: (transform-shape: false, anchor: "center"),
-      )
-
-      let circle-2d(center, radius) = {
-        range(101).map(x => (
-          center.at(0) + radius.at(0) * calc.cos(2 * calc.pi * x / 100),
-          center.at(1) + radius.at(1) * calc.sin(2 * calc.pi * x / 100),
-        ))
-      }
-
-      let circ1 = circle-2d((0, 0), (1.25, 1.25))
-      let circ2 = circle-2d((0, 0), (1.25, 1.25 / 2))
-
-      line(..circ1)
-      line(
-        ..circ1.slice(49, 101),
-        ..circ2.slice(0, 51),
-        stroke: blue,
-        fill: rgb("#0074d9bb"),
-      )
-      line(..circ2, stroke: green)
-      line(
-        ..circ1.slice(0, 51),
-        ..circ2.slice(49, 101),
-        stroke: red,
-        fill: rgb("#ff4136bb"),
-      )
-      line(..circ2.slice(50, 101), stroke: green)
-
-      content((1.1, 0.9), $U$, anchor: "south", padding: 0.1)
-      content((1.1, -0.9), $V$, anchor: "north", padding: 0.1)
-      content((-1.25, 0), $U inter V$, anchor: "east", padding: 0.1)
-    }),
-    caption: [Recouvrement de $SS^2$.],
-  )
-  Alors on peut calculer $H_(n)(SS^2)$ de la même manière que dans la @prop-homologie-s0.
-])
-
-TODO : $SS^n$.
+=== Complémentaire d'une boule dans une sphère ou dans l'espace euclidien
 
 #proposition([
   Soit $X$ un sous-espace de $SS^p$ homéomorphe à $BB^q$. Alors pour tout $n in ZZ$, on a :
@@ -1523,7 +1515,7 @@ TODO : $SS^n$.
   $
     P(q) : H_(n)(SS^p without f(BB^q)) tilde.eq cases(ZZ &"si" n=0, 0 &"sinon")
   $
-  Pour $q = 0$. L'espace $BB^0$ est réduit à un unique point, d'après le @thm-projection-stereographique l'espace $SS^p without f(BB^0)$ est homéomorphe à $RR^p$, qui est homotopiquement équivalent à un point.
+  Pour $q = 0$. L'espace $BB^0$ est réduit à un unique point, par @thm-projection-stereographique l'espace $SS^p without f(BB^0)$ est homéomorphe à $RR^p$, qui est contractile.
   D'après le @cor-homotopie-equ et l'@thm-homologie-point on a :
 
   $
@@ -1552,16 +1544,16 @@ TODO : $SS^n$.
       arr((0, 3), (0, 4), $partial_n$),
     )]
   #v(-4pt)
-  où $func(phi_n := (i_0, j_0), H_(n)(U inter V), H_(n)(U) plus.circle H_(n)(V))$ est induite par les inclusions canoniques.
+  où $func(phi_n := (i, j), H_(n)(U inter V), H_(n)(U) plus.circle H_(n)(V))$ est induite par les inclusions canoniques.
 
   Si $n = 0$. $SS^p without f(BB^q)$ est connexe par arcs, d'après la @prop-h0-abelien-libre on a $H_(0)(SS^p without f(BB^q)) tilde.eq ZZ$.
 
   Si $n >= 1$. On suppose par l'absurde qu'il existe $alpha_0 in H_(n)(U inter V)$ non-nul.
-  D'après $P(q-1)$ on a $H_(n)(U union V) tilde.eq 0$, par exactitude $phi_n$ est injective et on peut supposer sans perte de généralité qu'il existe $alpha_1 in H_(n)(U)$ non-nul tel que $i_(0)(alpha_0) = alpha_1$ (sinon on prend $alpha_1 in H_(n)(V)$ et $j_(0)(alpha_0) = alpha_1$).
+  D'après $P(q-1)$ on a $H_(n+1)(U union V) tilde.eq 0$, par exactitude $phi_n$ est injective, donc $phi_(n)(alpha_0) = (i(alpha_0), j(alpha_0)) != (0, 0)$ et il existe $alpha_1 in H_(n)(SS^p without f(BB^(q-1) times I_1))$ non-nul tel que $i_(0)(alpha_0) = alpha_1$, où $I_1$ est un segment de longueur $1 slash 2$ et $func(i_0)$ est induite par l'inclusion canonique.
 
-  Puisque $BB^-$ est homéomorphe à $BB^q$, on peut refaire le même raisonnement avec $SS^p without f(BB^-)$ à la place de $SS^p without f(BB^q)$, alors il existe $alpha_2 in H_(n)(SS^p without f(BB^(q-1) times [0, 1 slash 4]))$ non-nul tel que $i_(1)(alpha_1) = alpha_2$, où $func(i_1, H_(n)(SS^p without f(BB^-)), H_(n)(SS^p without f(B times [0, 1 slash 4])))$ est induite par l'inclusion canonique. \
+  Puisque $BB^(q-1) times I_1$ est homéomorphe à $BB^q$, on peut refaire un raisonnement similaire avec l'espace $SS^p without f(BB^(q-1) times I_1)$, alors il existe $alpha_2 in H_(n)(SS^p without f(BB^(q-1) times I_2))$ non-nul tel que $i_(1)(alpha_1) = alpha_2$, où $I_2$ est un segment de longueur $1 slash 4$ et $func(i_1)$ est induite par l'inclusion canonique. \
 
-  En itérant ce raisonnement on obtient une suite $sequence(alpha_k, ind:k, dom: NN)$ où pour tout $k in NN$, on a $alpha_k in H_(n)(A_k) := H_(n)(SS^p without f(BB^(q-1) times [0, 1 slash 2^k]))$ non-nul tel que $i_(k)(alpha_k) = alpha_(k+1)$, où $func(i_k, H_(n)(A_k), H_(n)(A_(k+1)))$ est induite par l'inclusion canonique.
+  En itérant ce raisonnement on obtient une suite $sequence(alpha_k, ind: k, dom: NN)$ où pour tout $k in NN$, on a $alpha_k in H_(n)(A_k) := H_(n)(SS^p without f(BB^(q-1) times I_k))$ non-nul tel que $i_(k)(alpha_k) = alpha_(k+1)$, où $I_k$ est un segment de longueur $1 slash 2^k$ et $func(i_k)$ est induite par l'inclusion canonique.
 
   Soit $func(sigma, Delta^n, A_0)$ un $n$-cycle singulier représentant $alpha_0$.
   Puisque pour tout $k in NN$, on a $i_(k)(alpha_k) = alpha_(k+1)$, on en déduit que $sigma$ est un représentant de tous les $alpha_k$. \
@@ -1588,10 +1580,10 @@ TODO : $SS^n$.
 ]) <prop-homologie-rp-bq>
 
 #proof([
-  D'après le @thm-projection-stereographique et par compactification d'Alexandrov $RR^p union {oo}$ est homéomorphe à $SS^p$, en particulier la restriction $(RR^p without X) union {oo}$ est homéomorphe à $SS^p without X$.
+  Par @thm-projection-stereographique $RR^p union {oo}$ est homéomorphe à $SS^p$, en particulier la restriction $(RR^p without X) union {oo}$ est homéomorphe à $SS^p without X$.
   On recouvre $(RR^p without X) union {oo}$ par deux ouverts $U := RR^p without X$ et $V$ une boule au voisinage de $oo$ qui n'intersecte pas $X$ (qui est compact). \
 
-  Alors on peut calculer $H_(n)(RR^p without X)$ de la même manière que dans la @prop-homologie-s1.
+  Alors on peut calculer $H_(n)(RR^p without X)$ de la même manière que dans l'@ex-homologie-s1.
 ])
 
 #proposition([
@@ -1605,7 +1597,7 @@ TODO : $SS^n$.
 #proof([
   On recouvre $SS^q$ par deux arcs fermés $A_+$ et $A_-$, ils sont homéomorphes à $BB^q$, et leur intersection vaut $A_+ inter A_- = SS^(q-1)$. On considère un homéomorphisme $func(f, SS^q, X)$ et on pose deux ouverts $U := SS^p without f(A_+)$ et $V := SS^p without f(A_-)$.
 
-  Alors on peut calculer $H_(n)(SS^p without X)$ de la même manière que dans la @prop-homologie-s1 et par récurrence on se ramène au cas $q = 0$.
+  Alors on peut calculer $H_(n)(SS^p without X)$ de la même manière que dans l'@ex-homologie-s1 et par récurrence on se ramène au cas $q = 0$.
 
   D'après le @thm-projection-stereographique l'espace $SS^p without f(SS^(0))$ est homéomorphe à $RR^(p) without {0}$, qui est homotopiquement équivalent à $SS^(p-1)$.
 ])
@@ -1618,7 +1610,7 @@ TODO : $SS^n$.
 
 #proof([
   On peut recouvrir de la même manière que dans la @prop-homologie-rp-bq et
-  calculer $H_(n)(SS^3 without X)$ de la même manière que dans la @prop-homologie-s1
+  calculer $H_(n)(SS^3 without X)$ de la même manière que dans l'@ex-homologie-s1
 ])
 
 
@@ -1633,11 +1625,11 @@ TODO : $SS^n$.
 #definition([
   On appelle _droite projective réelle_, noté $PP^1_RR$, le quotient de $RR^2 without {0}$ par la relation d'équivalence $equ(PP^1)$ où pour tout $u, v in RR^2 without {0}$, on a $u equ(PP^1) v$ s'il existe $lambda in RR without {0}$ tel que $u = lambda v$. \
   Soit $(x, y) in RR^2 without {0}$.
-  On appelle _coordonnées homogènes de $(x, y)$_ le point associé sur la droite projective réelle $[x:y] := overline((x, y)) in PP^1_RR$.
+  On note $[x:y] := overline((x, y)) in PP^1_RR$ la classe de $(x, y)$.
 ])
 
 #remark([
-  Formellement un point de $PP^1_RR$ est induit par une droite linéaire de $RR^2$.
+  Un point de $PP^1_RR$ est donc induit par une droite linéaire de $RR^2$.
 ])
 
 #definition([
@@ -1648,7 +1640,7 @@ TODO : $SS^n$.
 
 #remark([
   Les cartes affines $A_x$ et $A_y$ sont homéomorphes à $RR$. \
-  On a $PP^1_RR = A_x union A_y$, mais surtout $PP^1_RR = A_y union.sq {oo}$ où $oo := [1:0]$. \
+  On a $PP^1_RR = A_x union A_y$ et $PP^1_RR = A_y union.sq {oo}$ où $oo := [1:0]$. \
   Intuitivement $PP^1_RR$ s'obtient donc à partir de $RR$ auquel on ajoute un point à l'infini.
 ])
 
@@ -1667,11 +1659,11 @@ TODO : $SS^n$.
   Donc l'application $func(I, lquotient(SS^1, equ(SS^1)), PP^1_RR)$ telle que $I compose pi = i$ est continue.
 
   Réciproquement on pose $func(j, RR^2 without {0}, lquotient(SS^1, equ(SS^1)), u, overline(u slash norm(u)))$.
-  Alors $j$ est bien définie, en effet pour tout $u, v in RR^2 without {0}$, si $u equ(PP^1) v$, alors il existe $lambda in RR without {0}$ tel que $u = lambda v$, d'où $j(u) = j(lambda v) = j(v)$.
+  Alors $j$ passe au quotient pour $equ(SS^1)$, en effet pour tout $u, v in RR^2 without {0}$, si $u equ(PP^1) v$, alors il existe $lambda in RR without {0}$ tel que $u = lambda v$, d'où $j(u) = j(lambda v) = j(v)$.
   De plus $j$ est continue par composition de fonctions continues.
   Donc l'application $func(J, PP^1_RR, lquotient(SS^1, equ(SS^1)))$ telle que $J compose pi = j$ est continue.
 
-  Enfin il est clair que $J compose I = id$ et $I compose J = id$, donc $I$ et $J$ sont bien des homéomorphisme de la droite projective réelle $PP^1_RR$ dans $lquotient(SS^1, equ(SS^1))$.
+  Enfin il est clair que $J compose I = id$ et $I compose J = id$, donc $I$ et $J$ sont bien des homéomorphismes entre la droite projective réelle $PP^1_RR$ et $lquotient(SS^1, equ(SS^1))$.
 ])
 
 == Le plan projectif réel
@@ -1679,11 +1671,11 @@ TODO : $SS^n$.
 #definition([
   On appelle _plan projectif réel_, noté $PP^2_RR$, le quotient de $RR^3 without {0}$ par la relation d'équivalence $equ(PP^2)$ où pour tout $u, v in RR^3 without {0}$, on a $u equ(PP^2) v$ s'il existe $lambda in RR without {0}$ tel que $u = lambda v$. \
   Soit $(x, y, z) in RR^3 without {0}$.
-  On appelle _coordonnées homogènes de $(x, y, z)$_ le point associé sur le plan projectif réel $[x:y:z] := overline((x, y, z)) in PP^2_RR$.
+  On note $[x:y:z] := overline((x, y, z)) in PP^2_RR$ la classe de $(x, y, z)$.
 ])
 
 #remark([
-  Formellement un point de $PP^2_RR$ est induit par une droite linéaire de $RR^3$ et une droite de $PP^2_RR$ est induite par un plan linéaire de $RR^3$.
+  Un point de $PP^2_RR$ est donc induit par une droite linéaire de $RR^3$ et une droite de $PP^2_RR$ est induite par un plan linéaire de $RR^3$.
   On déduit de la formule de Grassmann que deux droites distinctes de $PP^2_RR$ (même parallèles) s'intersectent en un point de $PP^2_RR$. \
 ]) <rem-inter-droites>
 
@@ -1696,12 +1688,12 @@ TODO : $SS^n$.
 
 #remark([
   Les cartes affines $A_x$, $A_y$ et $A_z$ sont homéomorphes à $RR^2$. \
-  On a $PP^2_RR = A_x union A_y union A_z$, mais surtout $PP^2_RR = A_z union.sq cal(l)_oo$ où $cal(l)_oo := {[x:y:0] in RR^2}$. \
+  On a $PP^2_RR = A_x union A_y union A_z$ et $PP^2_RR = A_z union.sq cal(l)_oo$ où $cal(l)_oo := {[x:y:0] in RR^2}$. \
   De plus l'ensemble $cal(l)_oo$ est homéomorphe à $PP^1_RR$, intuitivement $PP^2_RR$ s'obtient donc à partir de $RR^2$ auquel on ajoute une copie de $PP^1_RR$ à l'infini.
 ])
 
 #remark([
-  Pour être exact dans la @rem-inter-droites, une droite de $A_z$ intersecte $cal(l)_oo$ en un point dépendant uniquement de son vecteur directeur.
+  On peut affiner la @rem-inter-droites, une droite de $A_z$ intersecte $cal(l)_oo$ en un point dépendant uniquement de son vecteur directeur.
   En effet, soit $D := {(x_0 +t a, y_0 + t b) | t in RR}$ une droite de $RR^2 tilde.eq A_z$ passant par un point $(x_0, y_0) in RR^2$ et de vecteur directeur $(a, b) in RR^2 without {0}$.
   Alors l'image de $D$ dans $A_z$ est donnée par $D_z := {[x_0+t a:y_0 + t b:1] | t in RR}$, et on a :
   $
@@ -1711,8 +1703,8 @@ TODO : $SS^n$.
 
   Soit $D_1$ et $D_2$ deux droites distinctes de $PP^2_RR$, on note $A_1 := D_1 inter A_z$ et $A_2 := D_2 inter A_z$.
   - Si $D_1 != cal(l)_oo$ et $D_2 != cal(l)_oo$, alors $A_1 != emptyset$ et $A_2 != emptyset$. \
-    Si $A_1$ et $A_2$ sont parallèles, elles ont le même vecteur directeur, donc $D_1$ et $D_2$ s'intersectent en $cal(l)_oo$. \
-    Sinon $A_1$ et $A_2$ s'intersectent, donc $D_1$ et $D_2$ s'intersectent en $A_z$.
+    Si $A_1$ et $A_2$ sont parallèles dans $A_z tilde.eq RR^2$, elles ont le même vecteur directeur, donc $D_1$ et $D_2$ s'intersectent dans $cal(l)_oo$.
+    Sinon $A_1$ et $A_2$ s'intersectent, donc $D_1$ et $D_2$ s'intersectent dans $A_z$.
   - Si $D_1 = cal(l)_oo$, alors $D_2$ intersecte bien $D_1 = cal(l)_oo$.
 ])
 
@@ -1729,7 +1721,7 @@ TODO : $SS^n$.
 ])
 
 #proposition([
-  Le plan projectif réel $PP^2_RR$ est homéomorphe au quotient du carré $[0, 1]^2$ par la relation d'équivalence $equ([0, 1])$ où pour tout $t in [0, 1]$, on a $(t, 0) equ([0, 1]) (1-t, 1)$ et $(0, t) equ([0, 1]) (1, 1-t)$.
+  Le plan projectif réel $PP^2_RR$ est homéomorphe au quotient du carré $[0, 1]^2$ par la relation d'équivalence $equ([0, 1])$ définie par $(t, 0) equ([0, 1]) (1-t, 1)$ et $(0, t) equ([0, 1]) (1, 1-t)$ où $t in [0, 1]$.
 ]) <prop-homeo-p2-carre>
 
 #proof([
@@ -1923,18 +1915,14 @@ TODO : $SS^n$.
         fill: luma(50%, 40%),
         stroke: (dash: "dashed"),
       )
-      line(
-        (5, -1.985),
-        (5, 1.83),
-        stroke: green,
-        mark: (end: "stealth", fill: green),
-      )
-      line(
-        (7, -1.985),
-        (7, 1.83),
-        stroke: green,
-        mark: (end: "stealth", fill: green),
-      )
+      line((5, -1.985), (5, 1.83), stroke: green, mark: (
+        end: "stealth",
+        fill: green,
+      ))
+      line((7, -1.985), (7, 1.83), stroke: green, mark: (
+        end: "stealth",
+        fill: green,
+      ))
 
       content((6, 0), $M$)
       // content((4.5, 0), $D$)
@@ -1964,44 +1952,32 @@ TODO : $SS^n$.
         stroke: (cap: "round", join: "round"),
         mark: (transform-shape: false, anchor: "center"),
       )
-      line(
-        (-2, 2),
-        (-0.5, 2),
-        (-0.5, -2),
-        (-2, -2),
-        (-2, 2),
-        fill: luma(50%, 40%),
-      )
+      line((-2, 2), (-0.5, 2), (-0.5, -2), (-2, -2), (-2, 2), fill: luma(
+        50%,
+        40%,
+      ))
       line((0.5, 2), (2, 2), (2, -2), (0.5, -2), (0.5, 2), fill: luma(50%, 40%))
 
-      line(
-        (-1, -1.985),
-        (-1, 1.83),
-        stroke: green,
-        mark: (end: "stealth", fill: green),
-      )
-      line(
-        (1, -1.985),
-        (1, 1.83),
-        stroke: green,
-        mark: (end: "stealth", fill: green),
-      )
+      line((-1, -1.985), (-1, 1.83), stroke: green, mark: (
+        end: "stealth",
+        fill: green,
+      ))
+      line((1, -1.985), (1, 1.83), stroke: green, mark: (
+        end: "stealth",
+        fill: green,
+      ))
 
       line((4, 2), (7, 2), (7, -2), (4, -2), (4, 2), fill: luma(50%, 40%))
       line((5.5, 2), (5.5, -2))
 
-      line(
-        (6.5, -1.985),
-        (6.5, 1.83),
-        stroke: green,
-        mark: (end: "stealth", fill: green),
-      )
-      line(
-        (4.5, 1.985),
-        (4.5, -1.83),
-        stroke: green,
-        mark: (end: "stealth", fill: green),
-      )
+      line((6.5, -1.985), (6.5, 1.83), stroke: green, mark: (
+        end: "stealth",
+        fill: green,
+      ))
+      line((4.5, 1.985), (4.5, -1.83), stroke: green, mark: (
+        end: "stealth",
+        fill: green,
+      ))
 
       circle((11, 0), radius: 2, fill: luma(50%, 40%))
       circle((11, 0), radius: 1.65, stroke: green)
@@ -2040,9 +2016,11 @@ TODO : $SS^n$.
 
 === Non-plongement dans $RR^3$
 
+L'objectif de cette section est de montrer que $PP^2_RR$ ne se plonge pas dans $RR^3$ en utilisant l'homologie singulière présentée dans les sections précédentes.
+
 #definition([
   Soit $X$ et $Y$ deux espaces topologiques, $func(f, X, Y)$ une application.
-  On dit que $f$ est un _plongement de $X$ dans $Y$_ si elle induit un homéomorphisme de $X$ dans $f(X)$.
+  On dit que $f$ est un _plongement de $X$ dans $Y$_ si elle induit un homéomorphisme de $X$ dans $f(X)$ muni de la topologie induite.
 ])
 
 #theorem([
@@ -2054,7 +2032,7 @@ TODO : $SS^n$.
   D'après la @prop-homeo-p2-mobius-disque on peut écrire $PP^2_RR = M union D$ où $M$ est homéomorphe à une bande de Möbius, $D$ est homéomorphe à un disque fermé et $M inter D = partial M = partial D$ est homéomorphe à $SS^1$,
   dans la suite on identifie $PP^2_RR$, $M$ et $D$ avec leur images $f(PP^2_RR)$, $f(M)$ et $f(D)$ dans $RR^3$.
 
-  Le complémentaire de la bande de Möbius $RR^3 without M$ est homotopiquement équivalent à $RR^3 without C$ où $C$ le cercle central de $M$ est homéomorphe à $SS^1$. D'après le @cor-retract-deformation et la @prop-homologie-complementaire-s1, on a :
+  Le complémentaire de la bande de Möbius $RR^3 without M$ est un rétract par déformation de $RR^3 without C$ où $C$ le cercle central de $M$ est homéomorphe à $SS^1$. D'après le @cor-retract-deformation et la @prop-homologie-complementaire-s1, on a :
   $
     H_(1)(RR^3 without M) tilde.eq H_(1)(RR^3 without C) tilde.eq ZZ
   $
@@ -2157,7 +2135,7 @@ TODO : $SS^n$.
         arr((0, 3), (0, 4), $partial_0$),
       )],
   )
-  Par exactitude de la suite, on a $ker(partial_0) = im(H_(1)(i)) = 2ZZ$, d'où $partial_(0)(1) != 0$ et $2 partial_(0)(1) = partial_(0)(2) = 0$, donc $partial_(0)(1)$ est un élément non-nul d'ordre 2 de $H_(0)(RR^3 without PP^2_RR)$.
+  Par exactitude on a $ker(partial_0) = im(H_(1)(i)) = 2ZZ$, d'où $partial_(0)(1) != 0$ et $2 partial_(0)(1) = partial_(0)(2) = 0$, donc $partial_(0)(1)$ est un élément non-nul d'ordre 2 de $H_(0)(RR^3 without PP^2_RR)$.
 
   Mais d'après la @prop-h0-abelien-libre $H_(0)(RR^3 without PP^2_RR)$ est un groupe abélien libre, donc il n'existe aucun élément non-nul d'ordre 2 de $H_(0)(RR^3 without PP^2_RR)$, d'où une contradiction.
 
@@ -2176,7 +2154,9 @@ L'origine de cette application est le _problème du carré inscrit_, énoncé pa
 
 Cette question fut l'objet de nombreuses recherches, mais elle n'est toujours pas résolue, en revanche nous sommes capables d'en démontrer une version simplifiée :
 
-#align(center)[_"Toute courbe de Jordan admet-elle un #strike("carré") rectangle inscrit ?"_]
+#align(
+  center,
+)[_"Toute courbe de Jordan admet-elle un #strike("carré") rectangle inscrit ?"_]
 
 C'est ce que nous appellerons le _problème du rectangle inscrit_.
 
@@ -2264,7 +2244,7 @@ Par exemple dans le cas d'un cercle, on peut évidemment toujours trouver une in
 ])
 
 #example([
-  Le carré $R := ((sqrt(2)  slash  2, sqrt(2)  slash  2), (-sqrt(2)  slash  2, sqrt(2)  slash  2), (-sqrt(2)  slash  2, -sqrt(2)  slash  2), (sqrt(2)  slash  2, -sqrt(2)  slash  2))$ est bien inscrit dans le cercle $C$ de la @fig-cercle-carre, en effet :
+  Le carré $R := ((sqrt(2) slash 2, sqrt(2) slash 2), (-sqrt(2) slash 2, sqrt(2) slash 2), (-sqrt(2) slash 2, -sqrt(2) slash 2), (sqrt(2) slash 2, -sqrt(2) slash 2))$ est bien inscrit dans le cercle $C$ de la @fig-cercle-carre, en effet :
   - On a $gamma_(C)(1 slash 8) = (sqrt(2) slash 2, sqrt(2) slash 2)$, donc $(sqrt(2) slash 2, sqrt(2) slash 2) in C$.
 
   - On a $gamma_(C)(3 slash 8) = (-sqrt(2) slash 2, sqrt(2) slash 2)$, donc $(-sqrt(2) slash 2, sqrt(2) slash 2) in C$.
@@ -2332,16 +2312,14 @@ Par exemple dans le cas d'un cercle, on peut évidemment toujours trouver une in
       ).map(it => it.map(e => 1.75 * e))
       line(..jc, close: true)
 
-      line(
-        (-1.9, 0, -0.44),
-        (1.15, 0, 1.33),
-        stroke: (dash: "dashed", paint: red),
-      )
-      line(
-        (-0.375, 0, 0.445),
-        (-0.375, 3.18, 0.445),
-        stroke: (dash: "dashed", paint: blue),
-      )
+      line((-1.9, 0, -0.44), (1.15, 0, 1.33), stroke: (
+        dash: "dashed",
+        paint: red,
+      ))
+      line((-0.375, 0, 0.445), (-0.375, 3.18, 0.445), stroke: (
+        dash: "dashed",
+        paint: blue,
+      ))
 
       set-style(circle: (radius: 0.03, fill: red, stroke: red))
       circle((-1.9, 0, -0.44))
@@ -2372,7 +2350,7 @@ Par exemple dans le cas d'un cercle, on peut évidemment toujours trouver une in
   Puisque $C$ est paramétrée par une application continue $func(gamma, [0, 1], RR^2)$, on peut paramétrer $Q$ par l'application $func(mu := overline((gamma, gamma)), [0, 1]^2, lquotient((RR^2 times RR^2), thin~))$.
   Mais par définition $gamma(0) = gamma(1)$, pour tout $t in [0, 1]$, on a $mu(0, t) = mu(1, t)$ et $mu(t, 0) = mu(t, 1)$, de plus pour tout $(a, b) in [0, 1]^2$, on a $mu(a, b) = mu(b, a)$.
 
-  Pour éviter ça, on étudie le quotient de $[0, 1]^2$ par la relation d'équivalence $equ(1)$ où pour tout $t in [0, 1]$, on a $(0, t) equ(1) (1, t)$ et $(t, 0) equ(1) (t, 1)$, et par la relation d'équivalence $equ(2)$ où pour tout $(a, b) in [0, 1]^2$, on a $(a, b) equ(2) (b, a)$ :
+  Pour éviter ça, on étudie le quotient successif de $[0, 1]^2$ par les relations d'équivalence $equ(1)$ définie par $(0, t) equ(1) (1, t)$ et $(t, 0) equ(1) (t, 1)$ où $t in [0, 1]$, et $equ(2)$ où pour tout $(a, b) in [0, 1]^2$, on a $(a, b) equ(2) (b, a)$ :
   #figure(
     cetz.canvas({
       import cetz.draw: *
@@ -2495,6 +2473,7 @@ Par exemple dans le cas d'un cercle, on peut évidemment toujours trouver une in
 
 #theorem(
   number: "A",
+  title: "Projection stéréographique",
   [$SS^n without {N}$ est homéomorphe à $RR^n$ où $N := (0, ..., 0, 1)$ est le pôle nord de $SS^n$.],
 ) <thm-projection-stereographique>
 

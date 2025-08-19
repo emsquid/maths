@@ -1,6 +1,6 @@
 #import "@preview/commute:0.3.0": *
 #import "@preview/outrageous:0.4.0"
-#import "@preview/rich-counters:0.2.2": *
+#import "@preview/headcount:0.1.0": *
 #import "@preview/ez-today:1.1.0": *
 #import "@preview/cetz:0.3.4"
 #import "@preview/touying:0.6.1": *
@@ -8,18 +8,28 @@
 #import "@local/mathematica:0.1.0": *
 
 // Counter and blocks definitions
-#let mathscounter = rich-counter(identifier: "maths", inherited_levels: 1)
-#let mathsbrick = brick.with(counter: mathscounter)
+#let mathscounter = counter("maths")
+#let mathsbrick = brick.with(
+  counter: mathscounter,
+  numbering: dependent-numbering("1.1", levels: 1),
+)
 #let examplebrick = mathsbrick.with(
   bodyfmt: body => {
     set enum(numbering: "1.a.i.A.")
     body
   },
 )
-#let questioncounter = rich-counter(identifier: "qst", inherited_levels: 0)
-#let questionbrick = brick.with(counter: questioncounter)
-#let exercisecounter = rich-counter(identifier: "ex", inherited_levels: 0)
-#let exercisebrick = brick.with(counter: exercisecounter)
+#let questioncounter = counter("qst")
+#let questionbrick = brick.with(
+  counter: questioncounter,
+  numbering: dependent-numbering("1.1", levels: 0),
+)
+#let exercisecounter = counter("ex")
+#let exercisebrick = brick.with(
+  counter: exercisecounter,
+  numbering: dependent-numbering("1.1", levels: 0),
+)
+
 
 #let axiom = mathsbrick("Axiome")
 #let axioms = mathsbrick("Axiomes")
@@ -105,6 +115,9 @@
 
   // Heading options
   set heading(numbering: "1.")
+  show heading: reset-counter(mathscounter, levels: 1)
+  show heading: reset-counter(questioncounter, levels: 1)
+  show heading: reset-counter(exercisecounter, levels: 1)
 
   // Enum options
   set enum(numbering: "(1.a.i.A)")
