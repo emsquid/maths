@@ -13,12 +13,10 @@
   counter: mathscounter,
   numbering: dependent-numbering("1.1", levels: 1),
 )
-#let examplebrick = mathsbrick.with(
-  bodyfmt: body => {
-    set enum(numbering: "1.a.i.A.")
-    body
-  },
-)
+#let examplebrick = mathsbrick.with(bodyfmt: body => {
+  set enum(numbering: "1.a.i.A.")
+  body
+})
 #let questioncounter = counter("qst")
 #let questionbrick = brick.with(
   counter: questioncounter,
@@ -29,7 +27,6 @@
   counter: exercisecounter,
   numbering: dependent-numbering("1.1", levels: 0),
 )
-
 
 #let axiom = mathsbrick("Axiome")
 #let axioms = mathsbrick("Axiomes")
@@ -48,10 +45,7 @@
 #let exercise = exercisebrick("Exercice")
 
 // Maths shortcuts
-#let scr(it) = text(
-  features: ("ss01",),
-  box($cal(it)$),
-)
+#let scr(it) = text(features: ("ss01",), box($cal(it)$))
 
 #let underbraced(body, text) = $attach(limits(underbrace(#body)), b: #text)$
 
@@ -79,25 +73,19 @@
   }
 
   // Page options
-  set page(
-    numbering: "1",
-    header: context {
-      if header and counter(page).get().first() > 1 {
-        align(
-          center,
-          if title != "" and authors != "" {
-            [#title -- #authors]
-          } else if title != "" {
-            title
-          } else {
-            ""
-          },
-        )
-        line(start: (0%, -8pt), length: 100%, stroke: 0.5pt)
-        v(-10pt)
-      }
-    },
-  )
+  set page(numbering: "1", header: context {
+    if header and counter(page).get().first() > 1 {
+      align(center, if title != "" and authors != "" {
+        [#title -- #authors]
+      } else if title != "" {
+        title
+      } else {
+        ""
+      })
+      line(start: (0%, -8pt), length: 100%, stroke: 0.5pt)
+      v(-10pt)
+    }
+  })
 
   // Text options
   set text(
@@ -173,24 +161,21 @@
   show: touvlo-init
 
   // Title
-  align(
-    center,
-    {
-      text(size: 26pt)[#title]
-      if authors != none {
-        v(-12pt)
-        text(size: 13pt)[#authors]
-      }
-      if note != none {
-        v(0pt)
-        text(size: 13pt)[#note]
-      }
+  align(center, {
+    text(size: 26pt)[#title]
+    if authors != none {
+      v(-12pt)
+      text(size: 13pt)[#authors]
+    }
+    if note != none {
       v(0pt)
-      if date {
-        text(size: 12pt)[#today(lang: "fr", format: "d M Y")]
-      }
-    },
-  )
+      text(size: 13pt)[#note]
+    }
+    v(0pt)
+    if date {
+      text(size: 12pt)[#today(lang: "fr", format: "d M Y")]
+    }
+  })
 
   // Contents
   outline()
@@ -246,13 +231,10 @@
   if title != auto {
     self.store.title = title
   }
-  self = utils.merge-dicts(
-    self,
-    config-page(
-      header: header,
-      footer: footer,
-    ),
-  )
+  self = utils.merge-dicts(self, config-page(
+    header: header,
+    footer: footer,
+  ))
   touying-slide(self: self, ..args)
 })
 
@@ -261,57 +243,36 @@
   let body = {
     set align(center + horizon)
     v(-1em)
-    block(
-      fill: self.colors.secondary,
-      inset: 2em,
-      radius: 0.5em,
-      text(
-        size: 2em,
-        fill: self.colors.neutral-lightest,
-        weight: "bold",
-        info.title,
-      ),
-    )
+    block(fill: self.colors.secondary, inset: 2em, radius: 0.5em, text(
+      size: 2em,
+      fill: self.colors.neutral-lightest,
+      weight: "bold",
+      info.title,
+    ))
     set text(fill: self.colors.neutral-darkest)
     if info.date != none {
       block(utils.display-info-date(self))
     }
   }
-  self = utils.merge-dicts(
-    self,
-    config-page(footer: footer),
-  )
+  self = utils.merge-dicts(self, config-page(footer: footer))
   touying-slide(self: self, body)
 })
 
 #let slide-brick(kind, col, body) = {
-  align(
-    center,
+  align(center, block(width: 100%, radius: 7pt, align(left, grid(
+    rows: 2,
+    block(width: 100%, radius: (top: 7pt), inset: 0.5em, fill: col, text(
+      kind,
+      white,
+    )),
     block(
       width: 100%,
-      radius: 7pt,
-      align(
-        left,
-        grid(
-          rows: 2,
-          block(
-            width: 100%,
-            radius: (top: 7pt),
-            inset: 0.5em,
-            fill: col,
-            text(kind, white),
-          ),
-          block(
-            width: 100%,
-            radius: (bottom: 7pt),
-            inset: 0.5em,
-            fill: rgb(..col.components().slice(0, 3), 15%),
-            body,
-          ),
-        ),
-      ),
+      radius: (bottom: 7pt),
+      inset: 0.5em,
+      fill: rgb(..col.components().slice(0, 3), 15%),
+      body,
     ),
-  )
+  ))))
 }
 
 #let slide-definition(body) = slide-brick("Définition", rgb("#718355"), body)
@@ -342,10 +303,11 @@
   set par(justify: true)
 
   show: touying-slides.with(
-    config-page(
-      paper: "presentation-" + aspect-ratio,
-      margin: (top: 3.5em, bottom: 1.5em, x: 1em),
-    ),
+    config-page(paper: "presentation-" + aspect-ratio, margin: (
+      top: 3.5em,
+      bottom: 1.5em,
+      x: 1em,
+    )),
     config-common(slide-fn: slide),
     config-methods(alert: utils.alert-with-primary-color),
     config-store(
