@@ -1285,14 +1285,14 @@
       arr((0, 0), (1, 0), $k_cdot$, label-pos: right),
       arr((0, 1), (1, 1), $i_cdot$),
     )]
-  où $i_cdot, j_cdot, k_cdot$ et $l_cdot$ sont les inclusions canoniques.
+  où $j_cdot, k_cdot$ et $l_cdot$ sont les inclusions canoniques.
   Alors d'après le @thm-petites-chaines les morphismes induits $H_(n)(j)$ et $H_(n)(l)$ sont des isomorphismes. De plus on peut remarquer que :
   #[
     #set math.lr(size: 14pt)
     $ C_(cdot)(X, A; cal(U))
     = lquotient((C_(cdot)(circle(A)) + C_(cdot)underbrace((X without overline(B)), = (X without B) without overline(B))), (C_(cdot)(circle(A)) + C_(cdot)underbrace((A without overline(B)), = (A without B) without overline(B))))
     = C_(cdot)(X without B, A without B; cal(U)) $
-  ]  donc $j_cdot$ est un isomorphisme et le morphisme induit $H_(n)(j)$ est aussi un isomorphisme.
+  ]  donc $k_cdot$ est un isomorphisme et le morphisme induit $H_(n)(k)$ est aussi un isomorphisme.
 
   Puisque le diagramme est commutatif, le morphisme induit $H_(n)(i)$ est bien un isomorphisme.
 ])
