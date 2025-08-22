@@ -1,6 +1,6 @@
 #import "../../template.typ": *
 
-#set-maths(sequence: (ind: $n$, dom: $ZZ$))
+#set-maths(sequence: (ind: $n$, dom: $NN$))
 
 #let cdot = $circle.filled.tiny$
 
@@ -198,42 +198,42 @@
 == Complexes de chaînes
 
 #definition([
-  On appelle _complexe de chaînes_, noté $C_cdot$, une suite de groupes abéliens $sequence(C_(n))$ munie de morphismes de groupes $sequence(func(dif_n, C_(n), C_(n-1)))$ tels que pour tout $n in ZZ$, on a $dif_n dif_(n+1) = 0$.
+  On appelle _complexe de chaînes_, noté $C_cdot$, une suite de groupes abéliens $sequence(C_(n))$ munie de morphismes de groupes $sequence(func(dif_n, C_(n), C_(n-1)))$ tels que pour tout $n in NN$, on a $dif_n dif_(n+1) = 0$.
 ])
 
 #definition([
-  Soit $C_cdot$ un complexe de chaînes et $n in ZZ$.
+  Soit $C_cdot$ un complexe de chaînes et $n in NN$.
   - On appelle _$n$-cycle_ un élément de $Z_(n)(C_cdot) := ker(dif_n)$.
   - On appelle _$n$-bord_ un élément de $B_(n)(C_cdot) := im(dif_(n+1))$.
 ])
 
 #proposition([
   Soit $C_cdot$ un complexe de chaînes.
-  Alors pour tout $n in ZZ$, on a $B_(n)(C_cdot) subset Z_(n)(C_cdot)$.
+  Alors pour tout $n in NN$, on a $B_(n)(C_cdot) subset Z_(n)(C_cdot)$.
 ])
 
 #proof([
-  Soit $n in ZZ$. Alors $dif_n dif_(n+1) = 0$, donc $B_(n)(C_cdot) = im(dif_(n+1)) subset ker(dif_n) = Z_(n)(C_cdot)$.
+  Soit $n in NN$. Alors $dif_n dif_(n+1) = 0$, donc $B_(n)(C_cdot) = im(dif_(n+1)) subset ker(dif_n) = Z_(n)(C_cdot)$.
 ])
 
 #definition([
-  Soit $C_cdot$ un complexe de chaînes et $n in ZZ$.
+  Soit $C_cdot$ un complexe de chaînes et $n in NN$.
   - On appelle _$n$#super("e") groupe d'homologie de $C_cdot$_ le groupe quotient $H_(n)(C_cdot) := lquotient(Z_(n)(C_cdot), B_(n)(C_cdot))$.
-  - On appelle _homologie de $C_cdot$_ le groupe abélien gradué $H_(cdot)(C_cdot) := plus.circle.big_(n in ZZ) H_(n)(C_cdot)$.
+  - On appelle _homologie de $C_cdot$_ le groupe abélien gradué $H_(cdot)(C_cdot) := plus.circle.big_(n in NN) H_(n)(C_cdot)$.
 ])
 
 #definition([
-  Soit $C_cdot$ un complexe de chaînes et $n in ZZ$.
+  Soit $C_cdot$ un complexe de chaînes et $n in NN$.
   - On dit que $C_cdot$ est _exact en $C_(n)$_ si $H_(n)(C_cdot)$ est trivial, c'est-à-dire, $im(dif_(n+1)) = ker(dif_n)$.
-  - On dit que $C_cdot$ est _exact_ si pour tout $n in ZZ$, il est exact en $C_(n)$.
-  - On dit que $C_cdot$ est _acyclique_ si pour tout $n in ZZ without {0}$, il est exact en $C_(n)$.
+  - On dit que $C_cdot$ est _exact_ si pour tout $n in NN$, il est exact en $C_(n)$.
+  - On dit que $C_cdot$ est _acyclique_ si pour tout $n in NN without {0}$, il est exact en $C_(n)$.
 ])
 
 == Morphismes de complexes
 
 #definition([
   Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes.
-  On appelle _morphisme de complexes_, noté $func(phi_cdot, C_cdot, D_cdot)$, une suite de morphismes de groupes $sequence(func(phi_n, C_(n), D_(n)))$ telle que pour tout $n in ZZ$, on a :
+  On appelle _morphisme de complexes_, noté $func(phi_cdot, C_cdot, D_cdot)$, une suite de morphismes de groupes $sequence(func(phi_n, C_(n), D_(n)))$ telle que pour tout $n in NN$, on a :
   $ dif_n phi_n = phi_(n-1) dif_n $
   c'est-à-dire que le diagramme suivant est commutatif :
   #align(center)[#commutative-diagram(
@@ -256,7 +256,7 @@
 ]) <prop-comp-composition>
 
 #proof([
-  Soit $n in ZZ$. Alors on a :
+  Soit $n in NN$. Alors on a :
   $
     dif_n (psi_n compose phi_n) = psi_(n-1) dif_n phi_n = (psi_(n-1) compose phi_(n-1)) dif_n.
   $
@@ -278,11 +278,11 @@
 
 #proposition([
   Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de complexes.
-  Alors pour tout $n in ZZ$, $phi_n$ induit un morphisme de groupes $func(H_(n)(phi), H_(n)(C_cdot), H_(n)(D_cdot))$.
+  Alors pour tout $n in NN$, $phi_n$ induit un morphisme de groupes $func(H_(n)(phi), H_(n)(C_cdot), H_(n)(D_cdot))$.
 ])
 
 #proof([
-  Soit $n in ZZ$. \
+  Soit $n in NN$. \
   Soit $z in Z_(n)(C_cdot)$. Alors on a
   $dif_n phi_(n)(z) = phi_(n-1)(dif_n z) = phi_(n-1)(0) = 0$,
   donc $phi_(n)(z) in Z_(n)(D_cdot)$. \
@@ -294,7 +294,7 @@
 
 #definition([
   Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de complexes.
-  On note $func(H_(cdot)(phi), H_(cdot)(C_cdot), H_(cdot)(D_cdot))$ le morphisme de groupes gradués $H_(cdot)(phi) := plus.circle.big_(n in ZZ) H_(n)(phi)$.
+  On note $func(H_(cdot)(phi), H_(cdot)(C_cdot), H_(cdot)(D_cdot))$ le morphisme de groupes gradués $H_(cdot)(phi) := plus.circle.big_(n in NN) H_(n)(phi)$.
 ])
 
 == La catégorie $sans("Comp")$
@@ -308,11 +308,11 @@
 ])
 
 #theorem([
-  Pour tout $n in ZZ$, le $n$#super("e") groupe d'homologie $H_n$ est un foncteur de $sans("Comp")$ vers $sans("Ab")$.
+  Pour tout $n in NN$, le $n$#super("e") groupe d'homologie $H_n$ est un foncteur de $sans("Comp")$ vers $sans("Ab")$.
 ]) <thm-foncteur-comp-ab>
 
 #proof([
-  Soit $n in ZZ$.
+  Soit $n in NN$.
   - Soit $C_cdot in ob(sans("Comp"))$ un complexe de chaînes.
     Alors le $n$#super("e") groupe d'homologie $H_(n)(C_cdot)$ est bien un groupe abélien.
   - Soit $C_cdot, D_cdot in ob(sans("Comp"))$ deux complexes de chaînes et $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de complexes.
@@ -326,7 +326,7 @@
 
 #proof([
   - Soit $C_cdot in ob(sans("Comp"))$ un complexe de chaînes.
-    Alors l'homologie $H_(cdot)(C_cdot) := plus.circle.big_(n in ZZ) H_(n)(C_cdot)$ est bien un groupe abélien gradué.
+    Alors l'homologie $H_(cdot)(C_cdot) := plus.circle.big_(n in NN) H_(n)(C_cdot)$ est bien un groupe abélien gradué.
   - Soit $C_cdot, D_cdot in ob(sans("Comp"))$ deux complexes de chaînes et $func(phi_cdot, C_cdot, D_cdot)$ un morphisme de complexes.
     Alors le morphisme induit $func(H_(cdot)(phi), H_(cdot)(C_cdot), H_(cdot)(D_cdot))$ est bien un morphisme de groupes abéliens gradués.
   Les propriétés de composition et d'identité découlent du @thm-foncteur-comp-ab, donc $H_cdot$ est bien un foncteur de $sans("Comp")$ vers $sans("GrAb")$.
@@ -338,7 +338,7 @@
 
 #definition([
   Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, $func(phi_cdot, C_cdot, D_cdot)$ et $func(psi_cdot, C_cdot, D_cdot)$ deux morphismes de complexes.
-  On dit que $phi_cdot$ et $psi_cdot$ sont _homotopes_ s'il existe une suite de morphismes de groupes $sequence(func(h_n, C_(n), D_(n+1)))$ telle que pour tout $n in ZZ$, on a $phi_n - psi_n = h_(n-1) dif_n + dif_n h_n$.
+  On dit que $phi_cdot$ et $psi_cdot$ sont _homotopes_ s'il existe une suite de morphismes de groupes $sequence(func(h_n, C_(n), D_(n+1)))$ telle que pour tout $n in NN$, on a $phi_n - psi_n = h_(n-1) dif_n + dif_n h_n$.
 ])
 
 #proposition([
@@ -348,13 +348,13 @@
 #proof([
   Notons $~$ la relation d'homotopie. \
   Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, ainsi que $func(phi_cdot, C_cdot, D_cdot)$, $func(psi_cdot, C_cdot, D_cdot)$ et $func(xi_cdot, C_cdot, D_cdot)$ trois morphismes de complexes tels que $phi_cdot ~ psi_cdot$ et $psi_cdot ~ xi_cdot$.
-  Alors par définition il existe deux suites de morphismes de groupes $sequence(func(f_n, C_n, D_(n+1)))$ et $sequence(func(g_n, C_n, D_(n+1)))$ telles que pour tout $n in ZZ$, on a $phi_n - psi_n = f_(n-1) dif_n + dif_n f_n$ et $psi_n - xi_n = g_(n-1) dif_n + dif_n g_n$.
+  Alors par définition il existe deux suites de morphismes de groupes $sequence(func(f_n, C_n, D_(n+1)))$ et $sequence(func(g_n, C_n, D_(n+1)))$ telles que pour tout $n in NN$, on a $phi_n - psi_n = f_(n-1) dif_n + dif_n f_n$ et $psi_n - xi_n = g_(n-1) dif_n + dif_n g_n$.
 
-  - _Réflexivité_ : Pour tout $n in ZZ$, on peut écrire $phi_n - phi_n = 0 = 0 dif_n + dif_n 0$.
+  - _Réflexivité_ : Pour tout $n in NN$, on peut écrire $phi_n - phi_n = 0 = 0 dif_n + dif_n 0$.
     Donc on a bien $phi_cdot ~ phi_cdot$.
-  - _Symétrie_ : Pour tout $n in ZZ$, on pose $h_n := -f_n$, alors on a $psi_n - phi_n = -(phi_n - psi_n) = h_(n-1) dif_n + dif_n h_n$.
+  - _Symétrie_ : Pour tout $n in NN$, on pose $h_n := -f_n$, alors on a $psi_n - phi_n = -(phi_n - psi_n) = h_(n-1) dif_n + dif_n h_n$.
     Donc on a bien $psi_cdot ~ phi_cdot$.
-  - _Transitivité_ : Pour tout $n in ZZ$, on pose $h_n := f_n + g_n$, alors on a $phi_n - xi_n = phi_n - psi_n + psi_n - xi_n = h_(n-1) dif_n + dif_n h_n$.
+  - _Transitivité_ : Pour tout $n in NN$, on pose $h_n := f_n + g_n$, alors on a $phi_n - xi_n = phi_n - psi_n + psi_n - xi_n = h_(n-1) dif_n + dif_n h_n$.
     Donc on a bien $phi_cdot ~ xi_cdot$.
   Donc l'homotopie est bien une relation d'équivalence sur les morphismes de complexes.
 ])
@@ -365,8 +365,8 @@
 ])
 
 #proof([
-  Par définition il existe deux suites de morphismes de groupes $sequence(func(f_n, A_n, B_(n+1)))$ et $sequence(func(g_n, B_n, C_(n+1)))$ telles que pour tout $n in ZZ$, on a $phi_n - psi_n = f_(n-1) dif_n + dif_n f_n$ et $alpha_n - beta_n = g_(n-1) dif_n + dif_n g_n$.
-  Soit $n in ZZ$. Alors on a:
+  Par définition il existe deux suites de morphismes de groupes $sequence(func(f_n, A_n, B_(n+1)))$ et $sequence(func(g_n, B_n, C_(n+1)))$ telles que pour tout $n in NN$, on a $phi_n - psi_n = f_(n-1) dif_n + dif_n f_n$ et $alpha_n - beta_n = g_(n-1) dif_n + dif_n g_n$.
+  Soit $n in NN$. Alors on a:
   $
     alpha_n compose phi_n - beta_n compose psi_n
     &= alpha_n compose phi_n - alpha_n compose psi_n + alpha_n compose psi_n - beta_n compose psi_n \
@@ -385,8 +385,8 @@
 ]) <prop-homotopie>
 
 #proof([
-  Par définition il existe une suite de morphismes de groupes $sequence(func(h_n, C_n, D_(n+1)))$ telle que pour tout $n in ZZ$, on a $phi_n - psi_n = h_(n-1) dif_n + dif_n h_n$. \
-  Soit $n in ZZ$ et $overline(c) in H_(n)(C_cdot)$.
+  Par définition il existe une suite de morphismes de groupes $sequence(func(h_n, C_n, D_(n+1)))$ telle que pour tout $n in NN$, on a $phi_n - psi_n = h_(n-1) dif_n + dif_n h_n$. \
+  Soit $n in NN$ et $overline(c) in H_(n)(C_cdot)$.
   Alors on a $phi_(n)(c) - psi_(n)(c) = h_(n-1)(dif_n c) + dif_n h_(n)(c) = dif_n h_(n)(c) in B_(n)(D_cdot)$, on en déduit $H_(n)(phi)(c) - H_(n)(psi)(c) = 0 in H_(n)(D_cdot)$.
   Donc $H_(cdot)(phi) = H_(cdot)(psi)$.
 ])
@@ -395,16 +395,16 @@
 
 #definition([
   Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes.
-  On dit que $D_cdot$ est un _sous-complexe de chaînes de $C_cdot$_ si pour tout $n in ZZ$, on a $D_n subset C_n$.
+  On dit que $D_cdot$ est un _sous-complexe de chaînes de $C_cdot$_ si pour tout $n in NN$, on a $D_n subset C_n$.
 ])
 
 #proposition([
   Soit $C_cdot$ un complexe de chaînes et $D_cdot$ un sous-complexe de chaînes de $C_cdot$.
-  Alors pour tout $n in ZZ$, $dif_n$ induit un morphisme $func(overline(dif)_n, lquotient(C_(n), D_(n)), lquotient(C_(n-1), D_(n-1)))$ tel que $overline(dif)_n overline(dif)_(n+1) = 0$.
+  Alors pour tout $n in NN$, $dif_n$ induit un morphisme $func(overline(dif)_n, lquotient(C_(n), D_(n)), lquotient(C_(n-1), D_(n-1)))$ tel que $overline(dif)_n overline(dif)_(n+1) = 0$.
 ]) <prop-bord-quotient>
 
 #proof([
-  Soit $n in ZZ$.
+  Soit $n in NN$.
   Alors on a $D_n subset C_n$, on peut donc former le quotient $lquotient(C_n, D_n)$. \
   On pose $func(delta_n := overline(dif_n), C_n, lquotient(C_(n-1), D_(n-1)))$, alors $D_(n) subset ker(delta_n)$ et d'après la propriété universelle du groupe quotient $delta_n$ induit bien un morphisme $func(overline(dif)_n, lquotient(C_n, D_n), lquotient(C_(n-1), D_(n-1)))$. \
   Enfin puisque $dif_n dif_(n+1) = 0$, on a bien $overline(dif)_n overline(dif)_(n+1) = overline(dif_n dif_(n+1)) = 0$.
@@ -426,11 +426,11 @@
 ]) <prop-morphisme-quotient>
 
 #proof([
-  Pour tout $n in ZZ$,
+  Pour tout $n in NN$,
   on considère $func(overline(phi_n), A_n, lquotient(C_n, D_n))$, alors puisque $phi_(n)(B_n) subset D_n$, on en déduit $B_n subset ker(overline(phi_n))$ et d'après la propriété universelle du groupe quotient $overline(phi_n)$ induit un morphisme $func(overline(phi)_n, lquotient(A_n, B_n), lquotient(C_n, D_n))$.
   On pose $overline(phi)_cdot := sequence(overline(phi)_n)$
 
-  Soit $n in ZZ$. Alors par définition $overline(dif)_n overline(phi)_n = overline(dif_n phi_n) = overline(phi_(n-1) dif_n) = overline(phi)_(n-1) overline(dif)_n$.
+  Soit $n in NN$. Alors par définition $overline(dif)_n overline(phi)_n = overline(dif_n phi_n) = overline(phi_(n-1) dif_n) = overline(phi)_(n-1) overline(dif)_n$.
   Donc $phi_cdot$ est bien un morphisme de complexes.
 ])
 
@@ -452,7 +452,7 @@
       arr((0, 2), (0, 3), $psi_cdot$),
       arr((0, 3), (0, 4), ""),
     )]
-  si pour tout $n in ZZ$, la suite courte de groupes suivante est exacte :
+  si pour tout $n in NN$, la suite courte de groupes suivante est exacte :
   #align(center)[#commutative-diagram(
       node-padding: (40pt, 50pt),
       padding: 5pt,
@@ -485,7 +485,7 @@
       arr((0, 2), (0, 3), $psi_cdot$),
       arr((0, 3), (0, 4), ""),
     )]
-  Alors pour tout $n in ZZ$, il existe un morphisme de groupes $func(partial_n, H_(n)(C_cdot), H_(n-1)(A_cdot))$ tel que la suite longue des groupes d'homologie est exacte :
+  Alors pour tout $n in NN$, il existe un morphisme de groupes $func(partial_n, H_(n)(C_cdot), H_(n-1)(A_cdot))$ tel que la suite longue des groupes d'homologie est exacte :
   #align(center)[#commutative-diagram(
       node-padding: (40pt, 40pt),
       padding: 5pt,
@@ -554,7 +554,7 @@
 ])
 
 #proof([
-  Soit $n in ZZ$. On commence par faire un diagramme en 3 dimensions pour la suite :
+  Soit $n in NN$. On commence par faire un diagramme en 3 dimensions pour la suite :
   #align(center)[#commutative-diagram(
       node-padding: (20pt, 13pt),
       padding: 0pt,
@@ -729,7 +729,7 @@
 
 #corollary([
   Soit $C_cdot$ un complexe de chaînes et $D_cdot$ un sous-complexe de chaînes de $C_cdot$.
-  Alors pour tout $n in ZZ$, il existe un morphisme de groupes $func(partial_n, H_(n)(lquotient(C_cdot, D_cdot)), H_(n-1)(D_cdot))$ telle que la suite longue suivante est exacte :
+  Alors pour tout $n in NN$, il existe un morphisme de groupes $func(partial_n, H_(n)(lquotient(C_cdot, D_cdot)), H_(n-1)(D_cdot))$ telle que la suite longue suivante est exacte :
   #align(center)[#commutative-diagram(
       node-padding: (40pt, 40pt),
       padding: 5pt,
@@ -751,7 +751,7 @@
 ]) <lem-courte-longue-homologie-quotient>
 
 #proof([
-  Soit $n in ZZ$. Par définition l'inclusion $func(i_n, D_n, C_n)$ est injective, de plus on a clairement $im(i_n) = D_n = ker(pi_n)$ et par définition la projection $func(pi_n, C_n, lquotient(C_n, D_n))$ est surjective. \
+  Soit $n in NN$. Par définition l'inclusion $func(i_n, D_n, C_n)$ est injective, de plus on a clairement $im(i_n) = D_n = ker(pi_n)$ et par définition la projection $func(pi_n, C_n, lquotient(C_n, D_n))$ est surjective. \
   Donc on a une suite exacte courte de complexe de chaînes :
   #align(center)[#commutative-diagram(
       node-padding: (40pt, 50pt),
@@ -920,7 +920,7 @@
 ])
 
 #definition([
-  Soit $X$ un espace topologique. Pour tout $n in ZZ$, on appelle _groupe des $n$-chaînes singulières_, noté $C_(n)(X)$, le groupe abélien libre engendré par les $n$-simplexes singuliers sur $X$.
+  Soit $X$ un espace topologique. Pour tout $n in NN$, on appelle _groupe des $n$-chaînes singulières_, noté $C_(n)(X)$, le groupe abélien libre engendré par les $n$-simplexes singuliers sur $X$.
 ])
 
 #definition([
@@ -1044,7 +1044,7 @@
 ])
 
 #definition([
-  Soit $C_(cdot)(X)$ un complexe de chaînes singulières et $n in ZZ$.
+  Soit $C_(cdot)(X)$ un complexe de chaînes singulières et $n in NN$.
   - On appelle _$n$-cycle singulier_ un élément de $Z_(n)(X) := Z_(n)(C_(cdot)(X))$.
   - On appelle _$n$-bord singulier_ un élément de $B_(n)(X) := B_(n)(C_(cdot)(X))$.
   - On appelle _$n$#super("e") groupe d'homologie singulière de $X$_ le groupe $H_(n)(X) := H_(n)(C_(cdot)(X))$.
@@ -1057,11 +1057,11 @@
 ])
 
 #corollary([
-  Pour tout $n in ZZ$, le $n$#super("e") groupe d'homologie singulière $H_n$ est un foncteur de $sans("Top")$ vers $sans("Ab")$.
+  Pour tout $n in NN$, le $n$#super("e") groupe d'homologie singulière $H_n$ est un foncteur de $sans("Top")$ vers $sans("Ab")$.
 ])
 
 #proof([
-  Soit $n in ZZ$.
+  Soit $n in NN$.
   D'après la @prop-foncteur-top-comp $C_cdot$ est un foncteur de $sans("Top")$ vers $sans("Comp")$ et d'après le @thm-foncteur-comp-ab $H_n$ est un foncteur de $sans("Comp")$ vers $sans("Ab")$, par composition $H_n = H_(n)(C_cdot)$ est bien un foncteur de $sans("Top")$ vers $sans("Ab")$.
 ])
 
@@ -1099,23 +1099,23 @@
 ])
 
 #definition([
-  Soit $C_(cdot)(X, A)$ un complexe de chaînes singulières et $n in ZZ$.
+  Soit $C_(cdot)(X, A)$ un complexe de chaînes singulières et $n in NN$.
   - On appelle _$n$-cycle singulier_ un élément de $Z_(n)(X, A) := Z_(n)(lquotient(C_(cdot)(X), C_(cdot)(A)))$.
   - On appelle _$n$-bord singulier_ un élément de $B_(n)(X, A) := B_(n)(lquotient(C_(cdot)(X), C_(cdot)(A)))$.
   - On appelle _$n$#super("e") groupe d'homologie singulière de $(X, A)$_ le groupe $H_(n)(X, A) := H_(n)(lquotient(C_(cdot)(X), C_(cdot)(A)))$.
   - On appelle _homologie singulière de $(X, A)$_ le groupe $H_(cdot)(X, A) := H_(cdot)(lquotient(C_(cdot)(X), C_(cdot)(A)))$.
 ])
 
-// #remark([
-//   Dans le cas de la paire d'espaces topologiques $(X, emptyset)$, on trouve $C_(cdot)(X, emptyset) tilde.eq C_(cdot)(X)$ et $H_(cdot)(X, emptyset) tilde.eq H_(cdot)(X)$.
-// ])
+#remark([
+  Dans le cas de la paire $(X, emptyset)$, on trouve $C_(cdot)(X, emptyset) tilde.eq C_(cdot)(X)$ et $H_(cdot)(X, emptyset) tilde.eq H_(cdot)(X)$.
+])
 
 #corollary([
-  Pour tout $n in ZZ$, le $n$#super("e") groupe d'homologie singulière de paires $H_n$ est un foncteur de $sans("Top")_2$ vers $sans("Ab")$.
+  Pour tout $n in NN$, le $n$#super("e") groupe d'homologie singulière de paires $H_n$ est un foncteur de $sans("Top")_2$ vers $sans("Ab")$.
 ])
 
 #proof([
-  Soit $n in ZZ$.
+  Soit $n in NN$.
   D'après la @prop-foncteur-top2-comp $C_cdot$ est un foncteur de $sans("Top")_2$ vers $sans("Comp")$ et d'après le @thm-foncteur-comp-ab $H_n$ est un foncteur de $sans("Comp")$ vers $sans("Ab")$, par composition $H_n = H_(n)(C_cdot)$ est bien un foncteur de $sans("Top")_2$ vers $sans("Ab")$.
 ])
 
@@ -1131,12 +1131,16 @@
 
 #definition([
   Soit $X$ un espace topologique et $cal(U)$ un recouvrement ouvert de $X$.
-  Pour tout $n in ZZ$, on appelle _groupe des petites $n$-chaînes singulières de $X$ associées à $cal(U)$_, noté $C_(n)(X; cal(U))$, le groupe abélien libre engendré par les $n$-simplexes singuliers sur l'un des $U in cal(U)$.
+  Pour tout $n in NN$, on appelle _groupe des petites $n$-chaînes singulières de $X$ associées à $cal(U)$_, noté $C_(n)(X; cal(U))$, le groupe abélien libre engendré par les $n$-simplexes singuliers sur l'un des $U in cal(U)$.
 ])
 
 #definition([
   Soit $X$ un espace topologique et $cal(U)$ un recouvrement ouvert de $X$.
   On appelle _complexe de petites chaînes singulières de $X$ associées à $cal(U)$_, noté $C_(cdot)(X; cal(U))$, le sous-complexe de chaînes déterminé par la suite $sequence(C_(n)(X; cal(U)))$.
+])
+
+#remark([
+  Dans le cas du recouvrement ouvert trivial $cal(U) := {X}$, on trouve $C_(cdot)(X; cal(U)) tilde.eq C_(cdot)(X)$ et $H_(cdot)(X; U) tilde.eq H_(cdot)(X)$.
 ])
 
 #definition([
@@ -1148,9 +1152,13 @@
   title: "Théorème des petites chaînes",
   [
     Soit $(X, A)$ une paire d'espace topologique, $cal(U)$ un recouvrement ouvert de $X$ et $func(i_cdot, C_(cdot)(X, A; cal(U)), C_(cdot)(X, A))$ l'inclusion canonique.
-    Alors pour tout $n in ZZ$, le morphisme induit $func(H_(n)(i), H_(n)(X, A; cal(U)), H_(n)(X, A))$ est un isomorphisme.
+    Alors pour tout $n in NN$, le morphisme induit $func(H_(n)(i), H_(n)(X, A; cal(U)), H_(n)(X, A))$ est un isomorphisme.
   ],
 ) <thm-petites-chaines>
+
+#proof([
+  TODO (@algtop).
+])
 
 == Principales propriétés
 
@@ -1158,12 +1166,12 @@
 
 #theorem(title: "Axiome de dimension", [
   On note ${*}$ un espace topologique composé d'un unique point.
-  Alors pour tout $n in ZZ$, on a :
+  Alors pour tout $n in NN$, on a :
   $ H_(n)({*}) tilde.eq cases(ZZ &"si" n = 0, 0 &"sinon") $
 ]) <thm-homologie-point>
 
 #proof([
-  Soit $n in ZZ$.
+  Soit $n in NN$.
   Si $n < 0$, on a clairement $H_(n)({*}) tilde.eq 0$. \
   Si $n >= 0$, il existe un unique $n$-simplexe singulier $func(sigma_n, Delta^n, {*})$, alors on a :
   $
@@ -1188,7 +1196,7 @@
 #proof([
   Par définition de l'homotopie il existe une application continue $func(h, X times [0, 1], Y)$ telle que pour tout $x in X$, on a $f(x) = h(x, 0)$ et $g(x) = h(x, 1)$.
 
-  Soit $n in ZZ$.
+  Soit $n in NN$.
   Il suffit de définir une homotopie pour un $n$-simplexe singulier $func(sigma, Delta^n, X)$.
   On pose :
   $
@@ -1235,7 +1243,7 @@
   title: "Axiome d'exactitude",
   [
     Soit $C_(cdot)(X, A)$ un complexe de chaînes singulières.
-    Alors pour tout $n in ZZ$, il existe un morphisme de groupes $func(partial_n, H_(n)(X, A), H_(n-1)(A))$ telle que la suite longue suivante est exacte :
+    Alors pour tout $n in NN$, il existe un morphisme de groupes $func(partial_n, H_(n)(X, A), H_(n-1)(A))$ telle que la suite longue suivante est exacte :
     #align(center)[#commutative-diagram(
         node-padding: (40pt, 40pt),
         padding: 5pt,
@@ -1266,12 +1274,12 @@
   title: "Axiome d'excision",
   [
     Soit $(X, A)$ une paire d'espaces topologiques, $B$ une partie de $A$ telle que $overline(B) subset circle(A)$ et $func(i, (X without B, A without B), (X, A))$ l'inclusion canonique.
-    Alors pour tout $n in ZZ$, le morphisme induit $func(H_(n)(i), H_(n)(X without B, A without B), H_(n)(X, A))$ est un isomorphisme.
+    Alors pour tout $n in NN$, le morphisme induit $func(H_(n)(i), H_(n)(X without B, A without B), H_(n)(X, A))$ est un isomorphisme.
   ],
 )
 
 #proof([
-  Soit $n in ZZ$. \
+  Soit $n in NN$. \
   On considère le recouvrement ouvert $cal(U) := {circle(A), X without overline(B)}$ et le diagramme commutatif :
   #align(center)[#commutative-diagram(
       node-padding: (50pt, 40pt),
@@ -1298,7 +1306,7 @@
 ])
 
 #definition([
-  Une _théorie de l'homologie_ sur la catégorie des paires d'espaces topologiques $sans("Top")_2$ dans la catégorie des groupes abéliens $sans("Ab")$ est une suite de foncteurs $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie de transformations naturelles $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A) := H_(n-1)(A, emptyset)))$ vérifiant les _axiomes d'Eilenberg-Steenrod_ pour toutes paires d'espaces topologiques $(X, A), (Y, B)$ et $n in ZZ$ :
+  Une _théorie de l'homologie_ sur la catégorie des paires d'espaces topologiques $sans("Top")_2$ dans la catégorie des groupes abéliens $sans("Ab")$ est une suite de foncteurs $sequence(func(H_n, sans("Top")_2, sans("Ab")))$ munie de transformations naturelles $sequence(func(partial_n, H_(n)(X, A), H_(n-1)(A) := H_(n-1)(A, emptyset)))$ vérifiant les _axiomes d'Eilenberg-Steenrod_ pour toutes paires d'espaces topologiques $(X, A), (Y, B)$ et $n in NN$ :
   - _Dimension_ : Le groupe $H_(n)({*})$ est non-trivial si et seulement si $n = 0$.
   - _Homotopie_ : Soit $func(f, (X, A), (Y, B))$ et $func(g, (X, A), (Y, B))$ deux morphismes de paires homotopes.
     Alors on a $H_(n)(f) = H_(n)(g)$
@@ -1320,8 +1328,8 @@
         arr((0, 4), (0, 5), $H_(n-1)(i)$),
       )]
     où $func(i, A, X)$ et $func(j, (X, emptyset), (X, A))$ sont les inclusions canoniques.
-  - _Excision_ : Soit $U$ une partie de $A$ telle que $overline(U) subset circle(A)$ et $func(i, (X without U, A without U), (X, A))$ l'inclusion canonique.
-    Alors le morphisme induit $func(H_(n)(i), H_(n)(X without U, A without U), H_(n)(X, A))$ est un isomorphisme.
+  - _Excision_ : Soit $B$ une partie de $A$ telle que $overline(B) subset circle(A)$ et $func(i, (X without U, B without B), (X, A))$ l'inclusion canonique.
+    Alors le morphisme induit $func(H_(n)(i), H_(n)(X without B, A without B), H_(n)(X, A))$ est un isomorphisme.
 ]) <def-theorie-homologie>
 
 #corollary([
@@ -1382,7 +1390,7 @@
 
 #corollary([
   Soit $X$ un espace topologique contractile.
-  Alors pour tout $n in ZZ$, on a :
+  Alors pour tout $n in NN$, on a :
   $ H_(n)(X) tilde.eq H_(n)({*}) tilde.eq cases(ZZ &"si" n = 0, 0 &"sinon") $
 ]) <cor-contractile>
 
@@ -1390,11 +1398,11 @@
 
 #proposition([
   Soit $X$ un espace topologique.
-  Alors, en notant $sequence(X, ind: i, dom: I)$ les composantes connexes par arcs de $X$, pour tout $n in ZZ$, on a $H_(n)(X) tilde.eq plus.circle.big_(i in I) H_(n)(X_i)$.
+  Alors, en notant $sequence(X, ind: i, dom: I)$ les composantes connexes par arcs de $X$, pour tout $n in NN$, on a $H_(n)(X) tilde.eq plus.circle.big_(i in I) H_(n)(X_i)$.
 ]) <prop-somme-composantes-connexes>
 
 #proof([
-  Soit $n in ZZ$.
+  Soit $n in NN$.
   Pour toute $n$-chaîne singulière $func(sigma, Delta^n, X)$, puisque $Delta^n$ est convexe, et en particulier connexe par arcs, par continuité de $sigma$ il existe un unique $i in I$ tel que $im(sigma) subset X_i$.
   Alors on en déduit que $C_(n)(X) tilde.eq plus.circle.big_(i in I) C_(n)(X_i)$.
   De plus $dif_n$ préserve cette décomposition en somme directe, par passage au quotient on a bien $H_(n)(X) tilde.eq plus.circle.big_(i in I) H_(n)(X_i)$.
@@ -1423,7 +1431,7 @@
 ])
 
 #example([
-  Pour tout $n in ZZ$, on a :
+  Pour tout $n in NN$, on a :
   $ H_(n)(SS^0) tilde.eq cases(ZZ plus.circle ZZ &"si" n=0, 0 &"sinon") $
 ]) <ex-homologie-s0>
 
@@ -1437,7 +1445,7 @@
   title: "Théorème de Mayer-Vietoris",
   [
     Soit $X$ un espace topologique, $U$ et $V$ deux ouverts de $X$ tels que $U union V = X$.
-    Alors pour tout $n in ZZ$, il existe un morphisme de groupes $func(partial_n, H_(n)(X), H_(n-1)(U inter V))$ tel que la suite longue suivante est exacte :
+    Alors pour tout $n in NN$, il existe un morphisme de groupes $func(partial_n, H_(n)(X), H_(n-1)(U inter V))$ tel que la suite longue suivante est exacte :
     #align(center)[
       #set text(10pt)
       #commutative-diagram(
@@ -1461,7 +1469,7 @@
 ) <thm-mayer-vietoris>
 
 #proof([
-  Soit $n in ZZ$. \
+  Soit $n in NN$. \
   On considère le recouvrement ouvert $cal(U) := {U, V}$ et la suite courte de complexes de chaînes :
   #align(center)[#commutative-diagram(
       node-padding: (40pt, 50pt),
@@ -1504,7 +1512,7 @@
 ])
 
 #example([
-  Pour tout $n in ZZ$, on a :
+  Pour tout $n in NN$, on a :
   $ H_(n)(SS^1) tilde.eq cases(ZZ &"si" n in {0, 1}, 0 &"sinon") $
   On recouvre $SS^1$ par deux arcs ouverts $U$ et $V$ recouvrant chacun un demi-cercle :
   #figure(
@@ -1574,7 +1582,7 @@
 ]) <ex-homologie-s1>
 
 #example([
-  Pour tout $m in ZZ without {0}$ et $n in ZZ$, on a :
+  Pour tout $m in NN without {0}$ et $n in NN$, on a :
   $ H_(n)(SS^m) tilde.eq cases(ZZ &"si" n in {0, m}, 0 &"sinon") $
   On raisonne par récurrence en recouvrant $SS^m$ par deux ouverts $U$ et $V$ homotopiquement équivalents à $SS^(m-1)$. Alors on peut calculer $H_(n)(SS^m)$ de la même manière que dans l'@ex-homologie-s1.
 ])
@@ -1582,7 +1590,7 @@
 === Complémentaire d'une boule dans une sphère ou dans l'espace euclidien
 
 #proposition([
-  Soit $X$ un sous-espace de $SS^p$ homéomorphe à $BB^q$. Alors pour tout $n in ZZ$, on a :
+  Soit $X$ un sous-espace de $SS^p$ homéomorphe à $BB^q$. Alors pour tout $n in NN$, on a :
   $
     H_(n)(SS^p without X) tilde.eq H_(n)({*}) tilde.eq cases(ZZ &"si" n = 0, 0 &"sinon")
   $
@@ -1655,7 +1663,7 @@
 
 #proposition([
   Soit $X$ un sous-espace de $RR^p$ homéomorphe à $BB^q$.
-  Alors pour tout $n in ZZ$, on a :
+  Alors pour tout $n in NN$, on a :
   $
     H_(n)(RR^p without X) tilde.eq H_(n)(S) tilde.eq cases(ZZ &"si" n in {0, p-1}, 0 &"sinon")
   $
@@ -1699,7 +1707,7 @@
 
 #proposition([
   Soit $X$ un sous-espace de $SS^p$ homéomorphe à $SS^q$.
-  Alors pour tout $n in ZZ$, on a :
+  Alors pour tout $n in NN$, on a :
   $
     H_(n)(SS^p without X) tilde.eq H_(n)(S) tilde.eq cases(ZZ &"si" n in {0, p - q -1}, 0 &"sinon")
   $
@@ -1744,7 +1752,7 @@
 
 #proposition([
   Soit $X$ un sous-espace de $RR^3$ homéomorphe à $SS^1$.
-  Alors pour tout $n in ZZ$, on a :
+  Alors pour tout $n in NN$, on a :
   $ H_(n)(RR^3 without X) tilde.eq cases(ZZ &"si" n in {0, 1, 2}, 0 &"sinon") $
   en particulier $H_(1)(RR^3 without X) = H_(1)(C)$ où $C$ est un cercle enlacé autour de $X$.
 ]) <prop-homologie-complementaire-s1>
@@ -2213,7 +2221,7 @@ L'objectif de cette section est de montrer que $PP^2_RR$ ne se plonge pas dans $
   où $S$ est une cercle enlacé autour de $M$.
 
   On considère $func(i, RR^3 without M, RR^3 without partial M)$ l'inclusion canonique.
-  Alors $i(D)$ est homotope au bouquet de deux cercles $S_1$ et $S_2$ enlacés autour de $partial M$ avec la même orientation :
+  Alors $i(S)$ est homotope au bouquet de deux cercles $S_1$ et $S_2$ enlacés autour de $partial M$ avec la même orientation :
 
   #figure(
     cetz.canvas({
