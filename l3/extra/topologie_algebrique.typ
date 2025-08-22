@@ -1136,12 +1136,12 @@
 
 #definition([
   Soit $X$ un espace topologique et $cal(U)$ un recouvrement ouvert de $X$.
-  On appelle _complexe de petites chaînes singulières de $X$ associées à $cal(U)$_, noté $C_(cdot)(X; cal(U))$, le sous-complexe de chaînes déterminé par la suite $sequence(C_(n)(X; U))$.
+  On appelle _complexe de petites chaînes singulières de $X$ associées à $cal(U)$_, noté $C_(cdot)(X; cal(U))$, le sous-complexe de chaînes déterminé par la suite $sequence(C_(n)(X; cal(U)))$.
 ])
 
 #definition([
   Soit $(X, A)$ une paire d'espace topologique et $cal(U)$ un recouvrement ouvert de $X$.
-  On appelle _complexe de petites chaînes singulières de la paire $(X, A)$ associées à $cal(U)$_, noté $C_(cdot)(X, A; cal(U))$, le sous-complexe de chaînes quotient $C_(cdot)(X, A; cal(U)) := lquotient(C_(cdot)(X; U), C_(cdot)(A; U))$.
+  On appelle _complexe de petites chaînes singulières de la paire $(X, A)$ associées à $cal(U)$_, noté $C_(cdot)(X, A; cal(U))$, le sous-complexe de chaînes quotient $C_(cdot)(X, A; cal(U)) := lquotient(C_(cdot)(X; cal(U)), C_(cdot)(A; cal(U)))$.
 ])
 
 #theorem(
