@@ -48,6 +48,7 @@
   note: [Avec les conseils de Jean-Baptiste Campesato],
   color: "#718355",
   date: true,
+  table: true,
 )
 
 #pagebreak()
@@ -1587,12 +1588,12 @@
   On raisonne par récurrence en recouvrant $SS^m$ par deux ouverts $U$ et $V$ homotopiquement équivalents à $SS^(m-1)$. Alors on peut calculer $H_(n)(SS^m)$ de la même manière que dans l'@ex-homologie-s1.
 ])
 
-=== Complémentaire d'une boule dans une sphère ou dans l'espace euclidien
+=== Complémentaire d'une sphère dans $RR^3$
 
 #proposition([
   Soit $X$ un sous-espace de $SS^p$ homéomorphe à $BB^q$. Alors pour tout $n in NN$, on a :
   $
-    H_(n)(SS^p without X) tilde.eq H_(n)({*}) tilde.eq cases(ZZ &"si" n = 0, 0 &"sinon")
+    H_(n)(SS^p without X) tilde.eq cases(ZZ &"si" n = 0, 0 &"sinon")
   $
 ]) <prop-homologie-sp-bq>
 
@@ -1665,9 +1666,8 @@
   Soit $X$ un sous-espace de $RR^p$ homéomorphe à $BB^q$.
   Alors pour tout $n in NN$, on a :
   $
-    H_(n)(RR^p without X) tilde.eq H_(n)(S) tilde.eq cases(ZZ &"si" n in {0, p-1}, 0 &"sinon")
+    H_(n)(RR^p without X) tilde.eq cases(ZZ &"si" n in {0, p-1}, 0 &"sinon")
   $
-  où $S$ est une $(p-1)$-sphère contenant $X$.
 ]) <prop-homologie-rp-bq>
 
 #proof([
@@ -1700,18 +1700,17 @@
     )])
 
   On en déduit que $H_(n)(f^(-1)(RR^p without X)) tilde.eq H_(n)(V without {N})$ et en particulier $H_(n)(RR^p without X) tilde.eq H_(n)(f(V without {N}))$.
-  Or $f(V without {N}) = RR^p without B$, qui se rétracte par déformation sur une $(p-1)$-sphère $S$ contenant $X$.
+  Or $f(V without {N}) = RR^p without B$, qui se rétracte par déformation sur $SS^(p-1)$.
 
-  Donc $H_(n)(RR^p without X) tilde.eq H_(n)(S)$.
+  Donc $H_(n)(RR^p without X) tilde.eq H_(n)(SS^(p-1))$.
 ])
 
 #proposition([
   Soit $X$ un sous-espace de $SS^p$ homéomorphe à $SS^q$.
   Alors pour tout $n in NN$, on a :
   $
-    H_(n)(SS^p without X) tilde.eq H_(n)(S) tilde.eq cases(ZZ &"si" n in {0, p - q -1}, 0 &"sinon")
+    H_(n)(SS^p without X) tilde.eq cases(ZZ &"si" n in {0, p - q -1}, 0 &"sinon")
   $
-  (TODO: où $S$ est une $(p-q-1)$-sphère enlacée autour de $X$).
 ]) <prop-homologie-sp-sq>
 
 #proof([
@@ -1745,7 +1744,7 @@
   On en déduit que $H_(n)(SS^p without X) tilde.eq H_(n+1)(SS^p without f(SS^(q-1)))$.
 
   Par récurrence directe on a $H_(n)(SS^q without X) tilde.eq H_(n+q)(SS^p without f(SS^0))$.
-  Or par @thm-projection-stereographique $SS^p without f(SS^0)$ est homéomorphe à $RR^p without {0}$, qui se rétracte par déformation sur $SS^(p-1)$.
+  Mais par @thm-projection-stereographique $SS^p without f(SS^0)$ est homéomorphe à $RR^p without {0}$, qui se rétracte par déformation sur $SS^(p-1)$.
 
   Donc $H_(n)(SS^q without X) tilde.eq H_(n+q)(SS^(p-1)) tilde.eq H_(n)(SS^(p-q-1))$.
 ])
@@ -1754,7 +1753,6 @@
   Soit $X$ un sous-espace de $RR^3$ homéomorphe à $SS^1$.
   Alors pour tout $n in NN$, on a :
   $ H_(n)(RR^3 without X) tilde.eq cases(ZZ &"si" n in {0, 1, 2}, 0 &"sinon") $
-  en particulier $H_(1)(RR^3 without X) = H_(1)(C)$ où $C$ est un cercle enlacé autour de $X$.
 ]) <prop-homologie-complementaire-s1>
 
 #proof([
@@ -1764,9 +1762,9 @@
 
   D'après la @prop-homologie-sp-bq et la @prop-homologie-sp-sq on a :
   $
-    H_(n)(V) tilde.eq H_(n)({*}) tilde.eq cases(ZZ &"si" n = 0, 0 &"sinon") quad "et" quad H_(n)(U union V) tilde.eq H_(n)(C) tilde.eq cases(ZZ &"si" n in {0, 1}, 0 &"sinon")
+    H_(n)(V) tilde.eq H_(n)({*}) tilde.eq cases(ZZ &"si" n = 0, 0 &"sinon") quad "et" quad H_(n)(U union V) tilde.eq H_(n)(SS^1) tilde.eq cases(ZZ &"si" n in {0, 1}, 0 &"sinon")
   $
-  où $C$ est un cercle enlacé autour de $X$, et d'après le @thm-mayer-vietoris la suite suivante est exacte :
+  et d'après le @thm-mayer-vietoris la suite suivante est exacte :
   #align(center, [
     #commutative-diagram(
       node-padding: (25pt, 40pt),
@@ -1774,7 +1772,7 @@
       node((0, 0), $dots.c$),
       node((0, 1), $H_(n)(V without {N})$),
       node((0, 2), $H_(n)(f^(-1)(RR^3 without X)) plus.circle H_(n)({*})$),
-      node((0, 3), $H_(n)(C)$),
+      node((0, 3), $H_(n)(SS^1)$),
       node((0, 4), $H_(n-1)(V without {N})$),
       node((0, 5), $dots.c$),
 
@@ -1785,9 +1783,9 @@
       arr((0, 4), (0, 5), $$),
     )])
 
-  Pour $n != 1$, on en déduit de la même manière que dans la @prop-homologie-rp-bq que $H_(n)(RR^3 without X) tilde.eq H_(n)(S)$ où $S$ est une $2$-sphère contenant $X$.
+  Pour $n != 1$, de la même manière que dans la @prop-homologie-rp-bq on trouve $H_(n)(RR^3 without X) tilde.eq H_(n)(SS^2)$.
 
-  Pour $n = 1$, on en déduit que $H_(1)(RR^3 without X) tilde.eq H_(1)(C)$.
+  Pour $n = 1$, on en déduit que $H_(1)(RR^3 without X) tilde.eq H_(1)(SS^1)$.
 ])
 
 
@@ -2198,7 +2196,7 @@
 
 === Non-plongement dans $RR^3$
 
-L'objectif de cette section est de montrer que $PP^2_RR$ ne se plonge pas dans $RR^3$ en utilisant l'homologie singulière présentée dans les sections précédentes.
+// L'objectif de cette section est de montrer que $PP^2_RR$ ne se plonge pas dans $RR^3$ en utilisant l'homologie singulière présentée dans les sections précédentes.
 
 #definition([
   Soit $X$ et $Y$ deux espaces topologiques, $func(f, X, Y)$ une application.
@@ -2216,12 +2214,20 @@ L'objectif de cette section est de montrer que $PP^2_RR$ ne se plonge pas dans $
 
   Le complémentaire de la bande de Möbius $RR^3 without M$ est un rétract par déformation de $RR^3 without C$ où $C$ le cercle central de $M$ est homéomorphe à $SS^1$. D'après le @cor-retract-deformation et la @prop-homologie-complementaire-s1, on a :
   $
-    H_(1)(RR^3 without M) tilde.eq H_(1)(RR^3 without C) tilde.eq H_(1)(S) tilde.eq ZZ
+    H_(1)(RR^3 without M) tilde.eq H_(1)(RR^3 without C) tilde.eq H_(1)(SS^1) tilde.eq ZZ
   $
-  où $S$ est une cercle enlacé autour de $M$.
+  On considère un $1$-simplexe singulier $func(sigma, [0, 1], RR^3 without M)$ dont l'image est un cercle enlacé autour de $M$ et vérifiant $sigma(0) = sigma(1)$.
+  Alors $sigma$ est un $1$-cycle car $dif_1 sigma = sigma(1) - sigma(0) = 0$.
+  Si on suppose par l'absurde que $sigma$ est un $1$-bord, il existe une $2$-chaîne singulière dont l'image est un disque qui a pour bord le cercle enlacé autour de $M$, ce qui est impossible.
+  Donc $overline(sigma)$ est un générateur de $H_(1)(RR^3 without M)$. 
+
+  De plus le bord de la bande Möbius $partial M$ est homéomorphe à $SS^1$. D'après la @prop-homologie-complementaire-s1, on a :
+  $
+    H_(1)(RR^3 without partial M) tilde.eq H_(1)(SS^1) tilde.eq ZZ
+  $
 
   On considère $func(i, RR^3 without M, RR^3 without partial M)$ l'inclusion canonique.
-  Alors $i(S)$ est homotope au bouquet de deux cercles $S_1$ et $S_2$ enlacés autour de $partial M$ avec la même orientation :
+  Alors $i compose sigma$ est homotope au bouquet de deux cercles enlacés autour de $partial M$ avec la même orientation :
 
   #figure(
     cetz.canvas({
@@ -2283,16 +2289,10 @@ L'objectif de cette section est de montrer que $PP^2_RR$ ne se plonge pas dans $
       mark((3.65, -0.35), 13deg)
       mark((4.43, -0.15), 12deg)
     }),
-    caption: [Homotopie de l'inclusion de $S$ dans $RR^3 without M$ (@ex-mobius).],
+    caption: [Homotopie de l'inclusion de $sigma$ dans $RR^3 without M$ (@ex-mobius).],
   )
 
-  De plus le bord de la bande Möbius $partial M$ est homéomorphe à $SS^1$. D'après la @prop-homologie-complementaire-s1, on a :
-  $
-    H_(1)(RR^3 without partial M) tilde.eq H_(1)(S_1) tilde.eq H_(1)(S_2) tilde.eq ZZ
-  $
-
-
-  Alors puisque leur orientation est la même, on a $func(H_(1)(i), ZZ, ZZ, n, 2n)$.
+  Alors puisque leur orientation est la même, la classe de chacun des deux cercles dans $H_(1)(RR^3 without partial M)$ est le même générateur $overline(tau)$ de $H_(1)(RR^3 without partial M)$ et on a $H_(1)(i)(overline(sigma)) = 2 overline(tau)$.
 
   Le disque fermé $D$ est homéomorphe à $BB^2$. D'après la @prop-homologie-rp-bq, on a :
 
@@ -2306,7 +2306,7 @@ L'objectif de cette section est de montrer que $PP^2_RR$ ne se plonge pas dans $
     [
       #commutative-diagram(
         node-padding: (40pt, 40pt),
-        padding: 10pt,
+        padding: 5pt,
         node(
           (0, 2),
           $H_(1)(RR^3 without M) tilde.eq ZZ plus.circle H_(1)(RR^3 without D) tilde.eq 0$,
@@ -2318,8 +2318,7 @@ L'objectif de cette section est de montrer que $PP^2_RR$ ne se plonge pas dans $
         arr((0, 3), (0, 4), $partial_0$),
       )],
   )
-  Par exactitude on a $ker(partial_0) = im(H_(1)(i)) = 2ZZ$, d'où $partial_(0)(1) != 0$ et $2 partial_(0)(1) = partial_(0)(2) = 0$, donc $partial_(0)(1)$ est un élément non-nul d'ordre 2 de $H_(0)(RR^3 without PP^2_RR)$.
-
+  Par exactitude on a $ker(partial_0) = im(H_(1)(i)) tilde.eq 2ZZ$, d'où $partial_(0)(1) != 0$ et $2 partial_(0)(1) = partial_(0)(2) = 0$, donc $partial_(0)(1)$ est un élément non-nul d'ordre 2 de $H_(0)(RR^3 without PP^2_RR)$. 
   Mais d'après la @prop-h0-abelien-libre $H_(0)(RR^3 without PP^2_RR)$ est un groupe abélien libre, donc il n'existe aucun élément non-nul d'ordre 2 de $H_(0)(RR^3 without PP^2_RR)$, d'où une contradiction.
 
   Donc il n'existe pas de plongement du plan projectif réel $PP^2_RR$ dans $RR^3$.

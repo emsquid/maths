@@ -56,6 +56,7 @@
   color: none,
   header: false,
   date: false,
+  table: false,
   body,
 ) = {
   // Document metadata
@@ -178,7 +179,9 @@
   })
 
   // Contents
-  outline()
+  if table {
+    outline()
+  }
 
   body
 }
