@@ -56,7 +56,7 @@
   color: none,
   header: false,
   date: false,
-  table: false,
+  contents: false,
   body,
 ) = {
   // Document metadata
@@ -74,19 +74,26 @@
   }
 
   // Page options
-  set page(numbering: "1", header: context {
-    if header and counter(page).get().first() > 1 {
-      align(center, if title != "" and authors != "" {
-        [#title -- #authors]
-      } else if title != "" {
-        title
-      } else {
-        ""
-      })
-      line(start: (0%, -8pt), length: 100%, stroke: 0.5pt)
-      v(-10pt)
-    }
-  })
+  set page(
+    numbering: if header { none } else { "1" },
+    header: context {
+      if header and counter(page).get().first() > 1 {
+        if calc.rem(counter(page).get().first(), 2) == 0 {
+          [*#counter(page).get().first()*]
+          h(1fr)
+          title
+          h(1fr)
+        } else {
+          h(1fr)
+          authors
+          h(1fr)
+          [*#counter(page).get().first()*]
+        }
+        line(start: (0%, -9pt), length: 100%, stroke: 0.5pt)
+        v(-10pt)
+      }
+    },
+  )
 
   // Text options
   set text(
@@ -179,7 +186,7 @@
   })
 
   // Contents
-  if table {
+  if contents {
     outline()
   }
 

@@ -48,7 +48,8 @@
   note: [Avec les conseils de Jean-Baptiste Campesato],
   color: "#718355",
   date: true,
-  table: true,
+  contents: true,
+  header: true,
 )
 
 #pagebreak()
@@ -347,7 +348,7 @@
 ]) <prop-homotopie-chaine-rel-eq>
 
 #proof([
-  Notons $~$ la relation d'homotopie. \
+  On note $~$ la relation d'homotopie. \
   Soit $C_cdot$ et $D_cdot$ deux complexes de chaînes, ainsi que $func(phi_cdot, C_cdot, D_cdot)$, $func(psi_cdot, C_cdot, D_cdot)$ et $func(xi_cdot, C_cdot, D_cdot)$ trois morphismes de complexes tels que $phi_cdot ~ psi_cdot$ et $psi_cdot ~ xi_cdot$.
   Alors par définition il existe deux suites de morphismes de groupes $sequence(func(f_n, C_n, D_(n+1)))$ et $sequence(func(g_n, C_n, D_(n+1)))$ telles que pour tout $n in NN$, on a $phi_n - psi_n = f_(n-1) dif_n + dif_n f_n$ et $psi_n - xi_n = g_(n-1) dif_n + dif_n g_n$.
 
@@ -793,7 +794,7 @@
 ]) <prop-combinaison-convexe>
 
 #proof([
-  Soit $t_0, ..., t_n in [0, 1]$ tels que $t_0 + dots.c + t_n = 1$. Notons $H(n) : t_0 f_0 + dots.c + t_n f_n in A$. \
+  Soit $t_0, ..., t_n in [0, 1]$ tels que $t_0 + dots.c + t_n = 1$. On note $H(n) : t_0 f_0 + dots.c + t_n f_n in A$. \
   Pour $n = 1$. On pose $t := t_1$, alors puisque $A$ est convexe $t_0 f_0 + t_1 f_1 = (1 - t)f_0 + t f_1 in A$. \
   Pour $n > 1$. On suppose que $H(n - 1)$ est vérifiée. Sans perte de généralité, on suppose que $t_n != 1$, et on pose :
   $ p := (t_0) / (1 - t_n) f_0 + dots.c + (t_(n-1)) / (1 - t_n) f_(n-1) $
@@ -830,7 +831,7 @@
 ])
 
 #proposition([
-  Soit $E$ un $RR$-espace vectoriel et $F := (f_0, ..., f_n)$ une famille libre de $n + 1$ éléments de $E$.
+  Soit $E$ un $RR$-espace vectoriel et $F := (f_0, ..., f_n)$ une famille libre d'éléments de $E$.
   Alors l'application :
   $
     func(gensubgroup(f_0, ..., f_n), Delta^n, "Conv"(F), (t_0, ..., t_n), t_0 f_0 + ... + t_n f_n)
@@ -850,12 +851,12 @@
 ])
 
 #definition([
-  Soit $E$ un $RR$-espace vectoriel, $F := (f_0, ..., f_n)$ une famille libre de $n + 1$ éléments de $E$ et $x := t_0 f_0 + ... + t_n f_n$ un élément de $"Conv"(F)$.
+  Soit $E$ un $RR$-espace vectoriel, $F := (f_0, ..., f_n)$ une famille libre d'éléments de $E$ et $x := t_0 f_0 + ... + t_n f_n$ un élément de $"Conv"(F)$.
   On appelle _coordonnées barycentriques de $x$_ les coefficients $t_0, ..., t_n in [0, 1]$.
 ])
 
 #definition([
-  Soit $E$ un $RR$-espace vectoriel, $F$ une famille libre de $n+1$ éléments de $E$ et $G$ une famille non-vide d'éléments de $m + 1$ éléments de $F$.
+  Soit $E$ un $RR$-espace vectoriel, $F$ une famille libre de $n+1$ éléments de $E$ et $G$ une famille non-vide de $m + 1$ éléments de $F$.
   On dit que $"Conv"(G)$ est une _$m$-face_ de $"Conv"(F)$.
 ])
 
@@ -898,6 +899,38 @@
     En vert les arêtes sont des $1$-faces du triangle. \
     En rouge les sommets sont des $0$-faces du triangle et des arêtes.],
 )
+
+#definition([
+  Soit $E$ un $RR$-espace vectoriel, $F := (f_0, ..., f_n)$ une famille libre d'éléments de $E$ et $S$ le $n$-simplexe généré par $F$.
+  - On appelle _barycentre de $S$_ le point $b_S := 1/(n+1) (f_0 + ... + f_n)$.
+  - On appelle _subvision barycentrique de $S$_ l'ensemble $B_S$ défini par récurrence sur $n$ : \
+    Pour $n = 0$, on pose $B_S := {S}$. \
+    Pour $n > 0$, pour tout $k in {0, ..., n}$, on note $S_i$ les $(n-1)$-faces de $S$ et on pose :
+    $
+      B_S := union.big_(k in {0, ..., n}) union.big_(B in B_S_i) {"Conv"(B union {b_S})}.
+    $
+])
+
+#definition([
+  Soit $(E, norm(dot))$ un $RR$-espace vectoriel normé, $F := (f_0, ..., f_n)$ une famille libre d'éléments de $E$ et $S$ le $n$-simplexe généré par $F$.
+  On appelle _diamètre de $S$_, noté $"diam"(S)$, la longueur de son plus grand côté :
+  $ "diam"(S) := max_(i, j in {0, ..., n}) norm(f_j - f_i). $
+])
+
+#proposition([
+  Soit $(E, norm(dot))$ un $RR$-espace vectoriel normé, $F := (f_0, ..., f_n)$ une famille libre d'élé-ments de $E$ et $S$ le $n$-simplexe généré par $F$.
+  Alors pour tout $B in B_S$, on a $"diam"(B) <= n/(n+1) "diam"(S)$.
+])
+
+#proof([
+  On note $H(n) : $ Soit $S$ un $n$-simplexe, $forall B in B_S, "diam"(B) <= n/(n+1) "diam"(S)$. \
+  Pour $n = 0$. On a $B_S = {S}$ et $"diam"(S) = 0$. \
+  Pour $n > 0$. On suppose que $H(n-1)$ est vérifiée et on note $B = "Conv"(C union {b_S}) in B_S$ avec $C in B_F$ où $F$ est une $(n-1)$-face de $S$. Alors pour tout $i in {0, ..., n}$, on a déjà :
+  $ norm(b_S - f_i) <= sum_(k=0)^n norm(f_k - f_i)/(n+1) <= n/(n+1) "diam"(S) $
+  et d'après $H(n-1)$ on a
+  $"diam"(C) <= (n-1)/n "diam"(F) <= n/(n+1) "diam"(S)$. \
+  Donc $"diam"(B) <= n/(n+1)"diam"(S)$.
+])
 
 == Chaînes singulières
 
@@ -1132,7 +1165,12 @@
 
 #definition([
   Soit $X$ un espace topologique et $cal(U)$ un recouvrement ouvert de $X$.
-  Pour tout $n in NN$, on appelle _groupe des petites $n$-chaînes singulières de $X$ associées à $cal(U)$_, noté $C_(n)(X; cal(U))$, le groupe abélien libre engendré par les $n$-simplexes singuliers sur l'un des $U in cal(U)$.
+  Pour tout #box($n in NN$), on appelle _groupe des petites $n$-chaînes singulières de $X$ associées à $cal(U)$_, noté $C_(n)(X; cal(U))$, le groupe abélien libre engendré par les $n$-simplexes singuliers sur l'un des $U in cal(U)$.
+])
+
+#remark([
+  Soit $X$ un espace topologique et $cal(U)$ un recouvrement ouvert de $X$.
+  Pour tout #box($n in NN$), on a $dif_n C_(n)(X; cal(U)) subset C_(n-1)(X; cal(U))$.
 ])
 
 #definition([
@@ -1153,7 +1191,7 @@
   title: "Théorème des petites chaînes",
   [
     Soit $(X, A)$ une paire d'espace topologique, $cal(U)$ un recouvrement ouvert de $X$ et $func(i_cdot, C_(cdot)(X, A; cal(U)), C_(cdot)(X, A))$ l'inclusion canonique.
-    Alors pour tout $n in NN$, le morphisme induit $func(H_(n)(i), H_(n)(X, A; cal(U)), H_(n)(X, A))$ est un isomorphisme.
+    Alors pour tout #box($n in NN$), le morphisme induit $func(H_(n)(i), H_(n)(X, A; cal(U)), H_(n)(X, A))$ est un isomorphisme.
   ],
 ) <thm-petites-chaines>
 
@@ -1585,7 +1623,7 @@
 #example([
   Pour tout $m in NN without {0}$ et $n in NN$, on a :
   $ H_(n)(SS^m) tilde.eq cases(ZZ &"si" n in {0, m}, 0 &"sinon") $
-  On raisonne par récurrence en recouvrant $SS^m$ par deux ouverts $U$ et $V$ homotopiquement équivalents à $SS^(m-1)$. Alors on peut calculer $H_(n)(SS^m)$ de la même manière que dans l'@ex-homologie-s1.
+  On raisonne par récurrence en recouvrant $SS^m$ par deux ouverts $U$ et $V$ contractiles dont l'intersection est homotopiquement équivalente à $SS^(m-1)$. Alors on peut calculer $H_(n)(SS^m)$ de la même manière que dans l'@ex-homologie-s1.
 ])
 
 === Complémentaire d'une sphère dans $RR^3$
@@ -2219,7 +2257,7 @@
   On considère un $1$-simplexe singulier $func(sigma, [0, 1], RR^3 without M)$ dont l'image est un cercle enlacé autour de $M$ et vérifiant $sigma(0) = sigma(1)$.
   Alors $sigma$ est un $1$-cycle car $dif_1 sigma = sigma(1) - sigma(0) = 0$.
   Si on suppose par l'absurde que $sigma$ est un $1$-bord, il existe une $2$-chaîne singulière dont l'image est un disque qui a pour bord le cercle enlacé autour de $M$, ce qui est impossible.
-  Donc $overline(sigma)$ est un générateur de $H_(1)(RR^3 without M)$. 
+  Donc $overline(sigma)$ est un générateur de $H_(1)(RR^3 without M)$.
 
   De plus le bord de la bande Möbius $partial M$ est homéomorphe à $SS^1$. D'après la @prop-homologie-complementaire-s1, on a :
   $
@@ -2318,7 +2356,7 @@
         arr((0, 3), (0, 4), $partial_0$),
       )],
   )
-  Par exactitude on a $ker(partial_0) = im(H_(1)(i)) tilde.eq 2ZZ$, d'où $partial_(0)(1) != 0$ et $2 partial_(0)(1) = partial_(0)(2) = 0$, donc $partial_(0)(1)$ est un élément non-nul d'ordre 2 de $H_(0)(RR^3 without PP^2_RR)$. 
+  Par exactitude on a $ker(partial_0) = im(H_(1)(i)) tilde.eq 2ZZ$, d'où $partial_(0)(1) != 0$ et $2 partial_(0)(1) = partial_(0)(2) = 0$, donc $partial_(0)(1)$ est un élément non-nul d'ordre 2 de $H_(0)(RR^3 without PP^2_RR)$.
   Mais d'après la @prop-h0-abelien-libre $H_(0)(RR^3 without PP^2_RR)$ est un groupe abélien libre, donc il n'existe aucun élément non-nul d'ordre 2 de $H_(0)(RR^3 without PP^2_RR)$, d'où une contradiction.
 
   Donc il n'existe pas de plongement du plan projectif réel $PP^2_RR$ dans $RR^3$.
@@ -2680,7 +2718,7 @@ Par exemple dans le cas d'un cercle, on peut évidemment toujours trouver une in
 ) <thm-bijection-continue-compact>
 
 #proof([
-  Notons $g := f^(-1)$.
+  On note $g := f^(-1)$.
   Soit $F$ un fermé de $K$.
   Puisque $K$ est compact et $F$ est fermé, $F$ est compact.
   Puisque $f$ est continue et $F$ est compact, $g^(-1)(F) = f(F)$ est compact.
